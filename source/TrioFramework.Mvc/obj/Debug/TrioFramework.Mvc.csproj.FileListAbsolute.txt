@@ -1,0 +1,14 @@
+E:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Mvc.xml
+E:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Mvc.dll
+E:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Mvc.pdb
+E:\BSPRJ2014127-ITSP\TrioFramework\source\TrioFramework.Mvc\obj\Debug\TrioFramework.Mvc.csprojResolveAssemblyReference.cache
+E:\BSPRJ2014127-ITSP\TrioFramework\source\TrioFramework.Mvc\obj\Debug\Bingosoft.TrioFramework.Mvc.dll
+E:\BSPRJ2014127-ITSP\TrioFramework\source\TrioFramework.Mvc\obj\Debug\Bingosoft.TrioFramework.Mvc.pdb
+E:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Mvc.dll.config
+D:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Mvc.dll.config
+D:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Mvc.xml
+D:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Mvc.dll
+D:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Mvc.pdb
+D:\BSPRJ2014127-ITSP\TrioFramework\source\TrioFramework.Mvc\obj\Debug\TrioFramework.Mvc.csprojResolveAssemblyReference.cache
+D:\BSPRJ2014127-ITSP\TrioFramework\source\TrioFramework.Mvc\obj\Debug\Bingosoft.TrioFramework.Mvc.dll
+D:\BSPRJ2014127-ITSP\TrioFramework\source\TrioFramework.Mvc\obj\Debug\Bingosoft.TrioFramework.Mvc.pdb

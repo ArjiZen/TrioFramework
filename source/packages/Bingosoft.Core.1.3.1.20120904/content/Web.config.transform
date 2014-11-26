@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<configuration>
+  <system.web>
+    <httpModules>
+      <add name="AppModule" type="Bingosoft.Core.AppModule,Bingosoft.Core"/>
+      <add name="AntiCsrfWebFormModule" type="Bingosoft.Common.AntiAttack.Csrf.AntiCsrfWebFormModule, Bingosoft.Common.AntiAttack"/>
+      <add name="AntiCsrfDataServiceModule" type="Bingosoft.Common.AntiAttack.Csrf.AntiCsrfDataServiceModule, Bingosoft.Common.AntiAttack"/>
+    </httpModules>    
+  </system.web>
+  <system.webServer>
+    <modules>
+      <add name="AppModule" type="Bingosoft.Core.AppModule,Bingosoft.Core"/>
+      <add name="AntiCsrfWebFormModule" preCondition="managedHandler" type="Bingosoft.Common.AntiAttack.Csrf.AntiCsrfWebFormModule, Bingosoft.Common.AntiAttack"/>
+      <add name="AntiCsrfDataServiceModule" preCondition="managedHandler" type="Bingosoft.Common.AntiAttack.Csrf.AntiCsrfDataServiceModule, Bingosoft.Common.AntiAttack"/>
+    </modules>
+  </system.webServer>
+</configuration>
