@@ -11,3 +11,7 @@ TrioFramework
 
 3. __*View*__
     + 基于工作流的MVC基础实现
+
+__*Changelog*__
+
+[点击查看](http://szdoc.hadeswong.cn/view/trio-Changelog.html)
