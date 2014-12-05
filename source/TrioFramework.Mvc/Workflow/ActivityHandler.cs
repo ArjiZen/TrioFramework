@@ -17,7 +17,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
         public virtual ViewResult Render(WorkflowForm form, BusinessForm bizForm) {
             return null;
         }
-        /// <summary>
+        /// <summary>R
         /// 提交之前进行处理
         /// </summary>
         /// <param name="choice">选择迁移</param>

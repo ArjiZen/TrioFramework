@@ -477,7 +477,7 @@
             <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.BeforeSubmit(System.String,System.String)">
-            <summary>
+            <summary>R
             提交之前进行处理
             </summary>
             <param name="choice">选择迁移</param>

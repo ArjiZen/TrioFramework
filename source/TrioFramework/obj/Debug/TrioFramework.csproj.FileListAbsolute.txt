@@ -7,6 +7,5 @@ E:\BSPRJ2014127-ITSP\TrioFramework\source\TrioFramework\obj\Debug\Bingosoft.Trio
 D:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.XML
 D:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.dll
 D:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.pdb
-D:\BSPRJ2014127-ITSP\TrioFramework\source\TrioFramework\obj\Debug\TrioFramework.csprojResolveAssemblyReference.cache
 D:\BSPRJ2014127-ITSP\TrioFramework\source\TrioFramework\obj\Debug\Bingosoft.TrioFramework.dll
 D:\BSPRJ2014127-ITSP\TrioFramework\source\TrioFramework\obj\Debug\Bingosoft.TrioFramework.pdb

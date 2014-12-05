@@ -65,6 +65,7 @@ namespace Bingosoft.TrioFramework.Mvc.Extensions {
             if (isReadonly) {
                 ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
                 var value = metadata.Model.ToString();
+                
                 TagBuilder tagBuilder = null;
                 tagBuilder = new TagBuilder("span");
                 if (collection.ContainsCode(value)) {

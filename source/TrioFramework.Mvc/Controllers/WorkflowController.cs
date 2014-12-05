@@ -328,6 +328,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
                 return new JsonResult().Error(500, ex.Message);
             }
         }
+
         /// <summary>
         /// 表单提交
         /// </summary>
@@ -395,6 +396,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
                 return Error(500, "流程删除时出错，错误信息：" + ex.Message);
             }
         }
+
         /// <summary>
         /// 流程提交
         /// </summary>
@@ -422,7 +424,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
             }
             // 更新表单数据
             if (BusinessForm == null) {
-                throw new TypeLoadException("流程控制器未实现BusinessForm属性");
+                throw new TypeLoadException("未指定当前流程的业务实体类型，流程控制器未实现BusinessForm属性");
             }
             var bizform = (BusinessForm)Activator.CreateInstance(BusinessForm);
             if (!string.IsNullOrEmpty(form.InstanceNo)) {
@@ -438,6 +440,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
             nform.BusinessForm = bizform;
             return nform;
         }
+
         /// <summary>
         /// 获取业务表单
         /// </summary>

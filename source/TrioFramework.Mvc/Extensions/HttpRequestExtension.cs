@@ -70,6 +70,9 @@ public static class HttpRequestExtension {
         foreach (var property in properties) {
             if (property == null)
                 continue;
+            if (!property.CanWrite) {
+                continue;
+            }
             var val = "";
             try {
                 switch (source) {
