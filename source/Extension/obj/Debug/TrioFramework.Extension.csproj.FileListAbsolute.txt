@@ -1,6 +1,0 @@
-E:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Extension.xml
-E:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Extension.dll
-E:\BSPRJ2014127-ITSP\TrioFramework\source\Library\Bingosoft.TrioFramework.Extension.pdb
-E:\BSPRJ2014127-ITSP\TrioFramework\source\Extension\obj\Debug\Bingosoft.TrioFramework.Extension.dll
-E:\BSPRJ2014127-ITSP\TrioFramework\source\Extension\obj\Debug\Bingosoft.TrioFramework.Extension.pdb
-E:\BSPRJ2014127-ITSP\TrioFramework\source\Extension\obj\Debug\TrioFramework.Extension.csprojResolveAssemblyReference.cache
