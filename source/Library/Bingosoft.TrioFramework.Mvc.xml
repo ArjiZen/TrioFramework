@@ -566,13 +566,20 @@
             </returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.BeforeSubmit(System.String,System.String)">
-            <summary>R
-            提交之前进行处理
+            <summary>
+            流程提交前事件
             </summary>
             <param name="choice">选择迁移</param>
             <param name="instanceNo">流程单号</param>
             <returns>
             </returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.AfterSubmit(System.String,System.String)">
+            <summary>
+            流程提交后事件
+            </summary>
+            <param name="instanceNo">流程编号</param>
+            <param name="choice">选择结果</param>
         </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.Save(Bingosoft.TrioFramework.Mvc.Workflow.ActionMode,Bingosoft.TrioFramework.Workflow.Business.BusinessForm)">
             <summary>
@@ -583,6 +590,18 @@
             <param name="bizform">业务表单</param>
             <returns>
             </returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.BeforeDelete(System.String)">
+            <summary>
+            流程删除前事件
+            </summary>
+            <param name="instanceNo">流程编号</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.AfterDeleted(System.String)">
+            <summary>
+            流程删除后事件
+            </summary>
+            <param name="instanceNo">流程编号</param>
         </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.ResolveActor(Bingosoft.TrioFramework.Workflow.Business.BusinessForm,Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector)">
             <summary>
