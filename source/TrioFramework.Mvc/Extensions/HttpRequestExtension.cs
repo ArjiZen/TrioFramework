@@ -143,6 +143,16 @@ public static class HttpRequestExtension {
 				return null;
 			}
 			return bool.Parse(val.ToString());
+		} else if (targetType == typeof(short?)) {
+			if (isNull) {
+				return null;
+			}
+			return short.Parse(val.ToString());
+		} else if (targetType == typeof(long?)) {
+			if (isNull) {
+				return null;
+			}
+			return long.Parse(val.ToString());
 		} else {
 			return Convert.ChangeType(val, targetType);
 		}
