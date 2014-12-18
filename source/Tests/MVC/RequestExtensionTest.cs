@@ -9,15 +9,18 @@ namespace Bingosoft.TrioFramework.Tests.MVC {
 		}
 
 		public class NullableModel{
-			public decimal? DecimalValue { get; set; }
+			public decimal? DecimalNullableValue { get; set; }
+			public decimal DecimalValue { get; set; }
 		}
 
 		[Test()]
 		public void ToModelTest(){
 			var collection = new NameValueCollection();
-			collection.Set("DecimalValue", "");
+			collection.Set("DecimalNullableValue", "");
+			collection.Set("DecimalValue", "10");
 			var model = HttpRequestExtension.ToModel(collection, new NullableModel()) as NullableModel;
-			Assert.AreEqual(null, model.DecimalValue);
+			Assert.AreEqual(null, model.DecimalNullableValue);
+			Assert.AreEqual(10, model.DecimalValue);
 		}
 
 	}
