@@ -210,13 +210,13 @@
          * 用法：
          * $("form").set({'id': 'abc', 'name': 'myName', 'title': 'myTitle'})
          */
-        set: function (option) {
+        fill: function (option) {
             if (!$(this).is("form")) {
                 console.error('set方法只对form表单有效');
                 return;
             }
 
-            var leftOption = option;
+            var leftOption = $.extend({}, option);
             var elements = $(this).find(":input");
             for (var i = 0; i < elements.length; i++) {
                 var element = $(elements[i]);
