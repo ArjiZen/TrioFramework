@@ -313,6 +313,15 @@
             <returns>
             </returns>
         </member>
+        <member name="M:StringExtension.EqualsWith(System.String,System.String)">
+            <summary>
+            忽略大小写判断字符串是否相等
+            </summary>
+            <param name="str">
+            </param>
+            <param name="target">
+            </param>
+        </member>
         <member name="T:Bingosoft.TrioFramework.Logger">
             <summary>
             日志记录

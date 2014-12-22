@@ -33,4 +33,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.1.5.*")]
 //[assembly: AssemblyFileVersion("1.1.0.*")]
-[InternalsVisibleTo("Tests")]
+[InternalsVisibleTo("TrioFrameworkMvcTest")]

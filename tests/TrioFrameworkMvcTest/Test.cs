@@ -1,12 +1,11 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace Tests {
+namespace TrioFrameworkMvcTest {
 	[TestFixture()]
 	public class Test {
 		[Test()]
 		public void TestCase() {
-
 		}
 	}
 }

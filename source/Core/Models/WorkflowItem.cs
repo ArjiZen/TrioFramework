@@ -14,6 +14,10 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// 待处理
         /// </summary>
         Waiting = 0,
+		/// <summary>
+		/// 待阅
+		/// </summary>
+		ToRead = 4,
         /// <summary>
         /// 同意
         /// </summary>

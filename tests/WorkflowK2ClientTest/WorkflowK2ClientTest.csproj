@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18D4E5F0-3FFE-4A08-9795-A73E39D4BDB6}</ProjectGuid>
+    <ProjectGuid>{A1D334F9-D79F-495D-8BFC-B008C0C20508}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Bingosoft.TrioFramework.Tests</RootNamespace>
-    <AssemblyName>Tests</AssemblyName>
+    <RootNamespace>Bingosoft.TrioFramework.Workflow.K2Client.Test</RootNamespace>
+    <AssemblyName>WorkflowK2ClientTest</AssemblyName>
     <ReleaseVersion>1.1.3</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -31,24 +31,20 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\source\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MVC\RequestExtensionTest.cs" />
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MVC\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TrioFramework.Mvc\TrioFramework.Mvc.csproj">
-      <Project>{128C4953-45D3-4A8C-A867-C5B9FA73E3EF}</Project>
-      <Name>TrioFramework.Mvc</Name>
+    <ProjectReference Include="..\..\source\K2Client\K2Client.csproj">
+      <Project>{AD572C7A-1140-423F-B39E-6EB652FA0DED}</Project>
+      <Name>K2Client</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

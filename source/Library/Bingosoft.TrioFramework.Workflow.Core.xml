@@ -709,6 +709,11 @@
             待处理
             </summary>
         </member>
+        <member name="F:Bingosoft.TrioFramework.Workflow.Core.Models.TaskStatus.ToRead">
+            <summary>
+            待阅
+            </summary>
+        </member>
         <member name="F:Bingosoft.TrioFramework.Workflow.Core.Models.TaskStatus.Accept">
             <summary>
             同意

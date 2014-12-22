@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Specialized;
 
-namespace Bingosoft.TrioFramework.Tests.MVC {
+namespace Bingosoft.TrioFramework.Mvc.Test {
 	[TestFixture()]
 	public class RequestExtensionTest {
 		public RequestExtensionTest() {

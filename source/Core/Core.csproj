@@ -96,9 +96,6 @@
     <Compile Include="WorkflowEngine.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataAccess\" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="App_Config\SqlCommands\attachment.config" />
     <None Include="packages.config" />
   </ItemGroup>
