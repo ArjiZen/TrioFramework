@@ -188,21 +188,18 @@
          * $("body").alert(false, "操作失败")
          */
         alert: function (ajaxResult, message) {
-            if (ajaxResult === true) {
+            if (ajaxResult === 'success') {
                 self.showSuccess($(this), message, self.showtime_success);
                 return this;
             }
-            if (ajaxResult === false) {
+            if (ajaxResult === 'failure') {
                 self.showError($(this), message, self.showtime_error);
                 return this;
             }
-            //if (!ajaxResult.success) {
-            //    self.showError($(this), ajaxResult.errorMessage);
-            //} else {
-            //    if (message && $.trim(message) != '') {
-            //        self.showSuccess($(this), message, self.showtime_success);
-            //    }
-            //}
+            if(ajaxResult === 'clear'){
+            	self.clear($(this));
+            	return this;
+            }
             return this;
         },
         /* 
@@ -254,7 +251,7 @@
                         if (failureCallback) {
                             failureCallback(result);
                         } else {
-                            $.alert(result.success, result.errorMessage);
+                            $.alert('failure', result.errorMessage);
                         }
 
                     }
@@ -287,21 +284,7 @@
          * $("body").alert(false, "操作失败")
          */
         alert: function (ajaxResult, message) {
-            if (ajaxResult === true) {
-                self.showSuccess($("body"), message, self.showtime_success);
-                return;
-            }
-            if (ajaxResult === false) {
-                self.showError($("body"), message, self.showtime_error);
-                return;
-            }
-            //if (!ajaxResult.success) {
-            //    self.showError($("body"), ajaxResult.errorMessage);
-            //} else {
-            //    if (message && $.trim(message) != '') {
-            //        self.showSuccess($("body"), message, self.showtime_success);
-            //    }
-            //}
+        	$("body").alert(ajaxResult, message);
         }
     });
 
