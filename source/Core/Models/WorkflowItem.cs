@@ -70,6 +70,10 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// 已读时间
         /// </summary>
         public DateTime? ReadTime { get; set; }
+		/// <summary>
+		/// 签收时间
+		/// </summary>
+		public DateTime? SignTime { get; set; }
         /// <summary>
         /// 审批时间
         /// </summary>
@@ -99,6 +103,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// (AutoFinished == true) => 3
         /// </remarks>
         public string Choice { get; set; }
+
         #endregion
 
         /// <summary>

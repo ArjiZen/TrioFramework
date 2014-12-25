@@ -33,18 +33,80 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\source\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Bingosoft.Core">
+      <HintPath>..\..\source\Library\Bingosoft.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Security">
+      <HintPath>..\..\source\Library\Bingosoft.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="Bingosoft.Environment">
+      <HintPath>..\..\source\Library\Bingosoft.Environment.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Log">
+      <HintPath>..\..\source\Library\Bingosoft.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Common.Logging">
+      <HintPath>..\..\source\Library\Bingosoft.Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\..\source\Library\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data.SqlCe">
+      <HintPath>..\..\source\Library\Microsoft.Practices.EnterpriseLibrary.Data.SqlCe.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\..\source\Library\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\source\Library\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\..\source\Library\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\..\source\Library\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\source\Library\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\source\Library\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Bingosoft.Data">
+      <HintPath>..\..\source\Library\Bingosoft.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
+    <Compile Include="WorkflowEngineTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="app.config" />
+    <None Include="App_Config\Environment.config" />
+    <None Include="App_Config\log4net.config" />
+    <None Include="App_Config\Unity\Log.config" />
+    <None Include="App_Config\Unity\Security.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\source\K2Client\K2Client.csproj">
       <Project>{AD572C7A-1140-423F-B39E-6EB652FA0DED}</Project>
       <Name>K2Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\source\Core\Core.csproj">
+      <Project>{A7C4F4AE-4D37-4063-8CDE-C6B3AD191E83}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\source\TrioFramework\TrioFramework.csproj">
+      <Project>{3DC7A192-85FF-407F-865E-F45FF05CB928}</Project>
+      <Name>TrioFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Config\" />
+    <Folder Include="App_Config\Unity\" />
   </ItemGroup>
 </Project>

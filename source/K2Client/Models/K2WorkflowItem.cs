@@ -13,7 +13,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Models {
         /// 更新K2流程项
         /// </summary>
         public override void Update() {
-            _dao.UpdateFields<K2WorkflowItem>(this, "ReadTime", "FinishTime", "AutoFinished", "TaskStatus", "Comment", "Choice");
+            _dao.UpdateFields<K2WorkflowItem>(this, "ReadTime", "SignTime", "FinishTime", "AutoFinished", "TaskStatus", "Comment", "Choice");
         }
     }
 }
