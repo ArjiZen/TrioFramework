@@ -70,13 +70,15 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 				}
 				return m_CurrentUser;
 			}
-			internal set {
-				// 用于单元测试
-				m_CurrentUser = value;
-			}
 		}
 
-		 
+		/// <summary>
+		/// 设置当前用户
+		/// </summary>
+		/// <param name="loginId">用户登录id</param>
+		public void SetCurrentUser(string loginId) {
+			this.m_CurrentUser = SecurityContext.Provider.GetUser(loginId);
+		}
 
 		/// <summary>
 		/// 获取流程定义缓存
