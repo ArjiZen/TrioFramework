@@ -33,18 +33,51 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\source\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
+    <Compile Include="PendingJobTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\source\TrioFramework.WindowsServices\TrioFramework.WindowsServices.csproj">
       <Project>{586AEE19-B0C5-4C63-86A6-79D546BDBD02}</Project>
       <Name>TrioFramework.WindowsServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\source\TrioFramework\TrioFramework.csproj">
+      <Project>{3DC7A192-85FF-407F-865E-F45FF05CB928}</Project>
+      <Name>TrioFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\source\K2Client\K2Client.csproj">
+      <Project>{AD572C7A-1140-423F-B39E-6EB652FA0DED}</Project>
+      <Name>K2Client</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy inheritsSet="VisualStudio" inheritsScope="text/plain" scope="application/xml" />
+          <XmlFormattingPolicy inheritsSet="Mono" inheritsScope="application/xml" scope="application/xml">
+            <Formats __added="0">
+              <XmlFormattingSettings OmitXmlDeclaration="False" NewLineChars="&#xA;" IndentContent="True" ContentIndentString="	" AttributesInNewLine="False" MaxAttributesPerLine="10" AttributesIndentString="	" WrapAttributes="False" AlignAttributes="False" AlignAttributeValues="False" QuoteChar="&quot;" SpacesBeforeAssignment="0" SpacesAfterAssignment="0" EmptyLinesBeforeStart="0" EmptyLinesAfterStart="0" EmptyLinesBeforeEnd="0" EmptyLinesAfterEnd="0">
+                <ScopeXPath>
+                  <String>/configuration/*</String>
+                </ScopeXPath>
+              </XmlFormattingSettings>
+              <XmlFormattingSettings OmitXmlDeclaration="False" NewLineChars="&#xA;" IndentContent="True" ContentIndentString="	" AttributesInNewLine="False" MaxAttributesPerLine="10" AttributesIndentString="	" WrapAttributes="False" AlignAttributes="False" AlignAttributeValues="False" QuoteChar="&quot;" SpacesBeforeAssignment="0" SpacesAfterAssignment="0" EmptyLinesBeforeStart="0" EmptyLinesAfterStart="0" EmptyLinesBeforeEnd="0" EmptyLinesAfterEnd="1">
+                <ScopeXPath>
+                  <String>/commands/*</String>
+                </ScopeXPath>
+              </XmlFormattingSettings>
+            </Formats>
+          </XmlFormattingPolicy>
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

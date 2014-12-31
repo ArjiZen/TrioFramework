@@ -121,11 +121,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_Config\SqlCommands\Workflow\K2Client.config">
+    <None Include="packages.config" />
+    <EmbeddedResource Include="App_Config\SqlCommands\K2Client.config">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="packages.config" />
-    <EmbeddedResource Include="App_Config\SqlCommands\Workflow\PendingJob.config">
+    <EmbeddedResource Include="App_Config\SqlCommands\PendingJob.config">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

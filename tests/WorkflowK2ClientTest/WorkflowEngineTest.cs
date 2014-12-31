@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Bingosoft.Data;
 using System.Reflection;
 using Bingosoft.Security.Principal;
+using Bingosoft.TrioFramework.Workflow.K2Client.Models;
 
 namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 	[TestFixture()]

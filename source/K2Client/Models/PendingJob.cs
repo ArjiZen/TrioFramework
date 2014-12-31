@@ -6,7 +6,7 @@ using Bingosoft.TrioFramework.Workflow.Core.Models;
 using Bingosoft.TrioFramework.Workflow.K2Client.Models;
 using System.Text.RegularExpressions;
 
-namespace Bingosoft.TrioFramework.Workflow.K2Client {
+namespace Bingosoft.TrioFramework.Workflow.K2Client.Models {
 	/// <summary>
 	/// 任务推送
 	/// </summary>
@@ -95,6 +95,11 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		public bool DoFinish { get; set; }
 
 		/// <summary>
+		/// 创建时间
+		/// </summary>
+		public DateTime CreateTime { get; set; }
+
+		/// <summary>
 		/// 推送时间
 		/// </summary>
 		public DateTime? PushedTime { get; set; }
@@ -153,10 +158,40 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		}
 
 		/// <summary>
-		/// 更新iOffice任务Id
+		/// 推送任务成功
 		/// </summary>
-		private bool UpdateJobId() {
-			var effectRows = _dao.ExecuteNonQuery("trio.k2client.pendingjob.update.jobid", this);
+		internal bool PushSuccess() {
+			if (string.IsNullOrEmpty(this.JobId)) {
+				throw new ArgumentNullException("JobId不能为空");
+			}
+			var effectRows = _dao.ExecuteNonQuery("trio.k2client.pendingjob.push.success", this);
+			return effectRows > 0;
+		}
+
+		/// <summary>
+		/// 结束任务成功
+		/// </summary>
+		internal bool FinishSuccess() {
+			var effectRows = _dao.ExecuteNonQuery("trio.k2client.pendingjob.finish.success", this);
+			return effectRows > 0;
+		}
+
+		/// <summary>
+		/// 删除任务成功
+		/// </summary>
+		internal bool DeleteSuccess() {
+			var effectRows = _dao.ExecuteNonQuery("trio.k2client.pendingjob.delete.success", this);
+			return effectRows > 0;
+		}
+
+		/// <summary>
+		/// 推送任务失败
+		/// </summary>
+		internal bool PendingFailure() {
+			if (string.IsNullOrEmpty(this.Result)) {
+				throw new ArgumentNullException("Result不能为空");
+			}
+			var effectRows = _dao.ExecuteNonQuery("trio.k2client.pendingjob.failure", this);
 			return effectRows > 0;
 		}
 

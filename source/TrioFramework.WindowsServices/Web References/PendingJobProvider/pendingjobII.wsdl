@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://eap.sz.gmcc.net/WebService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://eap.sz.gmcc.net/WebService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://eap.sz.gmcc.net/WebService/">
+      <s:element name="AddPendingJob">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobURL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TriggerEmployeeNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TriggerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyUserIDs" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="NotifyChannel" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyContent" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsAcceptResponse" type="s:short" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPendingJobResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddPendingJobResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPendingJobTest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobURL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TriggerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TriggerEmployeeNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyUserIDs" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="NotifyChannel" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyContent" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsAcceptResponse" type="s:short" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPendingJobTestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddPendingJobTestResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPendingJobForAboss">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AbossLoginName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobURL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TriggerAbossLoginName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TriggerUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyAbossLoginNames" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="NotifyChannel" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyContent" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsAcceptResponse" type="s:short" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPendingJobForAbossResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddPendingJobForAbossResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPendingJobBatch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pendingJobsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPendingJobBatchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddPendingJobBatchResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPendingJobBatchForAboss">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pendingJobsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPendingJobBatchForAbossResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddPendingJobBatchForAbossResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishPendingJobByJobIDs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JobIDs" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishPendingJobByJobIDsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FinishPendingJobByJobIDsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishPendingJobBySubID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishPendingJobBySubIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FinishPendingJobBySubIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishPendingJobBySubIDAndUserID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishPendingJobBySubIDAndUserIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FinishPendingJobBySubIDAndUserIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishPendingJobByJobID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JobID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobHandleResult" type="tns:HandleResult" />
+            <s:element minOccurs="1" maxOccurs="1" name="NotifyChannel" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyUserIDs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyContent" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsAcceptResponse" type="s:short" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HandleResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Result" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultInfo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JobOrReadingID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FinishPendingJobByJobIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FinishPendingJobByJobIDResult" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobHandleResult" type="tns:HandleResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishPendingJobByJobIDsWithXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pendingJobsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishPendingJobByJobIDsWithXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FinishPendingJobByJobIDsWithXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingJobByJobIDs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JobIDs" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingJobByJobIDsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeletePendingJobByJobIDsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingJobBySubID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingJobBySubIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeletePendingJobBySubIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingJobBySubIDAndUserID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SystemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingJobBySubIDAndUserIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeletePendingJobBySubIDAndUserIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingJobByJobID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JobID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="NotifyChannel" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyUserIDs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyContent" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsAcceptResponse" type="s:short" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingJobByJobIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeletePendingJobByJobIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingJobByJobIDsWithXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pendingJobsXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePendingJobByJobIDsWithXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeletePendingJobByJobIDsWithXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPendingJobByUserID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPendingJobByUserIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPendingJobByUserIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPendingJobByUserIDWithDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="StartDateTime" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDateTime" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPendingJobByUserIDWithDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPendingJobByUserIDWithDateResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPendingJobByEUMUserID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EUMUserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPendingJobByEUMUserIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPendingJobByEUMUserIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPendingJobByEUMUserIDWithDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EUMUserID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="StartDateTime" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDateTime" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPendingJobByEUMUserIDWithDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPendingJobByEUMUserIDWithDateResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddPendingJobSoapIn">
+    <wsdl:part name="parameters" element="tns:AddPendingJob" />
+  </wsdl:message>
+  <wsdl:message name="AddPendingJobSoapOut">
+    <wsdl:part name="parameters" element="tns:AddPendingJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddPendingJobTestSoapIn">
+    <wsdl:part name="parameters" element="tns:AddPendingJobTest" />
+  </wsdl:message>
+  <wsdl:message name="AddPendingJobTestSoapOut">
+    <wsdl:part name="parameters" element="tns:AddPendingJobTestResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddPendingJobForAbossSoapIn">
+    <wsdl:part name="parameters" element="tns:AddPendingJobForAboss" />
+  </wsdl:message>
+  <wsdl:message name="AddPendingJobForAbossSoapOut">
+    <wsdl:part name="parameters" element="tns:AddPendingJobForAbossResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddPendingJobBatchSoapIn">
+    <wsdl:part name="parameters" element="tns:AddPendingJobBatch" />
+  </wsdl:message>
+  <wsdl:message name="AddPendingJobBatchSoapOut">
+    <wsdl:part name="parameters" element="tns:AddPendingJobBatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddPendingJobBatchForAbossSoapIn">
+    <wsdl:part name="parameters" element="tns:AddPendingJobBatchForAboss" />
+  </wsdl:message>
+  <wsdl:message name="AddPendingJobBatchForAbossSoapOut">
+    <wsdl:part name="parameters" element="tns:AddPendingJobBatchForAbossResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinishPendingJobByJobIDsSoapIn">
+    <wsdl:part name="parameters" element="tns:FinishPendingJobByJobIDs" />
+  </wsdl:message>
+  <wsdl:message name="FinishPendingJobByJobIDsSoapOut">
+    <wsdl:part name="parameters" element="tns:FinishPendingJobByJobIDsResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinishPendingJobBySubIDSoapIn">
+    <wsdl:part name="parameters" element="tns:FinishPendingJobBySubID" />
+  </wsdl:message>
+  <wsdl:message name="FinishPendingJobBySubIDSoapOut">
+    <wsdl:part name="parameters" element="tns:FinishPendingJobBySubIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinishPendingJobBySubIDAndUserIDSoapIn">
+    <wsdl:part name="parameters" element="tns:FinishPendingJobBySubIDAndUserID" />
+  </wsdl:message>
+  <wsdl:message name="FinishPendingJobBySubIDAndUserIDSoapOut">
+    <wsdl:part name="parameters" element="tns:FinishPendingJobBySubIDAndUserIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinishPendingJobByJobIDSoapIn">
+    <wsdl:part name="parameters" element="tns:FinishPendingJobByJobID" />
+  </wsdl:message>
+  <wsdl:message name="FinishPendingJobByJobIDSoapOut">
+    <wsdl:part name="parameters" element="tns:FinishPendingJobByJobIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinishPendingJobByJobIDsWithXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:FinishPendingJobByJobIDsWithXML" />
+  </wsdl:message>
+  <wsdl:message name="FinishPendingJobByJobIDsWithXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:FinishPendingJobByJobIDsWithXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingJobByJobIDsSoapIn">
+    <wsdl:part name="parameters" element="tns:DeletePendingJobByJobIDs" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingJobByJobIDsSoapOut">
+    <wsdl:part name="parameters" element="tns:DeletePendingJobByJobIDsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingJobBySubIDSoapIn">
+    <wsdl:part name="parameters" element="tns:DeletePendingJobBySubID" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingJobBySubIDSoapOut">
+    <wsdl:part name="parameters" element="tns:DeletePendingJobBySubIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingJobBySubIDAndUserIDSoapIn">
+    <wsdl:part name="parameters" element="tns:DeletePendingJobBySubIDAndUserID" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingJobBySubIDAndUserIDSoapOut">
+    <wsdl:part name="parameters" element="tns:DeletePendingJobBySubIDAndUserIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingJobByJobIDSoapIn">
+    <wsdl:part name="parameters" element="tns:DeletePendingJobByJobID" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingJobByJobIDSoapOut">
+    <wsdl:part name="parameters" element="tns:DeletePendingJobByJobIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingJobByJobIDsWithXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:DeletePendingJobByJobIDsWithXML" />
+  </wsdl:message>
+  <wsdl:message name="DeletePendingJobByJobIDsWithXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:DeletePendingJobByJobIDsWithXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPendingJobByUserIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPendingJobByUserID" />
+  </wsdl:message>
+  <wsdl:message name="GetPendingJobByUserIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPendingJobByUserIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPendingJobByUserIDWithDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPendingJobByUserIDWithDate" />
+  </wsdl:message>
+  <wsdl:message name="GetPendingJobByUserIDWithDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPendingJobByUserIDWithDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPendingJobByEUMUserIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPendingJobByEUMUserID" />
+  </wsdl:message>
+  <wsdl:message name="GetPendingJobByEUMUserIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPendingJobByEUMUserIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPendingJobByEUMUserIDWithDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPendingJobByEUMUserIDWithDate" />
+  </wsdl:message>
+  <wsdl:message name="GetPendingJobByEUMUserIDWithDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPendingJobByEUMUserIDWithDateResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PendingJobIISoap">
+    <wsdl:operation name="AddPendingJob">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">增加一项待办工作</wsdl:documentation>
+      <wsdl:input message="tns:AddPendingJobSoapIn" />
+      <wsdl:output message="tns:AddPendingJobSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobTest">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">新增待办测试方法</wsdl:documentation>
+      <wsdl:input message="tns:AddPendingJobTestSoapIn" />
+      <wsdl:output message="tns:AddPendingJobTestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobForAboss">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Aboss 新增待办接口</wsdl:documentation>
+      <wsdl:input message="tns:AddPendingJobForAbossSoapIn" />
+      <wsdl:output message="tns:AddPendingJobForAbossSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobBatch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">批量新增待办,支持通知</wsdl:documentation>
+      <wsdl:input message="tns:AddPendingJobBatchSoapIn" />
+      <wsdl:output message="tns:AddPendingJobBatchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobBatchForAboss">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">aboss批量新增待办,支持通知</wsdl:documentation>
+      <wsdl:input message="tns:AddPendingJobBatchForAbossSoapIn" />
+      <wsdl:output message="tns:AddPendingJobBatchForAbossSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobByJobIDs">
+      <wsdl:input message="tns:FinishPendingJobByJobIDsSoapIn" />
+      <wsdl:output message="tns:FinishPendingJobByJobIDsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobBySubID">
+      <wsdl:input message="tns:FinishPendingJobBySubIDSoapIn" />
+      <wsdl:output message="tns:FinishPendingJobBySubIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobBySubIDAndUserID">
+      <wsdl:input message="tns:FinishPendingJobBySubIDAndUserIDSoapIn" />
+      <wsdl:output message="tns:FinishPendingJobBySubIDAndUserIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobByJobID">
+      <wsdl:input message="tns:FinishPendingJobByJobIDSoapIn" />
+      <wsdl:output message="tns:FinishPendingJobByJobIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobByJobIDsWithXML">
+      <wsdl:input message="tns:FinishPendingJobByJobIDsWithXMLSoapIn" />
+      <wsdl:output message="tns:FinishPendingJobByJobIDsWithXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobByJobIDs">
+      <wsdl:input message="tns:DeletePendingJobByJobIDsSoapIn" />
+      <wsdl:output message="tns:DeletePendingJobByJobIDsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobBySubID">
+      <wsdl:input message="tns:DeletePendingJobBySubIDSoapIn" />
+      <wsdl:output message="tns:DeletePendingJobBySubIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobBySubIDAndUserID">
+      <wsdl:input message="tns:DeletePendingJobBySubIDAndUserIDSoapIn" />
+      <wsdl:output message="tns:DeletePendingJobBySubIDAndUserIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobByJobID">
+      <wsdl:input message="tns:DeletePendingJobByJobIDSoapIn" />
+      <wsdl:output message="tns:DeletePendingJobByJobIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobByJobIDsWithXML">
+      <wsdl:input message="tns:DeletePendingJobByJobIDsWithXMLSoapIn" />
+      <wsdl:output message="tns:DeletePendingJobByJobIDsWithXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByUserID">
+      <wsdl:input message="tns:GetPendingJobByUserIDSoapIn" />
+      <wsdl:output message="tns:GetPendingJobByUserIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByUserIDWithDate">
+      <wsdl:input message="tns:GetPendingJobByUserIDWithDateSoapIn" />
+      <wsdl:output message="tns:GetPendingJobByUserIDWithDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByEUMUserID">
+      <wsdl:input message="tns:GetPendingJobByEUMUserIDSoapIn" />
+      <wsdl:output message="tns:GetPendingJobByEUMUserIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByEUMUserIDWithDate">
+      <wsdl:input message="tns:GetPendingJobByEUMUserIDWithDateSoapIn" />
+      <wsdl:output message="tns:GetPendingJobByEUMUserIDWithDateSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PendingJobIISoap" type="tns:PendingJobIISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddPendingJob">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/AddPendingJob" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobTest">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/AddPendingJobTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobForAboss">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/AddPendingJobForAboss" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobBatch">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/AddPendingJobBatch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobBatchForAboss">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/AddPendingJobBatchForAboss" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobByJobIDs">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/FinishPendingJobByJobIDs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobBySubID">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/FinishPendingJobBySubID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobBySubIDAndUserID">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/FinishPendingJobBySubIDAndUserID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobByJobID">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/FinishPendingJobByJobID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobByJobIDsWithXML">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/FinishPendingJobByJobIDsWithXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobByJobIDs">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/DeletePendingJobByJobIDs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobBySubID">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/DeletePendingJobBySubID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobBySubIDAndUserID">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/DeletePendingJobBySubIDAndUserID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobByJobID">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/DeletePendingJobByJobID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobByJobIDsWithXML">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/DeletePendingJobByJobIDsWithXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByUserID">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/GetPendingJobByUserID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByUserIDWithDate">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/GetPendingJobByUserIDWithDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByEUMUserID">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/GetPendingJobByEUMUserID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByEUMUserIDWithDate">
+      <soap:operation soapAction="http://eap.sz.gmcc.net/WebService/GetPendingJobByEUMUserIDWithDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PendingJobIISoap12" type="tns:PendingJobIISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddPendingJob">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/AddPendingJob" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobTest">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/AddPendingJobTest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobForAboss">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/AddPendingJobForAboss" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobBatch">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/AddPendingJobBatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPendingJobBatchForAboss">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/AddPendingJobBatchForAboss" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobByJobIDs">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/FinishPendingJobByJobIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobBySubID">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/FinishPendingJobBySubID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobBySubIDAndUserID">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/FinishPendingJobBySubIDAndUserID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobByJobID">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/FinishPendingJobByJobID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishPendingJobByJobIDsWithXML">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/FinishPendingJobByJobIDsWithXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobByJobIDs">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/DeletePendingJobByJobIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobBySubID">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/DeletePendingJobBySubID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobBySubIDAndUserID">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/DeletePendingJobBySubIDAndUserID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobByJobID">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/DeletePendingJobByJobID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePendingJobByJobIDsWithXML">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/DeletePendingJobByJobIDsWithXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByUserID">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/GetPendingJobByUserID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByUserIDWithDate">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/GetPendingJobByUserIDWithDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByEUMUserID">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/GetPendingJobByEUMUserID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingJobByEUMUserIDWithDate">
+      <soap12:operation soapAction="http://eap.sz.gmcc.net/WebService/GetPendingJobByEUMUserIDWithDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PendingJobII">
+    <wsdl:port name="PendingJobIISoap" binding="tns:PendingJobIISoap">
+      <soap:address location="http://edtodo.sz.gmcc.net/webservice/pendingjobII.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PendingJobIISoap12" binding="tns:PendingJobIISoap12">
+      <soap12:address location="http://edtodo.sz.gmcc.net/webservice/pendingjobII.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
