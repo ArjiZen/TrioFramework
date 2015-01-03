@@ -103,7 +103,14 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// (AutoFinished == true) => 3
         /// </remarks>
         public string Choice { get; set; }
-
+		/// <summary>
+		/// 被委托人Id
+		/// </summary>
+		public string MandataryId { get; set;}
+		/// <summary>
+		/// 被委托人
+		/// </summary>
+		public string Mandatary { get; set;}
         #endregion
 
         /// <summary>

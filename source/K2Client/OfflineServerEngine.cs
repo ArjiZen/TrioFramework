@@ -12,7 +12,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
         /// </summary>
         /// <param name="instance">流程实例</param>
         /// <returns></returns>
-        public bool SaveWorkflow(WorkflowInstance instance) {
+		public override bool SaveWorkflow(WorkflowInstance instance) {
             return true;
         }
 
@@ -23,7 +23,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
         /// <param name="result">处理结果</param>
         /// <param name="listNextUsers">下一环节处理人</param>
         /// <returns></returns>
-        public bool RunWorkflow(WorkflowInstance instance, ApproveResult result, IList<IUser> listNextUsers) {
+		public override bool RunWorkflow(WorkflowInstance instance, ApproveResult result, IList<IUser> listNextUsers) {
             return true;
         }
     }

@@ -35,6 +35,8 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			if (k2Online != null && k2Online.Equals("false", StringComparison.OrdinalIgnoreCase)) {
 				this.ServerEngine = new OfflineServerEngine();
 			}
+			this.DbEngine.CurrentUser = CurrentUser;
+			this.ServerEngine.CurrentUser = CurrentUser;
 		}
 
 		/// <summary>
@@ -61,9 +63,9 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			}
 
 			var definition = (from e in this.Definitions
-			                           where e.AppCode == appCode
+			                  where e.AppCode == appCode
                               orderby e.Version descending
-			                           select e).FirstOrDefault();
+			                  select e).FirstOrDefault();
 			if (definition == null) {
 				throw new WorkflowDefinitionNotExistsException(appCode, 0);
 			}
@@ -96,9 +98,9 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			var instance = WorkflowInstanceFactory.Get<K2WorkflowInstance>(instanceNo);
 			// 从流程定义缓存中读取流程名称
 			var definition = (from e in this.Definitions
-			                           where e.AppCode == appCode
+			                  where e.AppCode == appCode
                               orderby e.Version descending
-			                           select e).FirstOrDefault();
+			                  select e).FirstOrDefault();
 			if (definition == null) {
 				throw new WorkflowDefinitionNotExistsException(appCode, 0);
 			}
@@ -126,9 +128,9 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			var instance = WorkflowInstanceFactory.Get<K2WorkflowInstance>(instanceNo);
 			// 从流程定义缓存中读取流程名称
 			var definition = (from e in this.Definitions
-			                           where e.AppCode == instance.AppCode
+			                  where e.AppCode == instance.AppCode
                               orderby e.Version descending
-			                           select e).FirstOrDefault();
+			                  select e).FirstOrDefault();
 			if (definition == null) {
 				throw new WorkflowDefinitionNotExistsException(instance.AppCode, 0);
 			}
@@ -217,10 +219,13 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			if (instance.CurrentWorkItem == null) {
 				throw new ActivityNotFoundException(instance.InstanceNo, instance.CurrentActivity);
 			}
-
+				
 			// 验证当前办理人员
-			// TODO:委托场景的处理
-			if (instance.CurrentWorkItem.PartId != CurrentUser.Id) {
+			// 非WorkItem默认用户，非委托人设置，未设置委托信息
+			if (!instance.CurrentWorkItem.PartId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)
+			    && !instance.CurrentWorkItem.MandataryId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)
+			    && !DelegateWork.IsDelegate(instance.AppCode, instance.CurrentWorkItem.PartId, CurrentUser.Id)) {
+
 				throw new UserNotFoundException("当前用户不是该环节的处理人");
 			}
 

@@ -116,7 +116,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Models {
 
 		#endregion
 
-		private static Dao _dao = Dao.Get();
+		private readonly static Dao _dao = Dao.Get();
 
 		/// <summary>
 		/// 获取待办任务

@@ -6,6 +6,7 @@ using Bingosoft.Security;
 using Bingosoft.Security.Principal;
 using Bingosoft.TrioFramework.Workflow.Core.Models;
 using Bingosoft.TrioFramework.Workflow.K2Client.Models;
+using Bingosoft.TrioFramework.Workflow.Core;
 
 namespace Bingosoft.TrioFramework.Workflow.K2Client {
 	/// <summary>
@@ -21,7 +22,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		/// <param name="instance">流程实例对象</param>
 		/// <remarks>同时新增流程办理历史</remarks>
 		/// <returns></returns>
-		public bool SaveWorkflow(WorkflowInstance instance) {
+		public override bool SaveWorkflow(WorkflowInstance instance) {
 			var ret = 0;
 			var isInstExists = WorkflowInstanceFactory.IsExists<K2WorkflowInstance>(instance.InstanceNo);
 			if (isInstExists) {
@@ -70,7 +71,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		/// <param name="result">处理结果</param>
 		/// <param name="nextStepUsers">下一环节处理人</param>
 		/// <returns></returns>
-		public bool RunWorkflow(WorkflowInstance instance, ApproveResult result, IList<IUser> nextStepUsers) {
+		public override bool RunWorkflow(WorkflowInstance instance, ApproveResult result, IList<IUser> nextStepUsers) {
 			var nextWorkItems = new List<K2WorkflowItem>();
 			IEnumerable<K2WorkflowItem> curWorkItems = new K2WorkflowItem[0];
 
@@ -95,6 +96,10 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 						}
 					}
 					workItem.TaskStatus = isReject ? TaskStatus.Reject : TaskStatus.Accept;
+					if(workItem.PartId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)){
+						workItem.Mandatary = null;
+						workItem.MandataryId = null;
+					}
 				} else {
 					workItem.AutoFinished = true; //（默认当前办理方式是多选一）
 					workItem.TaskStatus = TaskStatus.Finished;
@@ -120,6 +125,15 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 				workItem.ReceTime = DateTime.Now;
 				workItem.TaskStatus = TaskStatus.Waiting;
 				workItem.CurrentActi = nextActi.Name;
+
+				// 检查有效的委托关系
+				// 默认将第一个被委托用户添加到WorkItem中，暂时不考虑同时委托给多个人的情况
+				var delegateRelations = DelegateWork.GetByDeletagor(instance.AppCode, workItem.PartId);
+				if (delegateRelations.Count > 0) {
+					var firstRelation = delegateRelations[0];
+					workItem.Mandatary = firstRelation.Mandatary;
+					workItem.MandataryId = firstRelation.MandataryId;
+				}
 				nextWorkItems.Add(workItem);
 			}
 
@@ -134,7 +148,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			using (var transactionScope = new TransactionScope(TransactionScopeOption.Required)) {
 				//1.更新当前办理环节及其相关环节
 				foreach (var workItem in curWorkItems) {
-					_dao.UpdateFields<K2WorkflowItem>(workItem, "FinishTime", "AutoFinished", "Choice", "Comment", "TaskStatus");
+					_dao.UpdateFields<K2WorkflowItem>(workItem, "FinishTime", "AutoFinished", "Choice", "Comment", "TaskStatus", "MandataryId", "Mandatary");
 				}
 				//2.新增下一批办理环节
 				foreach (var workItem in nextWorkItems) {

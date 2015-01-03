@@ -135,7 +135,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
         /// </summary>
         /// <param name="instance">本地流程实例</param>
         /// <returns></returns>
-        public bool SaveWorkflow(WorkflowInstance instance) {
+		public override bool SaveWorkflow(WorkflowInstance instance) {
             bool retValue = false;
             var loginUser = SecurityContext.User;
 
@@ -173,7 +173,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
         /// <param name="listNextUsers">分配办理人员列表</param>
         /// <remarks></remarks>
         /// <returns></returns>
-        public bool RunWorkflow(WorkflowInstance instance, ApproveResult result, IList<IUser> listNextUsers) {
+		public override bool RunWorkflow(WorkflowInstance instance, ApproveResult result, IList<IUser> listNextUsers) {
             var loginUser = SecurityContext.User;
             var k2ProcInstId = int.Parse(instance.DataLocator);
             var actionName = result.Choice;
