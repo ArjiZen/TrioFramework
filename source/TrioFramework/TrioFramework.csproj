@@ -83,6 +83,8 @@
     <Compile Include="Config\TrioSection.cs" />
     <Compile Include="Config\PendingJobElement.cs" />
     <Compile Include="Config\CommonElement.cs" />
+    <Compile Include="Config\WorkflowElement.cs" />
+    <Compile Include="Config\FileServerElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_Config\SqlCommands\securityContext.config" />

@@ -27,7 +27,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Models {
 				if (string.IsNullOrEmpty(pendingJobUrl)) {
 					lock (lockObj) {
 						if (string.IsNullOrEmpty(pendingJobUrl)) {
-							pendingJobUrl = ConfigurationManager.AppSettings["PendingJobUrl"];
+							pendingJobUrl = SettingProvider.PendingJob.Url;
 						}
 					}
 				}

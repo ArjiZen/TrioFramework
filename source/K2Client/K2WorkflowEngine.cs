@@ -31,8 +31,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		/// </summary>
 		public K2WorkflowEngine() {
 			// 用于测试的离线K2模式
-			var k2Online = ConfigurationManager.AppSettings["K2Online"];
-			if (k2Online != null && k2Online.Equals("false", StringComparison.OrdinalIgnoreCase)) {
+			if (!SettingProvider.Workflow.IsConnectK2) {
 				this.m_ServerEngine = new OfflineServerEngine();
 			}
 		}

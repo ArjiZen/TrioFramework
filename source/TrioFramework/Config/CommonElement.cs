@@ -7,13 +7,19 @@ namespace Bingosoft.TrioFramework {
 	/// Trio服务配置
 	/// </summary>
 	public class CommonElement : ConfigurationElement {
+		/// <summary>
+		/// 实例化通用配置节点
+		/// </summary>
+		public CommonElement() {
+			this.EncryptKey = "Bingosoft";
+		}
 
 		/// <summary>
 		/// 系统编码
 		/// </summary>
 		[ConfigurationProperty("systemId")]
 		public string SystemId { 
-			get{ return (string)this["systemId"]; } 
+			get{ return (string)this["systemId"]; }
 			set{ this["systemId"] = value; }
 		}
 
@@ -43,7 +49,15 @@ namespace Bingosoft.TrioFramework {
 			get{ return (string)this["systemName"]; }
 			set{ this["systemName"] = value; }
 		}
+
+		/// <summary>
+		/// RC4加密Key
+		/// </summary>
+		[ConfigurationProperty("encryptKey")]
+		public string EncryptKey {
+			get{ return (string)this["encryptKey"]; }
+			set{ this["encryptKey"] = value; }
+		}
 	}
-
 }
-
+	

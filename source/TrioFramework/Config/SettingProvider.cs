@@ -32,7 +32,7 @@ namespace Bingosoft.TrioFramework {
 		public static CommonElement Common {
 			get {
 				if (TrioSettings == null) {
-					throw new ConfigurationErrorsException("配置文件中未找到配置Trio\\Common节点");
+					throw new ConfigurationErrorsException("配置文件中未找到Trio配置节点");
 				}
 				return TrioSettings.Common;
 			}
@@ -44,9 +44,33 @@ namespace Bingosoft.TrioFramework {
 		public static PendingJobElement PendingJob {
 			get {
 				if (TrioSettings == null) {
-					throw new ConfigurationErrorsException("配置文件中未找到配置Trio\\PendingJob节点");
+					throw new ConfigurationErrorsException("配置文件中未找到Trio配置节点");
 				}
 				return TrioSettings.PendingJob;
+			}
+		}
+
+		/// <summary>
+		/// 工作流配置
+		/// </summary>
+		public static WorkflowElement Workflow {
+			get {
+				if (TrioSettings == null) {
+					throw new ConfigurationErrorsException("配置文件中未找到Trio配置节点");
+				}
+				return TrioSettings.Workflow;
+			}
+		}
+
+		/// <summary>
+		/// 文件服务器配置
+		/// </summary>
+		public static FileServerElement FileServer {
+			get {
+				if (TrioSettings == null) {
+					throw new ConfigurationErrorsException("配置文件中未找到Trio配置节点");
+				}
+				return TrioSettings.FileServer;
 			}
 		}
 	}

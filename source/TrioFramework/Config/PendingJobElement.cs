@@ -6,8 +6,11 @@ namespace Bingosoft.TrioFramework {
 	/// 推送待办配置
 	/// </summary>
 	public class PendingJobElement : ConfigurationElement {
+		/// <summary>
+		/// 实例化任务推送配置节点
+		/// </summary>
 		public PendingJobElement() {
-			this.IsEnabled = true;
+			this.IsEnabled = false;
 			this.IsEnabledSMS = false;
 		}
 

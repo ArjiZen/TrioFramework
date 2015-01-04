@@ -23,6 +23,19 @@ namespace Bingosoft.TrioFramework.Test {
 			Assert.IsFalse(SettingProvider.PendingJob.IsEnabledSMS);
 		}
 
+		[Test()]
+		public void WorkflowTest() {
+			Assert.IsNotNullOrEmpty(SettingProvider.Workflow.Provider);
+			Assert.IsFalse(SettingProvider.Workflow.IsConnectK2);
+		}
+
+		[Test()]
+		public void FileServerTest(){
+			Assert.IsNotNullOrEmpty(SettingProvider.FileServer.Server);
+			Assert.IsNotNullOrEmpty(SettingProvider.FileServer.UserName);
+			Assert.IsNotNullOrEmpty(SettingProvider.FileServer.Password);
+		}
+
 	}
 }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using Bingosoft.TrioFramework;
 
 /// <summary>
 /// 字符串加密扩展类
@@ -20,7 +21,7 @@ public static class EncryptExtension {
     private static string Rc4Key {
         get {
             if (string.IsNullOrEmpty(_rc4Key)) {
-                _rc4Key = ConfigurationManager.AppSettings["RC4Key"];
+				_rc4Key = SettingProvider.Common.EncryptKey;
             }
             return _rc4Key;
         }

@@ -24,18 +24,6 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		private readonly static object lockObj = new object();
 
 		/// <summary>
-		/// 流程引擎配置完全限定名
-		/// </summary>
-		private static string EngineConfigurator {
-			get {
-				if (ConfigurationManager.AppSettings["WorkflowEngine"] == null) {
-					throw new ConfigurationErrorsException("未找到工作流引擎配置项，AppSettingName：WorkflowEngine");
-				}
-				return ConfigurationManager.AppSettings["WorkflowEngine"];
-			}
-		}
-
-		/// <summary>
 		/// 获取流程引擎实例
 		/// </summary>
 		public static WorkflowEngine Instance {
@@ -43,7 +31,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 				if (m_Instance == null) {
 					lock (lockObj) {
 						if (m_Instance == null) {
-							var configurator = EngineConfigurator;
+							var configurator = SettingProvider.Workflow.Provider;
 							var t = Type.GetType(configurator);
 							if (t == null) {
 								throw new WorkflowEngineNotFoundException(configurator);

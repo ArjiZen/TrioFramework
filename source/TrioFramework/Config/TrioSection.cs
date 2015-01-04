@@ -25,6 +25,22 @@ namespace Bingosoft.TrioFramework {
 			get{ return (PendingJobElement)this["pendingJob"]; }
 		}
 
+		/// <summary>
+		/// 文件服务器配置
+		/// </summary>
+		[ConfigurationProperty("fileServer")]
+		public FileServerElement FileServer {
+			get{ return (FileServerElement)this["fileServer"]; }
+		}
+
+		/// <summary>
+		/// 流程配置
+		/// </summary>
+		[ConfigurationProperty("workflow")]
+		public WorkflowElement Workflow {
+			get{ return (WorkflowElement)this["workflow"]; }
+		}
+
 	}
 }
 
