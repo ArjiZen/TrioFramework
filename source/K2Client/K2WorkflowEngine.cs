@@ -20,11 +20,11 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		/// <summary>
 		/// 本地数据库访问
 		/// </summary>
-		protected IK2Engine DbEngine = new DbEngine();
+		protected IK2Engine m_DbEngine = new DbEngine();
 		/// <summary>
 		/// K2服务器访问
 		/// </summary>
-		protected IK2Engine ServerEngine = new ServerEngine();
+		protected IK2Engine m_ServerEngine = new ServerEngine();
 
 		/// <summary>
 		/// 实例化K2工作流引擎
@@ -33,10 +33,32 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			// 用于测试的离线K2模式
 			var k2Online = ConfigurationManager.AppSettings["K2Online"];
 			if (k2Online != null && k2Online.Equals("false", StringComparison.OrdinalIgnoreCase)) {
-				this.ServerEngine = new OfflineServerEngine();
+				this.m_ServerEngine = new OfflineServerEngine();
 			}
-			this.DbEngine.CurrentUser = CurrentUser;
-			this.ServerEngine.CurrentUser = CurrentUser;
+		}
+
+		/// <summary>
+		/// 数据库接口
+		/// </summary>
+		protected IK2Engine DbEngine {
+			get {
+				if (m_DbEngine != null) {
+					m_DbEngine.CurrentUser = this.CurrentUser;
+				}
+				return m_DbEngine;
+			}
+		}
+
+		/// <summary>
+		/// K2服务器接口
+		/// </summary>
+		protected IK2Engine ServerEngine {
+			get { 
+				if (m_ServerEngine != null) {
+					m_ServerEngine.CurrentUser = this.CurrentUser;
+				}
+				return m_ServerEngine;
+			}
 		}
 
 		/// <summary>
@@ -221,9 +243,10 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			}
 				
 			// 验证当前办理人员
-			// 非WorkItem默认用户，非委托人设置，未设置委托信息
+			// 非WorkItem默认用户，非被委托人，未设置委托信息
 			if (!instance.CurrentWorkItem.PartId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)
-			    && !instance.CurrentWorkItem.MandataryId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)
+			    && (string.IsNullOrEmpty(instance.CurrentWorkItem.MandataryId)
+			    	|| !instance.CurrentWorkItem.MandataryId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase))
 			    && !DelegateWork.IsDelegate(instance.AppCode, instance.CurrentWorkItem.PartId, CurrentUser.Id)) {
 
 				throw new UserNotFoundException("当前用户不是该环节的处理人");

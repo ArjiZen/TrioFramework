@@ -25,7 +25,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			Assert.AreEqual("宋爽", loginUser.Name);
 			Assert.IsNotEmpty(loginUser.DeptId);
 
-			WorkflowEngine.Instance.SetCurrentUser("songshuang");
+			WorkflowEngine.Instance.SetCurrentUser(loginUser.LoginId);
 		}
 
 		[TestFixtureTearDown()]
@@ -227,6 +227,153 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 
 			var delResult = WorkflowEngine.Instance.DeleteWorkflow(instance3);
 			Assert.IsTrue(delResult);
+		}
+
+
+		/// <summary>
+		/// 添加委托关系
+		/// </summary>
+		/// <param name="delegator">委托人</param>
+		/// <param name="mandatary">被委托人</param>
+		private void AddDelegateWork(IUser delegator, IUser mandatary){
+			Assert.IsNotNull(delegator);
+			Assert.IsNotNull(mandatary);
+
+			var delegateWork = new DelegateWork();
+			delegateWork.AppCode = 0;
+			delegateWork.Delegator = delegator.Name;
+			delegateWork.DelegatorId = delegator.Id;
+			delegateWork.Mandatary = mandatary.Name;
+			delegateWork.MandataryId = mandatary.Id;
+			delegateWork.StartTime = DateTime.Now.AddMinutes(-1);
+			delegateWork.EndTime = DateTime.Now.AddMinutes(2);
+			delegateWork.IsDeleted = false;
+
+			var addSuccess = delegateWork.AddNew();
+			Assert.IsTrue(addSuccess);
+		}
+
+		/// <summary>
+		/// 先设置委托时的流程待办处理，由被委托人处理
+		/// </summary>
+		[Test()]
+		public void Delegate_First_MandataryApproveTest(){
+			// 添加委托
+			var mandatary = SecurityContext.Provider.GetUser("liangyanshan");
+			AddDelegateWork(loginUser, mandatary);
+
+			// 发起流程
+			var department = SecurityContext.Provider.GetOrganization(loginUser.DeptId);
+			Assert.IsNotNull(department);
+
+			var instance = WorkflowEngine.Instance.CreateWorkflow(1);
+			Assert.IsNotNull(instance);
+
+			instance.Creator = loginUser.Name;
+			instance.CreatorId = loginUser.Id;
+			instance.CreatorDeptId = department.Id;
+			instance.CreatorDeptName = department.FullName;
+			instance.Title = "（委托单元测试）" + DateTime.Now.ToString("yyyyMMddHHmm");
+
+			var saveResult = WorkflowEngine.Instance.SaveWorkflow(instance);
+			Assert.IsTrue(saveResult);
+
+			var approveResult = new ApproveResult();
+			approveResult.Choice = "营销接口审核";
+			approveResult.Comment = "通过";
+			approveResult.NextUsers = new List<string>(){ loginUser.Id };
+
+			var runResult = WorkflowEngine.Instance.RunWorkflow(instance, approveResult);
+			Assert.IsTrue(runResult);
+
+			instanceNo = instance.InstanceNo;
+
+			// 第二个环节的WorkItem表已添加被委托人信息
+			var instance2 = WorkflowEngine.Instance.LoadWorkflow(instance.InstanceNo, 2);
+			var workitem2 = instance2.CurrentWorkItem;
+			Assert.IsNotNull(instance2);
+			Assert.IsNotNull(workitem2);
+			Assert.AreEqual(mandatary.Id, workitem2.MandataryId);
+
+			// 设置流程的当前人为被委托人，然后提交流程
+			WorkflowEngine.Instance.SetCurrentUser(mandatary.LoginId);
+
+			var approveResult2 = new ApproveResult();
+			approveResult2.Choice = "通过";
+			approveResult2.Comment = "通过";
+			approveResult2.NextUsers = new List<string>(){ mandatary.Id };
+
+			var runResult2 = WorkflowEngine.Instance.RunWorkflow(instance2, approveResult2);
+			Assert.IsTrue(runResult2);
+
+			var instance3 = WorkflowEngine.Instance.LoadWorkflow(instance2.InstanceNo, 2);
+			var workitem3 = instance3.CurrentWorkItem;
+			Assert.IsNotNull(instance3);
+			Assert.IsNotNull(workitem3);
+			Assert.AreEqual(mandatary.Id, workitem3.MandataryId);
+
+		}
+
+
+		/// <summary>
+		/// 先产生待办后设置委托信息，由被委托人处理
+		/// </summary>
+		[Test()]
+		public void Delegate_After_MandataryApproveTest(){
+			// 发起流程
+			var department = SecurityContext.Provider.GetOrganization(loginUser.DeptId);
+			Assert.IsNotNull(department);
+
+			var instance = WorkflowEngine.Instance.CreateWorkflow(1);
+			Assert.IsNotNull(instance);
+
+			instance.Creator = loginUser.Name;
+			instance.CreatorId = loginUser.Id;
+			instance.CreatorDeptId = department.Id;
+			instance.CreatorDeptName = department.FullName;
+			instance.Title = "（委托单元测试）" + DateTime.Now.ToString("yyyyMMddHHmm");
+
+			var saveResult = WorkflowEngine.Instance.SaveWorkflow(instance);
+			Assert.IsTrue(saveResult);
+
+			var approveResult = new ApproveResult();
+			approveResult.Choice = "营销接口审核";
+			approveResult.Comment = "通过";
+			approveResult.NextUsers = new List<string>(){ loginUser.Id };
+
+			var runResult = WorkflowEngine.Instance.RunWorkflow(instance, approveResult);
+			Assert.IsTrue(runResult);
+
+			instanceNo = instance.InstanceNo;
+
+			// 第二个环节的WorkItem表已添加被委托人信息
+			var instance2 = WorkflowEngine.Instance.LoadWorkflow(instance.InstanceNo, 2);
+			var workitem2 = instance2.CurrentWorkItem;
+			Assert.IsNotNull(instance2);
+			Assert.IsNotNull(workitem2);
+			Assert.IsNullOrEmpty(workitem2.MandataryId);
+
+			// 添加委托
+			var mandatary = SecurityContext.Provider.GetUser("liangyanshan");
+			AddDelegateWork(loginUser, mandatary);
+
+			// 设置流程的当前人为被委托人，然后提交流程
+			WorkflowEngine.Instance.SetCurrentUser(mandatary.LoginId);
+
+			var approveResult2 = new ApproveResult();
+			approveResult2.Choice = "通过";
+			approveResult2.Comment = "通过";
+			approveResult2.NextUsers = new List<string>(){ mandatary.Id };
+
+			var runResult2 = WorkflowEngine.Instance.RunWorkflow(instance2, approveResult2);
+			Assert.IsTrue(runResult2);
+
+			var instance3 = WorkflowEngine.Instance.LoadWorkflow(instance2.InstanceNo, 2);
+			var workitem3 = instance3.CurrentWorkItem;
+			Assert.IsNotNull(instance3);
+			Assert.IsNotNull(workitem3);
+			Assert.AreEqual(mandatary.Id, workitem3.MandataryId);
+
 		}
 	}
 }
