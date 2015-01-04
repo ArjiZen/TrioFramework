@@ -96,9 +96,14 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 						}
 					}
 					workItem.TaskStatus = isReject ? TaskStatus.Reject : TaskStatus.Accept;
-					if(workItem.PartId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)){
+					if (workItem.PartId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)) {
+						// 原审核人处理的话，就清空被委托人字段
 						workItem.Mandatary = null;
 						workItem.MandataryId = null;
+					} else if (workItem.MandataryId == null || !workItem.MandataryId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)) {
+						// 先有待办后有委托关系的话，更新WorkItem的被委托人字段为当前用户
+						workItem.Mandatary = CurrentUser.Name;
+						workItem.MandataryId = CurrentUser.Id;
 					}
 				} else {
 					workItem.AutoFinished = true; //（默认当前办理方式是多选一）
