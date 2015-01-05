@@ -68,6 +68,14 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		}
 
 		/// <summary>
+		/// 计算待阅参与者
+		/// </summary>
+		/// <param name="bizForm">业务表单</param>
+		/// <param name="selector">待阅参与者.</param>
+		public virtual void ResolveTobeReadActor(BusinessForm bizForm, TobeReadSelector selector){
+		}
+
+		/// <summary>
 		/// 是否可以下载附件
 		/// </summary>
 		/// <param name="attachment"></param>

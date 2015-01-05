@@ -14,6 +14,10 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// 待处理
         /// </summary>
         Waiting = 0,
+		/// <summary>
+		/// 待阅
+		/// </summary>
+		ToRead = 4,
         /// <summary>
         /// 同意
         /// </summary>
@@ -66,6 +70,10 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// 已读时间
         /// </summary>
         public DateTime? ReadTime { get; set; }
+		/// <summary>
+		/// 签收时间
+		/// </summary>
+		public DateTime? SignTime { get; set; }
         /// <summary>
         /// 审批时间
         /// </summary>
@@ -95,6 +103,14 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// (AutoFinished == true) => 3
         /// </remarks>
         public string Choice { get; set; }
+		/// <summary>
+		/// 被委托人Id
+		/// </summary>
+		public string MandataryId { get; set;}
+		/// <summary>
+		/// 被委托人
+		/// </summary>
+		public string Mandatary { get; set;}
         #endregion
 
         /// <summary>

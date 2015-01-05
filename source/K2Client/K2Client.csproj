@@ -11,11 +11,9 @@
     <AssemblyName>Bingosoft.TrioFramework.Workflow.K2Client</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ReleaseVersion>1.1.2</ReleaseVersion>
+    <ReleaseVersion>1.2.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\Library\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -87,6 +85,9 @@
       <HintPath>..\Library\SourceCode.Workflow.Management.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Library\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OfflineServerEngine.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Models\K2WorkflowItem.cs" />
     <Compile Include="ServerEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\PendingJob.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj">
@@ -120,10 +122,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_Config\SqlCommands\Workflow\K2Client.config">
+    <None Include="packages.config" />
+    <EmbeddedResource Include="App_Config\SqlCommands\K2Client.config">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <EmbeddedResource Include="App_Config\SqlCommands\PendingJob.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

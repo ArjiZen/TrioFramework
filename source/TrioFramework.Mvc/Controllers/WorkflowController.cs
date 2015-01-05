@@ -128,7 +128,8 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 			try {
 				oInstanceNo = instanceNo.Decrypt();
 				oTaskId = taskId.Decrypt();
-				var instance = WorkflowEngine.Instance.LoadWorkflow(oInstanceNo, int.Parse(oTaskId));
+				var engine = WorkflowEngine.Create();
+				var instance = engine.LoadWorkflow(oInstanceNo, int.Parse(oTaskId));
 				oActivityName = instance.CurrentActivity;
 				handlerKey = oActivityName + "_" + instance.Version;
 			} catch (DecryptException) {
@@ -298,7 +299,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 					}
 				}
 				// 表单保存成功后，再保存流程
-				var engine = WorkflowEngine.Instance;
+				var engine = WorkflowEngine.Create();
 				var engineSaved = engine.SaveWorkflow(xForm.Instance);
 				if (!engineSaved) {
 					return Error(500, "流程保存失败");
@@ -368,12 +369,19 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 							Logger.LogError(ModuleName, "流程提交前自定义事件时出错", ex, "");
 							return Error(500, ex.Message);
 						}
+
+						try {
+							func.ResolveTobeReadActor(form.BusinessForm, form.TobeReadSelector);
+						} catch (Exception ex) {
+							Logger.LogError(ModuleName, "流程提交前计算待阅人员时出错", ex, "");
+							return Error(500, ex.Message);
+						}
 					}
 				}
 
-				var engine = WorkflowEngine.Instance;
+				var engine = WorkflowEngine.Create();
 				var instance = engine.LoadWorkflow(form.InstanceNo, form.TaskId);
-				var runSuccess = engine.RunWorkflow(instance, form.ApproveResult);
+				var runSuccess = engine.RunWorkflow(instance, form.ApproveResult, form.TobeReadSelector.UserIds);
 				if (runSuccess) {
 
 					// 处理流程提交后自定义事件
@@ -407,6 +415,8 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 		[HttpPost]
 		public ActionResult Delete(WorkflowForm form) {
 			try {
+				Thread.Sleep(1000);
+
 				form.InstanceNo = form.InstanceNo.Decrypt();
 				form.CurrentActi = form.CurrentActi.Decrypt();
 
@@ -424,7 +434,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 					}
 				}
 
-				var engine = WorkflowEngine.Instance;
+				var engine = WorkflowEngine.Create();
 				var instance = engine.LoadWorkflow(form.InstanceNo, form.TaskId);
 				var success = engine.DeleteWorkflow(instance);
 				if (success) {
@@ -450,6 +460,29 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 			}
 		}
 
+
+		/// <summary>
+		/// 签收工单
+		/// </summary>
+		/// <param name="form"></param>
+		/// <returns></returns>
+		[HttpPost]
+		public ActionResult Sign(WorkflowForm form) {
+			try {
+				Thread.Sleep(1000);
+
+				form.InstanceNo = form.InstanceNo.Decrypt();
+				form.CurrentActi = form.CurrentActi.Decrypt();
+
+				var engine = WorkflowEngine.Create();
+				engine.SignWorkflow(form.InstanceNo, form.TaskId);
+				return Success();
+			} catch (Exception ex) {
+				Logger.LogError(ModuleName, "流程签收时出错", ex, form);
+				return Error(500, ex.Message);
+			}
+		}
+
 		/// <summary>
 		/// 流程提交
 		/// </summary>
@@ -462,7 +495,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 			if (TryUpdateModel(form)) {
 				UpdateModel(form);
 
-				var engine = WorkflowEngine.Instance;
+				var engine = WorkflowEngine.Create();
 				if (!string.IsNullOrEmpty(form.InstanceNo)) {
 					var instanceNo = form.InstanceNo.Decrypt();
 					var instance = engine.LoadWorkflow(form.AppCode, instanceNo, form.TaskId);

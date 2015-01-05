@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9EF6F40F-1811-4280-9701-DE67B20D0691}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Bingosoft.TrioFramework.WindowsServices.Test</RootNamespace>
+    <AssemblyName>TrioFrameworkWindowsServicesTest</AssemblyName>
+    <ReleaseVersion>1.2.0</ReleaseVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\source\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PendingJobTest.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\source\TrioFramework.WindowsServices\TrioFramework.WindowsServices.csproj">
+      <Project>{586AEE19-B0C5-4C63-86A6-79D546BDBD02}</Project>
+      <Name>TrioFramework.WindowsServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\source\TrioFramework\TrioFramework.csproj">
+      <Project>{3DC7A192-85FF-407F-865E-F45FF05CB928}</Project>
+      <Name>TrioFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\source\K2Client\K2Client.csproj">
+      <Project>{AD572C7A-1140-423F-B39E-6EB652FA0DED}</Project>
+      <Name>K2Client</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy inheritsSet="VisualStudio" inheritsScope="text/plain" scope="application/xml" />
+          <XmlFormattingPolicy inheritsSet="Mono" inheritsScope="application/xml" scope="application/xml">
+            <Formats __added="0">
+              <XmlFormattingSettings OmitXmlDeclaration="False" NewLineChars="&#xA;" IndentContent="True" ContentIndentString="	" AttributesInNewLine="False" MaxAttributesPerLine="10" AttributesIndentString="	" WrapAttributes="False" AlignAttributes="False" AlignAttributeValues="False" QuoteChar="&quot;" SpacesBeforeAssignment="0" SpacesAfterAssignment="0" EmptyLinesBeforeStart="0" EmptyLinesAfterStart="0" EmptyLinesBeforeEnd="0" EmptyLinesAfterEnd="0">
+                <ScopeXPath>
+                  <String>/configuration/*</String>
+                </ScopeXPath>
+              </XmlFormattingSettings>
+              <XmlFormattingSettings OmitXmlDeclaration="False" NewLineChars="&#xA;" IndentContent="True" ContentIndentString="	" AttributesInNewLine="False" MaxAttributesPerLine="10" AttributesIndentString="	" WrapAttributes="False" AlignAttributes="False" AlignAttributeValues="False" QuoteChar="&quot;" SpacesBeforeAssignment="0" SpacesAfterAssignment="0" EmptyLinesBeforeStart="0" EmptyLinesAfterStart="0" EmptyLinesBeforeEnd="0" EmptyLinesAfterEnd="1">
+                <ScopeXPath>
+                  <String>/commands/*</String>
+                </ScopeXPath>
+              </XmlFormattingSettings>
+            </Formats>
+          </XmlFormattingPolicy>
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>

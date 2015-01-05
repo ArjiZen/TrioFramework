@@ -1,17 +1,23 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="TrioFramework.Mvc/Controllers/WorkflowController.cs">
+    <Files>
+      <File FileName="K2Client/K2WorkflowEngine.cs" Line="41" Column="41" />
+      <File FileName="TrioFramework.Mvc/Controllers/WorkflowController.cs" Line="5" Column="5" />
+    </Files>
     <Pads>
       <Pad Id="MonoDevelop.NUnit.TestPad">
         <State expanded="True">
           <Node name="99.Test" expanded="True">
-            <Node name="Tests" expanded="True">
+            <Node name="WorkflowK2ClientTest" expanded="True">
               <Node name="Bingosoft" expanded="True">
                 <Node name="TrioFramework" expanded="True">
-                  <Node name="Tests" expanded="True">
-                    <Node name="MVC" expanded="True">
-                      <Node name="RequestExtensionTest" expanded="True">
-                        <Node name="ToModelTest" selected="True" />
+                  <Node name="Workflow" expanded="True">
+                    <Node name="K2Client" expanded="True">
+                      <Node name="Test" expanded="True">
+                        <Node name="WorkflowEngineTest" expanded="True">
+                          <Node name="LoadDefinitionTest" selected="True" />
+                        </Node>
                       </Node>
                     </Node>
                   </Node>
@@ -24,7 +30,9 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/hades/Documents/dotNet/TrioFramework/tests/TrioFrameworkWindowsServicesTest/PendingJobTest.cs" line="14" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

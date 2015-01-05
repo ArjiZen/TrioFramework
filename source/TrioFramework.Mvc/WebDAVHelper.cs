@@ -55,7 +55,7 @@ namespace Bingosoft.TrioFramework.Mvc {
                 if (string.IsNullOrEmpty(_fileServer)) {
                     lock (lockObj) {
                         if (string.IsNullOrEmpty(_fileServer)) {
-                            _fileServer = ConfigurationManager.AppSettings["WebDavServer"];
+							_fileServer = SettingProvider.FileServer.Server;
                         }
                     }
                 }
@@ -72,8 +72,8 @@ namespace Bingosoft.TrioFramework.Mvc {
                 if (_credential == null) {
                     lock (lockObj) {
                         if (_credential == null) {
-                            var userName = ConfigurationManager.AppSettings["WebDavUserName"];
-                            var password = ConfigurationManager.AppSettings["WebDavPassword"];
+							var userName = SettingProvider.FileServer.UserName;
+							var password = SettingProvider.FileServer.Password;
                             _credential = new NetworkCredential(userName, password);
                         }
                     }

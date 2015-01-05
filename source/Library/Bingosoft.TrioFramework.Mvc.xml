@@ -133,6 +133,15 @@
             <returns>
             </returns>
         </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.Sign(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
+            <summary>
+            签收工单
+            </summary>
+            <param name="form">
+            </param>
+            <returns>
+            </returns>
+        </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.LoadForm(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
             <summary>
             流程提交
@@ -613,6 +622,13 @@
             </param>
             <returns>
             </returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.ResolveTobeReadActor(Bingosoft.TrioFramework.Workflow.Business.BusinessForm,Bingosoft.TrioFramework.Mvc.TobeReadSelector)">
+            <summary>
+            计算待阅参与者
+            </summary>
+            <param name="bizForm">业务表单</param>
+            <param name="selector">待阅参与者.</param>
         </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.CanDownloadAttachment(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment)">
             <summary>
@@ -1098,6 +1114,11 @@
             审批结果
             </summary>
         </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.TobeReadSelector">
+            <summary>
+            待阅用户Id集合
+            </summary>
+        </member>
         <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.HistoryActivities">
             <summary>
             历史环节记录
@@ -1129,6 +1150,52 @@
             </summary>
             <returns>
             </returns>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.TobeReadSelector">
+            <summary>
+            待阅人选择
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.#ctor">
+            <summary>
+            实例化待阅人员选择
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.TobeReadSelector.UserIds">
+            <summary>
+            获取所有待阅人用户id
+            </summary>
+            <value>The user identifiers.</value>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.TobeReadSelector.Users">
+            <summary>
+            获取所有待阅用户
+            </summary>
+            <value>The users.</value>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.GetUser(System.String)">
+            <summary>
+            根据id获取用户
+            </summary>
+            <returns>The user.</returns>
+            <param name="id">Identifier.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.Add(System.String)">
+            <summary>
+            添加待阅人
+            </summary>
+            <param name="id">待阅人用户id或登录id.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.Remove(System.String)">
+            <summary>
+            移除待阅人
+            </summary>
+            <param name="id">待阅人用户id或登录id.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.Clear">
+            <summary>
+            移除所有待阅人
+            </summary>
         </member>
     </members>
 </doc>

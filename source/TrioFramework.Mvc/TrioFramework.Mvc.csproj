@@ -17,11 +17,9 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <ReleaseVersion>1.1.3</ReleaseVersion>
+    <ReleaseVersion>1.2.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\Library\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -154,6 +152,7 @@
     <Compile Include="Workflow\WorkflowForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\DictionaryCollection.cs" />
+    <Compile Include="Workflow\TobeReadSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj">
