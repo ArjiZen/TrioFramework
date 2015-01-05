@@ -369,6 +369,13 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 							Logger.LogError(ModuleName, "流程提交前自定义事件时出错", ex, "");
 							return Error(500, ex.Message);
 						}
+
+						try {
+							func.ResolveTobeReadActor(form.BusinessForm, form.TobeReadSelector);
+						} catch (Exception ex) {
+							Logger.LogError(ModuleName, "流程提交前计算待阅人员时出错", ex, "");
+							return Error(500, ex.Message);
+						}
 					}
 				}
 

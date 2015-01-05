@@ -623,6 +623,13 @@
             <returns>
             </returns>
         </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.ResolveTobeReadActor(Bingosoft.TrioFramework.Workflow.Business.BusinessForm,Bingosoft.TrioFramework.Mvc.TobeReadSelector)">
+            <summary>
+            计算待阅参与者
+            </summary>
+            <param name="bizForm">业务表单</param>
+            <param name="selector">待阅参与者.</param>
+        </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.CanDownloadAttachment(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment)">
             <summary>
             是否可以下载附件
@@ -1147,6 +1154,11 @@
         <member name="T:Bingosoft.TrioFramework.Mvc.TobeReadSelector">
             <summary>
             待阅人选择
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.#ctor">
+            <summary>
+            实例化待阅人员选择
             </summary>
         </member>
         <member name="P:Bingosoft.TrioFramework.Mvc.TobeReadSelector.UserIds">
