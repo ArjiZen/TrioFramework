@@ -113,7 +113,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			// 检查历史环节中当前用户是否参与过流程
 			var items = instance.GetWorkItems();
 			var hasTakePartIn = items.Any(p => p.PartId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)
-			                    			|| (!string.IsNullOrEmpty(p.MandataryId) && p.MandataryId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)));
+			                    || (!string.IsNullOrEmpty(p.MandataryId) && p.MandataryId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)));
 
 			if (hasTakePartIn) {
 				return true;
@@ -253,13 +253,14 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		/// </summary>
 		/// <param name="instance">流程实例</param>
 		/// <param name="result">办理操作</param>
+		/// <param name="tobeReadUsersId">待阅人员用户Id</param>
 		/// <remarks>
 		/// 验证当办理人，K2办理成功后维护办理记录，流程实例，新增办理记录
 		/// requireFields:
 		/// instance.CurrentWorkItem
 		/// </remarks>
 		/// <returns></returns>
-		public override bool RunWorkflow(WorkflowInstance instance, ApproveResult result) {
+		public override bool RunWorkflow(WorkflowInstance instance, ApproveResult result, string[] tobeReadUsersId = null) {
 			if (instance.CurrentWorkItem == null) {
 				throw new ActivityNotFoundException(instance.InstanceNo, instance.CurrentActivity);
 			}
@@ -281,6 +282,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 				throw new ChoiceNotFoundException(instance.InstanceNo, currentActi.Name, result.Choice);
 			}
 
+			// 下一步骤人员
 			var nextStepUsers = new List<IUser>();
 			if (!nextActi.Name.Equals("结束", StringComparison.OrdinalIgnoreCase)) {
 				if (result.NextUsers == null) {
@@ -292,14 +294,20 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 				nextStepUsers.AddRange(result.NextUsers.Select(userid => SecurityContext.Provider.Get(userid)));
 			}
 
+			// 下一步骤待阅人员
+			var tobeReadUsers = new List<IUser>();
+			if (tobeReadUsersId != null && tobeReadUsersId.Length > 0) {
+				tobeReadUsers.AddRange(tobeReadUsersId.Select(userid => SecurityContext.Provider.Get(userid)));
+			}
+
 			// 提交K2服务器
-			bool isK2Finished = ServerEngine.RunWorkflow(instance, result, nextStepUsers);
+			bool isK2Finished = ServerEngine.RunWorkflow(instance, result, nextStepUsers, null);
 			if (!isK2Finished) {
 				return false;
 			}
 
 			// 提交数据库更新
-			bool isDbFinished = DbEngine.RunWorkflow(instance, result, nextStepUsers);
+			bool isDbFinished = DbEngine.RunWorkflow(instance, result, nextStepUsers, tobeReadUsers);
 			if (!isDbFinished) {
 				return false;
 			}

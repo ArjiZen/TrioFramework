@@ -10,6 +10,7 @@ using Bingosoft.TrioFramework.Models;
 using Bingosoft.TrioFramework.Workflow.Business;
 using Bingosoft.TrioFramework.Workflow.Core.Models;
 using Bingosoft.TrioFramework.Workflow.Core;
+using Bingosoft.Security.Exceptions;
 
 namespace Bingosoft.TrioFramework.Mvc.Workflow {
 
@@ -55,9 +56,10 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// </summary>
 		public WorkflowForm() {
 			HistoryActivities = new List<string>();
+			TobeReadSelector = new TobeReadSelector();
 		}
 
-		private static Dao _dao = Dao.Get();
+		private static readonly Dao _dao = Dao.Get();
 
 		#region Properties
 
@@ -158,6 +160,11 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		public ApproveResult ApproveResult { get; set; }
 
 		/// <summary>
+		/// 待阅用户Id集合
+		/// </summary>
+		public TobeReadSelector TobeReadSelector { get; set; }
+
+		/// <summary>
 		/// 历史环节记录
 		/// </summary>
 		public IList<string> HistoryActivities { get; set; }
@@ -248,7 +255,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		public IList<SelectListItem> GetAttachmentTypes() {
 			var allAttachTypes = WorkflowAttachment.GetAllAttachType();
 			var activityAttachType = _dao.QueryScalar<string>("framework.attachment.getuploadtypes",
-				                                  new { AppCode = this.AppCode, Version = this.Instance.Version, CurrentActi = this.CurrentActi });
+				                         new { AppCode = this.AppCode, Version = this.Instance.Version, CurrentActi = this.CurrentActi });
 			var list = new List<SelectListItem>();
 			if (!string.IsNullOrEmpty(activityAttachType)) {
 				foreach (var typeid in activityAttachType.Split(',')) {

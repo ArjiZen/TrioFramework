@@ -243,7 +243,6 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			Assert.IsTrue(delResult);
 		}
 
-
 		/// <summary>
 		/// 添加委托关系
 		/// </summary>
@@ -327,8 +326,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			Assert.AreEqual(mandatary.Id, workitem3.MandataryId);
 
 		}
-
-
+			
 		/// <summary>
 		/// 先产生待办后设置委托信息，由被委托人处理
 		/// </summary>
@@ -388,6 +386,45 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			Assert.IsNotNull(workitem3);
 			Assert.AreEqual(mandatary.Id, workitem3.MandataryId);
 
+		}
+
+		/// <summary>
+		/// 待阅测试
+		/// </summary>
+		[Test()]
+		public void ToBeReadTest(){
+			Assert.IsNotNull(engine);
+
+			var department = SecurityContext.Provider.GetOrganization(loginUser.DeptId);
+			Assert.IsNotNull(department);
+
+			var instance = engine.CreateWorkflow(1);
+			Assert.IsNotNull(instance);
+
+			instance.Creator = loginUser.Name;
+			instance.CreatorId = loginUser.Id;
+			instance.CreatorDeptId = department.Id;
+			instance.CreatorDeptName = department.FullName;
+			instance.Title = "（待阅单元测试）" + DateTime.Now.ToString("yyyyMMddHHmm");
+
+			var saveResult = engine.SaveWorkflow(instance);
+			Assert.IsTrue(saveResult);
+
+			var approveResult = new ApproveResult();
+			approveResult.Choice = "营销接口审核";
+			approveResult.Comment = "通过";
+			approveResult.NextUsers = new List<string>(){ loginUser.Id };
+
+			var runResult = engine.RunWorkflow(instance, approveResult, new string[]{ loginUser.Id });
+			Assert.IsTrue(runResult);
+
+			instanceNo = instance.InstanceNo;
+
+			var instance2 = engine.LoadWorkflow(instance.InstanceNo, 3);
+			var workitem2 = instance2.CurrentWorkItem;
+			Assert.IsNotNull(instance2);
+			Assert.IsNotNull(workitem2);
+			Assert.AreEqual(TaskStatus.ToRead, workitem2.TaskStatus);
 		}
 	}
 }

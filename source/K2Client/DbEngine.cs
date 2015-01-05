@@ -40,7 +40,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 				var effectRows = 0;
 				using (var transactionScope = new TransactionScope(TransactionScopeOption.Required)) {
 					foreach (var workitem in workitems) {
-						if (!workitem.FinishTime.HasValue) {
+						if (!workitem.FinishTime.HasValue && workitem.TaskStatus == TaskStatus.Waiting) {
 							workitem.FinishTime = DateTime.Now;
 							workitem.TaskStatus = TaskStatus.Finished;
 							effectRows = _dao.UpdateFields<K2WorkflowItem>(workitem, new string[]{ "FinishTime", "TaskStatus" });
@@ -70,9 +70,11 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		/// <param name="instance">流程实例</param>
 		/// <param name="result">处理结果</param>
 		/// <param name="nextStepUsers">下一环节处理人</param>
+		/// <param name="tobeReadUsers">待阅人员</param>
 		/// <returns></returns>
-		public override bool RunWorkflow(WorkflowInstance instance, ApproveResult result, IList<IUser> nextStepUsers) {
+		public override bool RunWorkflow(WorkflowInstance instance, ApproveResult result, IList<IUser> nextStepUsers, IList<IUser> tobeReadUsers) {
 			var nextWorkItems = new List<K2WorkflowItem>();
+			var nextTobeReadWorkItems = new List<K2WorkflowItem>();
 			IEnumerable<K2WorkflowItem> curWorkItems = new K2WorkflowItem[0];
 
 			var currentActi = instance.GetCurrentActi();
@@ -114,7 +116,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 
 			#endregion
 
-			#region 添加下一环节流程项
+			#region 添加下一环节待办流程项
 
 			var lastTaskId = this.GetWorkItemLastTaskId(instance.InstanceNo);
 			foreach (var user in nextStepUsers) {
@@ -144,6 +146,27 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 
 			#endregion
 
+			#region 添加下一环节待阅流程
+
+			foreach (var user in tobeReadUsers) {
+				var workItem = WorkflowItemFactory.Create<K2WorkflowItem>();
+				lastTaskId += 1;
+				workItem.TaskId = lastTaskId;
+				workItem.InstanceNo = instance.InstanceNo;
+				workItem.PartId = user.Id;
+				workItem.PartName = user.Name;
+				workItem.PartDeptId = user.DeptId;
+				var dept = SecurityContext.Provider.GetOrganization(user.DeptId);
+				workItem.PartDeptName = (dept == null ? "" : dept.FullName);
+				workItem.ReceTime = DateTime.Now;
+				workItem.TaskStatus = TaskStatus.ToRead;
+				workItem.CurrentActi = nextActi.Name;
+
+				nextTobeReadWorkItems.Add(workItem);
+			}
+
+			#endregion
+
 			instance.CurrentActivity = nextActi.Name;
 			if (nextActi.Name.Equals("结束", StringComparison.OrdinalIgnoreCase)) {
 				instance.EndTime = DateTime.Now;
@@ -156,10 +179,14 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 					_dao.UpdateFields<K2WorkflowItem>(workItem, "FinishTime", "AutoFinished", "Choice", "Comment", "TaskStatus", "MandataryId", "Mandatary");
 				}
 				//2.新增下一批办理环节
-				foreach (var workItem in nextWorkItems) {
-					_dao.Insert<K2WorkflowItem>(workItem);
+				foreach (var workitem in nextWorkItems) {
+					_dao.Insert<K2WorkflowItem>(workitem);
 				}
-				//3.更新流程实例
+				//3.新增下一批待阅环节
+				foreach (var workitem in nextTobeReadWorkItems) {
+					_dao.Insert<K2WorkflowItem>(workitem);
+				}
+				//4.更新流程实例
 				_dao.UpdateFields<K2WorkflowInstance>(instance, "EndTime", "Status", "CurrentActivity");
 				transactionScope.Complete();
 			}

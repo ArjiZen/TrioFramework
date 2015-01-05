@@ -374,7 +374,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 
 				var engine = WorkflowEngine.Create();
 				var instance = engine.LoadWorkflow(form.InstanceNo, form.TaskId);
-				var runSuccess = engine.RunWorkflow(instance, form.ApproveResult);
+				var runSuccess = engine.RunWorkflow(instance, form.ApproveResult, form.TobeReadSelector.UserIds);
 				if (runSuccess) {
 
 					// 处理流程提交后自定义事件

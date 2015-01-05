@@ -143,6 +143,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// </summary>
 		/// <param name="instance">流程编号</param>
 		/// <param name="result">审批结果</param>
+		/// <param name="tobeReadUsersId">待阅人员用户Id</param>
 		/// <returns></returns>
 		/// <remarks>
 		/// 根据用户选择的下一步骤，计算出下一环节的参与者并持久化到数据库
@@ -153,7 +154,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// =========================================================
 		/// 调用K2接口
 		/// </remarks>
-		public abstract bool RunWorkflow(WorkflowInstance instance, ApproveResult result);
+		public abstract bool RunWorkflow(WorkflowInstance instance, ApproveResult result, string[] tobeReadUsersId = null);
 
 		/// <summary>
 		/// 删除流程

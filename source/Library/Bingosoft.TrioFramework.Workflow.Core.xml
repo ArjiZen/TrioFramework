@@ -1012,12 +1012,13 @@
             调用K2接口
             </remarks>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult)">
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.String[])">
             <summary>
             运行流程
             </summary>
             <param name="instance">流程编号</param>
             <param name="result">审批结果</param>
+            <param name="tobeReadUsersId">待阅人员用户Id</param>
             <returns>
             </returns>
             <remarks>

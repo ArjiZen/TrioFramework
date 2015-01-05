@@ -152,6 +152,7 @@
     <Compile Include="Workflow\WorkflowForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\DictionaryCollection.cs" />
+    <Compile Include="Workflow\TobeReadSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj">

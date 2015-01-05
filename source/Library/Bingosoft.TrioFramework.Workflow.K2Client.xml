@@ -17,13 +17,14 @@
             <returns>
             </returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.OfflineServerEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser})">
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.OfflineServerEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser},System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser})">
             <summary>
             运行流程
             </summary>
             <param name="instance">流程实例</param>
             <param name="result">处理结果</param>
             <param name="listNextUsers">下一环节处理人</param>
+            <param name="tobeReadUsers">待阅人员</param>
             <returns>
             </returns>
         </member>
@@ -228,13 +229,14 @@
             <returns>
             </returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.IK2Engine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser})">
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.IK2Engine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser},System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser})">
             <summary>
             办理流程
             </summary>
             <param name="instance">流程实例</param>
             <param name="result">处理结果</param>
             <param name="listNextUsers">分配办理人员列表</param>
+            <param name="tobeReadUsers">待阅人员</param>
             <remarks>
             </remarks>
             <returns>
@@ -321,12 +323,13 @@
             <returns>
             </returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult)">
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.String[])">
             <summary>
             提交流程实例
             </summary>
             <param name="instance">流程实例</param>
             <param name="result">办理操作</param>
+            <param name="tobeReadUsersId">待阅人员用户Id</param>
             <remarks>
             验证当办理人，K2办理成功后维护办理记录，流程实例，新增办理记录
             requireFields:
@@ -419,13 +422,14 @@
             <returns>
             </returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.DbEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser})">
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.DbEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser},System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser})">
             <summary>
             运行流程
             </summary>
             <param name="instance">流程实例</param>
             <param name="result">处理结果</param>
             <param name="nextStepUsers">下一环节处理人</param>
+            <param name="tobeReadUsers">待阅人员</param>
             <returns>
             </returns>
         </member>
@@ -594,13 +598,14 @@
             <returns>
             </returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.ServerEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser})">
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.ServerEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser},System.Collections.Generic.IList{Bingosoft.Security.Principal.IUser})">
             <summary>
             办理流程
             </summary>
             <param name="instance">流程实例</param>
             <param name="result">处理结果</param>
             <param name="listNextUsers">分配办理人员列表</param>
+            <param name="tobeReadUsers">待阅人员</param>
             <remarks>
             </remarks>
             <returns>
