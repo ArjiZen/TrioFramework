@@ -15,6 +15,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 
 		private IUser loginUser = null;
 		private string instanceNo = null;
+		private WorkflowEngine engine = null;
 
 		[TestFixtureSetUp()]
 		public void Setup() {
@@ -25,25 +26,38 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			Assert.AreEqual("宋爽", loginUser.Name);
 			Assert.IsNotEmpty(loginUser.DeptId);
 
-			WorkflowEngine.Instance.SetCurrentUser(loginUser.LoginId);
+			engine = WorkflowEngine.Create();
+			engine.SetCurrentUser(loginUser.LoginId);
 		}
 
 		[TestFixtureTearDown()]
 		public void TearDown() {
-			var instance = WorkflowEngine.Instance.LoadWorkflow(instanceNo, 2);
-			var deleteResult = WorkflowEngine.Instance.DeleteWorkflow(instance);
-			Assert.IsTrue(deleteResult);
+			if (engine != null) {
+				var instance = engine.LoadWorkflow(instanceNo, 2);
+				var deleteResult = engine.DeleteWorkflow(instance);
+				Assert.IsTrue(deleteResult);
+			}
 		}
+
+		[Test()]
+		public void LoadDefinitionTest(){
+			var engine = WorkflowEngine.Create();
+			var definitions = engine.LoadDefinitions();
+			Assert.AreNotEqual(0, definitions.Length);
+		}
+
 
 		/// <summary>
 		/// 流程签收测试
 		/// </summary>
 		[Test()]
 		public void SignTest() {
+			Assert.IsNotNull(engine);
+
 			var department = SecurityContext.Provider.GetOrganization(loginUser.DeptId);
 			Assert.IsNotNull(department);
 
-			var instance = WorkflowEngine.Instance.CreateWorkflow(1);
+			var instance = engine.CreateWorkflow(1);
 			Assert.IsNotNull(instance);
 
 			instance.Creator = loginUser.Name;
@@ -52,7 +66,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			instance.CreatorDeptName = department.FullName;
 			instance.Title = "（签收单元测试）" + DateTime.Now.ToString("yyyyMMddHHmm");
 
-			var saveResult = WorkflowEngine.Instance.SaveWorkflow(instance);
+			var saveResult = engine.SaveWorkflow(instance);
 			Assert.IsTrue(saveResult);
 
 			var approveResult = new ApproveResult();
@@ -60,15 +74,15 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			approveResult.Comment = "通过";
 			approveResult.NextUsers = new List<string>(){ loginUser.Id };
 
-			var runResult = WorkflowEngine.Instance.RunWorkflow(instance, approveResult);
+			var runResult = engine.RunWorkflow(instance, approveResult);
 			Assert.IsTrue(runResult);
 
 			instanceNo = instance.InstanceNo;
 
-			WorkflowEngine.Instance.SignWorkflow(instance.InstanceNo, 2);
+			engine.SignWorkflow(instance.InstanceNo, 2);
 			var assertSignTime = DateTime.Now;
 
-			var instance2 = WorkflowEngine.Instance.LoadWorkflow(instance.InstanceNo, 2);
+			var instance2 = engine.LoadWorkflow(instance.InstanceNo, 2);
 			var workitem2 = instance2.CurrentWorkItem;
 			Assert.IsNotNull(instance2);
 			Assert.IsNotNull(workitem2);
@@ -85,7 +99,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 		public void SignWithExistsTest() {
 			var assertSignTime = DateTime.Parse("2014-12-24 11:53:16.510");
 
-			var instance2 = WorkflowEngine.Instance.LoadWorkflow("2014122400001", 2);
+			var instance2 = engine.LoadWorkflow("2014122400001", 2);
 			var workitem2 = instance2.CurrentWorkItem;
 			Assert.IsNotNull(instance2);
 			Assert.IsNotNull(workitem2);
@@ -101,7 +115,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			var department = SecurityContext.Provider.GetOrganization(loginUser.DeptId);
 			Assert.IsNotNull(department);
 
-			var instance = WorkflowEngine.Instance.CreateWorkflow(1);
+			var instance = engine.CreateWorkflow(1);
 			Assert.IsNotNull(instance);
 
 			instance.Creator = loginUser.Name;
@@ -110,7 +124,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			instance.CreatorDeptName = department.FullName;
 			instance.Title = "（待办单元测试）" + DateTime.Now.ToString("yyyyMMddHHmm");
 
-			var saveResult = WorkflowEngine.Instance.SaveWorkflow(instance);
+			var saveResult = engine.SaveWorkflow(instance);
 			Assert.IsTrue(saveResult);
 
 			var approveResult = new ApproveResult();
@@ -118,7 +132,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			approveResult.Comment = "通过";
 			approveResult.NextUsers = new List<string>(){ loginUser.Id };
 
-			var runResult = WorkflowEngine.Instance.RunWorkflow(instance, approveResult);
+			var runResult = engine.RunWorkflow(instance, approveResult);
 			Assert.IsTrue(runResult);
 
 			var job = PendingJob.Get(instance.InstanceNo, 2);
@@ -134,7 +148,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			var department = SecurityContext.Provider.GetOrganization(loginUser.DeptId);
 			Assert.IsNotNull(department);
 
-			var instance = WorkflowEngine.Instance.CreateWorkflow(1);
+			var instance = engine.CreateWorkflow(1);
 			Assert.IsNotNull(instance);
 
 			instance.Creator = loginUser.Name;
@@ -143,7 +157,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			instance.CreatorDeptName = department.FullName;
 			instance.Title = "（待办单元测试）" + DateTime.Now.ToString("yyyyMMddHHmm");
 
-			var saveResult = WorkflowEngine.Instance.SaveWorkflow(instance);
+			var saveResult = engine.SaveWorkflow(instance);
 			Assert.IsTrue(saveResult);
 
 			var approveResult = new ApproveResult();
@@ -151,17 +165,17 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			approveResult.Comment = "通过";
 			approveResult.NextUsers = new List<string>(){ loginUser.Id };
 
-			var runResult = WorkflowEngine.Instance.RunWorkflow(instance, approveResult);
+			var runResult = engine.RunWorkflow(instance, approveResult);
 			Assert.IsTrue(runResult);
 
 			var job = PendingJob.Get(instance.InstanceNo, 2);
 			Assert.IsTrue(job.DoPush);
 			Assert.IsNull(job.PushedTime);
 
-			var instance2 = WorkflowEngine.Instance.LoadWorkflow(instance.InstanceNo, 2);
+			var instance2 = engine.LoadWorkflow(instance.InstanceNo, 2);
 			Assert.IsNotNull(instance2);
 
-			var delResult = WorkflowEngine.Instance.DeleteWorkflow(instance2);
+			var delResult = engine.DeleteWorkflow(instance2);
 			Assert.IsTrue(delResult);
 
 			var job2 = PendingJob.Get(instance.InstanceNo, 2);
@@ -177,7 +191,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			var department = SecurityContext.Provider.GetOrganization(loginUser.DeptId);
 			Assert.IsNotNull(department);
 
-			var instance = WorkflowEngine.Instance.CreateWorkflow(1);
+			var instance = engine.CreateWorkflow(1);
 			Assert.IsNotNull(instance);
 
 			instance.Creator = loginUser.Name;
@@ -186,7 +200,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			instance.CreatorDeptName = department.FullName;
 			instance.Title = "（待办单元测试）" + DateTime.Now.ToString("yyyyMMddHHmm");
 
-			var saveResult = WorkflowEngine.Instance.SaveWorkflow(instance);
+			var saveResult = engine.SaveWorkflow(instance);
 			Assert.IsTrue(saveResult);
 
 			// to 营销接口审核、评估
@@ -195,14 +209,14 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			approveResult.Comment = "通过";
 			approveResult.NextUsers = new List<string>(){ loginUser.Id };
 
-			var runResult = WorkflowEngine.Instance.RunWorkflow(instance, approveResult);
+			var runResult = engine.RunWorkflow(instance, approveResult);
 			Assert.IsTrue(runResult);
 
 			var job = PendingJob.Get(instance.InstanceNo, 2);
 			Assert.IsTrue(job.DoPush);
 			Assert.IsNull(job.PushedTime);
 
-			var instance2 = WorkflowEngine.Instance.LoadWorkflow(instance.InstanceNo, 2);
+			var instance2 = engine.LoadWorkflow(instance.InstanceNo, 2);
 			Assert.IsNotNull(instance2);
 
 			// to 需求组长审核、评估
@@ -211,7 +225,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			approveResult2.Comment = "通过";
 			approveResult2.NextUsers = new List<string>(){ loginUser.Id };
 
-			var runResult2 = WorkflowEngine.Instance.RunWorkflow(instance2, approveResult2);
+			var runResult2 = engine.RunWorkflow(instance2, approveResult2);
 			Assert.IsTrue(runResult2);
 
 			var job2 = PendingJob.Get(instance.InstanceNo, 2);
@@ -222,10 +236,10 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			Assert.IsTrue(job3.DoPush);
 			Assert.IsNull(job3.PushedTime);
 
-			var instance3 = WorkflowEngine.Instance.LoadWorkflow(instance.InstanceNo, 3);
+			var instance3 = engine.LoadWorkflow(instance.InstanceNo, 3);
 			Assert.IsNotNull(instance3);
 
-			var delResult = WorkflowEngine.Instance.DeleteWorkflow(instance3);
+			var delResult = engine.DeleteWorkflow(instance3);
 			Assert.IsTrue(delResult);
 		}
 
@@ -266,7 +280,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			var department = SecurityContext.Provider.GetOrganization(loginUser.DeptId);
 			Assert.IsNotNull(department);
 
-			var instance = WorkflowEngine.Instance.CreateWorkflow(1);
+			var instance = engine.CreateWorkflow(1);
 			Assert.IsNotNull(instance);
 
 			instance.Creator = loginUser.Name;
@@ -275,7 +289,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			instance.CreatorDeptName = department.FullName;
 			instance.Title = "（委托单元测试）" + DateTime.Now.ToString("yyyyMMddHHmm");
 
-			var saveResult = WorkflowEngine.Instance.SaveWorkflow(instance);
+			var saveResult = engine.SaveWorkflow(instance);
 			Assert.IsTrue(saveResult);
 
 			var approveResult = new ApproveResult();
@@ -283,30 +297,30 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			approveResult.Comment = "通过";
 			approveResult.NextUsers = new List<string>(){ loginUser.Id };
 
-			var runResult = WorkflowEngine.Instance.RunWorkflow(instance, approveResult);
+			var runResult = engine.RunWorkflow(instance, approveResult);
 			Assert.IsTrue(runResult);
 
 			instanceNo = instance.InstanceNo;
 
 			// 第二个环节的WorkItem表已添加被委托人信息
-			var instance2 = WorkflowEngine.Instance.LoadWorkflow(instance.InstanceNo, 2);
+			var instance2 = engine.LoadWorkflow(instance.InstanceNo, 2);
 			var workitem2 = instance2.CurrentWorkItem;
 			Assert.IsNotNull(instance2);
 			Assert.IsNotNull(workitem2);
 			Assert.AreEqual(mandatary.Id, workitem2.MandataryId);
 
 			// 设置流程的当前人为被委托人，然后提交流程
-			WorkflowEngine.Instance.SetCurrentUser(mandatary.LoginId);
+			engine.SetCurrentUser(mandatary.LoginId);
 
 			var approveResult2 = new ApproveResult();
 			approveResult2.Choice = "通过";
 			approveResult2.Comment = "通过";
 			approveResult2.NextUsers = new List<string>(){ mandatary.Id };
 
-			var runResult2 = WorkflowEngine.Instance.RunWorkflow(instance2, approveResult2);
+			var runResult2 = engine.RunWorkflow(instance2, approveResult2);
 			Assert.IsTrue(runResult2);
 
-			var instance3 = WorkflowEngine.Instance.LoadWorkflow(instance2.InstanceNo, 2);
+			var instance3 = engine.LoadWorkflow(instance2.InstanceNo, 2);
 			var workitem3 = instance3.CurrentWorkItem;
 			Assert.IsNotNull(instance3);
 			Assert.IsNotNull(workitem3);
@@ -324,7 +338,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			var department = SecurityContext.Provider.GetOrganization(loginUser.DeptId);
 			Assert.IsNotNull(department);
 
-			var instance = WorkflowEngine.Instance.CreateWorkflow(1);
+			var instance = engine.CreateWorkflow(1);
 			Assert.IsNotNull(instance);
 
 			instance.Creator = loginUser.Name;
@@ -333,7 +347,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			instance.CreatorDeptName = department.FullName;
 			instance.Title = "（委托单元测试）" + DateTime.Now.ToString("yyyyMMddHHmm");
 
-			var saveResult = WorkflowEngine.Instance.SaveWorkflow(instance);
+			var saveResult = engine.SaveWorkflow(instance);
 			Assert.IsTrue(saveResult);
 
 			var approveResult = new ApproveResult();
@@ -341,13 +355,13 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			approveResult.Comment = "通过";
 			approveResult.NextUsers = new List<string>(){ loginUser.Id };
 
-			var runResult = WorkflowEngine.Instance.RunWorkflow(instance, approveResult);
+			var runResult = engine.RunWorkflow(instance, approveResult);
 			Assert.IsTrue(runResult);
 
 			instanceNo = instance.InstanceNo;
 
 			// 第二个环节的WorkItem表已添加被委托人信息
-			var instance2 = WorkflowEngine.Instance.LoadWorkflow(instance.InstanceNo, 2);
+			var instance2 = engine.LoadWorkflow(instance.InstanceNo, 2);
 			var workitem2 = instance2.CurrentWorkItem;
 			Assert.IsNotNull(instance2);
 			Assert.IsNotNull(workitem2);
@@ -358,17 +372,17 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			AddDelegateWork(loginUser, mandatary);
 
 			// 设置流程的当前人为被委托人，然后提交流程
-			WorkflowEngine.Instance.SetCurrentUser(mandatary.LoginId);
+			engine.SetCurrentUser(mandatary.LoginId);
 
 			var approveResult2 = new ApproveResult();
 			approveResult2.Choice = "通过";
 			approveResult2.Comment = "通过";
 			approveResult2.NextUsers = new List<string>(){ mandatary.Id };
 
-			var runResult2 = WorkflowEngine.Instance.RunWorkflow(instance2, approveResult2);
+			var runResult2 = engine.RunWorkflow(instance2, approveResult2);
 			Assert.IsTrue(runResult2);
 
-			var instance3 = WorkflowEngine.Instance.LoadWorkflow(instance2.InstanceNo, 2);
+			var instance3 = engine.LoadWorkflow(instance2.InstanceNo, 2);
 			var workitem3 = instance3.CurrentWorkItem;
 			Assert.IsNotNull(instance3);
 			Assert.IsNotNull(workitem3);

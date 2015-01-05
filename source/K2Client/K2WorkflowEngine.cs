@@ -64,13 +64,12 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		/// 初始化流程定义，并缓存
 		/// </summary>
 		/// <returns></returns>
-		protected override sealed bool InitWorkflowDefinition() {
+		public override WorkflowDefinition[] LoadDefinitions() {
 			var definitions = WorkflowDefinitionFactory.GetAll<K2WorkflowDefinition>();
 			foreach (var definition in definitions) {
 				definition.InitActivities();
-				base.AddWorkflowDefinition(definition);
 			}
-			return true;
+			return definitions.ToArray();
 		}
 
 		/// <summary>
@@ -83,7 +82,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 				throw new UserNotFoundException("未找到登录用户，请先登录本系统");
 			}
 
-			var definition = (from e in this.Definitions
+			var definition = (from e in WorkflowEngine.Definitions
 			                  where e.AppCode == appCode
                               orderby e.Version descending
 			                  select e).FirstOrDefault();
@@ -106,6 +105,30 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		}
 
 		/// <summary>
+		/// 是否可以查看流程
+		/// </summary>
+		/// <param name="instance">流程实例.</param>
+		public override bool CanViewWorkflow(WorkflowInstance instance) {
+
+			// 检查历史环节中当前用户是否参与过流程
+			var items = instance.GetWorkItems();
+			var hasTakePartIn = items.Any(p => p.PartId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)
+			                    			|| (!string.IsNullOrEmpty(p.MandataryId) && p.MandataryId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)));
+
+			if (hasTakePartIn) {
+				return true;
+			}
+
+			// 检查当前环节
+			var hasDelegate = DelegateWork.IsDelegate(instance.AppCode, instance.CurrentWorkItem.PartId, CurrentUser.Id);
+			if (hasDelegate) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/// <summary>
 		/// 加载流程
 		/// </summary>
 		/// <param name="appCode">流程编号</param>
@@ -118,7 +141,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			}
 			var instance = WorkflowInstanceFactory.Get<K2WorkflowInstance>(instanceNo);
 			// 从流程定义缓存中读取流程名称
-			var definition = (from e in this.Definitions
+			var definition = (from e in WorkflowEngine.Definitions
 			                  where e.AppCode == appCode
                               orderby e.Version descending
 			                  select e).FirstOrDefault();
@@ -148,7 +171,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			}
 			var instance = WorkflowInstanceFactory.Get<K2WorkflowInstance>(instanceNo);
 			// 从流程定义缓存中读取流程名称
-			var definition = (from e in this.Definitions
+			var definition = (from e in WorkflowEngine.Definitions
 			                  where e.AppCode == instance.AppCode
                               orderby e.Version descending
 			                  select e).FirstOrDefault();
@@ -244,8 +267,8 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			// 验证当前办理人员
 			// 非WorkItem默认用户，非被委托人，未设置委托信息
 			if (!instance.CurrentWorkItem.PartId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)
-			    && (string.IsNullOrEmpty(instance.CurrentWorkItem.MandataryId)
-			    	|| !instance.CurrentWorkItem.MandataryId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase))
+			    && (!string.IsNullOrEmpty(instance.CurrentWorkItem.MandataryId)
+			    && !instance.CurrentWorkItem.MandataryId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase))
 			    && !DelegateWork.IsDelegate(instance.AppCode, instance.CurrentWorkItem.PartId, CurrentUser.Id)) {
 
 				throw new UserNotFoundException("当前用户不是该环节的处理人");

@@ -133,6 +133,15 @@
             <returns>
             </returns>
         </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.Sign(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
+            <summary>
+            签收工单
+            </summary>
+            <param name="form">
+            </param>
+            <returns>
+            </returns>
+        </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.LoadForm(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
             <summary>
             流程提交

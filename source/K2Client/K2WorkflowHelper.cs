@@ -20,7 +20,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
         /// <param name="isOverride">是否覆盖</param>
         /// <returns></returns>
         public bool SyncWorkflowDefinition(bool isOverride = false) {
-            var listWfd = WorkflowEngine.Instance.Definitions;
+			var listWfd = WorkflowEngine.Definitions;
             //获取版本号为最新的流程信息
             var listAppCodeVersion = from s in listWfd
                                      group s by s.AppCode
@@ -45,7 +45,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
         /// <param name="isOverride">是否覆盖</param>
         /// <returns></returns>
         public bool SyncWorkflowDefinition(string workflowName, bool isOverride = false) {
-            var listWfd = WorkflowEngine.Instance.Definitions;
+			var listWfd = WorkflowEngine.Definitions;
             //获取版本号为最新的流程信息
             var listAppCodeVersion = from s in listWfd
                                      where s.AppName.Equals(workflowName, StringComparison.OrdinalIgnoreCase)

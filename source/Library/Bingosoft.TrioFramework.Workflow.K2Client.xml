@@ -213,6 +213,12 @@
             K2流程引擎接口
             </summary>
         </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.IK2Engine.CurrentUser">
+            <summary>
+            当前用户
+            </summary>
+            <value>The current user.</value>
+        </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.IK2Engine.SaveWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance)">
             <summary>
             启动流程实例
@@ -239,12 +245,12 @@
             K2工作流引擎
             </summary>
         </member>
-        <member name="F:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.DbEngine">
+        <member name="F:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.m_DbEngine">
             <summary>
             本地数据库访问
             </summary>
         </member>
-        <member name="F:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.ServerEngine">
+        <member name="F:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.m_ServerEngine">
             <summary>
             K2服务器访问
             </summary>
@@ -254,7 +260,17 @@
             实例化K2工作流引擎
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.InitWorkflowDefinition">
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.DbEngine">
+            <summary>
+            数据库接口
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.ServerEngine">
+            <summary>
+            K2服务器接口
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.LoadDefinitions">
             <summary>
             初始化流程定义，并缓存
             </summary>
@@ -268,6 +284,12 @@
             <param name="appCode">流程编号</param>
             <returns>
             </returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.CanViewWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance)">
+            <summary>
+            是否可以查看流程
+            </summary>
+            <param name="instance">流程实例.</param>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.LoadWorkflow(System.Int32,System.String,System.Int32)">
             <summary>
@@ -321,6 +343,15 @@
             </param>
             <returns>
             </returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.SignWorkflow(System.String,System.Int32)">
+            <summary>
+            流程签收
+            </summary>
+            <returns>true</returns>
+            <c>false</c>
+            <param name="instanceNo">流程实例编号</param>
+            <param name="taskId">当前任务id</param>
         </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowHelper">
             <summary>
@@ -574,6 +605,157 @@
             </remarks>
             <returns>
             </returns>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob">
+            <summary>
+            任务推送
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.PendingJobUrl">
+            <summary>
+            获取推送待办的地址
+            </summary>
+            <remarks>
+            读取配置文件appSettings/PendingJobUrl的值
+            </remarks>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.InstanceNo">
+            <summary>
+            流程实例编号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.TaskId">
+            <summary>
+            任务编号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.JobId">
+            <summary>
+            iOffice任务标示
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.JobTitle">
+            <summary>
+            任务标题
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.Url">
+            <summary>
+            任务URL地址
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.Result">
+            <summary>
+            执行结果
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.DoPush">
+            <summary>
+            是否推送
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.DoDelete">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.DoFinish">
+            <summary>
+            是否结束待办
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.PushedTime">
+            <summary>
+            推送时间
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.DeletedTime">
+            <summary>
+            待办删除时间
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.FinishedTime">
+            <summary>
+            待办完成时间
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.Get(System.String,System.Int32)">
+            <summary>
+            获取待办任务
+            </summary>
+            <param name="instanceNo">流程实例编号.</param>
+            <param name="taskId">任务编号.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.AddNew">
+            <summary>
+            添加新待办记录
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.UpdateFinished">
+            <summary>
+            完成待办记录
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.UpdateDeleted">
+            <summary>
+            删除待办记录
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.PushSuccess">
+            <summary>
+            推送任务成功
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.FinishSuccess">
+            <summary>
+            结束任务成功
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.DeleteSuccess">
+            <summary>
+            删除任务成功
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.PendingFailure">
+            <summary>
+            推送任务失败
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.Todo(System.String,System.Int32)">
+            <summary>
+            推送待办任务
+            </summary>
+            <param name="instanceNo">流程编号</param>
+            <param name="taskid">任务id</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.Finish(System.String,System.Int32)">
+            <summary>
+            完成任务
+            </summary>
+            <param name="instanceNo">流程编号</param>
+            <param name="taskId">任务id</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.Models.PendingJob.Delete(System.String,System.Int32)">
+            <summary>
+            删除任务记录
+            </summary>
+            <param name="instanceNo">流程编号</param>
+            <param name="taskId">任务id</param>
         </member>
     </members>
 </doc>

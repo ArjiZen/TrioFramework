@@ -142,7 +142,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
             using (Connection conn = ConnectHostServer()) {
                 conn.ImpersonateUser(loginUser.LoginId);
 
-                var definition = (from e in WorkflowEngine.Instance.Definitions
+                var definition = (from e in WorkflowEngine.Definitions
                                   where e.AppCode == instance.AppCode && e.Version == instance.Version
                                   select e)
                                  .FirstOrDefault();

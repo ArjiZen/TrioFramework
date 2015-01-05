@@ -11,37 +11,39 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 	/// 工作流引擎
 	/// </summary>
 	public abstract class WorkflowEngine {
-		/// <summary>
-		/// 实例化工作流引擎
-		/// </summary>
-		protected WorkflowEngine() {
-			InitWorkflowDefinition();
+		public WorkflowEngine() {
+			this.m_CurrentUser = null;
 		}
 
 		#region 实例化流程引擎
 
-		private static WorkflowEngine m_Instance = null;
-		private readonly static object lockObj = new object();
-
 		/// <summary>
 		/// 获取流程引擎实例
 		/// </summary>
+		[Obsolete("Instance属性不再返回单一实例，改用Create()创建流程引擎实例")]
 		public static WorkflowEngine Instance {
 			get {
-				if (m_Instance == null) {
-					lock (lockObj) {
-						if (m_Instance == null) {
-							var configurator = SettingProvider.Workflow.Provider;
-							var t = Type.GetType(configurator);
-							if (t == null) {
-								throw new WorkflowEngineNotFoundException(configurator);
-							}
-							m_Instance = (WorkflowEngine)Activator.CreateInstance(t);
-						}
-					}
+				var configurator = SettingProvider.Workflow.Provider;
+				var t = Type.GetType(configurator);
+				if (t == null) {
+					throw new WorkflowEngineNotFoundException(configurator);
 				}
-				return m_Instance;
+				var engine = (WorkflowEngine)Activator.CreateInstance(t);
+				return engine;
 			}
+		}
+
+		/// <summary>
+		/// 创建流程引擎实例
+		/// </summary>
+		public static WorkflowEngine Create(){
+			var configurator = SettingProvider.Workflow.Provider;
+			var t = Type.GetType(configurator);
+			if (t == null) {
+				throw new WorkflowEngineNotFoundException(configurator);
+			}
+			var engine = (WorkflowEngine)Activator.CreateInstance(t);
+			return engine;
 		}
 
 		#endregion
@@ -55,6 +57,9 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 			get {
 				if (m_CurrentUser == null) {
 					m_CurrentUser = SecurityContext.User;
+				}
+				if (m_CurrentUser == null) {
+					throw new NullReferenceException("未设置流程当前处理用户");
 				}
 				return m_CurrentUser;
 			}
@@ -71,7 +76,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// <summary>
 		/// 获取流程定义缓存
 		/// </summary>
-		public WorkflowDefinition[] Definitions {
+		public static WorkflowDefinition[] Definitions {
 			get { return WorkflowCache.Definitions.OrderBy(p => p.AppCode).ToArray(); }
 		}
 
@@ -79,29 +84,14 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// 初始化流程定义
 		/// </summary>
 		/// <returns></returns>
-		protected abstract bool InitWorkflowDefinition();
-
-		/// <summary>
-		/// 添加流程定义缓存
-		/// </summary>
-		/// <param name="definition"></param>
-		protected void AddWorkflowDefinition(WorkflowDefinition definition) {
-			if (WorkflowCache.Definitions.Any(p => p.AppCode == definition.AppCode && p.Version == definition.Version)) {
-				WorkflowCache.Definitions.RemoveWhere(p => p.AppCode == definition.AppCode && p.Version == definition.Version);
-			}
-			WorkflowCache.Definitions.Add(definition);
-		}
+		public abstract WorkflowDefinition[] LoadDefinitions();
 
 		/// <summary>
 		/// 清空流程定义缓存
 		/// </summary>
 		/// <returns></returns>
 		public void ClearDefinitionCache() {
-			lock (lockObj) {
-				if (WorkflowCache.Definitions != null) {
-					WorkflowCache.Definitions.Clear();
-				}
-			}
+			WorkflowCache.Clear();
 		}
 
 		/// <summary>
@@ -127,6 +117,11 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// <param name="taskId">当前任务序号</param>
 		/// <returns></returns>
 		public abstract WorkflowInstance LoadWorkflow(string instanceNo, int taskId);
+
+		/// <summary>
+		/// 是否可以查看流程
+		/// </summary>
+		public abstract bool CanViewWorkflow(WorkflowInstance instance);
 
 		/// <summary>
 		/// 保存流程

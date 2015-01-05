@@ -7,12 +7,10 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Bingosoft.TrioFramework.Mvc.Test</RootNamespace>
     <AssemblyName>TrioFrameworkMvcTest</AssemblyName>
-    <ReleaseVersion>1.1.3</ReleaseVersion>
+    <ReleaseVersion>1.2.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>

@@ -671,5 +671,166 @@
             <returns>
             </returns>
         </member>
+        <member name="T:Bingosoft.TrioFramework.SettingProvider">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.SettingProvider.TrioSettings">
+            <summary>
+            服务配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.SettingProvider.Common">
+            <summary>
+            通用配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.SettingProvider.PendingJob">
+            <summary>
+            推送待办配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.SettingProvider.Workflow">
+            <summary>
+            工作流配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.SettingProvider.FileServer">
+            <summary>
+            文件服务器配置
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.TrioSection">
+            <summary>
+            Trio配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.TrioSection.Common">
+            <summary>
+            Windows服务配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.TrioSection.PendingJob">
+            <summary>
+            推送待办配置
+            </summary>
+            <value>The pending job.</value>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.TrioSection.FileServer">
+            <summary>
+            文件服务器配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.TrioSection.Workflow">
+            <summary>
+            流程配置
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.PendingJobElement">
+            <summary>
+            推送待办配置
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.PendingJobElement.#ctor">
+            <summary>
+            实例化任务推送配置节点
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.PendingJobElement.IsEnabled">
+            <summary>
+            是否启用推送待办
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.PendingJobElement.IsEnabledSMS">
+            <summary>
+            是否启用发送短信
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.PendingJobElement.Url">
+            <summary>
+            接口地址
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.CommonElement">
+            <summary>
+            Trio服务配置
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.CommonElement.#ctor">
+            <summary>
+            实例化通用配置节点
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.CommonElement.SystemId">
+            <summary>
+            系统编码
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.CommonElement.SystemAccount">
+            <summary>
+            系统编码
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.CommonElement.SystemPassword">
+            <summary>
+            系统密码
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.CommonElement.SystemName">
+            <summary>
+            系统名称
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.CommonElement.EncryptKey">
+            <summary>
+            RC4加密Key
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.WorkflowElement">
+            <summary>
+            流程配置节点
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.WorkflowElement.#ctor">
+            <summary>
+            实例化流程配置节点
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.WorkflowElement.Provider">
+            <summary>
+            流程引擎提供者
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.WorkflowElement.IsConnectK2">
+            <summary>
+            是否连接K2服务器
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.FileServerElement">
+            <summary>
+            文件服务器配置
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.FileServerElement.#ctor">
+            <summary>
+            实例化文件服务器配置节点
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.FileServerElement.Server">
+            <summary>
+            文件服务器地址
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.FileServerElement.UserName">
+            <summary>
+            登录用户名
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.FileServerElement.Password">
+            <summary>
+            登录密码
+            </summary>
+        </member>
     </members>
 </doc>
