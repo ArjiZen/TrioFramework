@@ -75,7 +75,7 @@ namespace Bingosoft.TrioFramework.WindowsServices.PendingJobProvider {
         
         /// <remarks/>
         public PendingJobII() {
-			this.Url = SettingProvider.PendingJob.Url;
+			this.Url = SettingProvider.PendingJob.ApiUrl;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
