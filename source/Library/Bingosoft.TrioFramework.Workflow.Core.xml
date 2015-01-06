@@ -779,6 +779,11 @@
             签收时间
             </summary>
         </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItem.IsSign">
+            <summary>
+            是否已签收
+            </summary>
+        </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItem.FinishTime">
             <summary>
             审批时间
@@ -899,29 +904,14 @@
             <returns>
             </returns>
         </member>
-        <member name="T:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache">
-            <summary>
-            流程定义缓存
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache.Definitions">
-            <summary>
-            流程定义缓存
-            </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache.InitDefinitions">
-            <summary>
-            初始化流程定义
-            </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache.Clear">
-            <summary>
-            清空缓存
-            </summary>
-        </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine">
             <summary>
             工作流引擎
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.#ctor">
+            <summary>
+            实例化工作流引擎
             </summary>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.Instance">
@@ -1124,6 +1114,26 @@
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.DelegateWork.AddNew">
             <summary>
             添加新的委托关系
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache">
+            <summary>
+            流程定义缓存
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache.Definitions">
+            <summary>
+            流程定义缓存
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache.InitDefinitions">
+            <summary>
+            初始化流程定义
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache.Clear">
+            <summary>
+            清空缓存
             </summary>
         </member>
     </members>

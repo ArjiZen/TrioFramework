@@ -12,7 +12,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// 环节表单渲染
 		/// </summary>
 		/// <param name="form"></param>
-		/// <param name="bizForm"></param>
+		/// <param name="bizform"></param>
 		/// <returns></returns>
 		public virtual ViewResult Render(WorkflowForm form, BusinessForm bizform) {
 			return null;
@@ -68,7 +68,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <summary>
 		/// 计算参与者
 		/// </summary>
-		/// <param name="bizForm"></param>
+		/// <param name="bizform"></param>
 		/// <param name="selector"></param>
 		/// <returns></returns>
 		public virtual void ResolveActor(BusinessForm bizform, ApproveSelector selector) {
@@ -77,7 +77,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <summary>
 		/// 计算待阅参与者
 		/// </summary>
-		/// <param name="bizForm">业务表单</param>
+		/// <param name="bizform">业务表单</param>
 		/// <param name="selector">待阅参与者.</param>
 		public virtual void ResolveTobeReadActor(BusinessForm bizform, TobeReadSelector selector){
 		}
@@ -143,7 +143,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// 获取业务表单
 		/// </summary>
 		/// <typeparam name="T">业务表单类型</typeparam>
-		/// <param name="bizForm">业务表单通用类</param>
+		/// <param name="bizform">业务表单通用类</param>
 		/// <param name="form">业务表单</param>
 		/// <returns></returns>
 		protected bool TryParseForm<T>(BusinessForm bizform, out T form) {
