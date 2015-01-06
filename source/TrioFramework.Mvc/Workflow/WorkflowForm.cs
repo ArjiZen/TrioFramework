@@ -200,7 +200,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 						var currentWorkItem = instance.CurrentWorkItem;
 						// 待办条件：当前环节的审批人为当前登录用户 && 当前环节未结束
 						if ((currentWorkItem.PartId.Equals(currentUser.Id, StringComparison.OrdinalIgnoreCase)
-						    || currentWorkItem.MandataryId.Equals(currentUser.Id, StringComparison.OrdinalIgnoreCase)
+							|| (!string.IsNullOrEmpty(currentWorkItem.MandataryId) && currentWorkItem.MandataryId.Equals(currentUser.Id, StringComparison.OrdinalIgnoreCase))
 						    || DelegateWork.IsDelegate(instance.AppCode, currentWorkItem.PartId, currentUser.Id))
 						    && currentWorkItem.TaskStatus == TaskStatus.Waiting) {
 							form.Status = FormStatus.Todo;
