@@ -11,6 +11,9 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 	/// 工作流引擎
 	/// </summary>
 	public abstract class WorkflowEngine {
+		/// <summary>
+		/// 实例化工作流引擎
+		/// </summary>
 		public WorkflowEngine() {
 			this.m_CurrentUser = null;
 		}
