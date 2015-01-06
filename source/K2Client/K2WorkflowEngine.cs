@@ -338,10 +338,25 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 			if (instance == null) {
 				throw new WorkflowException("未找到指定的流程实例，流程编号：" + instanceNo + "，任务编号：" + taskId, null);
 			}
-			var workitem = instance.CurrentWorkItem;
-			workitem.SignTime = DateTime.Now;
-			workitem.Update();
-		}
 
+			var now = DateTime.Now;
+
+			var workitem = instance.CurrentWorkItem;
+			workitem.SignTime = now;
+			workitem.IsSign = true;
+			workitem.Update();
+
+			var allitems = instance.GetWorkItems();
+			var otherActiItems = allitems.Where(p => !p.FinishTime.HasValue
+			                     && p.CurrentActi.Equals(workitem.CurrentActi, StringComparison.OrdinalIgnoreCase)
+			                     && p.TaskId != workitem.TaskId);
+			if (otherActiItems != null) {
+				foreach (var item in otherActiItems) {
+					item.SignTime = null;
+					item.IsSign = true;
+					item.Update();
+				}
+			}
+		}
 	}
 }

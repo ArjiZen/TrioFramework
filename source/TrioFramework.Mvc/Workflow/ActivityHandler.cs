@@ -14,7 +14,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <param name="form"></param>
 		/// <param name="bizForm"></param>
 		/// <returns></returns>
-		public virtual ViewResult Render(WorkflowForm form, BusinessForm bizForm) {
+		public virtual ViewResult Render(WorkflowForm form, BusinessForm bizform) {
 			return null;
 		}
 
@@ -59,12 +59,19 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		}
 
 		/// <summary>
+		/// 流程签收前事件
+		/// </summary>
+		public virtual void BeforeSign(BusinessForm bizform){
+
+		}
+
+		/// <summary>
 		/// 计算参与者
 		/// </summary>
 		/// <param name="bizForm"></param>
 		/// <param name="selector"></param>
 		/// <returns></returns>
-		public virtual void ResolveActor(BusinessForm bizForm, ApproveSelector selector) {
+		public virtual void ResolveActor(BusinessForm bizform, ApproveSelector selector) {
 		}
 
 		/// <summary>
@@ -72,7 +79,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// </summary>
 		/// <param name="bizForm">业务表单</param>
 		/// <param name="selector">待阅参与者.</param>
-		public virtual void ResolveTobeReadActor(BusinessForm bizForm, TobeReadSelector selector){
+		public virtual void ResolveTobeReadActor(BusinessForm bizform, TobeReadSelector selector){
 		}
 
 		/// <summary>
@@ -139,10 +146,10 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <param name="bizForm">业务表单通用类</param>
 		/// <param name="form">业务表单</param>
 		/// <returns></returns>
-		protected bool TryParseForm<T>(BusinessForm bizForm, out T form) {
+		protected bool TryParseForm<T>(BusinessForm bizform, out T form) {
 			form = default(T);
 			try {
-				form = (T)Convert.ChangeType(bizForm, typeof(T));
+				form = (T)Convert.ChangeType(bizform, typeof(T));
 				return true;
 			} catch (InvalidCastException) {
 				return false;
