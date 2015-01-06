@@ -73,7 +73,7 @@ namespace Bingosoft.TrioFramework.Models {
         /// <param name="code">字典编码</param>
         /// <returns></returns>
         public static DictionaryCollection GetByCode(string code) {
-            var list = _dao.QueryEntities<DictionaryItem>("framework.dictionary.getbycode", new { Code = code });
+			var list = _dao.QueryEntities<DictionaryItem>("trio.framework.dictionary.getbycode", new { Code = code });
             var collection = new DictionaryCollection(list);
             return collection;
         }

@@ -176,9 +176,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_Config\SqlCommands\dictionary.config" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="App_Config\SqlCommands\attachments.config" />
   </ItemGroup>
   <ItemGroup>
