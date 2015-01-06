@@ -92,6 +92,63 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 
 		}
 
+
+		/// <summary>
+		/// 多人流程签收测试
+		/// </summary>
+		[Test()]
+		public void MutiSignTest() {
+			Assert.IsNotNull(engine);
+
+			var user1 = SecurityContext.Provider.GetUser("liangyanshan");
+			var user2 = SecurityContext.Provider.GetUser("zhuyan");
+
+			var department = SecurityContext.Provider.GetOrganization(loginUser.DeptId);
+			Assert.IsNotNull(department);
+
+			var instance = engine.CreateWorkflow(1);
+			Assert.IsNotNull(instance);
+
+			instance.Creator = loginUser.Name;
+			instance.CreatorId = loginUser.Id;
+			instance.CreatorDeptId = department.Id;
+			instance.CreatorDeptName = department.FullName;
+			instance.Title = "（签收单元测试）" + DateTime.Now.ToString("yyyyMMddHHmm");
+
+			var saveResult = engine.SaveWorkflow(instance);
+			Assert.IsTrue(saveResult);
+
+			var approveResult = new ApproveResult();
+			approveResult.Choice = "营销接口审核";
+			approveResult.Comment = "通过";
+			approveResult.NextUsers = new List<string>(){ loginUser.Id, user1.Id, user2.Id };
+
+			var runResult = engine.RunWorkflow(instance, approveResult);
+			Assert.IsTrue(runResult);
+
+			instanceNo = instance.InstanceNo;
+
+			engine.SignWorkflow(instance.InstanceNo, 2);
+			var assertSignTime = DateTime.Now;
+
+			var instance2 = engine.LoadWorkflow(instance.InstanceNo, 2);
+			var workitem2 = instance2.CurrentWorkItem;
+			Assert.IsNotNull(instance2);
+			Assert.IsNotNull(workitem2);
+			Assert.AreEqual(instance.Title, instance2.Title);
+			Assert.IsTrue(workitem2.IsSign);
+			Assert.IsTrue(workitem2.SignTime.HasValue);
+			Assert.IsTrue(workitem2.SignTime.Value >= assertSignTime.AddSeconds(-5) && workitem2.SignTime.Value <= assertSignTime.AddSeconds(5));
+
+			engine.SetCurrentUser(user1.LoginId);
+			var instance3 = engine.LoadWorkflow(instance.InstanceNo, 3);
+			var workitem3 = instance3.CurrentWorkItem;
+			Assert.IsNotNull(instance3);
+			Assert.IsNotNull(workitem3);
+			Assert.IsTrue(workitem3.IsSign);
+			Assert.IsFalse(workitem3.SignTime.HasValue);
+		}
+
 		/// <summary>
 		/// 已存在流程签收测试
 		/// </summary>

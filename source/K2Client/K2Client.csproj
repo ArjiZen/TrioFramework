@@ -11,7 +11,7 @@
     <AssemblyName>Bingosoft.TrioFramework.Workflow.K2Client</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ReleaseVersion>1.2.0</ReleaseVersion>
+    <ReleaseVersion>1.2.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>

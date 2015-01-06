@@ -74,6 +74,10 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 		/// 签收时间
 		/// </summary>
 		public DateTime? SignTime { get; set; }
+		/// <summary>
+		/// 是否已签收
+		/// </summary>
+		public bool IsSign { get; set;}
         /// <summary>
         /// 审批时间
         /// </summary>

@@ -35,10 +35,20 @@ namespace Bingosoft.TrioFramework {
 		/// <summary>
 		/// 接口地址
 		/// </summary>
-		[ConfigurationProperty("url")]
-		public string Url {
-			get{ return (string)this["url"]; }
-			set{ this["url"] = value; }
+		[ConfigurationProperty("apiUrl")]
+		public string ApiUrl {
+			get{ return (string)this["apiUrl"]; }
+			set{ this["apiUrl"] = value; }
+		}
+
+
+		/// <summary>
+		/// 待办地址
+		/// </summary>
+		[ConfigurationProperty("jobUrl")]
+		public string JobUrl {
+			get{ return (string)this["jobUrl"]; }
+			set{ this["jobUrl"] = value; }
 		}
 	}
 }

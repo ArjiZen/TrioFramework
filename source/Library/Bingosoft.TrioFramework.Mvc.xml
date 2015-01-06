@@ -569,7 +569,7 @@
             </summary>
             <param name="form">
             </param>
-            <param name="bizForm">
+            <param name="bizform">
             </param>
             <returns>
             </returns>
@@ -612,11 +612,16 @@
             </summary>
             <param name="instanceNo">流程编号</param>
         </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.BeforeSign(Bingosoft.TrioFramework.Workflow.Business.BusinessForm)">
+            <summary>
+            流程签收前事件
+            </summary>
+        </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.ResolveActor(Bingosoft.TrioFramework.Workflow.Business.BusinessForm,Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector)">
             <summary>
             计算参与者
             </summary>
-            <param name="bizForm">
+            <param name="bizform">
             </param>
             <param name="selector">
             </param>
@@ -627,7 +632,7 @@
             <summary>
             计算待阅参与者
             </summary>
-            <param name="bizForm">业务表单</param>
+            <param name="bizform">业务表单</param>
             <param name="selector">待阅参与者.</param>
         </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.CanDownloadAttachment(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment)">
@@ -690,7 +695,7 @@
             获取业务表单
             </summary>
             <typeparam name="T">业务表单类型</typeparam>
-            <param name="bizForm">业务表单通用类</param>
+            <param name="bizform">业务表单通用类</param>
             <param name="form">业务表单</param>
             <returns>
             </returns>

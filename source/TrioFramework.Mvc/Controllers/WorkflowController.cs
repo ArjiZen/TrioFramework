@@ -366,14 +366,14 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 						try {
 							func.BeforeSubmit(form.InstanceNo, form.ApproveResult.Choice);
 						} catch (Exception ex) {
-							Logger.LogError(ModuleName, "流程提交前自定义事件时出错", ex, "");
+							Logger.LogError(ModuleName, "流程提交前自定义事件出错", ex, "");
 							return Error(500, ex.Message);
 						}
 
 						try {
 							func.ResolveTobeReadActor(form.BusinessForm, form.TobeReadSelector);
 						} catch (Exception ex) {
-							Logger.LogError(ModuleName, "流程提交前计算待阅人员时出错", ex, "");
+							Logger.LogError(ModuleName, "流程提交前计算待阅人员出错", ex, "");
 							return Error(500, ex.Message);
 						}
 					}
@@ -391,7 +391,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 							try {
 								func.AfterSubmit(form.InstanceNo, form.ApproveResult.Choice);
 							} catch (Exception ex) {
-								Logger.LogError(ModuleName, "流程提交后自定义事件时出错", ex, form);
+								Logger.LogError(ModuleName, "流程提交后自定义事件出错", ex, form);
 								return Error(500, ex.Message);
 							}
 						}
@@ -428,7 +428,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 						try {
 							func.BeforeDelete(form.InstanceNo);
 						} catch (Exception ex) {
-							Logger.LogError(ModuleName, "流程删除前自定义事件时出错", ex, form);
+							Logger.LogError(ModuleName, "流程删除前自定义事件出错", ex, form);
 							return Error(500, ex.Message);
 						}
 					}
@@ -445,7 +445,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 							try {
 								func.AfterDeleted(form.InstanceNo);
 							} catch (Exception ex) {
-								Logger.LogError(ModuleName, "流程删除后自定义事件时出错", ex, form);
+								Logger.LogError(ModuleName, "流程删除后自定义事件出错", ex, form);
 								return Error(500, ex.Message);
 							}
 						}
@@ -473,6 +473,21 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 
 				form.InstanceNo = form.InstanceNo.Decrypt();
 				form.CurrentActi = form.CurrentActi.Decrypt();
+
+				var handlerKey = form.CurrentActi + "_" + form.VersionStr;  
+
+				// 处理流程签收前自定义事件
+				if (this.handlers.ContainsKey(handlerKey)) {
+					var func = this.handlers[handlerKey];
+					if (func != null) {
+						try {
+							func.BeforeSign(form.BusinessForm);
+						} catch (Exception ex) {
+							Logger.LogError(ModuleName, "流程签收前自定义事件出错", ex, form);
+							return Error(500, ex.Message);
+						}
+					}
+				}
 
 				var engine = WorkflowEngine.Create();
 				engine.SignWorkflow(form.InstanceNo, form.TaskId);

@@ -747,9 +747,14 @@
             是否启用发送短信
             </summary>
         </member>
-        <member name="P:Bingosoft.TrioFramework.PendingJobElement.Url">
+        <member name="P:Bingosoft.TrioFramework.PendingJobElement.ApiUrl">
             <summary>
             接口地址
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.PendingJobElement.JobUrl">
+            <summary>
+            待办地址
             </summary>
         </member>
         <member name="T:Bingosoft.TrioFramework.CommonElement">

@@ -21,6 +21,8 @@ namespace Bingosoft.TrioFramework.Test {
 			Assert.IsNotNull(SettingProvider.PendingJob);
 			Assert.IsTrue(SettingProvider.PendingJob.IsEnabled);
 			Assert.IsFalse(SettingProvider.PendingJob.IsEnabledSMS);
+			Assert.IsNotNullOrEmpty(SettingProvider.PendingJob.ApiUrl);
+			Assert.IsNotNullOrEmpty(SettingProvider.PendingJob.JobUrl);
 		}
 
 		[Test()]
