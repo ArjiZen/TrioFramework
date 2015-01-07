@@ -473,6 +473,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 
 				form.InstanceNo = form.InstanceNo.Decrypt();
 				form.CurrentActi = form.CurrentActi.Decrypt();
+				form.VersionStr = form.VersionStr.Decrypt();
 
 				var handlerKey = form.CurrentActi + "_" + form.VersionStr;  
 
