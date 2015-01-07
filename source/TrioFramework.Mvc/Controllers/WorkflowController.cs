@@ -481,7 +481,9 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 				if (this.handlers.ContainsKey(handlerKey)) {
 					var func = this.handlers[handlerKey];
 					if (func != null) {
-						try {
+						try{
+							form.BusinessForm = (BusinessForm)Activator.CreateInstance(BusinessForm);
+							form.BusinessForm.Load(form.InstanceNo);
 							func.BeforeSign(form.BusinessForm);
 						} catch (Exception ex) {
 							Logger.LogError(ModuleName, "流程签收前自定义事件出错", ex, form);
