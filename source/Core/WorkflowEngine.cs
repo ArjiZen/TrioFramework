@@ -71,9 +71,9 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// <summary>
 		/// 设置当前用户
 		/// </summary>
-		/// <param name="loginId">用户登录id</param>
-		public void SetCurrentUser(string loginId) {
-			this.m_CurrentUser = SecurityContext.Provider.GetUser(loginId);
+		/// <param name="id">用户loginid 或 userid</param>
+		public void SetCurrentUser(string id) {
+			this.m_CurrentUser = SecurityContext.Provider.Get(id);
 		}
 
 		/// <summary>
