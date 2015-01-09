@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Bingosoft.TrioFramework.Workflow.K2Client.Test</RootNamespace>
     <AssemblyName>WorkflowK2ClientTest</AssemblyName>
-    <ReleaseVersion>1.2.1</ReleaseVersion>
+    <ReleaseVersion>1.2.2</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -17,6 +17,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -80,6 +81,7 @@
   <ItemGroup>
     <Compile Include="WorkflowEngineTest.cs" />
     <Compile Include="DelegateTest.cs" />
+    <Compile Include="WorkflowDefinitionSyncTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

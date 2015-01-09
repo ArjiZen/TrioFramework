@@ -62,7 +62,6 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// 流程签收前事件
 		/// </summary>
 		public virtual void BeforeSign(BusinessForm bizform){
-
 		}
 
 		/// <summary>

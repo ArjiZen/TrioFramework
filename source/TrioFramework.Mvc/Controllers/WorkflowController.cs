@@ -10,6 +10,7 @@ using Bingosoft.TrioFramework.Mvc.Workflow;
 using Bingosoft.TrioFramework.Workflow.Business;
 using Bingosoft.TrioFramework.Workflow.Core;
 using Bingosoft.TrioFramework.Workflow.Core.Models;
+using System.Linq;
 
 namespace Bingosoft.TrioFramework.Mvc.Controllers {
 	/// <summary>
@@ -357,7 +358,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 				form.CurrentActi = form.CurrentActi.Decrypt();
 				form.VersionStr = form.VersionStr.Decrypt();
 
-				var handlerKey = form.CurrentActi + "_" + form.VersionStr;                
+				var handlerKey = form.CurrentActi + "_" + form.VersionStr;  
 
 				// 处理流程提交前自定义事件
 				if (this.handlers.ContainsKey(handlerKey)) {
@@ -379,9 +380,11 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 					}
 				}
 
+				form.ApproveResult.NextTobeReadUsers = form.TobeReadSelector[form.ApproveResult.Choice].Select(p => p.id).ToList();
+
 				var engine = WorkflowEngine.Create();
 				var instance = engine.LoadWorkflow(form.InstanceNo, form.TaskId);
-				var runSuccess = engine.RunWorkflow(instance, form.ApproveResult, form.TobeReadSelector.UserIds);
+				var runSuccess = engine.RunWorkflow(instance, form.ApproveResult);
 				if (runSuccess) {
 
 					// 处理流程提交后自定义事件
@@ -481,7 +484,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 				if (this.handlers.ContainsKey(handlerKey)) {
 					var func = this.handlers[handlerKey];
 					if (func != null) {
-						try{
+						try {
 							form.BusinessForm = (BusinessForm)Activator.CreateInstance(BusinessForm);
 							form.BusinessForm.Load(form.InstanceNo);
 							func.BeforeSign(form.BusinessForm);

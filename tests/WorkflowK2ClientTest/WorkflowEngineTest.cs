@@ -532,8 +532,9 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			approveResult.Choice = "营销接口审核";
 			approveResult.Comment = "通过";
 			approveResult.NextUsers = new List<string>(){ loginUser.Id };
+			approveResult.NextTobeReadUsers = new string[]{ loginUser.Id };
 
-			var runResult = engine.RunWorkflow(instance, approveResult, new string[]{ loginUser.Id });
+			var runResult = engine.RunWorkflow(instance, approveResult);
 			Assert.IsTrue(runResult);
 
 			instanceNo = instance.InstanceNo;

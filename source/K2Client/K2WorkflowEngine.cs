@@ -260,7 +260,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		/// instance.CurrentWorkItem
 		/// </remarks>
 		/// <returns></returns>
-		public override bool RunWorkflow(WorkflowInstance instance, ApproveResult result, string[] tobeReadUsersId = null) {
+		public override bool RunWorkflow(WorkflowInstance instance, ApproveResult result) {
 			if (instance.CurrentWorkItem == null) {
 				throw new ActivityNotFoundException(instance.InstanceNo, instance.CurrentActivity);
 			}
@@ -296,8 +296,8 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 
 			// 下一步骤待阅人员
 			var tobeReadUsers = new List<IUser>();
-			if (tobeReadUsersId != null && tobeReadUsersId.Length > 0) {
-				tobeReadUsers.AddRange(tobeReadUsersId.Select(userid => SecurityContext.Provider.Get(userid)));
+			if (result.NextTobeReadUsers != null && result.NextTobeReadUsers.Count > 0) {
+				tobeReadUsers.AddRange(result.NextTobeReadUsers.Select(userid => SecurityContext.Provider.Get(userid)));
 			}
 
 			// 提交K2服务器

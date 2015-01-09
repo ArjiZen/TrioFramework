@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Bingosoft.TrioFramework.Mvc.Test</RootNamespace>
     <AssemblyName>TrioFrameworkMvcTest</AssemblyName>
-    <ReleaseVersion>1.2.1</ReleaseVersion>
+    <ReleaseVersion>1.2.2</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Test.cs" />
     <Compile Include="RequestExtensionTest.cs" />
+    <Compile Include="WorkflowFormTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -45,6 +46,10 @@
     <ProjectReference Include="..\..\source\TrioFramework.Mvc\TrioFramework.Mvc.csproj">
       <Project>{128C4953-45D3-4A8C-A867-C5B9FA73E3EF}</Project>
       <Name>TrioFramework.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\source\Core\Core.csproj">
+      <Project>{A7C4F4AE-4D37-4063-8CDE-C6B3AD191E83}</Project>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

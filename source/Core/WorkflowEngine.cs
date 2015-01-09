@@ -157,7 +157,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// =========================================================
 		/// 调用K2接口
 		/// </remarks>
-		public abstract bool RunWorkflow(WorkflowInstance instance, ApproveResult result, string[] tobeReadUsersId = null);
+		public abstract bool RunWorkflow(WorkflowInstance instance, ApproveResult result);
 
 		/// <summary>
 		/// 删除流程

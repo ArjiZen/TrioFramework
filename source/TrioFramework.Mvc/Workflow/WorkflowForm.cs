@@ -155,14 +155,14 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		public ApproveSelector Selector { get; set; }
 
 		/// <summary>
-		/// 审批结果
-		/// </summary>
-		public ApproveResult ApproveResult { get; set; }
-
-		/// <summary>
 		/// 待阅用户Id集合
 		/// </summary>
 		public TobeReadSelector TobeReadSelector { get; set; }
+
+		/// <summary>
+		/// 审批结果
+		/// </summary>
+		public ApproveResult ApproveResult { get; set; }
 
 		/// <summary>
 		/// 历史环节记录
