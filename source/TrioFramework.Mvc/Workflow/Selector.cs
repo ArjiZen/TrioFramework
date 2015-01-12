@@ -35,7 +35,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 			/// </summary>
 			public bool selected { get; set; }
 		}
-			
+
 		/// <summary>
 		/// 环节用户
 		/// </summary>
@@ -49,10 +49,8 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 			get {
 				if (!m_Users.ContainsKey(choice)) {
 					m_Users.Add(choice, new List<SelectorUser>());
-					return m_Users[choice];
-				} else {
-					return new List<SelectorUser>();
 				}
+				return m_Users[choice];
 			}
 		}
 
@@ -115,7 +113,9 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// </summary>
 		/// <param name="choice">审核结果.</param>
 		public virtual void Clear(string choice) {
-			this.m_Users[choice].Clear();
+			if (this.m_Users.ContainsKey(choice)) {
+				this.m_Users[choice].Clear();
+			}
 		}
 
 	}

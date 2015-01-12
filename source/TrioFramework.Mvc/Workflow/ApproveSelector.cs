@@ -32,40 +32,42 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 				var actor = nextActi.Actor;
 				this.m_NextChoice.Add(choice);
 				this.m_Activities.Add(choice, nextActi.Name);
-				if (actor != null) {
-					IEnumerable<IUser> users;
-					if (choice.Contains("退回")) {
-						actor.RefActivityName = nextActi.Name;
+
+				IEnumerable<IUser> users = new List<IUser>();
+				if (choice.Contains("退回")) {
+					actor.RefActivityName = nextActi.Name;
+					users = actor.Resolve(instance);
+				} else {
+					if (actor != null) {
 						users = actor.Resolve(instance);
-					} else {
-						users = actor.Resolve(instance);    
 					}
-					foreach (var user in users) {
-						var organization = SecurityContext.Provider.GetOrganization(user.DeptId);
-						this[choice].Add(new SelectorUser() {
-							id = user.Id,
-							name = user.Name,
-							deptName = organization.FullName
-						});
-					}
+				}
+
+				foreach (var user in users) {
+					var organization = SecurityContext.Provider.GetOrganization(user.DeptId);
+					this[choice].Add(new SelectorUser() {
+						id = user.Id,
+						name = user.Name,
+						deptName = organization.FullName
+					});
 				}
 			}
 		}
-			
+
 		/// <summary>
 		/// 下一环节
 		/// </summary>
-		public IList<string> m_NextChoice { get; set; }
+		protected IList<string> m_NextChoice = new List<string>();
 
 		/// <summary>
 		/// 审批结果与下一环节名称的映射关系
 		/// </summary>
-		public IDictionary<string, string> m_Activities = new Dictionary<string, string>();
+		protected IDictionary<string, string> m_Activities = new Dictionary<string, string>();
 
 		/// <summary>
 		/// 是否需要用户选择
 		/// </summary>
-		public bool m_NeedChoice { get; set; }
+		protected bool m_NeedChoice { get; set; }
 
 		/// <summary>
 		/// 设置默认审批用户（界面可重新选择）
@@ -103,7 +105,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 				m_NextChoice.Remove(choice);
 			}
 			if (m_Users.ContainsKey(choice)) {
-				m_Users.Keys.Remove(choice);
+				m_Users.Remove(choice);
 			}
 		}
 
@@ -157,10 +159,14 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 			foreach (var choice in m_NextChoice) {
 				sbString.Append("\"" + choice + "\" : [");
 				if (m_Users.ContainsKey(choice)) {
+					var hasUser = false;
 					foreach (var u in m_Users[choice].Where(p=>p.selected)) {
 						sbString.Append("\"" + u.id + "\",");
+						hasUser = true;
 					}
-					sbString.Remove(sbString.Length - 1, 1);
+					if (hasUser) {
+						sbString.Remove(sbString.Length - 1, 1);
+					}
 				}
 				sbString.Append("],");
 			}
