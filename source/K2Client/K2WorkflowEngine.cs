@@ -253,7 +253,6 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		/// </summary>
 		/// <param name="instance">流程实例</param>
 		/// <param name="result">办理操作</param>
-		/// <param name="tobeReadUsersId">待阅人员用户Id</param>
 		/// <remarks>
 		/// 验证当办理人，K2办理成功后维护办理记录，流程实例，新增办理记录
 		/// requireFields:

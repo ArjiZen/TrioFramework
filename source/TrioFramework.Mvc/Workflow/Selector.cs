@@ -88,14 +88,18 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// </summary>
 		/// <param name="choice">审核结果.</param>
 		/// <param name="id">用户loginid或userid.</param>
-		private void Remove(string choice, string id) {
+		public virtual void Remove(string choice, string id) {
 			if (!m_Users.ContainsKey(choice)) {
 				return;
 			}
 
+			var user = SecurityContext.Provider.Get(id);
 			if (!m_Users[choice].Any(p => p.id.Equals(id, StringComparison.OrdinalIgnoreCase))) {
 				return;
 			}
+
+			var selected = m_Users[choice].First(p => p.id.Equals(user.Id, StringComparison.OrdinalIgnoreCase));
+			m_Users[choice].Remove(selected);
 		}
 
 		/// <summary>

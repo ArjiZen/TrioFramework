@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bingosoft.TrioFramework.Workflow.K2Client.Exceptions;
 
 namespace Bingosoft.TrioFramework.Mvc.Workflow {
 
@@ -29,16 +30,19 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 			var currentActi = instance.GetCurrentActi();
 			foreach (var choice in currentActi.Transitions.Keys) {
 				var nextActi = currentActi.Transitions[choice];
+				if (nextActi == null) {
+					throw new NextActivityNotFoundException(instance.InstanceNo, instance.CurrentActivity, choice);
+				}
 				var actor = nextActi.Actor;
 				this.m_NextChoice.Add(choice);
 				this.m_Activities.Add(choice, nextActi.Name);
 
 				IEnumerable<IUser> users = new List<IUser>();
-				if (choice.Contains("退回")) {
-					actor.RefActivityName = nextActi.Name;
-					users = actor.Resolve(instance);
-				} else {
-					if (actor != null) {
+				if (actor != null) {
+					if (choice.Contains("退回")) {
+						actor.RefActivityName = nextActi.Name;
+						users = actor.Resolve(instance);
+					} else {
 						users = actor.Resolve(instance);
 					}
 				}
@@ -58,6 +62,13 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// 下一环节
 		/// </summary>
 		protected IList<string> m_NextChoice = new List<string>();
+
+		/// <summary>
+		/// 当前环节的所有审批项
+		/// </summary>
+		public string[] Choices {
+			get{ return m_NextChoice.ToArray(); }
+		}
 
 		/// <summary>
 		/// 审批结果与下一环节名称的映射关系
@@ -83,6 +94,19 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 				}
 			} else {
 				this.Add(choice, userid, true);
+			}
+		}
+
+		/// <summary>
+		/// 设置默认审批项
+		/// </summary>
+		/// <param name="choice">审批项.</param>
+		public void SetDefault(string choice) {
+			if (m_NextChoice.Contains(choice)) {
+				m_NextChoice.Remove(choice);
+				m_NextChoice.Insert(0, choice);
+			} else {
+				throw new ChoiceNotFoundException(choice);
 			}
 		}
 
@@ -149,7 +173,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 			sbString.Append("},");
 			foreach (var choice in m_NextChoice) {
 				sbString.Append("\"" + choice + "\"").Append(":");
-				var jUsers = JsonConvert.SerializeObject(this[choice].Where(p => !p.selected).ToList());
+				var jUsers = JsonConvert.SerializeObject(this[choice].ToList());
 				sbString.Append(jUsers);
 				sbString.Append(",");
 			}

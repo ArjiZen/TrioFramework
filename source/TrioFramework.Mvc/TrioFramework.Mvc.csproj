@@ -28,6 +28,7 @@
     <DocumentationFile>..\Library\Bingosoft.TrioFramework.Mvc.xml</DocumentationFile>
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -155,6 +156,7 @@
     <Compile Include="Extensions\DictionaryCollection.cs" />
     <Compile Include="Workflow\TobeReadSelector.cs" />
     <Compile Include="Workflow\Selector.cs" />
+    <Compile Include="Exceptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj">
