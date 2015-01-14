@@ -350,16 +350,17 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 			try {
 				Thread.Sleep(1500);
 
-				if (TryUpdateModel(form)) {
-					UpdateModel(form);
-				}
-
 				form.InstanceNo = form.InstanceNo.Decrypt();
 				form.CurrentActi = form.CurrentActi.Decrypt();
 				form.VersionStr = form.VersionStr.Decrypt();
 
-				var handlerKey = form.CurrentActi + "_" + form.VersionStr;  
+				var handlerKey = form.CurrentActi + "_" + form.VersionStr; 
 
+				form.BusinessForm = (BusinessForm)Activator.CreateInstance(BusinessForm);
+				if (!string.IsNullOrEmpty(form.InstanceNo)) {
+					form.BusinessForm.Load(form.InstanceNo);
+				}
+					
 				// 处理流程提交前自定义事件
 				if (this.handlers.ContainsKey(handlerKey)) {
 					var func = this.handlers[handlerKey];
@@ -513,22 +514,27 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 		protected WorkflowForm LoadForm(WorkflowForm form) {
 			WorkflowForm nform = null;
 			// 更新流程数据
-			if (TryUpdateModel(form)) {
-				UpdateModel(form);
-
-				var engine = WorkflowEngine.Create();
-				if (!string.IsNullOrEmpty(form.InstanceNo)) {
-					var instanceNo = form.InstanceNo.Decrypt();
-					var instance = engine.LoadWorkflow(form.AppCode, instanceNo, form.TaskId);
-					nform = WorkflowForm.Init(instance);
-				} else {
-					var instance = engine.CreateWorkflow(form.AppCode);
-					nform = WorkflowForm.Init(instance);
-				}
-				nform.ActionModeStr = form.ActionModeStr;
-			} else {
+			if (!TryUpdateModel(form)) {
 				throw new NullReferenceException("加载表单数据失败");
 			}
+
+			UpdateModel(form);
+
+			if (!string.IsNullOrEmpty(form.InstanceNo)) {
+				form.InstanceNo = form.InstanceNo.Decrypt();
+			}
+
+			var engine = WorkflowEngine.Create();
+			if (!string.IsNullOrEmpty(form.InstanceNo)) {
+				var instance = engine.LoadWorkflow(form.InstanceNo, form.TaskId);
+				nform = WorkflowForm.Init(instance);
+			} else {
+				var instance = engine.CreateWorkflow(form.AppCode);
+				nform = WorkflowForm.Init(instance);
+			}
+			nform.ActionModeStr = form.ActionModeStr;
+
+
 			// 更新表单数据
 			if (BusinessForm == null) {
 				throw new TypeLoadException("未指定当前流程的业务实体类型，流程控制器未实现BusinessForm属性");
@@ -536,7 +542,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 			var bizform = (BusinessForm)Activator.CreateInstance(BusinessForm);
 			if (!string.IsNullOrEmpty(form.InstanceNo)) {
 				// 除新发起的流程外，需要重新加载业务表单
-				bizform.Load(form.InstanceNo.Decrypt());
+				bizform.Load(form.InstanceNo);
 			}
 			// 从界面上读取数据到业务表单实体
 			bizform = (BusinessForm)Request.ToModel(bizform, HttpRequestExtension.ModelSource.Form);
