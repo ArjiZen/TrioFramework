@@ -84,6 +84,9 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 
 			curWorkItems = WorkflowItemFactory.GetAll<K2WorkflowItem>(instance.InstanceNo, instance.CurrentActivity);
 			foreach (var workItem in curWorkItems) {
+				if (workItem.TaskStatus != TaskStatus.Waiting) {
+					continue;
+				} 
 				if ((workItem.TaskId == instance.CurrentWorkItem.TaskId)) {
 					workItem.Comment = result.Comment;
 					workItem.AutoFinished = false;

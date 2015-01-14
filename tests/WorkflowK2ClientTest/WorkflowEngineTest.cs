@@ -544,6 +544,20 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Test {
 			Assert.IsNotNull(instance2);
 			Assert.IsNotNull(workitem2);
 			Assert.AreEqual(TaskStatus.ToRead, workitem2.TaskStatus);
+
+			var approveResult2 = new ApproveResult();
+			approveResult2.Choice = "通过";
+			approveResult2.Comment = "通过";
+			approveResult2.NextUsers = new List<string>(){ loginUser.Id };
+
+			var runResult2 = engine.RunWorkflow(instance2, approveResult2);
+			Assert.IsTrue(runResult2);
+
+			var instance3 = engine.LoadWorkflow(instance2.InstanceNo, 3);
+			var workitem3 = instance3.CurrentWorkItem;
+			Assert.IsNotNull(instance3);
+			Assert.IsNotNull(workitem3);
+			Assert.AreEqual(TaskStatus.ToRead, workitem3.TaskStatus);
 		}
 	}
 }
