@@ -2,7 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Workflow", "01.Workflow", "{B4907B37-5F44-4AB0-ADD8-4861CA0B5882}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K2Client", "K2Client\K2Client.csproj", "{AD572C7A-1140-423F-B39E-6EB652FA0DED}"
@@ -178,7 +177,7 @@ Global
 		$0.XmlFormattingPolicy = $10
 		$10.inheritsSet = null
 		$10.scope = application/config+xml
-		version = 1.2.1
+		version = 1.2.2
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

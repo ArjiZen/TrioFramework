@@ -11,13 +11,17 @@ public static class SecurityContextExtension {
     private readonly static Dao _dao = Dao.Get();
 
     /// <summary>
-    /// 根据 UserID获取指定人员
+    /// 根据 loginid 或 userid 获取指定人员
     /// </summary>
     /// <param name="provider"></param>
-    /// <param name="userid"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
-    public static IUser Get(this ISecurityProvider provider, string userid) {
-        return _dao.QueryEntity<User>("framework.securitycontext.getuser", new { Id = userid });
+    public static IUser Get(this ISecurityProvider provider, string id) {
+		var u = _dao.QueryEntity<User>("framework.securitycontext.getuser", new { Id = id });
+		if (u == null) {
+			return SecurityContext.Provider.GetUser(id);
+		}
+		return u;
     }
 
     /// <summary>

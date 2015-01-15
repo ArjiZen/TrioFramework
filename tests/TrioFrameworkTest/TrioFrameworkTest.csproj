@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Bingosoft.TrioFramework.Test</RootNamespace>
     <AssemblyName>TrioFrameworkTest</AssemblyName>
-    <ReleaseVersion>1.2.1</ReleaseVersion>
+    <ReleaseVersion>1.2.2</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -32,9 +32,28 @@
       <HintPath>..\..\source\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
+    <Reference Include="Bingosoft.Data">
+      <HintPath>..\..\source\Library\Bingosoft.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Security">
+      <HintPath>..\..\source\Library\Bingosoft.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Core">
+      <HintPath>..\..\source\Library\Bingosoft.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Common.Logging">
+      <HintPath>..\..\source\Library\Bingosoft.Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Environment">
+      <HintPath>..\..\source\Library\Bingosoft.Environment.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Log">
+      <HintPath>..\..\source\Library\Bingosoft.Log.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigTest.cs" />
+    <Compile Include="SecurityContextTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

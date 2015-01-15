@@ -82,8 +82,8 @@ namespace Bingosoft.TrioFramework.WindowsServices {
 						this.InternalExecute(task);
 						Thread.Sleep(1000);
 					} catch (Exception ex) {
-						var businessId = JsonConvert.SerializeObject(task);
-						Log(businessId, false, content: "执行失败", errorMessage: ex.GetAllMessage());
+						var obj = JsonConvert.SerializeObject(task);
+						Log("", false, content: "执行失败 " + obj, errorMessage: ex.GetAllMessage());
 					}
 				}
 			}
@@ -113,10 +113,10 @@ namespace Bingosoft.TrioFramework.WindowsServices {
 			new TaskLog() {
 				TaskName = this.TaskName,
 				BusinessNo = businessNo,
-				Content = content,
+				Content = content.Length > 4000 ? content.Substring(0, 4000) : content,
 				ExecuteTime = DateTime.Now,
 				IsSuccess = success,
-				ErrorMessage = errorMessage
+				ErrorMessage = errorMessage.Length > 4000 ? errorMessage.Substring(0, 4000) : errorMessage
 			}.Log();
 		}
 	}

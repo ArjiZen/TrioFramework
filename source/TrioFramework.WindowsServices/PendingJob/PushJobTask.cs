@@ -41,10 +41,10 @@ namespace Bingosoft.TrioFramework.WindowsServices {
 			}
 			var businessNo = task.InstanceNo + "|" + task.TaskId;
 			try {
-				var client = new PendingJobProvider.PendingJobII();
 				var jobId = "";
 				var isSuccess = false;
 				if (SettingProvider.PendingJob.IsEnabled) {
+					var client = new PendingJobProvider.PendingJobII();
 					isSuccess = client.AddPendingJob(task.UserId, 
 						ref jobId, task.JobTitle, task.Url, task.UserId, task.UserName, businessNo, 
 						SettingProvider.Common.SystemId, SettingProvider.Common.SystemName, 
