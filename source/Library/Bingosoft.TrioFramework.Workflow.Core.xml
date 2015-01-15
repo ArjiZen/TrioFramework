@@ -143,7 +143,12 @@
         </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult">
             <summary>
-            审批结果
+            审核结果
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult.#ctor">
+            <summary>
+            审核结果
             </summary>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult.Choice">
@@ -153,7 +158,12 @@
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult.NextUsers">
             <summary>
-            下一步人员Id
+            下一步处理人员id
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult.NextTobeReadUsers">
+            <summary>
+            下一环节待阅人员id
             </summary>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult.Comment">
@@ -933,7 +943,7 @@
             <summary>
             设置当前用户
             </summary>
-            <param name="loginId">用户登录id</param>
+            <param name="id">用户loginid 或 userid</param>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.Definitions">
             <summary>
@@ -1002,13 +1012,12 @@
             调用K2接口
             </remarks>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.String[])">
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult)">
             <summary>
             运行流程
             </summary>
             <param name="instance">流程编号</param>
             <param name="result">审批结果</param>
-            <param name="tobeReadUsersId">待阅人员用户Id</param>
             <returns>
             </returns>
             <remarks>

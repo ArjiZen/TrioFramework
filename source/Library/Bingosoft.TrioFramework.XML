@@ -181,11 +181,11 @@
         </member>
         <member name="M:SecurityContextExtension.Get(Bingosoft.Security.ISecurityProvider,System.String)">
             <summary>
-            根据 UserID获取指定人员
+            根据 loginid 或 userid 获取指定人员
             </summary>
             <param name="provider">
             </param>
-            <param name="userid">
+            <param name="id">
             </param>
             <returns>
             </returns>

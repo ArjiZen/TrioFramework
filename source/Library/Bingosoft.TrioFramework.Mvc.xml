@@ -628,7 +628,7 @@
             <returns>
             </returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.ResolveTobeReadActor(Bingosoft.TrioFramework.Workflow.Business.BusinessForm,Bingosoft.TrioFramework.Mvc.TobeReadSelector)">
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.ResolveTobeReadActor(Bingosoft.TrioFramework.Workflow.Business.BusinessForm,Bingosoft.TrioFramework.Mvc.Workflow.TobeReadSelector)">
             <summary>
             计算待阅参与者
             </summary>
@@ -717,87 +717,54 @@
             <param name="instance">
             </param>
         </member>
-        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.SelectorUser">
-            <summary>
-            已选择用户
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.SelectorUser.id">
-            <summary>
-            用户id
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.SelectorUser.name">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.SelectorUser.deptName">
-            <summary>
-            部门名称
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.NextActivities">
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.m_NextChoice">
             <summary>
             下一环节
             </summary>
         </member>
-        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.ChoiceActivityMapped">
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.Choices">
+            <summary>
+            当前环节的所有审批项
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.m_Activities">
             <summary>
             审批结果与下一环节名称的映射关系
             </summary>
         </member>
-        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.NeedChoice">
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.m_NeedChoice">
             <summary>
             是否需要用户选择
             </summary>
-        </member>
-        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.m_Users">
-            <summary>
-            已选中用户
-            </summary>
-        </member>
-        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.m_DefaultUsers">
-            <summary>
-            默认选中用户
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.Item(System.String)">
-            <summary>
-            获取该环节的参与者
-            </summary>
-            <param name="activityName">环节名称</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.RemoveActivity(System.String)">
-            <summary>
-            移除环节及相关处理人
-            </summary>
-            <param name="activityName">环节名称</param>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.ClearUsers(System.String)">
-            <summary>
-            清空环节处理人（不移除环节）
-            </summary>
-            <param name="activityName">环节名称</param>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.AddUser(System.String,System.String,System.Boolean)">
-            <summary>
-            添加环节处理人
-            </summary>
-            <param name="activityName">环节名</param>
-            <param name="userId">用户id</param>
-            <param name="selected">是否默认选中</param>
         </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.SetDefault(System.String,System.String)">
             <summary>
             设置默认审批用户（界面可重新选择）
             </summary>
-            <param name="activityName">
+            <param name="choice">
             </param>
             <param name="userid">
             </param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.SetDefault(System.String)">
+            <summary>
+            设置默认审批项
+            </summary>
+            <param name="choice">审批项.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.Add(System.String,System.String,System.Boolean)">
+            <summary>
+            添加环节用户
+            </summary>
+            <param name="choice">审核结果.</param>
+            <param name="id">用户loginid或userid.</param>
+            <param name="selected">是否默认选中.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.RemoveChoice(System.String)">
+            <summary>
+            移除审批结果
+            </summary>
+            <param name="choice">Choice.</param>
         </member>
         <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.ToString">
             <summary>
@@ -809,9 +776,9 @@
             返回数据格式：
             {
             "needChoice": "True",
-            "next": ["营销接口审核"],
+            "next": ["营销接口人审核"],
             "nextActi": {
-            "营销接口审核": "营销接口审核、评估"
+            "营销接口人审核": "营销接口人审核、评估"
             },
             "营销接口审核": [{
             "id": "0321031435",
@@ -1114,14 +1081,14 @@
             供选择的下一步骤处理人
             </summary>
         </member>
-        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.ApproveResult">
-            <summary>
-            审批结果
-            </summary>
-        </member>
         <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.TobeReadSelector">
             <summary>
             待阅用户Id集合
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.ApproveResult">
+            <summary>
+            审批结果
             </summary>
         </member>
         <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.HistoryActivities">
@@ -1156,50 +1123,133 @@
             <returns>
             </returns>
         </member>
-        <member name="T:Bingosoft.TrioFramework.Mvc.TobeReadSelector">
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.TobeReadSelector">
             <summary>
             待阅人选择
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.#ctor">
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.TobeReadSelector.#ctor">
             <summary>
             实例化待阅人员选择
             </summary>
         </member>
-        <member name="P:Bingosoft.TrioFramework.Mvc.TobeReadSelector.UserIds">
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.TobeReadSelector.Add(System.String,System.String)">
             <summary>
-            获取所有待阅人用户id
+            添加环节用户
             </summary>
-            <value>The user identifiers.</value>
+            <param name="choice">审核结果.</param>
+            <param name="id">用户loginid或userid.</param>
         </member>
-        <member name="P:Bingosoft.TrioFramework.Mvc.TobeReadSelector.Users">
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.Selector">
             <summary>
-            获取所有待阅用户
+            用户选择
             </summary>
-            <value>The users.</value>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.GetUser(System.String)">
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.Selector.SelectorUser">
             <summary>
-            根据id获取用户
+            选择用户
             </summary>
-            <returns>The user.</returns>
-            <param name="id">Identifier.</param>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.Add(System.String)">
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.Selector.SelectorUser.id">
             <summary>
-            添加待阅人
+            用户id
             </summary>
-            <param name="id">待阅人用户id或登录id.</param>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.Remove(System.String)">
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.Selector.SelectorUser.name">
             <summary>
-            移除待阅人
+            用户名
             </summary>
-            <param name="id">待阅人用户id或登录id.</param>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Mvc.TobeReadSelector.Clear">
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.Selector.SelectorUser.deptName">
             <summary>
-            移除所有待阅人
+            部门名称
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.Selector.SelectorUser.selected">
+            <summary>
+            是否默认选中
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.Selector.m_Users">
+            <summary>
+            环节用户
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.Selector.Item(System.String)">
+            <summary>
+            获取当前审核结果的选择用户
+            </summary>
+            <param name="choice">审核结果.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.Selector.Add(System.String,System.String,System.Boolean)">
+            <summary>
+            添加环节用户
+            </summary>
+            <param name="choice">审核结果.</param>
+            <param name="id">用户loginid或userid.</param>
+            <param name="selected">是否默认选中.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.Selector.Remove(System.String,System.String)">
+            <summary>
+            移除环节用户
+            </summary>
+            <param name="choice">审核结果.</param>
+            <param name="id">用户loginid或userid.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.Selector.RemoveChoice(System.String)">
+            <summary>
+            移除审批结果
+            </summary>
+            <param name="choice">Choice.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.Selector.Clear(System.String)">
+            <summary>
+            清空审核用户
+            </summary>
+            <param name="choice">审核结果.</param>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.NextActivityNotFoundException">
+            <summary>
+            异常：下一环节未找到
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.NextActivityNotFoundException.#ctor(System.String,System.String,System.String)">
+            <summary>
+            实例化异常
+            </summary>
+            <param name="instanceNo">流程单号.</param>
+            <param name="currentActi">当前环节.</param>
+            <param name="choice">审核结果.</param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.NextActivityNotFoundException.InstanceNo">
+            <summary>
+            流程单号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.NextActivityNotFoundException.CurrentActi">
+            <summary>
+            当前环节
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.NextActivityNotFoundException.Choice">
+            <summary>
+            审核结果
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.ChoiceNotFoundException">
+            <summary>
+            异常：审批项未找到
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.ChoiceNotFoundException.#ctor(System.String)">
+            <summary>
+            实例化异常
+            </summary>
+            <param name="choice">Choice.</param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.ChoiceNotFoundException.Choice">
+            <summary>
+            审核结果
             </summary>
         </member>
     </members>

@@ -146,7 +146,6 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// </summary>
 		/// <param name="instance">流程编号</param>
 		/// <param name="result">审批结果</param>
-		/// <param name="tobeReadUsersId">待阅人员用户Id</param>
 		/// <returns></returns>
 		/// <remarks>
 		/// 根据用户选择的下一步骤，计算出下一环节的参与者并持久化到数据库
