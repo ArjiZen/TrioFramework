@@ -102,6 +102,7 @@
     <EmbeddedResource Include="App_Config\SqlCommands\attachment.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="App_Config\SqlCommands\delegate.config" />
+    <EmbeddedResource Include="App_Config\SqlCommands\core.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrioFramework\TrioFramework.csproj">
