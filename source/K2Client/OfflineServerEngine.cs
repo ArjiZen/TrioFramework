@@ -27,5 +27,16 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 		public override bool RunWorkflow(WorkflowInstance instance, ApproveResult result, IList<IUser> listNextUsers, IList<IUser> tobeReadUsers) {
             return true;
         }
+
+		/// <summary>
+		/// 传阅流程
+		/// </summary>
+		/// <returns>true</returns>
+		/// <c>false</c>
+		/// <param name="instance">流程实例.</param>
+		/// <param name="toUsers">传阅用户.</param>
+		public override bool PassAround(WorkflowInstance instance, IList<IUser> toUsers) {
+			return true;
+		}
     }
 }

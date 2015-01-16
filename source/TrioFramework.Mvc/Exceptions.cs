@@ -3,6 +3,18 @@
 namespace Bingosoft.TrioFramework.Mvc {
 
 	/// <summary>
+	/// 异常：业务类异常，不会记录到异常日志，只用作向界面输出
+	/// </summary>
+	public class BusinessException: Exception {
+		/// <summary>
+		/// 实例化异常
+		/// </summary>
+		public BusinessException(string message) 
+			: base(message) {
+		}
+	}
+
+	/// <summary>
 	/// 异常：下一环节未找到
 	/// </summary>
 	public class NextActivityNotFoundException: Exception {
@@ -12,8 +24,7 @@ namespace Bingosoft.TrioFramework.Mvc {
 		/// <param name="instanceNo">流程单号.</param>
 		/// <param name="currentActi">当前环节.</param>
 		/// <param name="choice">审核结果.</param>
-		public NextActivityNotFoundException(string instanceNo, string currentActi, string choice) 
-			: base("当前环节" + currentActi + "的处理结果" + choice + "对应的下一环节未找到，请检查流程定义") {
+		public NextActivityNotFoundException(string instanceNo, string currentActi, string choice) : base("当前环节" + currentActi + "的处理结果" + choice + "对应的下一环节未找到，请检查流程定义") {
 			this.InstanceNo = instanceNo;
 			this.CurrentActi = currentActi;
 			this.Choice = choice;
@@ -43,11 +54,10 @@ namespace Bingosoft.TrioFramework.Mvc {
 		/// 实例化异常
 		/// </summary>
 		/// <param name="choice">Choice.</param>
-		public ChoiceNotFoundException(string choice) 
-			: base("当前环节的处理结果" + choice + "未找到，请检查流程定义") {
+		public ChoiceNotFoundException(string choice) : base("当前环节的处理结果" + choice + "未找到，请检查流程定义") {
 			this.Choice = choice;
 		}
-			
+
 		/// <summary>
 		/// 审核结果
 		/// </summary>

@@ -173,5 +173,12 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// <param name="taskId">当前任务id</param>
 		public abstract void SignWorkflow(string instanceNo, int taskId);
 
+		/// <summary>
+		/// 流程传阅
+		/// </summary>
+		/// <param name="instance">流程实例.</param>
+		/// <param name="toUsersId">传阅目标用户.</param>
+		public abstract bool PassAround(WorkflowInstance instance, params string[] toUsersId);
+
 	}
 }

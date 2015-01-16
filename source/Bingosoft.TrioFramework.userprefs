@@ -1,11 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../tests/WorkflowK2ClientTest/WorkflowEngineTest.cs">
-    <Files>
-      <File FileName="K2Client/DbEngine.cs" Line="7" Column="7" />
-      <File FileName="../tests/WorkflowK2ClientTest/WorkflowEngineTest.cs" Line="20" Column="20" />
-      <File FileName="../tests/WorkflowK2ClientTest/app.config" Line="103" Column="103" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="MonoDevelop.NUnit.TestPad">
         <State expanded="True">
@@ -17,7 +12,7 @@
                     <Node name="K2Client" expanded="True">
                       <Node name="Test" expanded="True">
                         <Node name="WorkflowEngineTest" expanded="True">
-                          <Node name="ToBeReadTest" selected="True" />
+                          <Node name="PassAroundTest" selected="True" />
                         </Node>
                       </Node>
                     </Node>
