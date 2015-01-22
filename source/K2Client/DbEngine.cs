@@ -210,5 +210,51 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 
 			return true;
 		}
+
+		/// <summary>
+		/// 传阅流程
+		/// </summary>
+		/// <param name="instance">流程实例.</param>
+		/// <param name="toUsers">传阅用户.</param>
+		public override bool PassAround(WorkflowInstance instance, IList<IUser> toUsers) {
+			var tobeReadWorkItems = new List<K2WorkflowItem>();
+			var currentWorkItem = instance.CurrentWorkItem;
+
+			#region 添加下一环节待阅流程
+
+			var lastTaskId = this.GetWorkItemLastTaskId(instance.InstanceNo);
+			foreach (var user in toUsers) {
+				var workItem = WorkflowItemFactory.Create<K2WorkflowItem>();
+				lastTaskId += 1;
+				workItem.TaskId = lastTaskId;
+				workItem.InstanceNo = instance.InstanceNo;
+				workItem.PartId = user.Id;
+				workItem.PartName = user.Name;
+				workItem.PartDeptId = user.DeptId;
+				var dept = SecurityContext.Provider.GetOrganization(user.DeptId);
+				workItem.PartDeptName = (dept == null ? "" : dept.FullName);
+				workItem.ReceTime = DateTime.Now;
+				workItem.TaskStatus = TaskStatus.ToRead;
+				workItem.CurrentActi = currentWorkItem.CurrentActi;
+				// 传阅人
+				workItem.Mandatary = CurrentUser.Name;
+				workItem.MandataryId = CurrentUser.Id;
+
+				tobeReadWorkItems.Add(workItem);
+			}
+
+			#endregion
+
+			using (var transactionScope = new TransactionScope(TransactionScopeOption.Required)) {
+				// 新增传阅环节
+				foreach (var workitem in tobeReadWorkItems) {
+					_dao.Insert<K2WorkflowItem>(workitem);
+				}
+				transactionScope.Complete();
+			}
+
+			return true;
+		}
+
 	}
 }

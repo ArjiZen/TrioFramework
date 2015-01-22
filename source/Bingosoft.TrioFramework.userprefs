@@ -1,15 +1,27 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TrioFramework.Mvc/Controllers/WorkflowController.cs">
-    <Files>
-      <File FileName="TrioFramework.Mvc/Controllers/WorkflowController.cs" Line="12" Column="12" />
-      <File FileName="TrioFramework.Mvc/Workflow/WorkflowForm.cs" Line="16" Column="16" />
-      <File FileName="TrioFramework.Mvc/Workflow/Selector.cs" Line="3" Column="3" />
-      <File FileName="TrioFramework.Mvc/Workflow/ActivityHandler.cs" Line="93" Column="93" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="99.Test" expanded="True">
+            <Node name="WorkflowK2ClientTest" expanded="True">
+              <Node name="Bingosoft" expanded="True">
+                <Node name="TrioFramework" expanded="True">
+                  <Node name="Workflow" expanded="True">
+                    <Node name="K2Client" expanded="True">
+                      <Node name="Test" expanded="True">
+                        <Node name="WorkflowEngineTest" expanded="True">
+                          <Node name="PassAroundTest" selected="True" />
+                        </Node>
+                      </Node>
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

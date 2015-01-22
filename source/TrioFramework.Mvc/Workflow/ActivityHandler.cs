@@ -48,20 +48,20 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// 流程删除前事件
 		/// </summary>
 		/// <param name="instanceNo">流程编号</param>
-		public virtual void BeforeDelete(string instanceNo){
+		public virtual void BeforeDelete(string instanceNo) {
 		}
 
 		/// <summary>
 		/// 流程删除后事件
 		/// </summary>
 		/// <param name="instanceNo">流程编号</param>
-		public virtual void AfterDeleted(string instanceNo){
+		public virtual void AfterDeleted(string instanceNo) {
 		}
 
 		/// <summary>
 		/// 流程签收前事件
 		/// </summary>
-		public virtual void BeforeSign(BusinessForm bizform){
+		public virtual void BeforeSign(BusinessForm bizform) {
 		}
 
 		/// <summary>
@@ -78,7 +78,16 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// </summary>
 		/// <param name="bizform">业务表单</param>
 		/// <param name="selector">待阅参与者.</param>
-		public virtual void ResolveTobeReadActor(BusinessForm bizform, TobeReadSelector selector){
+		public virtual void ResolveTobeReadActor(BusinessForm bizform, TobeReadSelector selector) {
+		}
+
+		/// <summary>
+		/// 计算传阅参与者
+		/// </summary>
+		/// <returns>被传阅人userid或loginid.</returns>
+		/// <param name="bizform">业务表单.</param>
+		public virtual string[] ResolvePassAroundActor(BusinessForm bizform) {
+			return new string[0];
 		}
 
 		/// <summary>

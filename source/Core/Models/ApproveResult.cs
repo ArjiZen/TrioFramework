@@ -4,10 +4,13 @@ using System.Collections.Generic;
 namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 
 	/// <summary>
-	/// 审批结果
+	/// 审核结果
 	/// </summary>
 	[Serializable]
 	public class ApproveResult {
+		/// <summary>
+		/// 审核结果
+		/// </summary>
 		public ApproveResult() {
 			this.NextUsers = new List<string>();
 			this.NextTobeReadUsers = new List<string>();

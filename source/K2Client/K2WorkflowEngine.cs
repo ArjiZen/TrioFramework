@@ -357,5 +357,40 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 				}
 			}
 		}
+
+		/// <summary>
+		/// 流程传阅
+		/// </summary>
+		/// <param name="instance">流程实例.</param>
+		/// <param name="toUsersId">传阅目标用户.</param>
+		public override bool PassAround(WorkflowInstance instance,  params string[] toUsersId) {
+			if (instance.CurrentWorkItem == null) {
+				throw new ActivityNotFoundException(instance.InstanceNo, instance.CurrentActivity);
+			}
+
+			// 验证当前办理人员
+			// 非WorkItem默认用户，非被委托人，未设置委托信息
+			if (!instance.CurrentWorkItem.PartId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase)
+				&& (!string.IsNullOrEmpty(instance.CurrentWorkItem.MandataryId)
+					&& !instance.CurrentWorkItem.MandataryId.Equals(CurrentUser.Id, StringComparison.OrdinalIgnoreCase))
+				&& !DelegateWork.IsDelegate(instance.AppCode, instance.CurrentWorkItem.PartId, CurrentUser.Id)) {
+
+				throw new UserNotFoundException("当前用户不是该环节的处理人");
+			}
+
+			// 下一步骤待阅人员
+			var tobeReadUsers = new List<IUser>();
+			if (toUsersId != null && toUsersId.Length > 0) {
+				tobeReadUsers.AddRange(toUsersId.Select(userid => SecurityContext.Provider.Get(userid)));
+			}
+				
+			// 提交数据库更新
+			bool isDbFinished = DbEngine.PassAround(instance, tobeReadUsers);
+			if (!isDbFinished) {
+				return false;
+			}
+
+			return true;
+		}
 	}
 }

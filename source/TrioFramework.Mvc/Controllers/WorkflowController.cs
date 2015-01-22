@@ -293,9 +293,11 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 					if (func != null) {
 						try {
 							func.Save(xForm.ActionMode, xForm.BusinessForm);
+						} catch (BusinessException ex) {
+							throw ex;
 						} catch (Exception ex) {
 							Logger.LogError(ModuleName, "保存自定义表单数据时出错", ex, "");
-							return Error(500, ex.Message);
+							throw new Exception(ex.Message, ex);
 						}
 					}
 				}
@@ -321,9 +323,11 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 						if (func != null) {
 							try {
 								func.ResolveActor(xForm.BusinessForm, selector);
+							} catch (BusinessException ex) {
+								throw ex;
 							} catch (Exception ex) {
 								Logger.LogError(ModuleName, "计算自定义环节参与者时出错", ex, "");
-								return new JsonResult().Error(500, ex.Message);
+								throw new Exception(ex.Message, ex);
 							}
 						}
 					}
@@ -334,9 +338,12 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 					// 保存流程时，返回新的流程参数，用于页面上的重定向和刷新页面（由草稿重定向到待办）
 					return new JsonResult().Succeed(new { appCode = xForm.AppCode, instanceNo = xForm.InstanceNo, taskId = xForm.TaskId });
 				}
+
+			} catch (BusinessException ex) {
+				return Error(500, ex.Message);
 			} catch (Exception ex) {
 				Logger.LogError(ModuleName, "流程保存时出错", ex, form);
-				return new JsonResult().Error(500, ex.Message);
+				return Error(500, ex.Message);
 			}
 		}
 
@@ -367,6 +374,8 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 					if (func != null) {
 						try {
 							func.BeforeSubmit(form.InstanceNo, form.ApproveResult.Choice);
+						} catch (BusinessException ex) {
+							throw ex;
 						} catch (Exception ex) {
 							Logger.LogError(ModuleName, "流程提交前自定义事件出错", ex, "");
 							return Error(500, ex.Message);
@@ -374,6 +383,8 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 
 						try {
 							func.ResolveTobeReadActor(form.BusinessForm, form.TobeReadSelector);
+						} catch (BusinessException ex) {
+							throw ex;
 						} catch (Exception ex) {
 							Logger.LogError(ModuleName, "流程提交前计算待阅人员出错", ex, "");
 							return Error(500, ex.Message);
@@ -394,9 +405,11 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 						if (func != null) {
 							try {
 								func.AfterSubmit(form.InstanceNo, form.ApproveResult.Choice);
+							} catch (BusinessException ex) {
+								throw ex;
 							} catch (Exception ex) {
 								Logger.LogError(ModuleName, "流程提交后自定义事件出错", ex, form);
-								return Error(500, ex.Message);
+								throw new Exception(ex.Message, ex);
 							}
 						}
 					}
@@ -405,6 +418,8 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 				} else {
 					return Error(500, "请稍候重试");
 				}
+			} catch (BusinessException ex) {
+				return Error(500, ex.Message);
 			} catch (Exception ex) {
 				Logger.LogError(ModuleName, "流程提交时出错", ex, form);
 				return Error(500, ex.Message);
@@ -431,9 +446,11 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 					if (func != null) {
 						try {
 							func.BeforeDelete(form.InstanceNo);
+						} catch (BusinessException ex) {
+							throw ex;
 						} catch (Exception ex) {
 							Logger.LogError(ModuleName, "流程删除前自定义事件出错", ex, form);
-							return Error(500, ex.Message);
+							throw new Exception(ex.Message, ex);
 						}
 					}
 				}
@@ -448,9 +465,11 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 						if (func != null) {
 							try {
 								func.AfterDeleted(form.InstanceNo);
+							} catch (BusinessException ex) {
+								throw ex;
 							} catch (Exception ex) {
 								Logger.LogError(ModuleName, "流程删除后自定义事件出错", ex, form);
-								return Error(500, ex.Message);
+								throw new Exception(ex.Message, ex);
 							}
 						}
 					}
@@ -458,6 +477,8 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 				} else {
 					return Error(500, "请稍后重试");
 				}
+			} catch (BusinessException ex) {
+				return Error(500, ex.Message);
 			} catch (Exception ex) {
 				Logger.LogError(ModuleName, "流程删除时出错", ex, form);
 				return Error(500, ex.Message);
@@ -489,9 +510,11 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 							form.BusinessForm = (BusinessForm)Activator.CreateInstance(BusinessForm);
 							form.BusinessForm.Load(form.InstanceNo);
 							func.BeforeSign(form.BusinessForm);
+						} catch (BusinessException ex) {
+							throw ex;
 						} catch (Exception ex) {
 							Logger.LogError(ModuleName, "流程签收前自定义事件出错", ex, form);
-							return Error(500, ex.Message);
+							throw new Exception(ex.Message, ex);
 						}
 					}
 				}
@@ -499,10 +522,62 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 				var engine = WorkflowEngine.Create();
 				engine.SignWorkflow(form.InstanceNo, form.TaskId);
 				return Success();
+			} catch (BusinessException ex) {
+				return Error(500, ex.Message);
 			} catch (Exception ex) {
 				Logger.LogError(ModuleName, "流程签收时出错", ex, form);
 				return Error(500, ex.Message);
 			}
+		}
+
+		/// <summary>
+		/// 传阅
+		/// </summary>
+		/// <returns>The around.</returns>
+		/// <param name="form">Form. 字段：InstanceNo，TaskId，Version</param>
+		public ActionResult PassAround(WorkflowForm form) {
+			try {
+				Thread.Sleep(1000);
+				
+				form.InstanceNo = form.InstanceNo.Decrypt();
+				form.CurrentActi = form.CurrentActi.Decrypt();
+				form.VersionStr = form.VersionStr.Decrypt();
+				
+				var handlerKey = form.CurrentActi + "_" + form.VersionStr;  
+				var toUsersId = new string[0];
+				// 处理流程签收前自定义事件
+				if (this.handlers.ContainsKey(handlerKey)) {
+					var func = this.handlers[handlerKey];
+					if (func != null) {
+						try {
+							form.BusinessForm = (BusinessForm)Activator.CreateInstance(BusinessForm);
+							form.BusinessForm.Load(form.InstanceNo);
+							toUsersId = func.ResolvePassAroundActor(form.BusinessForm);
+						} catch (BusinessException ex) {
+							throw ex;
+						} catch (Exception ex) {
+							Logger.LogError(ModuleName, "流程签收前自定义事件出错", ex, form);
+							return Error(500, ex.Message);
+						}
+					}
+				}
+
+				if (toUsersId == null || toUsersId.Length == 0) {
+					throw new BusinessException("未设置传阅人");
+				}
+
+				var engine = WorkflowEngine.Create();
+				var instance = engine.LoadWorkflow(form.InstanceNo, form.TaskId);
+				engine.PassAround(instance, toUsersId);
+
+				return Success();
+			} catch (BusinessException ex) {
+				return Error(500, ex.Message);
+			} catch (Exception ex) {
+				Logger.LogError(ModuleName, "流程传阅时出错", ex, form);
+				return Error(500, ex.Message);
+			}
+
 		}
 
 		/// <summary>

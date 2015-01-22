@@ -323,13 +323,12 @@
             <returns>
             </returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult,System.String[])">
+        <member name="M:Bingosoft.TrioFramework.Workflow.K2Client.K2WorkflowEngine.RunWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult)">
             <summary>
             提交流程实例
             </summary>
             <param name="instance">流程实例</param>
             <param name="result">办理操作</param>
-            <param name="tobeReadUsersId">待阅人员用户Id</param>
             <remarks>
             验证当办理人，K2办理成功后维护办理记录，流程实例，新增办理记录
             requireFields:
