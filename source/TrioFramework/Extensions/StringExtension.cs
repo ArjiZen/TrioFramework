@@ -59,10 +59,4 @@ public static class StringExtension {
 	public static bool EqualsWith(this string str, string target) {
 		return str.Equals(target, StringComparison.OrdinalIgnoreCase);
 	}
-
-
-
-
-
-
 }

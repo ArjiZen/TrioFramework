@@ -18,4 +18,17 @@ public static class DictionaryCollectionExtension {
 		}
 		return list;
 	}
+
+	/// <summary>
+	/// 将数组转为适用于Select的项
+	/// </summary>
+	/// <returns>The select.</returns>
+	/// <param name="array">Array.</param>
+	public static IList<SelectListItem> ToSelect(this string[] array) {
+		var list = new List<SelectListItem>(array.Length);
+		foreach (var item in array) {
+			list.Add(new SelectListItem(){ Selected = false, Text = item, Value = item });
+		}
+		return list;
+	}
 }
