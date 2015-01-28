@@ -17,8 +17,15 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 	/// 工作流基类
 	/// </summary>
 	public class WorkflowController : BaseController {
-
-		private const string ModuleName = "流程控制器";
+		/// <summary>
+		/// 当前功能所属模块
+		/// </summary>
+		/// <value>The name of the module.</value>
+		protected override string ModuleName {
+			get {
+				return "流程控制器";
+			}
+		}
 
 		/// <summary>
 		/// 实例化工作流基类
