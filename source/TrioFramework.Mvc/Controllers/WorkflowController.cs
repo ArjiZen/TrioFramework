@@ -445,6 +445,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 
 				form.InstanceNo = form.InstanceNo.Decrypt();
 				form.CurrentActi = form.CurrentActi.Decrypt();
+				form.VersionStr = form.VersionStr.Decrypt();
 
 				var handlerKey = form.CurrentActi + "_" + form.VersionStr;  
 				// 处理流程删除前自定义事件

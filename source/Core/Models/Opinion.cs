@@ -3,12 +3,9 @@ using System.Linq;
 using Bingosoft.Data;
 using Bingosoft.Security;
 using Bingosoft.Data.Attributes;
+using System.Collections.Generic;
 
 namespace Bingosoft.TrioFramework.Workflow.Core {
-
-
-
-
 
 	/// <summary>
 	/// 个人常用意见
@@ -98,6 +95,64 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 			}
 			var effectRow = _dao.ExecuteNonQuery("trio.workflow.opinion.personal.markdeleted", this);
 			return effectRow > 0;
+		}
+	}
+
+
+	/// <summary>
+	/// 中途意见
+	/// </summary>
+	[Table("WF_MidwayOpinions")]
+	public class MidwayOpinion {
+		#region Properties
+
+		/// <summary>
+		/// 流程实例编号
+		/// </summary>
+		public string InstanceNo { get; set; }
+
+		/// <summary>
+		/// 流程任务编号
+		/// </summary>
+		public int TaskId { get; set; }
+
+		/// <summary>
+		/// 内容
+		/// </summary>
+		public string Content { get; set; }
+
+		/// <summary>
+		/// 创建人
+		/// </summary>
+		public string CreatorId { get; set; }
+
+		/// <summary>
+		/// 创建人
+		/// </summary>
+		public string Creator { get; set; }
+
+		/// <summary>
+		/// 创建时间
+		/// </summary>
+		public DateTime CreateTime { get; set; }
+
+		#endregion
+
+		private static Dao _dao = Dao.Get();
+
+		/// <summary>
+		/// 保存中途意见
+		/// </summary>
+		public bool Save() {
+			return _dao.Insert(this) > 0;
+		}
+			
+		/// <summary>
+		/// 获取当前流程的所有中途意见
+		/// </summary>
+		/// <param name="instanceNo">流程实例编号.</param>
+		public static IList<MidwayOpinion> GetAll(string instanceNo) {
+			return _dao.QueryEntities<MidwayOpinion>("trio.workflow.opinion.midway.getall", new {InstanceNo = instanceNo});
 		}
 	}
 
