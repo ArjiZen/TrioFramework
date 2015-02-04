@@ -116,7 +116,6 @@ Global
 		{586AEE19-B0C5-4C63-86A6-79D546BDBD02} = {40B54239-2A85-4197-9CDD-DC9A71D0A61F}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = K2Client\K2Client.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
@@ -177,7 +176,7 @@ Global
 		$0.XmlFormattingPolicy = $10
 		$10.inheritsSet = null
 		$10.scope = application/config+xml
-		version = 1.3.0
+		version = 1.3.1
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
