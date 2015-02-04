@@ -84,6 +84,7 @@
     <Compile Include="Config\CommonElement.cs" />
     <Compile Include="Config\WorkflowElement.cs" />
     <Compile Include="Config\FileServerElement.cs" />
+    <Compile Include="Extensions\TypeExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_Config\SqlCommands\securityContext.config" />

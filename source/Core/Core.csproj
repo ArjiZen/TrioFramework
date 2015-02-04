@@ -84,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\WorkflowExceptions.cs" />
-    <Compile Include="Extensions\TypeExtension.cs" />
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\ApproveResult.cs" />
     <Compile Include="Models\WorkflowActivity.cs" />
@@ -97,12 +96,14 @@
     <Compile Include="WorkflowEngine.cs" />
     <Compile Include="Models\DelegateWork.cs" />
     <Compile Include="WorkflowCache.cs" />
+    <Compile Include="Models\Opinion.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_Config\SqlCommands\attachment.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="App_Config\SqlCommands\delegate.config" />
     <EmbeddedResource Include="App_Config\SqlCommands\core.config" />
+    <EmbeddedResource Include="App_Config\SqlCommands\opinion.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrioFramework\TrioFramework.csproj">

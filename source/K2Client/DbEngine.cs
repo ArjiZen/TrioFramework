@@ -176,6 +176,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 				instance.Status = InstanceStatus.Finished;
 			}
 
+			// 运行流程
 			using (var transactionScope = new TransactionScope(TransactionScopeOption.Required)) {
 				//1.更新当前办理环节及其相关环节
 				foreach (var workItem in curWorkItems) {
@@ -194,7 +195,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 				transactionScope.Complete();
 			}
 
-			// 更新待办
+			// 推送待办已办
 			using (var transactionScope = new TransactionScope(TransactionScopeOption.Required)) {
 				foreach (var workItem in curWorkItems) {
 					// 结束待办
@@ -206,6 +207,16 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client {
 					PendingJob.Todo(workItem.InstanceNo, workItem.TaskId);
 				}
 				transactionScope.Complete();
+			}
+
+			try {
+				var opinion = new PersonalOpinion() {
+					UserId = instance.CurrentWorkItem.PartId,
+					Content = result.Comment
+				};
+				opinion.AddUsedTimes();
+			} catch (Exception ex) {
+				Logger.LogError("K2Client.DbEngine.RunWorkflow", ex, new {UserId = instance.CurrentWorkItem.PartId, Content = result.Comment});
 			}
 
 			return true;

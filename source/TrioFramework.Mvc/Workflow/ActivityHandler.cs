@@ -2,12 +2,30 @@
 using System.Web.Mvc;
 using Bingosoft.TrioFramework.Workflow.Business;
 using Bingosoft.TrioFramework.Workflow.Core.Models;
+using Bingosoft.TrioFramework.Attributes;
 
 namespace Bingosoft.TrioFramework.Mvc.Workflow {
 	/// <summary>
 	/// 环节实现
 	/// </summary>
 	public abstract class ActivityHandler {
+		public ActivityHandler() {
+			var attr = this.GetType().GetFirstAttr<ActivityAttribute>();
+			if (attr != null) {
+				this.ActivityName = attr.ActivityName;
+				this.Version = attr.Version;
+			}
+		}
+
+		/// <summary>
+		/// 当前环节
+		/// </summary>
+		protected string ActivityName { get; private set;}
+		/// <summary>
+		/// 当前流程版本
+		/// </summary>
+		protected int Version { get; private set;}
+
 		/// <summary>
 		/// 环节表单渲染
 		/// </summary>

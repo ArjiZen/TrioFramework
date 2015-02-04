@@ -17,8 +17,15 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 	/// 工作流基类
 	/// </summary>
 	public class WorkflowController : BaseController {
-
-		private const string ModuleName = "流程控制器";
+		/// <summary>
+		/// 当前功能所属模块
+		/// </summary>
+		/// <value>The name of the module.</value>
+		protected override string ModuleName {
+			get {
+				return "流程控制器";
+			}
+		}
 
 		/// <summary>
 		/// 实例化工作流基类
@@ -438,6 +445,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 
 				form.InstanceNo = form.InstanceNo.Decrypt();
 				form.CurrentActi = form.CurrentActi.Decrypt();
+				form.VersionStr = form.VersionStr.Decrypt();
 
 				var handlerKey = form.CurrentActi + "_" + form.VersionStr;  
 				// 处理流程删除前自定义事件
