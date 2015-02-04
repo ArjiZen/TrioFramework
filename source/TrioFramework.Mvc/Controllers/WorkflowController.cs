@@ -150,19 +150,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 			if (file == null) {
 				return Error(500, "请先选择需要上传的附件");
 			}
-
-			// 处理不同环节对附件的要求
-			if (this.handlers.ContainsKey(handlerKey)) {
-				var func = this.handlers[handlerKey];
-				if (func != null) {
-					var message = "";
-					var canUpload = func.BeforeUploadAttachment(oInstanceNo, fileType, out message);
-					if (!canUpload) {
-						return new JsonResult() { ContentType = "text/html" }.Error(500, message);
-					}
-				}
-			}
-
+				
 			// 在IE6下上传附件会获取到文件的全路径，在FF和Chrome下只获取到文件名，所以这里要对IE的情况做处理
 			// C:\Users\Zeran\Desktop\xxx.xls
 			var fileName = Path.GetFileName(file.FileName);
@@ -170,6 +158,24 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 			var fileExtension = Path.GetExtension(fileName);
 			// 生成存放在文件服务器上的路径，确保唯一
 			var filePath = string.Format("{0}/Flow_{1}_{2}_{3}{4}", DateTime.Today.ToString("yyyy-MM-dd"), fileNameWithoutExtension, DateTime.Now.ToString("HHmmss"), new Random().Next(1000), fileExtension);
+
+			var context = new AttachmentContext() {
+				InstanceNo = oInstanceNo,
+				FileType = fileType,
+				FileName = fileName
+			};
+
+			// 处理不同环节对附件的要求
+			if (this.handlers.ContainsKey(handlerKey)) {
+				var func = this.handlers[handlerKey];
+				if (func != null) {
+					var message = "";
+					var canUpload = func.BeforeUploadAttachment(context, out message);
+					if (!canUpload) {
+						return new JsonResult() { ContentType = "text/html" }.Error(500, message);
+					}
+				}
+			}
 
 			var attachment = new WorkflowAttachment() {
 				InstanceNo = oInstanceNo,
@@ -192,13 +198,11 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 						if (this.handlers.ContainsKey(handlerKey)) {
 							var func = this.handlers[handlerKey];
 							if (func != null) {
-								var message = "";
-								func.AfterUploadAttachment(oInstanceNo, fileType, out message);
-								if (!string.IsNullOrEmpty(message)) {
-									return new JsonResult() { ContentType = "text/html" }.Error(500, message);
-								}
+								context.Attachment = attachment;
+								func.AfterUploadAttachment(context);
 							}
 						}
+
 						return new JsonResult() { ContentType = "text/html" }.Succeed();
 					} catch (Exception ex) {
 						attachment.Delete();

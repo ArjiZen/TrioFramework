@@ -9,6 +9,9 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 	/// 环节实现
 	/// </summary>
 	public abstract class ActivityHandler {
+		/// <summary>
+		/// 实例化流程环节实现对象
+		/// </summary>
 		public ActivityHandler() {
 			var attr = this.GetType().GetFirstAttr<ActivityAttribute>();
 			if (attr != null) {
@@ -17,14 +20,19 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 			}
 		}
 
+		#region Properties
+
 		/// <summary>
 		/// 当前环节
 		/// </summary>
-		protected string ActivityName { get; private set;}
+		protected string ActivityName { get; private set; }
+
 		/// <summary>
 		/// 当前流程版本
 		/// </summary>
-		protected int Version { get; private set;}
+		protected int Version { get; private set; }
+
+		#endregion
 
 		/// <summary>
 		/// 环节表单渲染
@@ -138,8 +146,9 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <summary>
 		/// 上传附件之前对附件进行相关检查
 		/// </summary>
+		/// <param name="context">附件相关上下文</param>
 		/// <returns></returns>
-		public virtual bool BeforeUploadAttachment(string instanceNo, int fileType, out string message) {
+		public virtual bool BeforeUploadAttachment(AttachmentContext context, out string message) {
 			message = "";
 			return true;
 		}
@@ -147,11 +156,8 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <summary>
 		/// 上传附件之后进行的操作
 		/// </summary>
-		/// <param name="instanceNo"></param>
-		/// <param name="fileType"></param>
-		/// <param name="message"></param>
-		public virtual void AfterUploadAttachment(string instanceNo, int fileType, out string message) {
-			message = "";
+		/// <param name="context">附件相关上下文</param>
+		public virtual void AfterUploadAttachment(AttachmentContext context) {
 		}
 
 		/// <summary>
@@ -181,5 +187,38 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 				return false;
 			}
 		}
+	}
+
+	/// <summary>
+	/// 上下文容器
+	/// </summary>
+	public abstract class HandlerContext {
+		/// <summary>
+		/// 流程实例编号
+		/// </summary>
+		/// <value>The instance no.</value>
+		public string InstanceNo { get; set; }
+	}
+
+	/// <summary>
+	/// 附件上下文
+	/// </summary>
+	public class AttachmentContext : HandlerContext {
+		/// <summary>
+		/// 附件类型
+		/// </summary>
+		/// <value>The type of the file.</value>
+		public int FileType { get; set; }
+		/// <summary>
+		/// 附件文件名
+		/// </summary>
+		/// <value>The name of the file.</value>
+		public string FileName { get; set; }
+		/// <summary>
+		/// 持久化的工作流附件对象
+		/// </summary>
+		/// <value>The attachment.</value>
+		/// <remarks>适用于AfterUploadAttachment</remarks>
+		public WorkflowAttachment Attachment { get; set; }
 	}
 }
