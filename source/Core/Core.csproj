@@ -84,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\WorkflowExceptions.cs" />
-    <Compile Include="Extensions\TypeExtension.cs" />
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\ApproveResult.cs" />
     <Compile Include="Models\WorkflowActivity.cs" />

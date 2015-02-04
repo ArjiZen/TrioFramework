@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Bingosoft.Data;
 using Bingosoft.Data.Attributes;
-using Bingosoft.TrioFramework.Workflow.Core.Extensions;
 
 namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 
