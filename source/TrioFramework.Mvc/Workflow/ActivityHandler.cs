@@ -18,9 +18,19 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 				this.ActivityName = attr.ActivityName;
 				this.Version = attr.Version;
 			}
+
+			var workflowAttr = this.GetType().DeclaringType.GetFirstAttr<WorkflowAttribute>();
+			if (workflowAttr != null) {
+				this.AppCode = workflowAttr.AppCode;
+			}
 		}
 
 		#region Properties
+
+		/// <summary>
+		/// 当前流程编号
+		/// </summary>
+		protected int AppCode { get; private set; }
 
 		/// <summary>
 		/// 当前环节
@@ -147,9 +157,10 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// 上传附件之前对附件进行相关检查
 		/// </summary>
 		/// <param name="context">附件相关上下文</param>
+		/// <param name="errMsg">错误信息</param>
 		/// <returns></returns>
-		public virtual bool BeforeUploadAttachment(AttachmentContext context, out string message) {
-			message = "";
+		public virtual bool BeforeUploadAttachment(AttachmentContext context, out string errMsg) {
+			errMsg = "";
 			return true;
 		}
 
@@ -163,10 +174,10 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <summary>
 		/// 删除附件之前对附件进行的操作
 		/// </summary>
-		/// <param name="attachment"></param>
+		/// <param name="context"></param>
 		/// <param name="errMsg">错误信息</param>
 		/// <returns></returns>
-		public virtual bool BeforeDeleteAttachment(WorkflowAttachment attachment, out string errMsg) {
+		public virtual bool BeforeDeleteAttachment(AttachmentContext context, out string errMsg) {
 			errMsg = "";
 			return true;
 		}
@@ -209,11 +220,13 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// </summary>
 		/// <value>The type of the file.</value>
 		public int FileType { get; set; }
+
 		/// <summary>
 		/// 附件文件名
 		/// </summary>
 		/// <value>The name of the file.</value>
 		public string FileName { get; set; }
+
 		/// <summary>
 		/// 持久化的工作流附件对象
 		/// </summary>

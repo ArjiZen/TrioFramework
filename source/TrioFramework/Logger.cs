@@ -11,6 +11,9 @@ namespace Bingosoft.TrioFramework {
 	/// 日志记录
 	/// </summary>
 	public static class Logger {
+
+		private static readonly Dao _dao = Dao.Get();
+
 		/// <summary>
 		/// 日志基类
 		/// </summary>
@@ -77,8 +80,7 @@ namespace Bingosoft.TrioFramework {
 			#endregion
 
 			public override bool Save() {
-				var dao = Dao.Get();
-				var effectRows = dao.Insert<OperatorLog>(this);
+				var effectRows = _dao.Insert<OperatorLog>(this);
 				return effectRows > 0;
 			}
 		}
@@ -104,9 +106,57 @@ namespace Bingosoft.TrioFramework {
 			public DateTime CreateTime { get; set; }
 
 			public override bool Save() {
-				var dao = Dao.Get();
-				var effectRows = dao.Insert<ErrorLog>(this);
+				var effectRows = _dao.Insert<ErrorLog>(this);
 				return effectRows > 0;
+			}
+		}
+
+		[Table("SYS_ServiceCallLog")]
+		internal class ServiceCallLog: BaseLog {
+			[PrimaryKey]
+			public long ServiceCallLogId { get; set; }
+
+			public string CallInterface { get; set; }
+
+			public DateTime RequestTime { get; set; }
+
+			public string RequestContent { get; set; }
+
+			public long RequestContentLength { get; set; }
+
+			public bool IsSuccess { get; set; }
+
+			public DateTime? ResponseTime { get; set; }
+
+			public string ResponseContent { get; set; }
+
+			public long ResponseContentLength { get; set; }
+
+			public string ExceptionType { get; set; }
+
+			public string ExceptionMsg { get; set; }
+
+			public override bool Save() {
+				var effectRows = _dao.Insert<ServiceCallLog>(this);
+				if (effectRows > 0) {
+					this.ServiceCallLogId = GetId();
+					return true;
+				}
+				return false;
+			}
+
+			public bool Update() {
+				var effectRows = _dao.UpdateFields<ServiceCallLog>(this, "IsSuccess", "ResponseTime", "ResponseContent", "ResponseContentLength", "ExceptionType", "ExceptionMsg");
+				return effectRows > 0;
+			}
+
+			public static ServiceCallLog Get(long id) {
+				return _dao.QueryEntity<ServiceCallLog>("SELECT * FROM dbo.SYS_ServiceCallLog WHERE ServiceCallLogId = #Id#", new {Id = id});
+			}
+
+			private long GetId() {
+				var logid = _dao.QueryScalar<long>("SELECT IDENT_CURRENT ('SYS_ServiceCallLog')");
+				return logid;
 			}
 		}
 
@@ -232,6 +282,57 @@ namespace Bingosoft.TrioFramework {
 		/// <returns></returns>
 		public static bool LogError(string module, string errorMessage, Exception ex, object extraData = null) {
 			return LogError(module, new Exception(errorMessage, ex), extraData);
+		}
+
+		/// <summary>
+		/// 记录接口调用日志的请求内容
+		/// </summary>
+		/// <returns>记录的日志id.</returns>
+		/// <param name="module">所属模块.</param>
+		/// <param name="interfaceName">接口名.</param>
+		/// <param name="content">请求内容.</param>
+		public static long LogServiceRequest(string module, string interfaceName, string content) {
+			var log = new ServiceCallLog() {
+				Module = module,
+				CallInterface = interfaceName,
+				RequestTime = DateTime.Now,
+				RequestContent = content,
+				RequestContentLength = content.Length
+			};
+			var isSuccess = log.Save();
+			if (isSuccess) {
+				return log.ServiceCallLogId;
+			} else {
+				return -1;
+			}
+		}
+
+		/// <summary>
+		/// 记录接口调用日志的返回结果
+		/// </summary>
+		/// <param name="logid">日志id.</param>
+		/// <param name="responseContent">接口返回内容.</param>
+		public static bool LogServiceResponse(long logid, string responseContent) {
+			var log = ServiceCallLog.Get(logid);
+			log.IsSuccess = true;
+			log.ResponseTime = DateTime.Now;
+			log.ResponseContent = responseContent;
+			log.ResponseContentLength = responseContent.Length;
+			return log.Update();
+		}
+
+		/// <summary>
+		/// 记录接口调用日志的返回结果
+		/// </summary>
+		/// <param name="logid">日志id.</param>
+		/// <param name="ex">接口调用异常对象.</param>
+		public static bool LogServiceResponse(long logid, Exception ex) {
+			var log = ServiceCallLog.Get(logid);
+			log.IsSuccess = true;
+			log.ResponseTime = DateTime.Now;
+			log.ExceptionType = ex.GetType().FullName;
+			log.ExceptionMsg = ex.GetAllMessage();
+			return log.Update();
 		}
 	}
 }

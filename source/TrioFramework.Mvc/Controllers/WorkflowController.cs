@@ -32,6 +32,11 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 		/// </summary>
 		public WorkflowController() {
 			InitActivityHandler();
+
+			var workflowAttr = this.GetType().GetFirstAttr<WorkflowAttribute>();
+			if (workflowAttr != null) {
+				this.AppCode = workflowAttr.AppCode;
+			}
 		}
 
 		/// <summary>
@@ -75,6 +80,11 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 		protected virtual Type BusinessForm {
 			get { return null; }
 		}
+
+		/// <summary>
+		/// 流程编号
+		/// </summary>
+		protected int AppCode { get; private set; }
 
 		#region Attachment
 
@@ -238,7 +248,12 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 				var func = this.handlers[handlerKey];
 				if (func != null) {
 					var message = "";
-					var canDelete = func.BeforeDeleteAttachment(attachment, out message);
+					var context = new AttachmentContext() {
+						InstanceNo = attachment.InstanceNo,
+						FileType = attachment.FileType,
+						Attachment = attachment
+					};
+					var canDelete = func.BeforeDeleteAttachment(context, out message);
 					if (!canDelete) {
 						return Error(302, message);
 					}
