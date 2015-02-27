@@ -43,7 +43,11 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <summary>
 		/// 提交流程
 		/// </summary>
-		Submit
+		Submit,
+		/// <summary>
+		/// 退回流程
+		/// </summary>
+		Rollback
 	}
 
 	/// <summary>

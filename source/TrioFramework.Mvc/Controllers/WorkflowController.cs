@@ -339,7 +339,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 				xForm.BusinessForm.InstanceNo = xForm.Instance.InstanceNo;
 				xForm.BusinessForm.UpdateInstanceNo();
 
-				if (form.ActionMode == ActionMode.Submit) {
+				if (form.ActionMode == ActionMode.Submit || form.ActionMode == ActionMode.Rollback) {
 					// 流程提交
 					// 计算默认的角色参与者（包括用户自定义的）
 					var selector = new ApproveSelector(xForm.Instance);
