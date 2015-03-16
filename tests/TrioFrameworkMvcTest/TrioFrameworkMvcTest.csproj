@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Bingosoft.TrioFramework.Mvc.Test</RootNamespace>
     <AssemblyName>TrioFrameworkMvcTest</AssemblyName>
-    <ReleaseVersion>1.2.2</ReleaseVersion>
+    <ReleaseVersion>1.4.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -17,6 +17,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -32,15 +33,64 @@
       <HintPath>..\..\source\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\source\Library\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\..\source\Library\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\..\source\Library\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\..\source\Library\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\source\Library\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\..\source\Library\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Core">
+      <HintPath>..\..\source\Library\Bingosoft.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Data">
+      <HintPath>..\..\source\Library\Bingosoft.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Environment">
+      <HintPath>..\..\source\Library\Bingosoft.Environment.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Log">
+      <HintPath>..\..\source\Library\Bingosoft.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Security">
+      <HintPath>..\..\source\Library\Bingosoft.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Common.Logging">
+      <HintPath>..\..\source\Library\Bingosoft.Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\source\Library\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\source\Library\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Test.cs" />
     <Compile Include="RequestExtensionTest.cs" />
     <Compile Include="WorkflowFormTest.cs" />
+    <Compile Include="ControllerExecutorTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>app.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>app.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\source\TrioFramework.Mvc\TrioFramework.Mvc.csproj">
@@ -51,5 +101,8 @@
       <Project>{A7C4F4AE-4D37-4063-8CDE-C6B3AD191E83}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app.config" />
   </ItemGroup>
 </Project>

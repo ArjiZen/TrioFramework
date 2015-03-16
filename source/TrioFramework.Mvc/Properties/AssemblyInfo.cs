@@ -30,7 +30,6 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-[assembly: AssemblyVersion("1.3.1")]
-[assembly: AssemblyFileVersion("1.3.1")]
+// by using the '*' as shown AssemblyVersion("1.4.0")lyVersion("1.3.1")]
+[assembly: AssemblyFileVersion("1.4.0")]
 [assembly: InternalsVisibleTo("TrioFrameworkMvcTest")]
