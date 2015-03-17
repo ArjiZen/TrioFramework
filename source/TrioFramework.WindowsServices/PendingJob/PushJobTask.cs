@@ -48,7 +48,7 @@ namespace Bingosoft.TrioFramework.WindowsServices {
 					isSuccess = client.AddPendingJob(task.UserId, 
 						ref jobId, task.JobTitle, task.Url, task.UserId, task.UserName, businessNo, 
 						SettingProvider.Common.SystemId, SettingProvider.Common.SystemName, 
-						"",	SettingProvider.PendingJob.IsEnabled ? 1 : 0, "", "", 0);
+						"", SettingProvider.PendingJob.IsEnabledSMS ? 1 : 0, "", "", 0);
 				} else {
 					jobId = "TEST_JOBID_" + DateTime.Now.ToString("yyyyMMddHHmmss");
 					isSuccess = true;
