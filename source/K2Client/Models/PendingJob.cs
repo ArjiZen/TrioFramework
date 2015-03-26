@@ -75,6 +75,16 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client.Models {
 		public string UserName { get; set; }
 
 		/// <summary>
+		/// 流程建单人
+		/// </summary>
+		public string Creator { get; set; }
+
+		/// <summary>
+		/// 流程建单人Id
+		/// </summary>
+		public string CreatorId { get; set; }
+
+		/// <summary>
 		/// 执行结果
 		/// </summary>
 		public string Result { get; set; }

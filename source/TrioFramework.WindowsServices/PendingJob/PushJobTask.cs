@@ -44,9 +44,22 @@ namespace Bingosoft.TrioFramework.WindowsServices {
 				var jobId = "";
 				var isSuccess = false;
 				if (SettingProvider.PendingJob.IsEnabled) {
+					var creatorId = task.CreatorId;
+					var creator = task.Creator;
+					if (string.IsNullOrEmpty(creatorId) || string.IsNullOrEmpty(creator)) {
+						// 兼容旧数据，读取流程建单人
+						using (var reader = _dao.QueryReader("trio.winservices.pendingjob.get.creator", new {InstanceNo = task.InstanceNo})) {
+							if (reader.Read()) {
+								creatorId = reader["CreatorId"].ToString();
+								creator = reader["Creator"].ToString();
+								reader.Close();
+							}
+						}
+					}
+
 					var client = new PendingJobProvider.PendingJobII();
 					isSuccess = client.AddPendingJob(task.UserId, 
-						ref jobId, task.JobTitle, task.Url, task.UserId, task.UserName, businessNo, 
+						ref jobId, task.JobTitle, task.Url, creatorId, creator, businessNo, 
 						SettingProvider.Common.SystemId, SettingProvider.Common.SystemName, 
 						"", SettingProvider.PendingJob.IsEnabledSMS ? 1 : 0, "", "", 0);
 				} else {
