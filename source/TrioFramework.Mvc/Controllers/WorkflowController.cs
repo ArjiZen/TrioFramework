@@ -128,7 +128,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers {
 					i--;
 				}
 			}
-			return new JsonResult().Succeed(new { Total = attachments.Count, List = attachments });
+			return new JsonResult().Succeed(new { Total = attachments.Count, List = attachments.OrderByDescending(p => p.CreatedTime).ToList()});
 		}
 
 		/// <summary>
