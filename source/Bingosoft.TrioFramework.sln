@@ -48,7 +48,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelComponent", "ExcelComp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelComponent.NPOI", "ExcelComponent.NPOI\ExcelComponent.NPOI.csproj", "{62C21634-81F7-4ED4-B57E-1E45DE822824}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelComponentTest", "ExcelComponentTest\ExcelComponentTest.csproj", "{E956AC74-DC5F-410E-B86D-F4DA52B4CA63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelComponentTest", "..\tests\ExcelComponentTest\ExcelComponentTest.csproj", "{E956AC74-DC5F-410E-B86D-F4DA52B4CA63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

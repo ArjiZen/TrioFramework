@@ -70,11 +70,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExcelComponent.NPOI\ExcelComponent.NPOI.csproj">
+    <ProjectReference Include="..\..\source\ExcelComponent.NPOI\ExcelComponent.NPOI.csproj">
       <Project>{62c21634-81f7-4ed4-b57e-1e45de822824}</Project>
       <Name>ExcelComponent.NPOI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ExcelComponent\ExcelComponent.csproj">
+    <ProjectReference Include="..\..\source\ExcelComponent\ExcelComponent.csproj">
       <Project>{11126a13-f29f-4030-b568-32eeeafa5258}</Project>
       <Name>ExcelComponent</Name>
     </ProjectReference>
