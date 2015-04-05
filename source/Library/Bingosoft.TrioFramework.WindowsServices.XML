@@ -9,6 +9,38 @@
             任务实体
             </summary>
         </member>
+        <member name="M:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.Execute">
+            <summary>
+            执行任务（对外公开方法）
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.LoadTasks">
+            <summary>
+            内部重载获取任务方法
+            </summary>
+            <returns>The tasks.</returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.InternalExecute(`0)">
+            <summary>
+            内部重载任务执行方法
+            </summary>
+            <param name="task">任务项</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.Log(System.String,System.Boolean,System.String,System.String)">
+            <summary>
+            记录日志
+            </summary>
+            <param name="businessNo">业务数据编号.</param>
+            <param name="success">是否执行成功.</param>
+            <param name="content">日志内容.</param>
+            <param name="errorMessage">错误信息.</param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.TaskName">
+            <summary>
+            获取任务名称
+            </summary>
+            <value>The name of the task.</value>
+        </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.TaskLog.TaskName">
             <summary>
             任务名
@@ -39,475 +71,438 @@
             错误消息
             </summary>
         </member>
-        <member name="P:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.TaskName">
-            <summary>
-            获取任务名称
-            </summary>
-            <value>The name of the task.</value>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.Execute">
-            <summary>
-            执行任务（对外公开方法）
-            </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.LoadTasks">
-            <summary>
-            内部重载获取任务方法
-            </summary>
-            <returns>The tasks.</returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.InternalExecute(`0)">
-            <summary>
-            内部重载任务执行方法
-            </summary>
-            <param name="task">任务项</param>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.WindowsServices.TrioTask`1.Log(System.String,System.Boolean,System.String,System.String)">
-            <summary>
-            记录日志
-            </summary>
-            <param name="businessNo">业务数据编号.</param>
-            <param name="success">是否执行成功.</param>
-            <param name="content">日志内容.</param>
-            <param name="errorMessage">错误信息.</param>
-        </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.#ctor">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobTestCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobForAbossCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobBatchCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobBatchForAbossCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDsCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobBySubIDCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobBySubIDAndUserIDCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDsWithXMLCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDsCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobBySubIDCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobBySubIDAndUserIDCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDsWithXMLCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByUserIDCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByUserIDWithDateCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByEUMUserIDCompleted">
-            <remarks />
-        </member>
-        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByEUMUserIDWithDateCompleted">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJob(System.String,System.String@,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int16)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int16)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int16,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobTest(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int16)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobTestAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int16)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobTestAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int16,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobForAboss(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int16)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobForAbossAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int16)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobForAbossAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Int16,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobBatch(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobBatchAsync(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobBatchAsync(System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobBatchForAboss(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobBatchForAbossAsync(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobBatchForAbossAsync(System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDs(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDsAsync(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDsAsync(System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobBySubID(System.String,System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobBySubIDAsync(System.String,System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobBySubIDAsync(System.String,System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobBySubIDAndUserID(System.String,System.String,System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobBySubIDAndUserIDAsync(System.String,System.String,System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobBySubIDAndUserIDAsync(System.String,System.String,System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobID(System.String,Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.HandleResult@,System.Int32,System.String,System.String,System.String,System.Int16)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDAsync(System.String,Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.HandleResult,System.Int32,System.String,System.String,System.String,System.Int16)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDAsync(System.String,Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.HandleResult,System.Int32,System.String,System.String,System.String,System.Int16,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDsWithXML(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDsWithXMLAsync(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDsWithXMLAsync(System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDs(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDsAsync(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDsAsync(System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobBySubID(System.String,System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobBySubIDAsync(System.String,System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobBySubIDAsync(System.String,System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobBySubIDAndUserID(System.String,System.String,System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobBySubIDAndUserIDAsync(System.String,System.String,System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobBySubIDAndUserIDAsync(System.String,System.String,System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobID(System.String,System.Int32,System.String,System.String,System.String,System.Int16)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDAsync(System.String,System.Int32,System.String,System.String,System.String,System.Int16)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDAsync(System.String,System.Int32,System.String,System.String,System.String,System.Int16,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDsWithXML(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDsWithXMLAsync(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDsWithXMLAsync(System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByUserID(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByUserIDAsync(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByUserIDAsync(System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByUserIDWithDate(System.String,System.DateTime,System.DateTime)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByUserIDWithDateAsync(System.String,System.DateTime,System.DateTime)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByUserIDWithDateAsync(System.String,System.DateTime,System.DateTime,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByEUMUserID(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByEUMUserIDAsync(System.String)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByEUMUserIDAsync(System.String,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByEUMUserIDWithDate(System.String,System.DateTime,System.DateTime)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByEUMUserIDWithDateAsync(System.String,System.DateTime,System.DateTime)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByEUMUserIDWithDateAsync(System.String,System.DateTime,System.DateTime,System.Object)">
-            <remarks />
+            <remarks/>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.CancelAsync(System.Object)">
-            <remarks />
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobTestCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobForAbossCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobBatchCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.AddPendingJobBatchForAbossCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDsCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobBySubIDCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobBySubIDAndUserIDCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.FinishPendingJobByJobIDsWithXMLCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDsCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobBySubIDCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobBySubIDAndUserIDCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.DeletePendingJobByJobIDsWithXMLCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByUserIDCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByUserIDWithDateCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByEUMUserIDCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.PendingJobII.GetPendingJobByEUMUserIDWithDateCompleted">
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.HandleResult">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.HandleResult.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.HandleResult.ResultCode">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.HandleResult.ResultInfo">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.HandleResult.JobOrReadingID">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobCompletedEventArgs.JobID">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobTestCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobTestCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobTestCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobForAbossCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobForAbossCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobForAbossCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobBatchCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobBatchCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobBatchCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobBatchForAbossCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobBatchForAbossCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.AddPendingJobBatchForAbossCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobByJobIDsCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobByJobIDsCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobByJobIDsCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobBySubIDCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobBySubIDCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobBySubIDCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobBySubIDAndUserIDCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobBySubIDAndUserIDCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobBySubIDAndUserIDCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobByJobIDCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobByJobIDCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobByJobIDCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobByJobIDCompletedEventArgs.JobHandleResult">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobByJobIDsWithXMLCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobByJobIDsWithXMLCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.FinishPendingJobByJobIDsWithXMLCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobByJobIDsCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobByJobIDsCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobByJobIDsCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobBySubIDCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobBySubIDCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobBySubIDCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobBySubIDAndUserIDCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobBySubIDAndUserIDCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobBySubIDAndUserIDCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobByJobIDCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobByJobIDCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobByJobIDCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobByJobIDsWithXMLCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobByJobIDsWithXMLCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.DeletePendingJobByJobIDsWithXMLCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByUserIDCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByUserIDCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByUserIDCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByUserIDWithDateCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByUserIDWithDateCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByUserIDWithDateCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByEUMUserIDCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByEUMUserIDCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByEUMUserIDCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByEUMUserIDWithDateCompletedEventHandler">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByEUMUserIDWithDateCompletedEventArgs">
-            <remarks />
+            <remarks/>
         </member>
         <member name="P:Bingosoft.TrioFramework.WindowsServices.PendingJobProvider.GetPendingJobByEUMUserIDWithDateCompletedEventArgs.Result">
-            <remarks />
+            <remarks/>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.PushJobTask">
             <summary>
             推送待办
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.WindowsServices.PushJobTask.TaskName">
-            <summary>
-            获取任务名称
             </summary>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.PushJobTask.LoadTasks">
@@ -521,17 +516,16 @@
             推送待办
             </summary>
             <param name="task">任务项</param>
-            <returns>
-                <c>true</c>, if execute was internaled, <c>false</c> otherwise.</returns>
+            <returns><c>true</c>, if execute was internaled, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.WindowsServices.PushJobTask.TaskName">
+            <summary>
+            获取任务名称
+            </summary>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.FinishJobTask">
             <summary>
             结束待办任务
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.WindowsServices.FinishJobTask.TaskName">
-            <summary>
-            获取任务名称
             </summary>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.FinishJobTask.LoadTasks">
@@ -545,17 +539,16 @@
             结束待办
             </summary>
             <param name="task">任务项</param>
-            <returns>
-                <c>true</c>, if execute was internaled, <c>false</c> otherwise.</returns>
+            <returns><c>true</c>, if execute was internaled, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.WindowsServices.FinishJobTask.TaskName">
+            <summary>
+            获取任务名称
+            </summary>
         </member>
         <member name="T:Bingosoft.TrioFramework.WindowsServices.DeleteJobTask">
             <summary>
             删除待办任务
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.WindowsServices.DeleteJobTask.TaskName">
-            <summary>
-            获取任务名称
             </summary>
         </member>
         <member name="M:Bingosoft.TrioFramework.WindowsServices.DeleteJobTask.LoadTasks">
@@ -569,6 +562,11 @@
             删除待办
             </summary>
             <param name="task">任务项</param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.WindowsServices.DeleteJobTask.TaskName">
+            <summary>
+            获取任务名称
+            </summary>
         </member>
     </members>
 </doc>

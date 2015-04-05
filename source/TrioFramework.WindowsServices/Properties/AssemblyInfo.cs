@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("基于TrioFramework的Windows服务扩展")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Bingosoft")]
-[assembly: AssemblyProduct("TrioFramework.WindowsServices")]
-[assembly: AssemblyCopyright("Copyright ©Bingosoft  2014")]
+[assembly: AssemblyProduct("TrioFramework")]
+[assembly: AssemblyCopyright("Copyright ©Hades 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

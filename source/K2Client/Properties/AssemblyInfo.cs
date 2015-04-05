@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("K2工作流实现")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Bingosoft")]
-[assembly: AssemblyProduct("K2Client")]
-[assembly: AssemblyCopyright("Copyright ©Bingosoft 2014")]
+[assembly: AssemblyProduct("TrioFramework")]
+[assembly: AssemblyCopyright("Copyright ©Hades 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

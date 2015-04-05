@@ -13,8 +13,7 @@
             <summary>
             流程环节配置特性
             </summary>
-            <param name="activityName">
-            </param>
+            <param name="activityName"></param>
         </member>
         <member name="M:Bingosoft.TrioFramework.Attributes.ActivityAttribute.#ctor(System.String,System.Int32)">
             <summary>
@@ -54,17 +53,58 @@
             用于传输文件流的消息对象
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Communication.TrioFileMessage.#ctor(System.IO.Stream,System.Int64)">
-            <summary>
-            实例化文件流传输对象
-            </summary>
-            <param name="stream">文件流</param>
-            <param name="fileSize">文件长度</param>
-        </member>
         <member name="T:Bingosoft.TrioFramework.Communication.TrioMessage">
             <summary>
             用于Web站点于前端通讯的消息对象
             </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.ToString">
+            <summary>
+            序列化消息实体
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.Succeed(System.Object)">
+            <summary>
+            返回标识操作成功的消息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.Succeed(System.String)">
+            <summary>
+            返回标识操作成功的消息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.Error(System.Int32,System.String)">
+            <summary>
+            返回标识操作失败的消息
+            </summary>
+            <param name="code">错误码</param>
+            <param name="errMsg">错误消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.FromStream(System.IO.Stream,System.Int64)">
+            <summary>
+            创建传输文件流的消息对象
+            </summary>
+            <param name="stream">文件流</param>
+            <param name="fileSize">文件长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.ToStream">
+            <summary>
+            将当前消息中的数据转为流
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.ToBuffer">
+            <summary>
+            将当前消息中的数据转为字节
+            </summary>
+            <returns></returns>
         </member>
         <member name="P:Bingosoft.TrioFramework.Communication.TrioMessage.Success">
             <summary>
@@ -86,62 +126,32 @@
             错误信息
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.ToString">
+        <member name="M:Bingosoft.TrioFramework.Communication.TrioFileMessage.#ctor(System.IO.Stream,System.Int64)">
             <summary>
-            序列化消息实体
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.Succeed(System.Object)">
-            <summary>
-            返回标识操作成功的消息
-            </summary>
-            <param name="model">
-            </param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.Succeed(System.String)">
-            <summary>
-            返回标识操作成功的消息
-            </summary>
-            <param name="model">
-            </param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.Error(System.Int32,System.String)">
-            <summary>
-            返回标识操作失败的消息
-            </summary>
-            <param name="code">错误码</param>
-            <param name="errMsg">错误消息</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.FromStream(System.IO.Stream,System.Int64)">
-            <summary>
-            创建传输文件流的消息对象
+            实例化文件流传输对象
             </summary>
             <param name="stream">文件流</param>
             <param name="fileSize">文件长度</param>
-            <returns>
-            </returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.ToStream">
+        <member name="T:Bingosoft.TrioFramework.Config.ExcelElement">
             <summary>
-            将当前消息中的数据转为流
+            Excel组件配置
             </summary>
-            <returns>
-            </returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Communication.TrioMessage.ToBuffer">
+        <member name="P:Bingosoft.TrioFramework.Config.ExcelElement.Assembly">
             <summary>
-            将当前消息中的数据转为字节
+            实现程序集
             </summary>
-            <returns>
-            </returns>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.TrioComponentSection">
+            <summary>
+            Trio组件配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.TrioComponentSection.Excel">
+            <summary>
+            Excel配置
+            </summary>
         </member>
         <member name="T:ExceptionExtension">
             <summary>
@@ -153,26 +163,21 @@
             获取完整的错误信息
             </summary>
             <param name="ex">异常</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:ExceptionExtension.GetMessages(System.Exception)">
             <summary>
             获取所有错误信息
             </summary>
-            <param name="ex">
-            </param>
-            <returns>
-            </returns>
+            <param name="ex"></param>
+            <returns></returns>
         </member>
         <member name="M:ExceptionExtension.GetStackTraces(System.Exception)">
             <summary>
             获取所有堆栈信息
             </summary>
-            <param name="ex">
-            </param>
-            <returns>
-            </returns>
+            <param name="ex"></param>
+            <returns></returns>
         </member>
         <member name="T:SecurityContextExtension">
             <summary>
@@ -183,74 +188,58 @@
             <summary>
             根据 loginid 或 userid 获取指定人员
             </summary>
-            <param name="provider">
-            </param>
-            <param name="id">
-            </param>
-            <returns>
-            </returns>
+            <param name="provider"></param>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="M:SecurityContextExtension.GetRoleUsers(Bingosoft.Security.ISecurityProvider,System.String,System.String)">
             <summary>
             获取该部门的角色用户
             </summary>
-            <param name="provider">
-            </param>
+            <param name="provider"></param>
             <param name="roleName">角色名</param>
             <param name="orgName">部门名称</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:SecurityContextExtension.GetRoleUsers(Bingosoft.Security.ISecurityProvider,System.String)">
             <summary>
             获取该部门的角色用户
             </summary>
-            <param name="provider">
-            </param>
+            <param name="provider"></param>
             <param name="roleName">角色名</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:SecurityContextExtension.InRole(Bingosoft.Security.Principal.IUser,System.String)">
             <summary>
             判断当前用户是否在某个角色中
             </summary>
-            <param name="user">
-            </param>
+            <param name="user"></param>
             <param name="roleName">角色名</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:SecurityContextExtension.IsInDept(Bingosoft.Security.Principal.IUser,System.String)">
             <summary>
             判断用户是否属于某个部门
             </summary>
-            <param name="user">
-            </param>
-            <param name="deptName">
-            </param>
-            <returns>
-            </returns>
+            <param name="user"></param>
+            <param name="deptName"></param>
+            <returns></returns>
         </member>
         <member name="M:SecurityContextExtension.GetOrganization(Bingosoft.Security.ISecurityProvider,System.String)">
             <summary>
             获取部门信息
             </summary>
-            <param name="provider">
-            </param>
+            <param name="provider"></param>
             <param name="id">部门id</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:SecurityContextExtension.GetOrganizationByName(Bingosoft.Security.ISecurityProvider,System.String)">
             <summary>
             根据名称获取部门信息
             </summary>
-            <param name="provider">
-            </param>
+            <param name="provider"></param>
             <param name="name">部门名称</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="T:StreamExtension">
             <summary>
@@ -261,12 +250,9 @@
             <summary>
             从流中读取所有字节
             </summary>
-            <param name="stream">
-            </param>
-            <param name="length">
-            </param>
-            <returns>
-            </returns>
+            <param name="stream"></param>
+            <param name="length"></param>
+            <returns></returns>
         </member>
         <member name="T:StringExtension">
             <summary>
@@ -277,55 +263,104 @@
             <summary>
             将整形数组拼接成字符串
             </summary>
-            <param name="array">
-            </param>
-            <param name="separator">
-            </param>
-            <returns>
-            </returns>
+            <param name="array"></param>
+            <param name="separator"></param>
+            <returns></returns>
         </member>
         <member name="M:StringExtension.ToInt(System.String)">
             <summary>
             转为int类型
             </summary>
-            <param name="str">
-            </param>
-            <returns>
-            </returns>
+            <param name="str"></param>
+            <returns></returns>
         </member>
         <member name="M:StringExtension.ValidIsEmpty(System.String,System.String)">
             <summary>
             字符串是否为空，并返回错误信息
             </summary>
-            <param name="str">
-            </param>
-            <param name="errorMessage">
-            </param>
-            <returns>
-            </returns>
+            <param name="str"></param>
+            <param name="errorMessage"></param>
+            <returns></returns>
         </member>
         <member name="M:StringExtension.IsEmpty(System.String)">
             <summary>
             判断字符串是否为空
             </summary>
-            <param name="str">
-            </param>
-            <returns>
-            </returns>
+            <param name="str"></param>
+            <returns></returns>
         </member>
         <member name="M:StringExtension.EqualsWith(System.String,System.String)">
             <summary>
             忽略大小写判断字符串是否相等
             </summary>
-            <param name="str">
-            </param>
-            <param name="target">
-            </param>
+            <param name="str"></param>
+            <param name="target"></param>
         </member>
         <member name="T:Bingosoft.TrioFramework.Logger">
             <summary>
             日志记录
             </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Logger.LogOperator(System.String,Bingosoft.TrioFramework.Logger.BusinessAction,System.String)">
+            <summary>
+            记录操作日志
+            </summary>
+            <param name="module">所属模块</param>
+            <param name="action">操作类型</param>
+            <param name="content">操作内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Logger.LogOperator(System.String,Bingosoft.TrioFramework.Logger.BusinessAction,System.String,System.Exception)">
+            <summary>
+            记录操作日志
+            </summary>
+            <param name="module">所属模块</param>
+            <param name="action">操作类型</param>
+            <param name="content">操作内容</param>
+            <param name="ex">异常</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Logger.LogError(System.String,System.Exception,System.Object)">
+            <summary>
+            记录错误日志
+            </summary>
+            <param name="module">所属模块</param>
+            <param name="ex">异常</param>
+            <param name="extraData">附加数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Logger.LogError(System.String,System.String,System.Exception,System.Object)">
+            <summary>
+            记录错误日志
+            </summary>
+            <param name="module">所属模块</param>
+            <param name="errorMessage">错误信息</param>
+            <param name="ex">异常</param>
+            <param name="extraData">附加数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Logger.LogServiceRequest(System.String,System.String,System.String)">
+            <summary>
+            记录接口调用日志的请求内容
+            </summary>
+            <returns>记录的日志id.</returns>
+            <param name="module">所属模块.</param>
+            <param name="interfaceName">接口名.</param>
+            <param name="content">请求内容.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Logger.LogServiceResponse(System.Int64,System.String)">
+            <summary>
+            记录接口调用日志的返回结果
+            </summary>
+            <param name="logid">日志id.</param>
+            <param name="responseContent">接口返回内容.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Logger.LogServiceResponse(System.Int64,System.Exception)">
+            <summary>
+            记录接口调用日志的返回结果
+            </summary>
+            <param name="logid">日志id.</param>
+            <param name="ex">接口调用异常对象.</param>
         </member>
         <member name="T:Bingosoft.TrioFramework.Logger.BaseLog">
             <summary>
@@ -417,48 +452,6 @@
             其他
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogOperator(System.String,Bingosoft.TrioFramework.Logger.BusinessAction,System.String)">
-            <summary>
-            记录操作日志
-            </summary>
-            <param name="module">所属模块</param>
-            <param name="action">操作类型</param>
-            <param name="content">操作内容</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogOperator(System.String,Bingosoft.TrioFramework.Logger.BusinessAction,System.String,System.Exception)">
-            <summary>
-            记录操作日志
-            </summary>
-            <param name="module">所属模块</param>
-            <param name="action">操作类型</param>
-            <param name="content">操作内容</param>
-            <param name="ex">异常</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogError(System.String,System.Exception,System.Object)">
-            <summary>
-            记录错误日志
-            </summary>
-            <param name="module">所属模块</param>
-            <param name="ex">异常</param>
-            <param name="extraData">附加数据</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogError(System.String,System.String,System.Exception,System.Object)">
-            <summary>
-            记录错误日志
-            </summary>
-            <param name="module">所属模块</param>
-            <param name="errorMessage">错误信息</param>
-            <param name="ex">异常</param>
-            <param name="extraData">附加数据</param>
-            <returns>
-            </returns>
-        </member>
         <member name="T:Bingosoft.TrioFramework.Models.DictionaryItem">
             <summary>
             字典项
@@ -488,37 +481,52 @@
             <summary>
             实例化字典集合
             </summary>
-            <param name="list">
-            </param>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.DictionaryCollection.Item(System.String)">
-            <summary>
-            获取字典值
-            </summary>
-            <param name="code">字典编码</param>
-            <returns>
-            </returns>
+            <param name="list"></param>
         </member>
         <member name="M:Bingosoft.TrioFramework.Models.DictionaryCollection.ContainsCode(System.String)">
             <summary>
             包含字典项变啊
             </summary>
             <param name="code">字典项编码</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Models.DictionaryCollection.GetByCode(System.String)">
             <summary>
             根据字典编码获取字典项集合
             </summary>
             <param name="code">字典编码</param>
-            <returns>
-            </returns>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Models.DictionaryCollection.Item(System.String)">
+            <summary>
+            获取字典值
+            </summary>
+            <param name="code">字典编码</param>
+            <returns></returns>
         </member>
         <member name="T:Bingosoft.TrioFramework.Models.Organization">
             <summary>
             组织架构
             </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Models.Organization._parent">
+            <summary>
+            父部门
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Models.Organization.Load(System.String)">
+            <summary>
+            加载部门信息
+            </summary>
+            <param name="id">部门id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Models.Organization.LoadByName(System.String)">
+            <summary>
+            根据名称获取部门信息
+            </summary>
+            <param name="name">部门名称</param>
+            <returns></returns>
         </member>
         <member name="P:Bingosoft.TrioFramework.Models.Organization.Id">
             <summary>
@@ -528,11 +536,6 @@
         <member name="P:Bingosoft.TrioFramework.Models.Organization.ParentId">
             <summary>
             父部门Id
-            </summary>
-        </member>
-        <member name="F:Bingosoft.TrioFramework.Models.Organization._parent">
-            <summary>
-            父部门
             </summary>
         </member>
         <member name="P:Bingosoft.TrioFramework.Models.Organization.Parent">
@@ -575,22 +578,6 @@
             部门状态
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Models.Organization.Load(System.String)">
-            <summary>
-            加载部门信息
-            </summary>
-            <param name="id">部门id</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Models.Organization.LoadByName(System.String)">
-            <summary>
-            根据名称获取部门信息
-            </summary>
-            <param name="name">部门名称</param>
-            <returns>
-            </returns>
-        </member>
         <member name="T:Bingosoft.TrioFramework.ParamContainer">
             <summary>
             系统参数容器
@@ -602,8 +589,7 @@
             </summary>
             <param name="code">参数编码</param>
             <param name="defaultVal">默认值</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.ParamContainer.Update(System.String,System.String)">
             <summary>
@@ -611,19 +597,12 @@
             </summary>
             <param name="code">参数编码</param>
             <param name="value">参数值</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="T:Bingosoft.TrioFramework.RestClient">
             <summary>
             给予Rest服务的请求客户端
             </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.RestClient.#ctor(System.String)">
-            <summary>
-            创建Rest客户端
-            </summary>
-            <param name="apiBaseUrl">API基地址（不包含具体调用方法）</param>
         </member>
         <member name="F:Bingosoft.TrioFramework.RestClient.CONTENT_TYPE_DEFAULT">
             <summary>
@@ -635,17 +614,18 @@
             用于文件流的请求内容格式
             </summary>
         </member>
-        <member name="P:Bingosoft.TrioFramework.RestClient.BaseUrl">
+        <member name="M:Bingosoft.TrioFramework.RestClient.#ctor(System.String)">
             <summary>
+            创建Rest客户端
             </summary>
+            <param name="apiBaseUrl">API基地址（不包含具体调用方法）</param>
         </member>
         <member name="M:Bingosoft.TrioFramework.RestClient.Login(System.String)">
             <summary>
             登录
             </summary>
             <param name="loginid">登录用户Id</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.RestClient.Open(System.String,System.String,System.String,System.Int32,System.String)">
             <summary>
@@ -656,8 +636,7 @@
             <param name="method">HTTP方法</param>
             <param name="contentLength">请求内容长度（只有QueryString情况下为0）</param>
             <param name="contentType">请求内容格式</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.RestClient.Open(System.String,System.Byte[],System.String,System.String,System.String)">
             <summary>
@@ -668,8 +647,12 @@
             <param name="queryString">接口参数</param>
             <param name="method">HTTP方法</param>
             <param name="contentType">请求内容格式</param>
-            <returns>
-            </returns>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.RestClient.BaseUrl">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:Bingosoft.TrioFramework.SettingProvider">
             <summary>
@@ -699,6 +682,16 @@
         <member name="P:Bingosoft.TrioFramework.SettingProvider.FileServer">
             <summary>
             文件服务器配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.SettingProvider.TrioComponentSettings">
+            <summary>
+            组件配置
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.SettingProvider.Excel">
+            <summary>
+            Excel导出组件配置
             </summary>
         </member>
         <member name="T:Bingosoft.TrioFramework.TrioSection">
@@ -836,6 +829,19 @@
             <summary>
             登录密码
             </summary>
+        </member>
+        <member name="T:TypeExtension">
+            <summary>
+            类型扩展方法
+            </summary>
+        </member>
+        <member name="M:TypeExtension.GetFirstAttr``1(System.Type)">
+            <summary>
+            获取第一个该类型的特性
+            </summary>
+            <typeparam name="T">特性类型</typeparam>
+            <param name="type">类型</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

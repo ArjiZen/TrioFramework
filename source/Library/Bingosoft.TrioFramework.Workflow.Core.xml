@@ -13,32 +13,36 @@
             <summary>
             实例化工作流异常
             </summary>
-            <param name="message">
-            </param>
-            <param name="innerException">
-            </param>
+            <param name="message"></param>
+            <param name="innerException"></param>
         </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowEngineNotFoundException">
             <summary>
             未找到流程引擎实例异常
             </summary>
         </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowEngineNotFoundException.#ctor(System.String)">
+            <summary>
+            初始化未找到流程引擎实例的异常实例
+            </summary>
+            <param name="engineConfiguartor"></param>
+        </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowEngineNotFoundException.EngineConfigurator">
             <summary>
             流程实例配置
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowEngineNotFoundException.#ctor(System.String)">
-            <summary>
-            初始化未找到流程引擎实例的异常实例
-            </summary>
-            <param name="engineConfiguartor">
-            </param>
-        </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowDefinitionNotExistsException">
             <summary>
             流程定义不存在异常类
             </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowDefinitionNotExistsException.#ctor(System.Int32,System.Int32)">
+            <summary>
+            实例化异常
+            </summary>
+            <param name="appCode"></param>
+            <param name="version"></param>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowDefinitionNotExistsException.AppCode">
             <summary>
@@ -50,19 +54,18 @@
             流程版本
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowDefinitionNotExistsException.#ctor(System.Int32,System.Int32)">
-            <summary>
-            实例化异常
-            </summary>
-            <param name="appCode">
-            </param>
-            <param name="version">
-            </param>
-        </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowActivityNotExistsException">
             <summary>
             流程环节不存在异常类
             </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowActivityNotExistsException.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            实例化流程环节不存在的异常
+            </summary>
+            <param name="appCode">流程类型</param>
+            <param name="version">流程版本号</param>
+            <param name="activityName">环节名称</param>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowActivityNotExistsException.AppCode">
             <summary>
@@ -79,31 +82,14 @@
             环节名称
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Exceptions.WorkflowActivityNotExistsException.#ctor(System.Int32,System.Int32,System.String)">
-            <summary>
-            实例化流程环节不存在的异常
-            </summary>
-            <param name="appCode">流程类型</param>
-            <param name="version">流程版本号</param>
-            <param name="activityName">环节名称</param>
-        </member>
-        <member name="T:Bingosoft.TrioFramework.Workflow.Core.Extensions.TypeExtension">
-            <summary>
-            类型扩展方法
-            </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Extensions.TypeExtension.GetFirstAttr``1(System.Type)">
-            <summary>
-            获取第一个该类型的特性
-            </summary>
-            <typeparam name="T">特性类型</typeparam>
-            <param name="type">类型</param>
-            <returns>
-            </returns>
-        </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.Actor">
             <summary>
             环节参与人计算
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.Actor.Resolve(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance)">
+            <summary>
+            计算环节参与人
             </summary>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.Actor.RoleName">
@@ -134,11 +120,6 @@
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.Actor.RefActivityName">
             <summary>
             引用环节名
-            </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.Actor.Resolve(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance)">
-            <summary>
-            计算环节参与人
             </summary>
         </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.ApproveResult">
@@ -246,6 +227,97 @@
             实例化工作流附件
             </summary>
         </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.GetFileSizeStr(System.Int64)">
+            <summary>
+            获取文件大小的文本表达形式
+            </summary>
+            <param name="fileSize">文件大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Save">
+            <summary>
+            保存流程附件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Delete">
+            <summary>
+            删除附件记录（物理删除，仅在附件上传失败时调用）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.MarkedDeleted">
+            <summary>
+            标记为删除（逻辑删除）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.MarkedDisabled">
+            <summary>
+            标记为删除（逻辑删除）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Get(System.String)">
+            <summary>
+            根据文件id获取流程附件信息
+            </summary>
+            <param name="fileId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.GetFiles(System.String)">
+            <summary>
+            获取该流程的所有附件
+            </summary>
+            <param name="instanceNo">流程编号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Get(System.String,System.Int32)">
+            <summary>
+            读取该流程的某个类型的附件信息
+            </summary>
+            <param name="instanceNo">流程单号</param>
+            <param name="fileType">文件类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.GetFiles(System.String,System.Int32)">
+            <summary>
+            读取该流程中该类型的所有附件
+            </summary>
+            <param name="instanceNo">流程单号</param>
+            <param name="fileType">文件类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Exists(System.String,System.String)">
+            <summary>
+            判断该流程是否存在该类型的附件
+            </summary>
+            <param name="instanceNo">流程单号</param>
+            <param name="fileTypeName">附件类型名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Exists(System.String,System.Int32[])">
+            <summary>
+            判断该流程是否存在该附件类型
+            </summary>
+            <param name="instanceNo">流程单号</param>
+            <param name="fileTypes">多个附件类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Exists(System.String,System.Int32)">
+            <summary>
+            判断该流程是否存在该附件类型
+            </summary>
+            <param name="instanceNo">流程单号</param>
+            <param name="fileType">附件类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.GetAllAttachType">
+            <summary>
+            获取所有附件类型
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.FileId">
             <summary>
             文件Id
@@ -346,114 +418,26 @@
             失效时间
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.GetFileSizeStr(System.Int64)">
-            <summary>
-            获取文件大小的文本表达形式
-            </summary>
-            <param name="fileSize">文件大小</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Save">
-            <summary>
-            保存流程附件
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Delete">
-            <summary>
-            删除附件记录（物理删除，仅在附件上传失败时调用）
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.MarkedDeleted">
-            <summary>
-            标记为删除（逻辑删除）
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.MarkedDisabled">
-            <summary>
-            标记为删除（逻辑删除）
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Get(System.String)">
-            <summary>
-            根据文件id获取流程附件信息
-            </summary>
-            <param name="fileId">
-            </param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.GetFiles(System.String)">
-            <summary>
-            获取该流程的所有附件
-            </summary>
-            <param name="instanceNo">流程编号</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Get(System.String,System.Int32)">
-            <summary>
-            读取该流程的某个类型的附件信息
-            </summary>
-            <param name="instanceNo">流程单号</param>
-            <param name="fileType">文件类型</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.GetFiles(System.String,System.Int32)">
-            <summary>
-            读取该流程中该类型的所有附件
-            </summary>
-            <param name="instanceNo">流程单号</param>
-            <param name="fileType">文件类型</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Exists(System.String,System.String)">
-            <summary>
-            判断该流程是否存在该类型的附件
-            </summary>
-            <param name="instanceNo">流程单号</param>
-            <param name="fileTypeName">附件类型名称</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Exists(System.String,System.Int32[])">
-            <summary>
-            判断该流程是否存在该附件类型
-            </summary>
-            <param name="instanceNo">流程单号</param>
-            <param name="fileTypes">多个附件类型</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.Exists(System.String,System.Int32)">
-            <summary>
-            判断该流程是否存在该附件类型
-            </summary>
-            <param name="instanceNo">流程单号</param>
-            <param name="fileType">附件类型</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.GetAllAttachType">
-            <summary>
-            获取所有附件类型
-            </summary>
-            <returns>
-            </returns>
-        </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowDefinition">
             <summary>
             流程定义
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowDefinition.Save">
+            <summary>
+            保存流程定义
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowDefinition.Update">
+            <summary>
+            更新流程定义
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowDefinition.InitActivities">
+            <summary>
+            初始化环节信息
             </summary>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowDefinition.AppCode">
@@ -491,25 +475,6 @@
             环节列表
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowDefinition.Save">
-            <summary>
-            保存流程定义
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowDefinition.Update">
-            <summary>
-            更新流程定义
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowDefinition.InitActivities">
-            <summary>
-            初始化环节信息
-            </summary>
-        </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowDefinitionFactory">
             <summary>
             流程定义工厂类
@@ -519,10 +484,8 @@
             <summary>
             获取所有流程定义
             </summary>
-            <typeparam name="T">
-            </typeparam>
-            <returns>
-            </returns>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.InstanceStatus">
             <summary>
@@ -558,6 +521,37 @@
             <summary>
             流程实例
             </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.GetFirstActi">
+            <summary>
+            获取流程第一个环节
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.GetCurrentActi">
+            <summary>
+            获取当前流程环节
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.GetActi(System.String)">
+            <summary>
+            获取流程环节
+            </summary>
+            <param name="activityName">环节名</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.GetWorkItems">
+            <summary>
+            获取历史审批记录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.GetNewInstanceNo">
+            <summary>
+            获取新的流程实例编码
+            </summary>
+            <returns></returns>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.AppCode">
             <summary>
@@ -639,42 +633,6 @@
             当前环节数据
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.GetFirstActi">
-            <summary>
-            获取流程第一个环节
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.GetCurrentActi">
-            <summary>
-            获取当前流程环节
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.GetActi(System.String)">
-            <summary>
-            获取流程环节
-            </summary>
-            <param name="activityName">环节名</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.GetWorkItems">
-            <summary>
-            获取历史审批记录
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance.GetNewInstanceNo">
-            <summary>
-            获取新的流程实例编码
-            </summary>
-            <returns>
-            </returns>
-        </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstanceFactory">
             <summary>
             流程实例工厂类
@@ -684,30 +642,24 @@
             <summary>
             获取流程实例
             </summary>
-            <typeparam name="T">
-            </typeparam>
+            <typeparam name="T"></typeparam>
             <param name="instanceNo">流程实例编号</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstanceFactory.Create``1">
             <summary>
             创建新的流程实例
             </summary>
-            <typeparam name="T">
-            </typeparam>
-            <returns>
-            </returns>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstanceFactory.IsExists``1(System.String)">
             <summary>
             检查流程实例是否已存在
             </summary>
-            <typeparam name="T">
-            </typeparam>
+            <typeparam name="T"></typeparam>
             <param name="instanceNo">流程实例编号</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.TaskStatus">
             <summary>
@@ -742,6 +694,11 @@
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItem">
             <summary>
             流程流转过程
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItem.Update">
+            <summary>
+            更新
             </summary>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItem.TaskId">
@@ -824,9 +781,10 @@
             用户选择处理结果
             </summary>
             <remarks>
-            同意/通过 =&gt; 1
-            不同意/退回/拒绝 =&gt; 2
-            (AutoFinished == true) =&gt; 3
+            同意/通过 => 1
+            不同意/退回/拒绝 => 2
+            (AutoFinished == true) => 3
+            传阅 => 4
             </remarks>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItem.MandataryId">
@@ -839,9 +797,9 @@
             被委托人
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItem.Update">
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItem.MidwayOpinions">
             <summary>
-            更新
+            中途意见
             </summary>
         </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItemFactory">
@@ -853,42 +811,42 @@
             <summary>
             创建新的流程项
             </summary>
-            <typeparam name="T">
-            </typeparam>
-            <returns>
-            </returns>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItemFactory.GetAll``1(System.String)">
             <summary>
             获取该流程的所有流程项
             </summary>
-            <typeparam name="T">
-            </typeparam>
+            <typeparam name="T"></typeparam>
             <param name="instanceNo">流程实例编号</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItemFactory.Get``1(System.String,System.Int32)">
             <summary>
             获取流程项
             </summary>
-            <typeparam name="T">
-            </typeparam>
+            <typeparam name="T"></typeparam>
             <param name="instanceNo">流程实例编号</param>
             <param name="taskId">任务编号</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItemFactory.GetAll``1(System.String,System.String)">
             <summary>
             获取该流程中该环节的流程项
             </summary>
-            <typeparam name="T">
-            </typeparam>
+            <typeparam name="T"></typeparam>
             <param name="instanceNo">流程实例编号</param>
             <param name="activityName">环节名称</param>
-            <returns>
-            </returns>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItemFactory.LoadMidwayOpinions``1(System.String,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            加载中途意见
+            </summary>
+            <param name="instanceNo">流程实例编号.</param>
+            <param name="workitems">流程工作项.</param>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItemEqualityComparer">
             <summary>
@@ -899,20 +857,16 @@
             <summary>
             比较WorkItem
             </summary>
-            <param name="x">
-            </param>
-            <param name="y">
-            </param>
-            <returns>
-            </returns>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItemEqualityComparer.GetHashCode(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowItem)">
             <summary>
+            
             </summary>
-            <param name="obj">
-            </param>
-            <returns>
-            </returns>
+            <param name="obj"></param>
+            <returns></returns>
         </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine">
             <summary>
@@ -924,19 +878,9 @@
             实例化工作流引擎
             </summary>
         </member>
-        <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.Instance">
-            <summary>
-            获取流程引擎实例
-            </summary>
-        </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.Create">
             <summary>
             创建流程引擎实例
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.CurrentUser">
-            <summary>
-            当前用户
             </summary>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.SetCurrentUser(System.String)">
@@ -945,32 +889,24 @@
             </summary>
             <param name="id">用户loginid 或 userid</param>
         </member>
-        <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.Definitions">
-            <summary>
-            获取流程定义缓存
-            </summary>
-        </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.LoadDefinitions">
             <summary>
             初始化流程定义
             </summary>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.ClearDefinitionCache">
             <summary>
             清空流程定义缓存
             </summary>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.CreateWorkflow(System.Int32)">
             <summary>
             创建流程
             </summary>
             <param name="appCode">流程编码</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.LoadWorkflow(System.Int32,System.String,System.Int32)">
             <summary>
@@ -979,8 +915,7 @@
             <param name="appCode">流程编码</param>
             <param name="instanceNo">流程编号</param>
             <param name="taskId">当前任务序号</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.LoadWorkflow(System.String,System.Int32)">
             <summary>
@@ -988,8 +923,7 @@
             </summary>
             <param name="instanceNo">流程编号</param>
             <param name="taskId">当前任务序号</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.CanViewWorkflow(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance)">
             <summary>
@@ -1001,8 +935,7 @@
             保存流程
             </summary>
             <param name="instance">流程实例</param>
-            <returns>
-            </returns>
+            <returns></returns>
             <remarks>
             持久化流程实例及流程流转过程数据
             1、根据InstanceNo和taskId获取流程信息
@@ -1018,8 +951,7 @@
             </summary>
             <param name="instance">流程编号</param>
             <param name="result">审批结果</param>
-            <returns>
-            </returns>
+            <returns></returns>
             <remarks>
             根据用户选择的下一步骤，计算出下一环节的参与者并持久化到数据库
             1、检查流程数据的合法性（及权限）
@@ -1034,23 +966,69 @@
             <summary>
             删除流程
             </summary>
-            <param name="instance">
-            </param>
-            <returns>
-            </returns>
+            <param name="instance"></param>
+            <returns></returns>
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.SignWorkflow(System.String,System.Int32)">
             <summary>
             流程签收
             </summary>
-            <returns>
-                <c>true</c>, 签收成功, <c>false</c> 签收失败.</returns>
+            <returns><c>true</c>, 签收成功, <c>false</c> 签收失败.</returns>
             <param name="instanceNo">流程实例编号</param>
             <param name="taskId">当前任务id</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.PassAround(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance,System.String[])">
+            <summary>
+            流程传阅
+            </summary>
+            <param name="instance">流程实例.</param>
+            <param name="toUsersId">传阅目标用户.</param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.Instance">
+            <summary>
+            获取流程引擎实例
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.CurrentUser">
+            <summary>
+            当前用户
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowEngine.Definitions">
+            <summary>
+            获取流程定义缓存
+            </summary>
         </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.DelegateWork">
             <summary>
             流程委托项
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.DelegateWork.GetByDeletagor(System.Int32,System.String)">
+            <summary>
+            根据委托人获取委托信息
+            </summary>
+            <param name="appCode">流程编号（0表示所有流程）</param>
+            <param name="delegatorId">委托人Id.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.DelegateWork.GetByMandatary(System.Int32,System.String)">
+            <summary>
+            根据被委托人获取委托信息
+            </summary>
+            <param name="appCode">流程编号（0表示所有流程）</param>
+            <param name="mandataryId">被委托人Id.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.DelegateWork.IsDelegate(System.Int32,System.String,System.String)">
+            <summary>
+            检查委托人与被委托人是否有有效委托
+            </summary>
+            <param name="appCode">流程实例编号（0表示所有流程）</param>
+            <param name="delegatorId">委托人Id.</param>
+            <param name="mandataryId">被委托人Id.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.DelegateWork.AddNew">
+            <summary>
+            添加新的委托关系
             </summary>
         </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Core.DelegateWork.AppCode">
@@ -1098,39 +1076,7 @@
             删除时间
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.DelegateWork.GetByDeletagor(System.Int32,System.String)">
-            <summary>
-            根据委托人获取委托信息
-            </summary>
-            <param name="appCode">流程编号（0表示所有流程）</param>
-            <param name="delegatorId">委托人Id.</param>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.DelegateWork.GetByMandatary(System.Int32,System.String)">
-            <summary>
-            根据被委托人获取委托信息
-            </summary>
-            <param name="appCode">流程编号（0表示所有流程）</param>
-            <param name="mandataryId">被委托人Id.</param>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.DelegateWork.IsDelegate(System.Int32,System.String,System.String)">
-            <summary>
-            检查委托人与被委托人是否有有效委托
-            </summary>
-            <param name="appCode">流程实例编号（0表示所有流程）</param>
-            <param name="delegatorId">委托人Id.</param>
-            <param name="mandataryId">被委托人Id.</param>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Core.DelegateWork.AddNew">
-            <summary>
-            添加新的委托关系
-            </summary>
-        </member>
         <member name="T:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache">
-            <summary>
-            流程定义缓存
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache.Definitions">
             <summary>
             流程定义缓存
             </summary>
@@ -1143,6 +1089,109 @@
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache.Clear">
             <summary>
             清空缓存
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.WorkflowCache.Definitions">
+            <summary>
+            流程定义缓存
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Workflow.Core.PersonalOpinion">
+            <summary>
+            个人常用意见
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.PersonalOpinion.Save">
+            <summary>
+            保存个人常用意见
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.PersonalOpinion.GetAll(System.String)">
+            <summary>
+            获取当前用户的所有常用意见
+            </summary>
+            <returns>The all.</returns>
+            <param name="id">用户userid或loginid.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.PersonalOpinion.Get(System.Int32)">
+            <summary>
+            获取个人常用意见
+            </summary>
+            <param name="id">常用意见id.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.PersonalOpinion.AddUsedTimes">
+            <summary>
+            增加当前意见的使用次数
+            </summary>
+            <returns>返回false时有可能是因为当前常用意见不存在</returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.PersonalOpinion.MarkDeleted">
+            <summary>
+            标记删除当前个人常用意见
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.PersonalOpinion.Id">
+            <summary>
+            id
+            </summary>
+            <value>The identifier.</value>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.PersonalOpinion.UserId">
+            <summary>
+            用户id
+            </summary>
+            <value>The user identifier.</value>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.PersonalOpinion.Content">
+            <summary>
+            常用意见
+            </summary>
+            <value>The content.</value>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Workflow.Core.MidwayOpinion">
+            <summary>
+            中途意见
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.MidwayOpinion.Save">
+            <summary>
+            保存中途意见
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Core.MidwayOpinion.GetAll(System.String)">
+            <summary>
+            获取当前流程的所有中途意见
+            </summary>
+            <param name="instanceNo">流程实例编号.</param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.MidwayOpinion.InstanceNo">
+            <summary>
+            流程实例编号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.MidwayOpinion.TaskId">
+            <summary>
+            流程任务编号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.MidwayOpinion.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.MidwayOpinion.CreatorId">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.MidwayOpinion.Creator">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Workflow.Core.MidwayOpinion.CreateTime">
+            <summary>
+            创建时间
             </summary>
         </member>
     </members>

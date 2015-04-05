@@ -68,6 +68,8 @@
     <Compile Include="Attributes\WorkflowAttribute.cs" />
     <Compile Include="Communication\TrioFileMessage.cs" />
     <Compile Include="Communication\TrioMessage.cs" />
+    <Compile Include="Config\ExcelElement.cs" />
+    <Compile Include="Config\TrioComponentSection.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
     <Compile Include="Extensions\SecurityContextExtension.cs" />
     <Compile Include="Extensions\StreamExtension.cs" />
@@ -127,7 +129,5 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup>
-    <Folder Include="Config\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

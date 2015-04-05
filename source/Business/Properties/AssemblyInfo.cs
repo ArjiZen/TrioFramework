@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Business")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("TrioFramework.Business")]
+[assembly: AssemblyDescription("工作流业务模块")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Business")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCompany("Bingoosft")]
+[assembly: AssemblyProduct("TrioFramework")]
+[assembly: AssemblyCopyright("Copyright ©Hades  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

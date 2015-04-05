@@ -9,6 +9,34 @@
             业务表单
             </summary>
         </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Business.BusinessForm.Load(System.String)">
+            <summary>
+            加载业务表单数据
+            </summary>
+            <param name="instanceNo">流程编号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Business.BusinessForm.UpdateInstanceNo">
+            <summary>
+            更新表单中的流程编号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Business.BusinessForm.CopyTo``1(``0,``0)">
+            <summary>
+            属性复制
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="from"></param>
+            <param name="to"></param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Workflow.Business.BusinessForm.Validate(System.String@)">
+            <summary>
+            验证表单
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
         <member name="P:Bingosoft.TrioFramework.Workflow.Business.BusinessForm.InstanceNo">
             <summary>
             流程单号
@@ -18,41 +46,6 @@
             <summary>
             流程标题
             </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Business.BusinessForm.Load(System.String)">
-            <summary>
-            加载业务表单数据
-            </summary>
-            <param name="instanceNo">流程编号</param>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Business.BusinessForm.UpdateInstanceNo">
-            <summary>
-            更新表单中的流程编号
-            </summary>
-            <returns>
-            </returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Business.BusinessForm.CopyTo``1(``0,``0)">
-            <summary>
-            属性复制
-            </summary>
-            <typeparam name="T">
-            </typeparam>
-            <param name="from">
-            </param>
-            <param name="to">
-            </param>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Workflow.Business.BusinessForm.Validate(System.String@)">
-            <summary>
-            验证表单
-            </summary>
-            <param name="message">
-            </param>
-            <returns>
-            </returns>
         </member>
     </members>
 </doc>

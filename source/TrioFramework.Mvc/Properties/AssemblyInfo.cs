@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("基于TrioFramework的MVC框架扩展")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Bingosoft")]
-[assembly: AssemblyProduct("TrioFramework.Mvc")]
-[assembly: AssemblyCopyright("Copyright ©Bingosoft 2014")]
+[assembly: AssemblyProduct("TrioFramework")]
+[assembly: AssemblyCopyright("Copyright ©Hades 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

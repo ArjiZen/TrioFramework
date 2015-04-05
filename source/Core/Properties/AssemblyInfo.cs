@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TrioFramework.Core")]
-[assembly: AssemblyDescription("TrioFramework工作流核心")]
+[assembly: AssemblyDescription("TrioFramework工作流核心模块")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Bingosoft")]
-[assembly: AssemblyProduct("TrioFramework.Core")]
-[assembly: AssemblyCopyright("Copyright ©Bingosoft 2014")]
+[assembly: AssemblyProduct("TrioFramework")]
+[assembly: AssemblyCopyright("Copyright ©Hades 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
