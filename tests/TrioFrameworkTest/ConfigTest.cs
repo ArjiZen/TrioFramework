@@ -38,6 +38,12 @@ namespace Bingosoft.TrioFramework.Test {
 			Assert.IsNotNullOrEmpty(SettingProvider.FileServer.Password);
 		}
 
+        [Test()]
+	    public void ExcelComponentTest()
+	    {
+	        Assert.IsNotNull(SettingProvider.Excel.Assembly);
+	    }
+
 	}
 }
 
