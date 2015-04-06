@@ -12,17 +12,17 @@ namespace Bingosoft.TrioFramework.Component.Excel
     /// <summary>
     /// Excel工作表
     /// </summary>
-    public abstract class WorkSheet
+    public class WorkSheet
     {
         #region ctor
 
-        protected WorkSheet()
+        public WorkSheet()
         {
             this.Head = new WorkHeadCollection();
             this.Data = new WorkDataTable();
         }
 
-        protected WorkSheet(string name)
+        public WorkSheet(string name)
             : this()
         {
             this.Name = name;
@@ -62,12 +62,14 @@ namespace Bingosoft.TrioFramework.Component.Excel
         }
 
         /// <summary>
-        /// 创建数据行
+        /// 创建数据行并添加到当前工作表
         /// </summary>
         /// <returns></returns>
         public WorkDataRow CreateRow()
         {
-            return WorkFactory.CreateDataRow();
+            var row = WorkFactory.CreateDataRow();
+            this.Data.Add(row);
+            return row;
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using NPOI.HSSF.UserModel;
-using NPOI.POIFS.FileSystem;
 using NPOI.SS.UserModel;
-using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 
 namespace Bingosoft.TrioFramework.Component.Excel.NPOI
@@ -54,8 +53,8 @@ namespace Bingosoft.TrioFramework.Component.Excel.NPOI
                 foreach (var head in sheet.Head)
                 {
                     var c = headRow.CreateCell(cellnum);
-                    c.SetCellValue(WorkCellValuer.GetValue(head));
-                    headRow.Cells.Add(c);
+                    c.SetCellValue(WorkCellUtil.GetValue(head));
+                    c.SetCellType(CellType.String);
                     cellnum++;
                 }
                 rownum++;
@@ -64,34 +63,65 @@ namespace Bingosoft.TrioFramework.Component.Excel.NPOI
                 {
                     var r = s.CreateRow(rownum);
                     cellnum = 0;
-                    foreach (WorkCell cell in row.Cells)
+                    foreach (Excel.WorkCell cell in row.Cells)
                     {
                         var c = r.CreateCell(cellnum);
                         if (cell is WorkDateCell)
                         {
-                            c.SetCellValue(WorkCellValuer.GetValue((WorkDateCell)cell));
+                            var wc = cell as WorkDateCell;
+                            c.SetCellValue(WorkCellUtil.GetValue(wc));
+                            c.SetCellType(CellType.Numeric);
+                            // 设置数据格式
+                            if (!string.IsNullOrEmpty(wc.DataFormat) && this.Format == ExcelFormat.Xlsx)
+                            {
+                                // ISSUS: XLS格式文件写入21行后就没有自定义格式
+                                var style = wb.CreateCellStyle();
+                                style.DataFormat = wb.CreateDataFormat().GetFormat(wc.DataFormat);
+                                c.CellStyle = style;
+                            }
                         }
                         else if (cell is WorkNumCell)
                         {
-                            c.SetCellValue(WorkCellValuer.GetValue((WorkNumCell)cell));
+                            var wc = cell as WorkNumCell;
+                            c.SetCellValue(WorkCellUtil.GetValue(wc));
                             c.SetCellType(CellType.Numeric);
+                            if (!string.IsNullOrEmpty(wc.DataFormat) && this.Format == ExcelFormat.Xlsx)
+                            {
+                                var style = wb.CreateCellStyle();
+                                var format = wb.CreateDataFormat();
+                                style.DataFormat = format.GetFormat(wc.DataFormat);
+                                c.CellStyle = style;
+                            }
                         }
                         else if (cell is WorkMoneyCell)
                         {
-                            c.SetCellValue(WorkCellValuer.GetValue((WorkMoneyCell)cell));
-                            c.SetCellType(CellType.Numeric);
+                            var wc = cell as WorkMoneyCell;
+                            c.SetCellValue(WorkCellUtil.GetValue(wc));
+                            if (!string.IsNullOrEmpty(wc.DataFormat) && this.Format == ExcelFormat.Xlsx)
+                            {
+                                var style = wb.CreateCellStyle();
+                                var format = wb.CreateDataFormat();
+                                style.DataFormat = format.GetFormat(wc.DataFormat);
+                                c.CellStyle = style;
+                            }
                         }
                         else if (cell is WorkBoolCell)
                         {
-                            c.SetCellValue(WorkCellValuer.GetValue((WorkBoolCell)cell));
+                            c.SetCellValue(WorkCellUtil.GetValue((WorkBoolCell)cell));
                             c.SetCellType(CellType.Boolean);
                         }
                         else
                         {
                             c.SetCellValue(cell.Content);
                             c.SetCellType(CellType.String);
+                            if (!string.IsNullOrEmpty(cell.DataFormat) && this.Format == ExcelFormat.Xlsx)
+                            {
+                                var style = wb.CreateCellStyle();
+                                var format = wb.CreateDataFormat();
+                                style.DataFormat = format.GetFormat(cell.DataFormat);
+                                c.CellStyle = style;
+                            }
                         }
-                        r.Cells.Add(c);
                         cellnum++;
                     }
                     rownum++;
@@ -101,6 +131,79 @@ namespace Bingosoft.TrioFramework.Component.Excel.NPOI
             var ms = new MemoryStream();
             wb.Write(ms);
             return ms;
+        }
+
+        /// <summary>
+        /// 从文件读取Excel文件
+        /// </summary>
+        /// <param name="ms"></param>
+        /// <param name="headRows">标题行数</param>
+        public override void Load(MemoryStream ms, int headRows = 1)
+        {
+            if (headRows > 1)
+            {
+                throw new NotImplementedException("目前只支持单行表头的读取");
+            }
+            var wb = WorkbookFactory.Create(ms);
+            this.Format = (wb is XSSFWorkbook) ? ExcelFormat.Xlsx : ExcelFormat.Xls;
+            for (int sheetIndex = 0; sheetIndex < wb.NumberOfSheets; sheetIndex++)
+            {
+                var s = wb.GetSheetAt(sheetIndex);
+                var mSheet = this.CreateSheet(s.SheetName);
+                // 标题
+                for (int rowIndex = 0; rowIndex < headRows; rowIndex++)
+                {
+                    var r = s.GetRow(rowIndex);
+                    // 标题行数
+                    for (int cellIndex = 0; cellIndex < r.PhysicalNumberOfCells; cellIndex++)
+                    {
+                        var c = r.GetCell(cellIndex);
+                        mSheet.Head.Add(c.StringCellValue);
+                    }
+                }
+                // 数据
+                for (int rowIndex = headRows; rowIndex < s.PhysicalNumberOfRows; rowIndex++)
+                {
+                    var r = s.GetRow(rowIndex);
+                    var mRow = mSheet.CreateRow();
+                    for (int cellIndex = 0; cellIndex < r.PhysicalNumberOfCells; cellIndex++)
+                    {
+                        var c = r.GetCell(cellIndex);
+                        switch (c.CellType)
+                        {
+                            case CellType.Boolean:
+                            {
+                                mRow.Add(WorkCellUtil.SetValue(c.BooleanCellValue));
+                                break;
+                            }
+                            case CellType.Numeric:
+                            {
+                                if (DateUtil.IsCellDateFormatted(c))
+                                {
+                                    mRow.Add(WorkCellUtil.SetValue(c.DateCellValue));
+                                }
+                                else
+                                {
+                                    mRow.Add(WorkCellUtil.SetValue(c.NumericCellValue));
+                                }
+                                break;
+                            }
+                            case CellType.String:
+                            {
+                                try
+                                {
+                                    mRow.Add(WorkCellUtil.SetValue(c.RichStringCellValue.String));
+                                }
+                                catch (Exception)
+                                {
+                                    mRow.Add(WorkCellUtil.SetValue(c.StringCellValue));
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -58,9 +58,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkBook.cs" />
-    <Compile Include="WorkDataRow.cs" />
-    <Compile Include="WorkHead.cs" />
-    <Compile Include="WorkSheet.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExcelComponent\ExcelComponent.csproj">

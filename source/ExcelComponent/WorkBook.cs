@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace Bingosoft.TrioFramework.Component.Excel
 {
@@ -74,13 +75,114 @@ namespace Bingosoft.TrioFramework.Component.Excel
         }
 
         /// <summary>
+        /// 从MemoryStream中加载Excel文档数据
+        /// </summary>
+        /// <param name="ms"></param>
+        /// <returns></returns>
+        public static WorkBook LoadFrom(MemoryStream ms)
+        {
+            var wb = WorkBook.Create();
+            if (wb != null)
+            {
+                wb.Load(ms);
+            }
+            return wb;
+        }
+
+        /// <summary>
+        /// 从文件读取Excel工作簿
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns></returns>
+        public static WorkBook LoadFrom(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException();
+            }
+            var ext = Path.GetExtension(filePath);
+            using (var fs = new FileStream(filePath, FileMode.Open))
+            {
+                if (!fs.CanRead)
+                {
+                    throw new InvalidOperationException("无法读取文件" + filePath);
+                }
+                var buffer = fs.ReadBytes(fs.Length);
+                var ms = new MemoryStream(buffer);
+                return WorkBook.LoadFrom(ms);
+            }
+        }
+
+        #region Members
+
+        /// <summary>
         /// 保存
         /// </summary>
         /// <returns></returns>
         public abstract MemoryStream Save();
 
         /// <summary>
-        /// 创建工作表
+        /// 保存
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="isCover">是否覆盖目标文件</param>
+        /// <returns></returns>
+        public void Save(string filePath, bool isCover = true)
+        {
+            if (isCover && File.Exists(filePath))
+            {
+                var retryCount = 0;
+                var isDeleted = false;
+                do
+                {
+                    try
+                    {
+                        File.Delete(filePath);
+                        isDeleted = true;
+                    }
+                    catch (DirectoryNotFoundException)
+                    {
+                        break;
+                    }
+                    catch (IOException)
+                    {
+                        Thread.Sleep(1000);
+                        retryCount++;
+                    }
+                } while (retryCount <= 2 && !isDeleted);
+                File.Delete(filePath);
+            }
+
+            if (!isCover && File.Exists(filePath))
+            {
+                throw new IOException("目标文件已存在");
+            }
+
+            var ext = Path.GetExtension(filePath);
+            if (ext == null || !ext.Equals("." + this.Format, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidDataException("目标文件格式与当前工作簿文件格式不符，目标文件应该为." + this.Format + "格式");
+            }
+
+            using (var fs = new FileStream(filePath, FileMode.Create))
+            {
+                var ms = this.Save();
+                var buffer = ms.ToArray();
+                fs.Write(buffer, 0, buffer.Length);
+                fs.Flush();
+                fs.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// 读取
+        /// </summary>
+        /// <param name="ms"></param>
+        /// <param name="headRows">标题行数</param>
+        public abstract void Load(MemoryStream ms, int headRows = 1);
+
+        /// <summary>
+        /// 创建工作表并添加到当前工作簿
         /// </summary>
         /// <param name="sheetName"></param>
         /// <returns></returns>
@@ -91,8 +193,13 @@ namespace Bingosoft.TrioFramework.Component.Excel
             {
                 s.Name = sheetName;
             }
+            this.Sheets.Add(s);
             return s;
         }
+
+        #endregion
+
+
     }
 }
 

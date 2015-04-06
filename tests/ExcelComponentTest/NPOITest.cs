@@ -10,14 +10,14 @@ namespace ExcelComponentTest
     public class NPOITest
     {
         [TestMethod]
-        public void WorkbookTest()
+        public void CreateWorkbookTest()
         {
             var wb = WorkBook.Create(WorkBook.ExcelFormat.Xlsx);
 
             var sheet = wb.CreateSheet("Sheet1");
             sheet.Head.AddRange("字符串类型", "数值类型", "金额类型", "日期类型", "布尔类型");
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 var r = sheet.CreateRow();
                 r.AddRange(new[]
@@ -27,29 +27,27 @@ namespace ExcelComponentTest
                     (1.23f * i).ToString(CultureInfo.CurrentCulture), 
                     DateTime.Today.AddDays(i).ToString(CultureInfo.CurrentCulture), 
                     (i % 2 == 0).ToString()
-                }, true);
-                sheet.Data.Add(r);
+                });
+                r[2].DataFormat = "0%";
+                r[3].DataFormat = "yyyy-MM-dd HH:mm:ss";
             }
-
-            wb.Sheets.Add(sheet);
-            var ms = wb.Save();
 
             string filePath = string.Format("D:\\ExcelFile.xlsx");
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-            }
-
-            using (var fs = new FileStream(filePath, FileMode.CreateNew))
-            {
-                var buffer = ms.ToArray();
-                fs.Write(buffer, 0, buffer.Length);
-                fs.Flush();
-                fs.Dispose();
-            }
+            wb.Save(filePath);
 
             Assert.IsTrue(File.Exists(filePath));
+        }
 
+
+        [TestMethod]
+        public void LoadWorkbookTest()
+        {
+            var wb = WorkBook.LoadFrom("D:\\ExcelFile.xlsx");
+            Assert.IsNotNull(wb);
+            Assert.AreEqual(1, wb.Sheets.Count);
+            Assert.AreEqual(5, wb.Sheets[0].Head.Count);
+
+            wb.Save("D:\\ExcelFile1.xlsx");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Bingosoft.TrioFramework.Component.Excel
@@ -13,18 +14,24 @@ namespace Bingosoft.TrioFramework.Component.Excel
     /// <summary>
     /// Excel数据行
     /// </summary>
-    public abstract class WorkDataRow
+    public class WorkDataRow
     {
-        protected WorkDataRow()
+        public WorkDataRow()
         {
-            this.Cells = new List<WorkCell>();
+            this.Cells = new WorkCellCollection();
+        }
+
+        public WorkCell this[int index]
+        {
+            get { return this.Cells[index]; }
+            set { this.Cells[index] = value; }
         }
 
         /// <summary>
         /// 单元格集合
         /// </summary>
         /// <value>The cells.</value>
-        public ICollection<WorkCell> Cells { get; set; }
+        public WorkCellCollection Cells { get; set; }
 
         /// <summary>
         /// 添加数据单元格（自动识别数据类型）

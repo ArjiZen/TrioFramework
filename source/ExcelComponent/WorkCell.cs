@@ -1,19 +1,23 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace Bingosoft.TrioFramework.Component.Excel
 {
-
-    public static class WorkCellValuer
+    /// <summary>
+    /// Excel单元格取值、赋值辅助类
+    /// </summary>
+    public static class WorkCellUtil
     {
         public static string GetValue(WorkStrCell cell)
         {
             return cell.Content;
         }
 
-        public static Int32 GetValue(WorkNumCell cell)
+        public static Double GetValue(WorkNumCell cell)
         {
-            Int32 val;
-            if (!Int32.TryParse(cell.Content, out val))
+            Double val;
+            if (!Double.TryParse(cell.Content, out val))
             {
                 throw new InvalidCastException("");
             }
@@ -49,12 +53,40 @@ namespace Bingosoft.TrioFramework.Component.Excel
             }
             return val;
         }
+
+        public static WorkBoolCell SetValue(bool value)
+        {
+            return new WorkBoolCell(value.ToString());
+        }
+
+        public static WorkDateCell SetValue(DateTime value)
+        {
+            return new WorkDateCell(value.ToString(CultureInfo.CurrentCulture));
+        }
+
+        public static WorkNumCell SetValue(Double value)
+        {
+            return new WorkNumCell(value.ToString());
+        }
+
+        public static WorkStrCell SetValue(string str)
+        {
+            return new WorkStrCell(str);
+        }
+    }
+
+    /// <summary>
+    /// 单元格集合
+    /// </summary>
+    public class WorkCellCollection : Collection<WorkCell>
+    {
+        
     }
 
     /// <summary>
     /// Excel单元格
     /// </summary>
-    public abstract class WorkCell
+    public class WorkCell
     {
         #region ctor
 
@@ -69,10 +101,19 @@ namespace Bingosoft.TrioFramework.Component.Excel
 
         #endregion
 
+        #region Properties
+
         /// <summary>
         /// 单元格内容
         /// </summary>
         public string Content { get; set; }
+
+        /// <summary>
+        /// 数据格式
+        /// </summary>
+        public string DataFormat { get; set; }
+
+        #endregion
 
         /// <summary>
         /// 创建单元格
@@ -108,7 +149,6 @@ namespace Bingosoft.TrioFramework.Component.Excel
     {
         public WorkNumCell()
         {
-
         }
 
         public WorkNumCell(string content)
@@ -124,12 +164,13 @@ namespace Bingosoft.TrioFramework.Component.Excel
     {
         public WorkDateCell()
         {
-
+            this.DataFormat = "yyyy-MM-dd";
         }
 
         public WorkDateCell(string content)
             : base(content)
         {
+            this.DataFormat = "yyyy-MM-dd";
         }
     }
 
@@ -140,12 +181,13 @@ namespace Bingosoft.TrioFramework.Component.Excel
     {
         public WorkMoneyCell()
         {
-
+            this.DataFormat = "￥#.##0";
         }
 
         public WorkMoneyCell(string content)
             : base(content)
         {
+            this.DataFormat = "￥#.##0";
         }
     }
 

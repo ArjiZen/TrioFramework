@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 
 namespace Bingosoft.TrioFramework.Component.Excel
@@ -11,7 +12,7 @@ namespace Bingosoft.TrioFramework.Component.Excel
     /// </summary>
     internal class WorkFactory
     {
-        private static object lockObj = new object();
+        private readonly static object lockObj = new object();
 
         private static Assembly _assembly = null;
         /// <summary>
@@ -60,7 +61,7 @@ namespace Bingosoft.TrioFramework.Component.Excel
                     return (T)ImplementAssembly.CreateInstance(type.FullName);
                 }
             }
-            return default(T);
+            return Activator.CreateInstance<T>();
         }
 
         /// <summary>
@@ -106,27 +107,31 @@ namespace Bingosoft.TrioFramework.Component.Excel
         /// <returns></returns>
         public static WorkCell CreateWorkCell(string content)
         {
-            Double d;
-            if (Double.TryParse(content, out d))
+            Decimal d;
+            if (Decimal.TryParse(content, out d))
             {
-                return new WorkMoneyCell(content);
-            }
-            Int32 i;
-            if (Int32.TryParse(content, out i))
-            {
-                return new WorkNumCell(content);
+                var c = Create<WorkNumCell>();
+                c.Content = content;
+                return c;
             }
             DateTime t;
             if (DateTime.TryParse(content, out t))
             {
-                return new WorkDateCell(content);
+                var c = Create<WorkDateCell>();
+                c.Content = content;
+                return c;
             }
             Boolean b;
             if (Boolean.TryParse(content, out b))
             {
-                return new WorkBoolCell(content);
+                var c = Create<WorkBoolCell>();
+                c.Content = content;
+                return c;
             }
-            return new WorkStrCell(content);
+
+            var wc = Create<WorkStrCell>();
+            wc.Content = content;
+            return wc;
         }
     }
 }

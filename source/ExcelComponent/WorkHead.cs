@@ -39,14 +39,14 @@ namespace Bingosoft.TrioFramework.Component.Excel
     /// <remarks>
     /// 树结构
     /// </remarks>
-    public abstract class WorkHead : WorkStrCell
+    public class WorkHead : WorkStrCell
     {
-        protected WorkHead()
+        public WorkHead()
         {
 
         }
 
-        protected WorkHead(string content)
+        public WorkHead(string content)
             : base(content)
         {
 
