@@ -86,7 +86,7 @@ namespace Bingosoft.TrioFramework.Component.Excel
     /// <summary>
     /// Excel单元格
     /// </summary>
-    public class WorkCell
+    public abstract class WorkCell
     {
         #region ctor
 
