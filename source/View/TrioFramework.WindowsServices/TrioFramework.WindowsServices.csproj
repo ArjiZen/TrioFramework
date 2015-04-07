@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{586AEE19-B0C5-4C63-86A6-79D546BDBD02}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bingosoft.TrioFramework.WindowsServices</RootNamespace>
+    <AssemblyName>Bingosoft.TrioFramework.WindowsServices</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ReleaseVersion>1.4.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\bin\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\..\bin\debug\Bingosoft.TrioFramework.WindowsServices.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\bin\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bingosoft.Core, Version=1.3.0.25740, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\Bingosoft.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Data, Version=1.3.0.28862, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\Bingosoft.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Bingosoft.Environment, Version=1.3.0.28862, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\Bingosoft.Environment.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Library\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\TrioTask.cs" />
+    <Compile Include="Web References\PendingJobProvider\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="PendingJob\PushJobTask.cs" />
+    <Compile Include="PendingJob\FinishJobTask.cs" />
+    <Compile Include="PendingJob\DeleteJobTask.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Web References\PendingJobProvider\HandleResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PendingJobProvider\pendingjobII.wsdl" />
+    <None Include="Web References\PendingJobProvider\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Workflow\Business\Business.csproj">
+      <Project>{044F6DFC-7BA1-49C2-BA0C-7DC9107DBEED}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Foundation\TrioFramework\TrioFramework.csproj">
+      <Project>{3DC7A192-85FF-407F-865E-F45FF05CB928}</Project>
+      <Name>TrioFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\K2Client\K2Client.csproj">
+      <Project>{AD572C7A-1140-423F-B39E-6EB652FA0DED}</Project>
+      <Name>K2Client</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <Folder Include="Config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_Config\SqlCommands\PendingJob.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="~/Documents/dotNet/TrioFramework/source/pendingJobii.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PendingJobProvider\</RelPath>
+      <UpdateFromURL>~/Documents/dotNet/TrioFramework/source/pendingJobii.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>PendingJobProvider_Url</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+</Project>
