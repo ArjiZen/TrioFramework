@@ -26,7 +26,7 @@ namespace Bingosoft.TrioFramework.Component.Excel.NPOI
         /// <returns></returns>
         private IWorkbook GetWorkbook()
         {
-            if (this.Format == ExcelFormat.Xls)
+            if (this.Format == ExcelFormat.xls)
             {
                 return new HSSFWorkbook();
             }
@@ -69,10 +69,18 @@ namespace Bingosoft.TrioFramework.Component.Excel.NPOI
                         if (cell is WorkDateCell)
                         {
                             var wc = cell as WorkDateCell;
-                            c.SetCellValue(WorkCellUtil.GetValue(wc));
-                            c.SetCellType(CellType.Numeric);
+                            var val = WorkCellUtil.GetValue(wc);
+                            if (this.Format == ExcelFormat.xls)
+                            {
+                                c.SetCellValue(val.ToString("yyyy-MM-dd HH:mm:ss"));
+                                c.SetCellType(CellType.String);
+                            }
+                            else if (this.Format == ExcelFormat.xlsx)
+                            {
+                                c.SetCellValue(val);
+                            }
                             // 设置数据格式
-                            if (!string.IsNullOrEmpty(wc.DataFormat) && this.Format == ExcelFormat.Xlsx)
+                            if (!string.IsNullOrEmpty(wc.DataFormat) && this.Format == ExcelFormat.xlsx)
                             {
                                 // ISSUS: XLS格式文件写入21行后就没有自定义格式
                                 var style = wb.CreateCellStyle();
@@ -85,7 +93,7 @@ namespace Bingosoft.TrioFramework.Component.Excel.NPOI
                             var wc = cell as WorkNumCell;
                             c.SetCellValue(WorkCellUtil.GetValue(wc));
                             c.SetCellType(CellType.Numeric);
-                            if (!string.IsNullOrEmpty(wc.DataFormat) && this.Format == ExcelFormat.Xlsx)
+                            if (!string.IsNullOrEmpty(wc.DataFormat) && this.Format == ExcelFormat.xlsx)
                             {
                                 var style = wb.CreateCellStyle();
                                 var format = wb.CreateDataFormat();
@@ -97,7 +105,7 @@ namespace Bingosoft.TrioFramework.Component.Excel.NPOI
                         {
                             var wc = cell as WorkMoneyCell;
                             c.SetCellValue(WorkCellUtil.GetValue(wc));
-                            if (!string.IsNullOrEmpty(wc.DataFormat) && this.Format == ExcelFormat.Xlsx)
+                            if (!string.IsNullOrEmpty(wc.DataFormat) && this.Format == ExcelFormat.xlsx)
                             {
                                 var style = wb.CreateCellStyle();
                                 var format = wb.CreateDataFormat();
@@ -114,7 +122,7 @@ namespace Bingosoft.TrioFramework.Component.Excel.NPOI
                         {
                             c.SetCellValue(cell.Content);
                             c.SetCellType(CellType.String);
-                            if (!string.IsNullOrEmpty(cell.DataFormat) && this.Format == ExcelFormat.Xlsx)
+                            if (!string.IsNullOrEmpty(cell.DataFormat) && this.Format == ExcelFormat.xlsx)
                             {
                                 var style = wb.CreateCellStyle();
                                 var format = wb.CreateDataFormat();
@@ -144,8 +152,8 @@ namespace Bingosoft.TrioFramework.Component.Excel.NPOI
             {
                 throw new NotImplementedException("目前只支持单行表头的读取");
             }
-            var wb = WorkbookFactory.Create(ms);
-            this.Format = (wb is XSSFWorkbook) ? ExcelFormat.Xlsx : ExcelFormat.Xls;
+            IWorkbook wb = WorkbookFactory.Create(ms);
+            this.Format = (wb is XSSFWorkbook) ? ExcelFormat.xlsx : ExcelFormat.xls;
             for (int sheetIndex = 0; sheetIndex < wb.NumberOfSheets; sheetIndex++)
             {
                 var s = wb.GetSheetAt(sheetIndex);

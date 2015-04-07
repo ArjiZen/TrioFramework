@@ -15,7 +15,7 @@ namespace Bingosoft.TrioFramework.Component.Excel
         protected WorkBook()
         {
             this.Sheets = new WorkSheetCollection();
-            this.Format = ExcelFormat.Xls;
+            this.Format = ExcelFormat.xls;
         }
 
         #endregion
@@ -28,11 +28,11 @@ namespace Bingosoft.TrioFramework.Component.Excel
             /// <summary>
             /// Office2003及之前的文件版本
             /// </summary>
-            Xls,
+            xls,
             /// <summary>
             /// Office2007及以后的版本
             /// </summary>
-            Xlsx
+            xlsx
         }
 
         #region Properties
@@ -120,6 +120,20 @@ namespace Bingosoft.TrioFramework.Component.Excel
         /// </summary>
         /// <returns></returns>
         public abstract MemoryStream Save();
+
+        /// <summary>
+        /// 保存为字节数组
+        /// </summary>
+        /// <returns></returns>
+        public byte[] SaveAsBytes()
+        {
+            var ms = this.Save();
+            if (ms == null)
+            {
+                return new byte[0];
+            }
+            return ms.ToArray();
+        }
 
         /// <summary>
         /// 保存
