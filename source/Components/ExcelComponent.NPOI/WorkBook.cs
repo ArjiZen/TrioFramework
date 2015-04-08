@@ -2,6 +2,7 @@
 using System.IO;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 
 namespace Bingosoft.TrioFramework.Component.Excel.NPOI
@@ -48,16 +49,38 @@ namespace Bingosoft.TrioFramework.Component.Excel.NPOI
                 var s = wb.CreateSheet(sheet.Name);
                 var rownum = 0;
                 var cellnum = 0;
-                // 表头
-                var headRow = s.CreateRow(rownum);
-                foreach (var head in sheet.Head)
+                // 多行表头
+                var headArr = sheet.Head.Get2DArray();
+                for (int headRowIndex = 0; headRowIndex < headArr.Length; headRowIndex++)
                 {
-                    var c = headRow.CreateCell(cellnum);
-                    c.SetCellValue(WorkCellUtil.GetValue(head));
-                    c.SetCellType(CellType.String);
-                    cellnum++;
+                    cellnum = 0;
+                    var headRow = headArr[headRowIndex];
+                    var row = s.CreateRow(rownum);
+                    for (int headCellIndex = 0; headCellIndex < headRow.Length; headCellIndex++)
+                    {
+                        var cell = headRow[headCellIndex];
+                        if (cell != null)
+                        {
+                            var c = row.CreateCell(cellnum);
+                            c.SetCellValue(WorkCellUtil.GetValue(cell));
+                            c.SetCellType(CellType.String);
+                            var ncell = cell;
+                            if (ncell.ColSpan > 1)
+                            {
+                                // 列合并
+                                s.AddMergedRegion(new CellRangeAddress(rownum, rownum, cellnum, cellnum + ncell.ColSpan - 1));
+                            }
+                            if (headRowIndex + 1 < headArr.Length && headArr[headRowIndex + 1][headCellIndex] == null)
+                            {
+                                // 如果当前单元格的下面一个单元格为NULL，则默认为行合并
+                                // 行合并
+                                s.AddMergedRegion(new CellRangeAddress(rownum, headArr.Length - 1, cellnum, cellnum));
+                            }
+                        }
+                        cellnum++;
+                    }
+                    rownum++;
                 }
-                rownum++;
                 // 数据行
                 foreach (var row in sheet.Data)
                 {

@@ -58,7 +58,9 @@ namespace Bingosoft.TrioFramework.Component.Excel
         /// <returns></returns>
         public WorkHead CreateHead()
         {
-            return WorkFactory.CreateWorkHead();
+            var h = WorkFactory.CreateWorkHead();
+            this.Head.Add(h);
+            return h;
         }
 
         /// <summary>
