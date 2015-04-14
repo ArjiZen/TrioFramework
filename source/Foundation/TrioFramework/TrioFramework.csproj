@@ -85,6 +85,7 @@
     <Compile Include="Config\WorkflowElement.cs" />
     <Compile Include="Config\FileServerElement.cs" />
     <Compile Include="Extensions\TypeExtension.cs" />
+    <Compile Include="TrioVer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_Config\SqlCommands\securityContext.config" />

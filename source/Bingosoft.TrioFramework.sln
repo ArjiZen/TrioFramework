@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Framework", "00.Framewor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrioFramework", "Foundation\TrioFramework\TrioFramework.csproj", "{3DC7A192-85FF-407F-865E-F45FF05CB928}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D6D04AF3-DC43-434A-988B-D0ADF476D45F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "99.Test", "99.Test", "{CF6A57C8-FF14-475D-81C3-66419D113634}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowCoreTest", "..\tests\WorkflowCoreTest\WorkflowCoreTest.csproj", "{742D8C39-A24B-45AD-9DD0-65792F63EF19}"

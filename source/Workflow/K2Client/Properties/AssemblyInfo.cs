@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Bingosoft.TrioFramework;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -32,8 +33,8 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion"1.4.2"")]
-[assembly: AssemblyVersion("1.4.3")]
-[assembly: AssemblyFileVersion("1.4.3")]
+[assembly: AssemblyVersion(TrioVer.K2Workflow)]
+[assembly: AssemblyFileVersion(TrioVer.K2Workflow)]
 [assembly: InternalsVisibleTo("Bingosoft.TrioFramework.Workflow.Core")]
 [assembly: InternalsVisibleTo("Bingosoft.TrioFramework.WindowsServices")]
 [assembly: InternalsVisibleTo("WorkflowK2ClientTest")]

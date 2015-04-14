@@ -63,6 +63,10 @@
     <Compile Include="WorkHead.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Foundation\TrioFramework\TrioFramework.csproj">
+      <Project>{3DC7A192-85FF-407F-865E-F45FF05CB928}</Project>
+      <Name>TrioFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExcelComponent\ExcelComponent.csproj">
       <Project>{11126a13-f29f-4030-b568-32eeeafa5258}</Project>
       <Name>ExcelComponent</Name>
