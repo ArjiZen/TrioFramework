@@ -23,6 +23,7 @@
     <DocumentationFile>..\..\..\bin\debug\Bingosoft.TrioFramework.XML</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <DebugType>full</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,6 +35,10 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bingosoft.Common.Logging">
+      <HintPath>..\..\Library\Bingosoft.Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Bingosoft.Core">
       <HintPath>..\..\Library\Bingosoft.Core.dll</HintPath>
     </Reference>
@@ -88,7 +93,9 @@
     <Compile Include="TrioVer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_Config\SqlCommands\securityContext.config" />
+    <EmbeddedResource Include="App_Config\SqlCommands\securityContext.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="App_Config\SqlCommands\param.config" />
     <EmbeddedResource Include="App_Config\SqlCommands\dictionary.config" />
   </ItemGroup>

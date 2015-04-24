@@ -13,17 +13,17 @@ namespace Bingosoft.TrioFramework
         /// <summary>
         /// TrioFramework核心框架版本号
         /// </summary>
-        public const string Core = "1.5.0";
+        public const string Core = "1.5.1";
 
         /// <summary>
         /// 工作流组件版本号
         /// </summary>
-        public const string Workflow = "1.4.3";
+        public const string Workflow = "1.5.1";
 
         /// <summary>
         /// K2工作流版本号
         /// </summary>
-        public const string K2Workflow = "1.4.3";
+        public const string K2Workflow = "1.5.1";
 
         /// <summary>
         /// Excel组件版本号

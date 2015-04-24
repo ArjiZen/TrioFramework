@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelComponent.NPOI", "Comp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelComponentTest", "..\tests\ExcelComponentTest\ExcelComponentTest.csproj", "{E956AC74-DC5F-410E-B86D-F4DA52B4CA63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowPerformanceConsoles", "..\tests\WorkflowPerformanceConsoles\WorkflowPerformanceConsoles.csproj", "{CCC64AC8-2556-4DD7-845D-58CB2067EFCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,10 @@ Global
 		{E956AC74-DC5F-410E-B86D-F4DA52B4CA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E956AC74-DC5F-410E-B86D-F4DA52B4CA63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E956AC74-DC5F-410E-B86D-F4DA52B4CA63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCC64AC8-2556-4DD7-845D-58CB2067EFCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCC64AC8-2556-4DD7-845D-58CB2067EFCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCC64AC8-2556-4DD7-845D-58CB2067EFCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCC64AC8-2556-4DD7-845D-58CB2067EFCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,5 +135,6 @@ Global
 		{11126A13-F29F-4030-B568-32EEEAFA5258} = {8FE180E3-5D7A-49D1-A8E5-EBB3D56B4E4F}
 		{62C21634-81F7-4ED4-B57E-1E45DE822824} = {8FE180E3-5D7A-49D1-A8E5-EBB3D56B4E4F}
 		{E956AC74-DC5F-410E-B86D-F4DA52B4CA63} = {CF6A57C8-FF14-475D-81C3-66419D113634}
+		{CCC64AC8-2556-4DD7-845D-58CB2067EFCE} = {CF6A57C8-FF14-475D-81C3-66419D113634}
 	EndGlobalSection
 EndGlobal

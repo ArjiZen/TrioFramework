@@ -43,11 +43,13 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 		/// <summary>
 		/// 任务编号
 		/// </summary>
+	    [PrimaryKey]
 		public int TaskId { get; set; }
 
 		/// <summary>
 		/// 实例编号
 		/// </summary>
+		[PrimaryKey]
 		public string InstanceNo { get; set; }
 
 		/// <summary>
@@ -174,7 +176,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 		public static IList<T> GetAll<T>(string instanceNo) where T : WorkflowItem, new() {
 			var type = typeof(T);
 			var attr = type.GetFirstAttr<TableAttribute>();
-			var sql = string.Format("SELECT * FROM {0} WITH(NOLOCK) WHERE InstanceNo = @InstanceNo", attr.Name);
+			var sql = string.Format("SELECT * FROM {0} WHERE InstanceNo = @InstanceNo", attr.Name);
 			var workitems = _dao.QueryEntities<T>(sql, new { InstanceNo = instanceNo });
 			LoadMidwayOpinions(instanceNo, workitems);
 			return workitems;
@@ -190,7 +192,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 		public static T Get<T>(string instanceNo, int taskId) where T : WorkflowItem, new() {
 			var type = typeof(T);
 			var attr = type.GetFirstAttr<TableAttribute>();
-			var sql = string.Format("SELECT * FROM {0} WITH(NOLOCK) WHERE InstanceNo = @InstanceNo AND TaskId = @TaskId", attr.Name);
+			var sql = string.Format("SELECT * FROM {0} WHERE InstanceNo = @InstanceNo AND TaskId = @TaskId", attr.Name);
 			return _dao.QueryEntity<T>(sql, new { InstanceNo = instanceNo, TaskId = taskId });
 		}
 
@@ -204,7 +206,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 		public static IEnumerable<T> GetAll<T>(string instanceNo, string activityName) where T : WorkflowItem, new() {
 			var type = typeof(T);
 			var attr = type.GetFirstAttr<TableAttribute>();
-			var sql = string.Format("SELECT * FROM {0} WITH(NOLOCK) WHERE InstanceNo = @InstanceNo AND CurrentActi = @CurrentActi AND FinishTime IS NULL", attr.Name);
+			var sql = string.Format("SELECT * FROM {0} WHERE InstanceNo = @InstanceNo AND CurrentActi = @CurrentActi AND FinishTime IS NULL", attr.Name);
 			return _dao.QueryEntities<T>(sql, new { InstanceNo = instanceNo, CurrentActi = activityName });
 		}
 

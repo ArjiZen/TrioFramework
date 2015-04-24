@@ -1,4 +1,6 @@
-﻿namespace Bingosoft.TrioFramework.Workflow.Business {
+﻿using System;
+
+namespace Bingosoft.TrioFramework.Workflow.Business {
     /// <summary>
     /// 业务表单
     /// </summary>
@@ -52,5 +54,32 @@
         /// <param name="message"></param>
         /// <returns></returns>
         public abstract bool Validate(out string message);
+
+        /// <summary>
+        /// 转换类型
+        /// </summary>
+        /// <typeparam name="T">目标类型</typeparam>
+        /// <returns></returns>
+        public T ConvertTo<T>(bool exceptionIsFailure = true) where T : BusinessForm
+        {
+            try
+            {
+                var form = (T)Convert.ChangeType(this, typeof(T));
+                if (form == null)
+                {
+                    throw new NullReferenceException();
+                }
+                return form;
+            }
+            catch (Exception ex)
+            {
+                if (exceptionIsFailure)
+                {
+                    Logger.LogError("TrioFramework", ex);
+                    throw new Exception("加载工单失败，原因：" + ex.Message, ex);
+                }
+            }
+            return null;
+        }
     }
 }

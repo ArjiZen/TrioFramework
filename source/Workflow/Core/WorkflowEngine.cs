@@ -14,9 +14,11 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// <summary>
 		/// 实例化工作流引擎
 		/// </summary>
-		public WorkflowEngine() {
+		protected WorkflowEngine() {
 			this.m_CurrentUser = null;
 		}
+
+        private static object lockObj = new object();
 
 		#region 实例化流程引擎
 
@@ -40,13 +42,17 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// 创建流程引擎实例
 		/// </summary>
 		public static WorkflowEngine Create(){
-			var configurator = SettingProvider.Workflow.Provider;
-			var t = Type.GetType(configurator);
-			if (t == null) {
-				throw new WorkflowEngineNotFoundException(configurator);
-			}
-			var engine = (WorkflowEngine)Activator.CreateInstance(t);
-			return engine;
+		    lock (lockObj)
+		    {
+                var configurator = SettingProvider.Workflow.Provider;
+                var t = Type.GetType(configurator);
+                if (t == null)
+                {
+                    throw new WorkflowEngineNotFoundException(configurator);
+                }
+                var engine = (WorkflowEngine)Activator.CreateInstance(t);
+                return engine;
+		    }
 		}
 
 		#endregion
