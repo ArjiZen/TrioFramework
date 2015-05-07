@@ -1,7 +1,7 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using Bingosoft.TrioFramework.Config;
 
+// ReSharper disable once CheckNamespace
 namespace Bingosoft.TrioFramework
 {
     /// <summary>
@@ -10,7 +10,7 @@ namespace Bingosoft.TrioFramework
     public static class SettingProvider
     {
 
-        private static object lockObj = new object();
+        private readonly static object lockObj = new object();
         private static TrioSection _trioSettings = null;
 
         /// <summary>

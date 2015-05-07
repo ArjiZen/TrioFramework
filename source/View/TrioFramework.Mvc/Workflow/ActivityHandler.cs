@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
 using Bingosoft.TrioFramework.Workflow.Business;
+using Bingosoft.TrioFramework.Workflow.Core;
 using Bingosoft.TrioFramework.Workflow.Core.Models;
-using Bingosoft.TrioFramework.Attributes;
 
 namespace Bingosoft.TrioFramework.Mvc.Workflow
 {

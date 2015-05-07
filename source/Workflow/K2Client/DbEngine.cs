@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Transactions;
-using Bingosoft.Data;
 using Bingosoft.Security;
 using Bingosoft.Security.Principal;
 using Bingosoft.TrioFramework.Workflow.Core.Models;
 using Bingosoft.TrioFramework.Workflow.K2Client.Models;
-using Bingosoft.TrioFramework.Workflow.Core;
 
 namespace Bingosoft.TrioFramework.Workflow.K2Client
 {
@@ -17,8 +16,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client
     public class DbEngine : IK2Engine
     {
 
-        private static object lockObj = new object();
-        private readonly static Dao _dao = Dao.Get();
+        private readonly static object lockObj = new object();
 
         /// <summary>
         /// 启动流程实例
@@ -32,19 +30,19 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client
             var isInstExists = WorkflowInstanceFactory.IsExists<K2WorkflowInstance>(instance.InstanceNo);
             if (isInstExists)
             {
-                ret = _dao.UpdateFields<K2WorkflowInstance>(instance, new string[] { "Title", "Status", "EndTime" });
+                ret = DBFactory.WorkflowDB.UpdateFields<K2WorkflowInstance>(instance, new string[] { "Title", "Status", "EndTime" });
             }
             else
             {
-                using (var transactionScope = new TransactionScope(TransactionScopeOption.Suppress))
+                using (var transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew))
                 {
                     lock (lockObj)
                     {
                         instance.InstanceNo = WorkflowInstance.GetNewInstanceNo();
-                        ret = _dao.Insert<WorkflowInstance>(instance);
+                        ret = DBFactory.WorkflowDB.Insert<WorkflowInstance>(instance);
                     }
                     instance.CurrentWorkItem.InstanceNo = instance.InstanceNo;
-                    _dao.Insert<K2WorkflowItem>(instance.CurrentWorkItem);   //增加一个新的流程办理信息
+                    DBFactory.WorkflowDB.Insert<K2WorkflowItem>(instance.CurrentWorkItem);   //增加一个新的流程办理信息
                     transactionScope.Complete();
                 }
             }
@@ -53,7 +51,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client
             {
                 var workitems = instance.GetWorkItems();
                 var effectRows = 0;
-                using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
+                using (var transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew))
                 {
                     foreach (var workitem in workitems)
                     {
@@ -61,7 +59,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client
                         {
                             workitem.FinishTime = DateTime.Now;
                             workitem.TaskStatus = TaskStatus.Finished;
-                            effectRows = _dao.UpdateFields<K2WorkflowItem>(workitem, new string[] { "FinishTime", "TaskStatus" });
+                            effectRows = DBFactory.WorkflowDB.UpdateFields<K2WorkflowItem>(workitem, new string[] { "FinishTime", "TaskStatus" });
                             if (effectRows > 0)
                             {
                                 PendingJob.Delete(workitem.InstanceNo, workitem.TaskId);
@@ -81,7 +79,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client
         /// <returns></returns>
         private int GetWorkItemLastTaskId(string instanceNo)
         {
-            return _dao.QueryScalar<int>("K2Client.Instance.GetWorkItemLastTaskId", new { InstanceNo = instanceNo });
+            return DBFactory.WorkflowDB.QueryScalar<int>("K2Client.Instance.GetWorkItemLastTaskId", new { InstanceNo = instanceNo });
         }
 
         /// <summary>
@@ -219,31 +217,38 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client
                 instance.Status = InstanceStatus.Finished;
             }
 
+            #region 更新流程数据到数据库
+            
             // 运行流程
-            using (var transactionScope = new TransactionScope(TransactionScopeOption.Suppress))
+            using (var transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew))
             {
                 //1.更新当前办理环节及其相关环节
                 foreach (var workItem in curWorkItems)
                 {
-                    _dao.UpdateFields<K2WorkflowItem>(workItem, "FinishTime", "AutoFinished", "Choice", "Comment", "TaskStatus", "MandataryId", "Mandatary");
+                    DBFactory.WorkflowDB.UpdateFields<K2WorkflowItem>(workItem, "FinishTime", "AutoFinished", "Choice", "Comment", "TaskStatus", "MandataryId", "Mandatary");
                 }
                 //2.新增下一批办理环节
                 foreach (var workitem in nextWorkItems)
                 {
-                    _dao.Insert<K2WorkflowItem>(workitem);
+                    DBFactory.WorkflowDB.Insert<K2WorkflowItem>(workitem);
                 }
                 //3.新增下一批待阅环节
                 foreach (var workitem in nextTobeReadWorkItems)
                 {
-                    _dao.Insert<K2WorkflowItem>(workitem);
+                    DBFactory.WorkflowDB.Insert<K2WorkflowItem>(workitem);
                 }
                 //4.更新流程实例
-                _dao.UpdateFields<K2WorkflowInstance>(instance, "EndTime", "Status", "CurrentActivity");
+                DBFactory.WorkflowDB.UpdateFields<K2WorkflowInstance>(instance, "EndTime", "Status", "CurrentActivity");
                 transactionScope.Complete();
             }
 
+            #endregion
+
+            #region 推送待办、消除待办数据
+
+            Thread.Sleep(300);
             // 推送待办已办
-            using (var transactionScope = new TransactionScope(TransactionScopeOption.Suppress))
+            using (var transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew))
             {
                 foreach (var workItem in curWorkItems)
                 {
@@ -259,6 +264,10 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client
                 transactionScope.Complete();
             }
 
+            #endregion
+
+            #region 个人常用意见计数
+
             try
             {
                 var opinion = new PersonalOpinion() {
@@ -271,6 +280,8 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client
             {
                 Logger.LogError("K2Client.DbEngine.RunWorkflow", ex, new { UserId = instance.CurrentWorkItem.PartId, Content = result.Comment });
             }
+
+            #endregion
 
             return true;
         }
@@ -316,7 +327,7 @@ namespace Bingosoft.TrioFramework.Workflow.K2Client
                 // 新增传阅环节
                 foreach (var workitem in tobeReadWorkItems)
                 {
-                    _dao.Insert<K2WorkflowItem>(workitem);
+                    DBFactory.WorkflowDB.Insert<K2WorkflowItem>(workitem);
                 }
                 transactionScope.Complete();
             }

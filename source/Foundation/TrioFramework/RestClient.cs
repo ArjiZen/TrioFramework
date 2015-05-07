@@ -1,24 +1,25 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Net;
 using System.Text;
 using Bingosoft.TrioFramework.Communication;
 using Newtonsoft.Json;
 
-namespace Bingosoft.TrioFramework {
+namespace Bingosoft.TrioFramework
+{
 
     /// <summary>
     /// 给予Rest服务的请求客户端
     /// </summary>
-    public class RestClient {
-
+    public class RestClient
+    {
         private const string LoginAction = "account/login";
 
         /// <summary>
         /// 创建Rest客户端
         /// </summary>
         /// <param name="apiBaseUrl">API基地址（不包含具体调用方法）</param>
-        public RestClient(string apiBaseUrl) {
+        public RestClient(string apiBaseUrl)
+        {
             this.BaseUrl = apiBaseUrl.TrimEnd('/');
         }
 
@@ -41,7 +42,8 @@ namespace Bingosoft.TrioFramework {
         /// </summary>
         /// <param name="loginid">登录用户Id</param>
         /// <returns></returns>
-        public TrioMessage Login(string loginid) {
+        public TrioMessage Login(string loginid)
+        {
             return this.Open(LoginAction, "loginid=" + loginid);
         }
 
@@ -54,10 +56,12 @@ namespace Bingosoft.TrioFramework {
         /// <param name="contentLength">请求内容长度（只有QueryString情况下为0）</param>
         /// <param name="contentType">请求内容格式</param>
         /// <returns></returns>
-        public TrioMessage Open(string action, string queryString = "", string method = "POST", int contentLength = 0, string contentType = CONTENT_TYPE_DEFAULT) {
+        public TrioMessage Open(string action, string queryString = "", string method = "POST", int contentLength = 0, string contentType = CONTENT_TYPE_DEFAULT)
+        {
             WebResponse response = null;
             byte[] responseBuffer;
-            try {
+            try
+            {
                 var actionUrl = string.Format("{0}/{1}?{2}", this.BaseUrl, action.TrimStart('/').TrimEnd('?'),
                     queryString);
                 var request = WebRequest.Create(actionUrl);
@@ -65,8 +69,10 @@ namespace Bingosoft.TrioFramework {
                 request.Method = method;
                 request.ContentLength = contentLength;
                 response = request.GetResponse();
-                using (var responseStream = response.GetResponseStream()) {
-                    if (responseStream == null) {
+                using (var responseStream = response.GetResponseStream())
+                {
+                    if (responseStream == null)
+                    {
                         throw new NullReferenceException("接口返回内容的格式错误");
                     }
                     responseBuffer = responseStream.ReadBytes(response.ContentLength);
@@ -74,7 +80,9 @@ namespace Bingosoft.TrioFramework {
                 var responseText = Encoding.UTF8.GetString(responseBuffer);
                 var result = JsonConvert.DeserializeObject<TrioMessage>(responseText);
                 return result;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Logger.LogError("RestClient", "请求地址时出现错误", ex,
                     new {
                         action = action,
@@ -84,9 +92,12 @@ namespace Bingosoft.TrioFramework {
                         contentType = contentType
                     });
                 return TrioMessage.Error(500, "请求时出现错误：" + ex.GetAllMessage());
-            } finally {
+            }
+            finally
+            {
                 responseBuffer = null;
-                if (response != null) {
+                if (response != null)
+                {
                     response.Close();
                 }
             }
@@ -101,9 +112,11 @@ namespace Bingosoft.TrioFramework {
         /// <param name="method">HTTP方法</param>
         /// <param name="contentType">请求内容格式</param>
         /// <returns></returns>
-        public TrioMessage Open(string action, byte[] formData, string queryString = "", string method = "POST", string contentType = CONTENT_TYPE_DEFAULT) {
+        public TrioMessage Open(string action, byte[] formData, string queryString = "", string method = "POST", string contentType = CONTENT_TYPE_DEFAULT)
+        {
             WebResponse response = null;
-            try {
+            try
+            {
                 byte[] responseBuffer;
                 var actionUrl = string.Format("{0}/{1}?{2}", this.BaseUrl, action.TrimStart('/').TrimEnd('?'),
                     queryString);
@@ -117,8 +130,10 @@ namespace Bingosoft.TrioFramework {
 
                 // 发起请求，获取返回结果流
                 response = request.GetResponse();
-                using (var responseStream = response.GetResponseStream()) {
-                    if (responseStream == null) {
+                using (var responseStream = response.GetResponseStream())
+                {
+                    if (responseStream == null)
+                    {
                         throw new NullReferenceException("接口返回内容的格式错误");
                     }
                     responseBuffer = responseStream.ReadBytes(response.ContentLength);
@@ -126,7 +141,9 @@ namespace Bingosoft.TrioFramework {
                 var responseText = Encoding.UTF8.GetString(responseBuffer);
                 var result = JsonConvert.DeserializeObject<TrioMessage>(responseText);
                 return result;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Logger.LogError("RestClient", "请求地址时出现错误", ex,
                     new {
                         action = action,
@@ -135,8 +152,11 @@ namespace Bingosoft.TrioFramework {
                         contentType = contentType
                     });
                 return TrioMessage.Error(500, "请求时出现错误：" + ex.GetAllMessage());
-            } finally {
-                if (response != null) {
+            }
+            finally
+            {
+                if (response != null)
+                {
                     response.Close();
                 }
             }

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq;
-using Bingosoft.Data;
-using Bingosoft.Security;
-using Bingosoft.Data.Attributes;
 using System.Collections.Generic;
+using System.Linq;
+using Bingosoft.Data.Attributes;
+using Bingosoft.Security;
 
-namespace Bingosoft.TrioFramework.Workflow.Core {
+namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 
 	/// <summary>
 	/// 个人常用意见
@@ -36,10 +35,12 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 
 		#endregion
 
-		private static readonly Dao _dao = Dao.Get();
-
+        /// <summary>
+        /// 检查该常用意见是否已存在
+        /// </summary>
+        /// <returns></returns>
 		private bool IsExists() {
-			return _dao.QueryScalar<int>("trio.workflow.opinion.personal.isexists", this) > 0;
+			return DBFactory.WorkflowDB.QueryScalar<int>("trio.workflow.opinion.personal.isexists", this) > 0;
 		}
 
 		/// <summary>
@@ -52,7 +53,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 			if (IsExists()) {
 				return true;
 			}
-			return _dao.Insert<PersonalOpinion>(this) > 0;
+			return DBFactory.WorkflowDB.Insert<PersonalOpinion>(this) > 0;
 		}
 
 		/// <summary>
@@ -62,7 +63,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// <param name="id">用户userid或loginid.</param>
 		public static string[] GetAll(string id) {
 			var u = SecurityContext.Provider.Get(id);
-			var list = _dao.QueryEntities<PersonalOpinion>("trio.workflow.opinion.personal.getall", new {UserId = u.Id});
+			var list = DBFactory.WorkflowDB.QueryEntities<PersonalOpinion>("trio.workflow.opinion.personal.getall", new {UserId = u.Id});
 			return list.Select(p => p.Content).ToArray();
 		}
 
@@ -71,7 +72,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// </summary>
 		/// <param name="id">常用意见id.</param>
 		public static PersonalOpinion Get(int id) {
-			return _dao.Select<PersonalOpinion>(id);
+			return DBFactory.WorkflowDB.Select<PersonalOpinion>(id);
 		}
 
 		/// <summary>
@@ -82,7 +83,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 			if (!IsExists()) {
 				return false;
 			}
-			var effectRow = _dao.ExecuteNonQuery("trio.workflow.opinion.personal.addusedtimes", this);
+			var effectRow = DBFactory.WorkflowDB.ExecuteNonQuery("trio.workflow.opinion.personal.addusedtimes", this);
 			return effectRow > 0;
 		}
 
@@ -93,7 +94,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 			if (!IsExists()) {
 				return false;
 			}
-			var effectRow = _dao.ExecuteNonQuery("trio.workflow.opinion.personal.markdeleted", this);
+			var effectRow = DBFactory.WorkflowDB.ExecuteNonQuery("trio.workflow.opinion.personal.markdeleted", this);
 			return effectRow > 0;
 		}
 	}
@@ -104,6 +105,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 	/// </summary>
 	[Table("WF_MidwayOpinions")]
 	public class MidwayOpinion {
+
 		#region Properties
 
 		/// <summary>
@@ -138,13 +140,11 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 
 		#endregion
 
-		private static Dao _dao = Dao.Get();
-
 		/// <summary>
 		/// 保存中途意见
 		/// </summary>
 		public bool Save() {
-			return _dao.Insert(this) > 0;
+			return DBFactory.WorkflowDB.Insert(this) > 0;
 		}
 			
 		/// <summary>
@@ -152,7 +152,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// </summary>
 		/// <param name="instanceNo">流程实例编号.</param>
 		public static IList<MidwayOpinion> GetAll(string instanceNo) {
-			return _dao.QueryEntities<MidwayOpinion>("trio.workflow.opinion.midway.getall", new {InstanceNo = instanceNo});
+			return DBFactory.WorkflowDB.QueryEntities<MidwayOpinion>("trio.workflow.opinion.midway.getall", new {InstanceNo = instanceNo});
 		}
 	}
 

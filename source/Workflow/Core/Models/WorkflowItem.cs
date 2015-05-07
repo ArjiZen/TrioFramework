@@ -156,8 +156,6 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 	/// </summary>
 	public static class WorkflowItemFactory {
 
-		private readonly static Dao _dao = Dao.Get();
-
 		/// <summary>
 		/// 创建新的流程项
 		/// </summary>
@@ -177,7 +175,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 			var type = typeof(T);
 			var attr = type.GetFirstAttr<TableAttribute>();
 			var sql = string.Format("SELECT * FROM {0} WHERE InstanceNo = @InstanceNo", attr.Name);
-			var workitems = _dao.QueryEntities<T>(sql, new { InstanceNo = instanceNo });
+			var workitems = DBFactory.WorkflowDB.QueryEntities<T>(sql, new { InstanceNo = instanceNo });
 			LoadMidwayOpinions(instanceNo, workitems);
 			return workitems;
 		}
@@ -193,7 +191,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 			var type = typeof(T);
 			var attr = type.GetFirstAttr<TableAttribute>();
 			var sql = string.Format("SELECT * FROM {0} WHERE InstanceNo = @InstanceNo AND TaskId = @TaskId", attr.Name);
-			return _dao.QueryEntity<T>(sql, new { InstanceNo = instanceNo, TaskId = taskId });
+			return DBFactory.WorkflowDB.QueryEntity<T>(sql, new { InstanceNo = instanceNo, TaskId = taskId });
 		}
 
 		/// <summary>
@@ -207,7 +205,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 			var type = typeof(T);
 			var attr = type.GetFirstAttr<TableAttribute>();
 			var sql = string.Format("SELECT * FROM {0} WHERE InstanceNo = @InstanceNo AND CurrentActi = @CurrentActi AND FinishTime IS NULL", attr.Name);
-			return _dao.QueryEntities<T>(sql, new { InstanceNo = instanceNo, CurrentActi = activityName });
+			return DBFactory.WorkflowDB.QueryEntities<T>(sql, new { InstanceNo = instanceNo, CurrentActi = activityName });
 		}
 
 		/// <summary>

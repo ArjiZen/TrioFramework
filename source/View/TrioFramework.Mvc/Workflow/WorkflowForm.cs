@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using Bingosoft.Data;
 using Bingosoft.Security;
 using Bingosoft.Security.Principal;
 using Bingosoft.TrioFramework.Models;
 using Bingosoft.TrioFramework.Workflow.Business;
 using Bingosoft.TrioFramework.Workflow.Core.Models;
-using Bingosoft.TrioFramework.Workflow.Core;
 
 namespace Bingosoft.TrioFramework.Mvc.Workflow
 {
-
     /// <summary>
     /// 流程工单状态
     /// </summary>
@@ -66,8 +63,6 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow
             HistoryActivities = new List<string>();
             TobeReadSelector = new TobeReadSelector();
         }
-
-        private static readonly Dao _dao = Dao.Get();
 
         #region Properties
 
@@ -278,7 +273,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow
         public IList<SelectListItem> GetAttachmentTypes()
         {
             var allAttachTypes = WorkflowAttachment.GetAllAttachType();
-            var activityAttachType = _dao.QueryScalar<string>("framework.attachment.getuploadtypes",
+            var activityAttachType = DBFactory.WorkflowDB.QueryScalar<string>("trio.framework.attachment.getuploadtypes",
                                          new { AppCode = this.AppCode, Version = this.Instance.Version, CurrentActi = this.CurrentActi });
             var list = new List<SelectListItem>();
             if (!string.IsNullOrEmpty(activityAttachType))

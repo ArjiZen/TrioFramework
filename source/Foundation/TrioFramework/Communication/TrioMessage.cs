@@ -11,18 +11,22 @@ namespace Bingosoft.TrioFramework.Communication {
         /// <summary>
         /// 是否操作成功
         /// </summary>
+        [JsonProperty("success")]
         public bool Success { get; set; }
         /// <summary>
         /// 返回数据
         /// </summary>
+        [JsonProperty("data")]
         public string Data { get; set; }
         /// <summary>
         /// 错误编码
         /// </summary>
+        [JsonProperty("errorCode")]
         public int ErrCode { get; set; }
         /// <summary>
         /// 错误信息
         /// </summary>
+        [JsonProperty("errorMessage")]
         public string ErrorMessage { get; set; }
 
         /// <summary>

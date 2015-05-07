@@ -1,10 +1,12 @@
 ﻿using System;
 
-namespace Bingosoft.TrioFramework.Workflow.Business {
+namespace Bingosoft.TrioFramework.Workflow.Business
+{
     /// <summary>
     /// 业务表单
     /// </summary>
-    public abstract class BusinessForm {
+    public abstract class BusinessForm
+    {
 
         #region Properties
         /// <summary>
@@ -37,12 +39,15 @@ namespace Bingosoft.TrioFramework.Workflow.Business {
         /// <typeparam name="T"></typeparam>
         /// <param name="from"></param>
         /// <param name="to"></param>
-        protected void CopyTo<T>(T from, T to) {
+        protected void CopyTo<T>(T from, T to)
+        {
             var type = typeof(T);
             var properties = type.GetProperties();
-            foreach (var property in properties) {
+            foreach (var property in properties)
+            {
                 var value = property.GetValue(from, null);
-                if (property.CanWrite) {
+                if (property.CanWrite)
+                {
                     property.SetValue(to, value, null);
                 }
             }
@@ -76,7 +81,7 @@ namespace Bingosoft.TrioFramework.Workflow.Business {
                 if (exceptionIsFailure)
                 {
                     Logger.LogError("TrioFramework", ex);
-                    throw new Exception("加载工单失败，原因：" + ex.Message, ex);
+                    throw new InvalidCastException(string.Format("类型{0}转换为{1}时出错", this.GetType().FullName, typeof(T).FullName), ex);
                 }
             }
             return null;

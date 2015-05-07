@@ -4,8 +4,6 @@ using System.IO;
 using System.Threading;
 using System.Web.Mvc;
 using Bingosoft.Security;
-using Bingosoft.TrioFramework.Attributes;
-using Bingosoft.TrioFramework.Mvc.Models;
 using Bingosoft.TrioFramework.Mvc.Workflow;
 using Bingosoft.TrioFramework.Workflow.Business;
 using Bingosoft.TrioFramework.Workflow.Core;
@@ -502,7 +500,7 @@ namespace Bingosoft.TrioFramework.Mvc.Controllers
                     }
                 }
 
-                form.ApproveResult.NextTobeReadUsers = form.TobeReadSelector[form.ApproveResult.Choice].Select(p => p.id).ToList();
+                form.ApproveResult.NextTobeReadUsers = form.TobeReadSelector[form.ApproveResult.Choice].Select(p => p.Id).ToList();
 
                 var engine = WorkflowEngine.Create();
                 var instance = engine.LoadWorkflow(form.InstanceNo, form.TaskId);

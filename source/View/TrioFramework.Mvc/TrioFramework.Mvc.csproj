@@ -127,17 +127,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global\ResFileVerTokenMarker.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\WorkflowController.cs" />
     <Compile Include="Extensions\EncryptExtension.cs" />
     <Compile Include="Extensions\HttpRequestExtension.cs" />
     <Compile Include="Extensions\HtmlExtension.cs" />
+    <Compile Include="Extensions\StaticFileExtension.cs" />
     <Compile Include="Extensions\WorkflowHtmlExtension.cs" />
     <Compile Include="WebDAVHelper.cs" />
     <Compile Include="Workflow\ActivityHandler.cs" />
     <Compile Include="Workflow\ApproveSelector.cs" />
     <Compile Include="Workflow\FlowFactory.cs" />
-    <Compile Include="Models\JsonModel.cs" />
+    <Compile Include="Extensions\ActionResultExtension.cs" />
     <Compile Include="Workflow\WorkflowForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Workflow\TobeReadSelector.cs" />

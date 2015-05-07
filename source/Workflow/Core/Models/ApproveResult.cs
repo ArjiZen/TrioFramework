@@ -8,6 +8,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 	/// </summary>
 	[Serializable]
 	public class ApproveResult {
+
 		/// <summary>
 		/// 审核结果
 		/// </summary>
@@ -16,13 +17,15 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 			this.NextTobeReadUsers = new List<string>();
 		}
 
-		/// <summary>
+        #region Properties
+
+        /// <summary>
 		/// 审批结果
 		/// </summary>
 		public string Choice { get; set; }
 
 		/// <summary>
-		/// 下一步处理人员id
+		/// 下一步处理人员Id
 		/// </summary>
 		public IList<string> NextUsers { get; set; }
 
@@ -36,5 +39,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 		/// </summary>
 		public string Comment { get; set; }
 
-	}
+        #endregion
+
+    }
 }

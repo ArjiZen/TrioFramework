@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Bingosoft.TrioFramework.Attributes;
 using Bingosoft.TrioFramework.Mvc.Controllers;
 using Bingosoft.TrioFramework.Workflow.Business;
+using Bingosoft.TrioFramework.Workflow.Core;
 
 namespace Bingosoft.TrioFramework.Mvc.Workflow {
 
@@ -50,7 +50,7 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 							if (type.IsSubclassOf(typeof(WorkflowController))) {
 								var attributes = type.GetCustomAttributes(typeof(WorkflowAttribute), false);
 								foreach (WorkflowAttribute attr in attributes) {
-									_controllersConfigs.Add(attr.AppCode, type.Name.Replace("Controller", ""));
+									controllersConfigs.Add(attr.AppCode, type.Name.Replace("Controller", ""));
 								}
 							}
 						} catch (Exception innerEx) {
@@ -74,14 +74,14 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 					if (type.IsSubclassOf(typeof(BusinessForm))) {
 						var attributes = type.GetCustomAttributes(typeof(WorkflowAttribute), false);
 						foreach (WorkflowAttribute attr in attributes) {
-							_businessForms.Add(attr.AppCode, type);
+							businessForms.Add(attr.AppCode, type);
 						}
 					}
 				}
 			}
 		}
 
-		private static readonly IDictionary<int, string> _controllersConfigs = new Dictionary<int, string>();
+		private static readonly IDictionary<int, string> controllersConfigs = new Dictionary<int, string>();
 
 		/// <summary>
 		/// 创建环节配置信息
@@ -89,14 +89,14 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <param name="appCode">流程编号</param>
 		/// <returns></returns>
 		public static string GetWorklfowControllerName(int appCode) {
-			if (_controllersConfigs.ContainsKey(appCode)) {
-				return _controllersConfigs[appCode];
+			if (controllersConfigs.ContainsKey(appCode)) {
+				return controllersConfigs[appCode];
 			} else {
 				throw new KeyNotFoundException(string.Format("未找到流程{0}的Controller配置信息", appCode));
 			}
 		}
 
-		private static readonly IDictionary<int, Type> _businessForms = new Dictionary<int, Type>();
+		private static readonly IDictionary<int, Type> businessForms = new Dictionary<int, Type>();
 
 		/// <summary>
 		/// 创建流程业务表单
@@ -104,8 +104,8 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <param name="appCode">流程编号</param>
 		/// <returns></returns>
 		public static BusinessForm CreateBusinessForm(int appCode) {
-			if (_businessForms.ContainsKey(appCode)) {
-				var businessForm = Activator.CreateInstance(_businessForms[appCode]) as BusinessForm;
+			if (businessForms.ContainsKey(appCode)) {
+				var businessForm = Activator.CreateInstance(businessForms[appCode]) as BusinessForm;
 				return businessForm;
 			} else {
 				throw new KeyNotFoundException(string.Format("未找到流程{0}的业务表单信息", appCode));

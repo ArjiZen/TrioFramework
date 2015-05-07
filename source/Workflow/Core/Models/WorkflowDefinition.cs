@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
-using Bingosoft.Data;
 using Bingosoft.Data.Attributes;
 
-namespace Bingosoft.TrioFramework.Workflow.Core.Models {
-
+namespace Bingosoft.TrioFramework.Workflow.Core.Models
+{
     /// <summary>
     /// 流程定义
     /// </summary>
     [Table("WF_Definition")]
-    public abstract class WorkflowDefinition {
+    public abstract class WorkflowDefinition
+    {
+
         #region Properties
         /// <summary>
         /// 流程编码
@@ -42,16 +43,19 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// </summary>
         public IList<WorkflowActivity> Activities { get; set; }
         #endregion
+
         /// <summary>
         /// 保存流程定义
         /// </summary>
         /// <returns></returns>
         public abstract bool Save();
+
         /// <summary>
         /// 更新流程定义
         /// </summary>
         /// <returns></returns>
         public abstract bool Update();
+
         /// <summary>
         /// 初始化环节信息
         /// </summary>
@@ -61,19 +65,19 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
     /// <summary>
     /// 流程定义工厂类
     /// </summary>
-    public static class WorkflowDefinitionFactory {
-
-        private static Dao _dao = Dao.Get();
+    public static class WorkflowDefinitionFactory
+    {
         /// <summary>
         /// 获取所有流程定义
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static IEnumerable<T> GetAll<T>() where T : WorkflowDefinition, new() {
-            var type = typeof (T);
+        public static IEnumerable<T> GetAll<T>() where T : WorkflowDefinition, new()
+        {
+            var type = typeof(T);
             var attr = type.GetFirstAttr<TableAttribute>();
             var sql = string.Format("SELECT * FROM {0} WITH(NOLOCK)", attr.Name);
-            return _dao.QueryEntities<T>(sql);
+            return DBFactory.WorkflowDB.QueryEntities<T>(sql);
         }
     }
 }

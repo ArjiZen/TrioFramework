@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Linq;
 using Bingosoft.Security;
 using Bingosoft.Security.Principal;
@@ -15,10 +14,10 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// 实例化工作流引擎
 		/// </summary>
 		protected WorkflowEngine() {
-			this.m_CurrentUser = null;
+			this._currentUser = null;
 		}
 
-        private static object lockObj = new object();
+        private readonly static object lockObj = new object();
 
 		#region 实例化流程引擎
 
@@ -57,20 +56,20 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 
 		#endregion
 
-		private IUser m_CurrentUser = null;
+		private IUser _currentUser = null;
 
 		/// <summary>
 		/// 当前用户
 		/// </summary>
 		public IUser CurrentUser {
 			get {
-				if (m_CurrentUser == null) {
-					m_CurrentUser = SecurityContext.User;
+				if (_currentUser == null) {
+					_currentUser = SecurityContext.User;
 				}
-				if (m_CurrentUser == null) {
+				if (_currentUser == null) {
 					throw new NullReferenceException("未设置流程当前处理用户");
 				}
-				return m_CurrentUser;
+				return _currentUser;
 			}
 		}
 
@@ -79,7 +78,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core {
 		/// </summary>
 		/// <param name="id">用户loginid 或 userid</param>
 		public void SetCurrentUser(string id) {
-			this.m_CurrentUser = SecurityContext.Provider.Get(id);
+			this._currentUser = SecurityContext.Provider.Get(id);
 		}
 
 		/// <summary>

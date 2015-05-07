@@ -1,16 +1,17 @@
 ﻿using Bingosoft.Data;
 using Bingosoft.Data.Attributes;
-using Bingosoft.Security;
 
-namespace Bingosoft.TrioFramework.Models {
+namespace Bingosoft.TrioFramework.Models
+{
 
     /// <summary>
     /// 组织架构
     /// </summary>
     [Table("SEC_Organization")]
-    public class Organization {
+    public class Organization
+    {
 
-        private readonly static Dao _dao = Dao.Get();
+        private readonly static Dao dao = Dao.Get();
 
         #region
         /// <summary>
@@ -29,9 +30,12 @@ namespace Bingosoft.TrioFramework.Models {
         /// <summary>
         /// 父部门
         /// </summary>
-        public Organization Parent {
-            get {
-                if (_parent == null) {
+        public Organization Parent
+        {
+            get
+            {
+                if (_parent == null)
+                {
                     _parent = Organization.Load(this.ParentId);
                 }
                 return _parent;
@@ -72,8 +76,9 @@ namespace Bingosoft.TrioFramework.Models {
         /// </summary>
         /// <param name="id">部门id</param>
         /// <returns></returns>
-        public static Organization Load(string id) {
-            return _dao.QueryEntity<Organization>("framework.organization.get", new { Id = id });
+        public static Organization Load(string id)
+        {
+            return dao.QueryEntity<Organization>("trio.framework.organization.get", new { Id = id });
         }
 
         /// <summary>
@@ -81,8 +86,9 @@ namespace Bingosoft.TrioFramework.Models {
         /// </summary>
         /// <param name="name">部门名称</param>
         /// <returns></returns>
-        public static Organization LoadByName(string name) {
-            return _dao.QueryEntity<Organization>("framework.organization.getbyname", new { Name = name });
+        public static Organization LoadByName(string name)
+        {
+            return dao.QueryEntity<Organization>("trio.framework.organization.getbyname", new { Name = name });
         }
     }
 }

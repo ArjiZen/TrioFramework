@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Bingosoft.Data;
 using Bingosoft.Data.Attributes;
 using Bingosoft.TrioFramework.Workflow.Core.Exceptions;
 
@@ -125,8 +124,6 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 
 		#endregion
 
-		private static readonly Dao _dao = Dao.Get();
-
 		/// <summary>
 		/// 获取流程第一个环节
 		/// </summary>
@@ -190,7 +187,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 		public static string GetNewInstanceNo() {
 			lock (lockObj) {
 				var today = DateTime.Today.ToString("yyyyMMdd");
-				var instanceNo = _dao.QueryScalar<string>("trio.workflow.core.instance.getmaxno", new {Today = today});
+				var instanceNo = DBFactory.WorkflowDB.QueryScalar<string>("trio.workflow.core.instance.getmaxno", new {Today = today});
 				if (string.IsNullOrEmpty(instanceNo)) {
 					instanceNo = today + "00001";
 				} else {
@@ -215,8 +212,6 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 	/// </summary>
 	public static class WorkflowInstanceFactory {
 
-		private readonly static Dao _dao = Dao.Get();
-
 		/// <summary>
 		/// 获取流程实例
 		/// </summary>
@@ -224,7 +219,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 		/// <param name="instanceNo">流程实例编号</param>
 		/// <returns></returns>
 		public static T Get<T>(string instanceNo) where T : WorkflowInstance, new() {
-			return _dao.Select<T>(instanceNo);
+			return DBFactory.WorkflowDB.Select<T>(instanceNo);
 		}
 
 		/// <summary>
@@ -243,7 +238,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
 		/// <param name="instanceNo">流程实例编号</param>
 		/// <returns></returns>
 		public static bool IsExists<T>(string instanceNo) where T : WorkflowInstance, new() {
-			return _dao.Exists<T>(instanceNo);
+            return DBFactory.WorkflowDB.Exists<T>(instanceNo);
 		}
 	}
 }

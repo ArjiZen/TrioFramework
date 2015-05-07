@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Bingosoft.TrioFramework
+﻿namespace Bingosoft.TrioFramework
 {
     /// <summary>
     /// Trio版本号
@@ -13,7 +8,7 @@ namespace Bingosoft.TrioFramework
         /// <summary>
         /// TrioFramework核心框架版本号
         /// </summary>
-        public const string Core = "1.5.1";
+        public const string Core = "1.6.0";
 
         /// <summary>
         /// 工作流组件版本号

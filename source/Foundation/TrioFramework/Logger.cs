@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Web;
 using Bingosoft.Data;
 using Bingosoft.Data.Attributes;
@@ -12,7 +11,7 @@ namespace Bingosoft.TrioFramework {
 	/// </summary>
 	public static class Logger {
 
-		private static readonly Dao _dao = Dao.Get();
+		private static readonly Dao dao = Dao.Get();
 
 		/// <summary>
 		/// 日志基类
@@ -80,7 +79,7 @@ namespace Bingosoft.TrioFramework {
 			#endregion
 
 			public override bool Save() {
-				var effectRows = _dao.Insert<OperatorLog>(this);
+				var effectRows = dao.Insert<OperatorLog>(this);
 				return effectRows > 0;
 			}
 		}
@@ -106,7 +105,7 @@ namespace Bingosoft.TrioFramework {
 			public DateTime CreateTime { get; set; }
 
 			public override bool Save() {
-				var effectRows = _dao.Insert<ErrorLog>(this);
+				var effectRows = dao.Insert<ErrorLog>(this);
 				return effectRows > 0;
 			}
 		}
@@ -137,7 +136,7 @@ namespace Bingosoft.TrioFramework {
 			public string ExceptionMsg { get; set; }
 
 			public override bool Save() {
-				var effectRows = _dao.Insert<ServiceCallLog>(this);
+				var effectRows = dao.Insert<ServiceCallLog>(this);
 				if (effectRows > 0) {
 					this.ServiceCallLogId = GetId();
 					return true;
@@ -146,16 +145,16 @@ namespace Bingosoft.TrioFramework {
 			}
 
 			public bool Update() {
-				var effectRows = _dao.UpdateFields<ServiceCallLog>(this, "IsSuccess", "ResponseTime", "ResponseContent", "ResponseContentLength", "ExceptionType", "ExceptionMsg");
+				var effectRows = dao.UpdateFields<ServiceCallLog>(this, "IsSuccess", "ResponseTime", "ResponseContent", "ResponseContentLength", "ExceptionType", "ExceptionMsg");
 				return effectRows > 0;
 			}
 
 			public static ServiceCallLog Get(long id) {
-				return _dao.QueryEntity<ServiceCallLog>("SELECT * FROM dbo.SYS_ServiceCallLog WHERE ServiceCallLogId = #Id#", new {Id = id});
+				return dao.QueryEntity<ServiceCallLog>("SELECT * FROM dbo.SYS_ServiceCallLog WHERE ServiceCallLogId = #Id#", new {Id = id});
 			}
 
 			private long GetId() {
-				var logid = _dao.QueryScalar<long>("SELECT IDENT_CURRENT ('SYS_ServiceCallLog')");
+				var logid = dao.QueryScalar<long>("SELECT IDENT_CURRENT ('SYS_ServiceCallLog')");
 				return logid;
 			}
 		}
@@ -242,6 +241,65 @@ namespace Bingosoft.TrioFramework {
 			log.ExceptionMsg = ex.GetAllMessage();
 			return log.Save();
 		}
+
+        /// <summary>
+        /// 记录操作日志
+        /// </summary>
+        /// <param name="module">所属模块</param>
+        /// <param name="action">操作类型</param>
+        /// <param name="content">操作内容</param>
+        /// <returns></returns>
+        public static bool LogOperator(string module, string action, string content)
+        {
+            var log = new OperatorLog() {
+                Module = module,
+                Action = action,
+                ActionContent = content,
+                ActionTime = DateTime.Now,
+                IsSuccess = true,
+                ExceptionType = "",
+                ExceptionMsg = ""
+            };
+            if (HttpContext.Current != null)
+            {
+                var loginUser = SecurityContext.User;
+                if (loginUser != null)
+                {
+                    log.Actor = loginUser.LoginId + "|" + loginUser.Name;
+                }
+            }
+            return log.Save();
+        }
+
+        /// <summary>
+        /// 记录操作日志
+        /// </summary>
+        /// <param name="module">所属模块</param>
+        /// <param name="action">操作类型</param>
+        /// <param name="content">操作内容</param>
+        /// <param name="ex">异常</param>
+        /// <returns></returns>
+        public static bool LogOperator(string module, string action, string content, Exception ex)
+        {
+            var log = new OperatorLog() {
+                Module = module,
+                Action = action,
+                ActionContent = content,
+                ActionTime = DateTime.Now,
+                IsSuccess = false
+            };
+            if (HttpContext.Current != null)
+            {
+                var loginUser = SecurityContext.User;
+                if (loginUser != null)
+                {
+                    log.Actor = loginUser.LoginId + "|" + loginUser.Name;
+                }
+            }
+            log.ExceptionType = ex.GetType().ToString();
+            log.ExceptionMsg = ex.GetAllMessage();
+            return log.Save();
+        }
 
 		/// <summary>
 		/// 记录错误日志

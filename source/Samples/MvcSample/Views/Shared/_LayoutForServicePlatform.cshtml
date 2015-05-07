@@ -1,0 +1,92 @@
+﻿@using Bingosoft.TrioFramework.Mvc
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <title>ITSP - 营销支撑 - @ViewBag.Title</title>
+    @Html.Stylesheet("~/Content/Site.css")
+    @Html.Stylesheet("~/Content/bootstrap.min.css")
+    @Html.Stylesheet("~/Content/trio/itsp-style.css")
+    @if (IsSectionDefined("css"))
+    {
+        <!--页面引用的样式 Start-->
+        @RenderSection("css")
+        <!--页面引用的样式  End-->
+    }
+    @*@Html.Script("~/Scripts/require.js")
+    @Html.Script("~/Scripts/require.config.js")*@
+</head>
+<body class="trio-layout">
+    <script id="topmenu_template" container=".itsp-topmenu ul.nav" type="text/x-jsrender">
+        <li title="{{:name}}">
+            <span>&nbsp;</span>
+            <a href="{{:url}}" menuid="{{:id}}">
+                {{:name}}
+            </a>
+        </li>
+    </script>
+    <!-- 顶部信息 -->
+    <div class="header">
+        <div class="banner-background"></div>
+        <div class="banner">
+            <div class="welcome">
+                <div class="info">
+                    @*<span>欢迎：@SecurityContext.User.Name</span>&nbsp;<a href="@Url.Action("Logout", "Default", new {area = "Account"})">[注销]</a>*@ 
+                </div>
+            </div>
+        </div>
+        <div class="itsp-topmenu">
+            <ul class="nav"></ul>
+        </div>
+    </div>
+    <!-- logo end -->
+    <!--顶部导航菜单  start-->
+    <!--顶部导航菜单 end-->
+    <!-- 左边导航菜单 start -->
+    <div id="sidebar" class="sidebar" style="height: 480px;">
+        <div class="top"></div>
+        <div id="sidemenu" class="ztree"></div>
+    </div>
+    <!-- 左边导航菜单 end-->
+    <!-- 中间主体内容 start -->
+    <div id="content" class="pageContent">
+        <!-- content start -->
+        @RenderBody()
+        <!-- content end -->
+        @*@Html.Partial("PagerTemplates/Pager")*@
+    </div>
+    @Html.Stylesheet("~/Content/trio/layout.min.css")
+    @if (IsSectionDefined("script"))
+    {
+        <!--页面引用的样式 Start-->
+        @RenderSection("script")
+        <!--页面引用的样式  End-->
+    }
+    <!-- 中间主体内容 end -->
+    <!-- 脚部 start -->
+    <div class="footer">
+        <div style="text-align: center;">中国移动广东公司深圳分公司 © 2014</div>
+    </div>
+    <!-- 脚部 end
+    -->
+    <style type="text/css">
+        /* 去掉后台系统的滚动条 */ html {
+            overflow: hidden;
+        }
+        /*页面内容区域显示滚动条*/
+        .pageContent {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    </style>
+    @*@Html.Script("~/Scripts/My97DatePicker/WdatePicker.js")*@
+    @*<script type="text/javascript" src="@Url.Action("GetMyMenus", "Default", new {area = "Account"})"></script>
+    <script type="text/javascript">
+        require(['trio/menuBuilder'], function(builder) {
+            builder.initMenu(window.myMenu, location.href);
+        });
+    </script>*@
+</body>
+</html>

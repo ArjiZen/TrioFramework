@@ -1,27 +1,29 @@
-﻿using Bingosoft.Data;
+﻿using System.Linq;
 using Bingosoft.Security;
 using Bingosoft.Security.Principal;
-using System.Linq;
+using Bingosoft.TrioFramework;
 using Bingosoft.TrioFramework.Models;
 
 /// <summary>
 /// 安全上下文扩展
 /// </summary>
-public static class SecurityContextExtension {
-    private readonly static Dao _dao = Dao.Get();
-
+// ReSharper disable once CheckNamespace
+public static class SecurityContextExtension
+{
     /// <summary>
     /// 根据 loginid 或 userid 获取指定人员
     /// </summary>
     /// <param name="provider"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    public static IUser Get(this ISecurityProvider provider, string id) {
-		var u = _dao.QueryEntity<User>("framework.securitycontext.getuser", new { Id = id });
-		if (u == null) {
-			return SecurityContext.Provider.GetUser(id);
-		}
-		return u;
+    public static IUser Get(this ISecurityProvider provider, string id)
+    {
+        var u = DBFactory.DB.QueryEntity<User>("framework.securitycontext.getuser", new { Id = id });
+        if (u == null)
+        {
+            return SecurityContext.Provider.GetUser(id);
+        }
+        return u;
     }
 
     /// <summary>
@@ -31,8 +33,9 @@ public static class SecurityContextExtension {
     /// <param name="roleName">角色名</param>
     /// <param name="orgName">部门名称</param>
     /// <returns></returns>
-    public static User[] GetRoleUsers(this ISecurityProvider provider, string roleName, string orgName) {
-        var list = _dao.QueryEntities<User>("framework.securitycontext.getroleuserbyorg", new { RoleName = roleName, OrgName = orgName });
+    public static User[] GetRoleUsers(this ISecurityProvider provider, string roleName, string orgName)
+    {
+        var list = DBFactory.DB.QueryEntities<User>("framework.securitycontext.getroleuserbyorg", new { RoleName = roleName, OrgName = orgName });
         return list.ToArray();
     }
 
@@ -42,8 +45,9 @@ public static class SecurityContextExtension {
     /// <param name="provider"></param>
     /// <param name="roleName">角色名</param>
     /// <returns></returns>
-    public static User[] GetRoleUsers(this ISecurityProvider provider, string roleName) {
-        var list = _dao.QueryEntities<User>("framework.securitycontext.getroleuser", new { RoleName = roleName });
+    public static User[] GetRoleUsers(this ISecurityProvider provider, string roleName)
+    {
+        var list = DBFactory.DB.QueryEntities<User>("framework.securitycontext.getroleuser", new { RoleName = roleName });
         return list.ToArray();
     }
 
@@ -53,8 +57,9 @@ public static class SecurityContextExtension {
     /// <param name="user"></param>
     /// <param name="roleName">角色名</param>
     /// <returns></returns>
-    public static bool InRole(this IUser user, string roleName) {
-        var isExists = _dao.QueryScalar<int>("framework.securitycontext.isinrole", new { UserId = user.Id, RoleName = roleName });
+    public static bool InRole(this IUser user, string roleName)
+    {
+        var isExists = DBFactory.DB.QueryScalar<int>("framework.securitycontext.isinrole", new { UserId = user.Id, RoleName = roleName });
         return isExists > 0;
     }
 
@@ -64,8 +69,9 @@ public static class SecurityContextExtension {
     /// <param name="user"></param>
     /// <param name="deptName"></param>
     /// <returns></returns>
-    public static bool IsInDept(this IUser user, string deptName) {
-        var isExists = _dao.QueryScalar<int>("framework.securitycontext.isindept", new { UserId = user.Id, DeptName = deptName });
+    public static bool IsInDept(this IUser user, string deptName)
+    {
+        var isExists = DBFactory.DB.QueryScalar<int>("framework.securitycontext.isindept", new { UserId = user.Id, DeptName = deptName });
         return isExists > 0;
     }
 
@@ -75,7 +81,8 @@ public static class SecurityContextExtension {
     /// <param name="provider"></param>
     /// <param name="id">部门id</param>
     /// <returns></returns>
-    public static Organization GetOrganization(this ISecurityProvider provider, string id) {
+    public static Organization GetOrganization(this ISecurityProvider provider, string id)
+    {
         return Organization.Load(id);
     }
 
@@ -85,7 +92,8 @@ public static class SecurityContextExtension {
     /// <param name="provider"></param>
     /// <param name="name">部门名称</param>
     /// <returns></returns>
-    public static Organization GetOrganizationByName(this ISecurityProvider provider, string name) {
+    public static Organization GetOrganizationByName(this ISecurityProvider provider, string name)
+    {
         return Organization.LoadByName(name);
     }
 }

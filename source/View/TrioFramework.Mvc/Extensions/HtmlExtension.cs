@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.Remoting.Messaging;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Bingosoft.TrioFramework.Models;
-using Bingosoft.TrioFramework.Mvc.Models;
 
 /// <summary>
 /// 用于工作流的页面扩展
@@ -44,6 +37,4 @@ public static class HtmlExtension {
 		var selectListItems = collection.ToSelectListItems();
 		return htmlHelper.DropDownList(name, selectListItems, htmlAttributes);
 	}
-
-
 }

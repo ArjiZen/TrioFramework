@@ -74,6 +74,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ActivityAttribute.cs" />
+    <Compile Include="Attributes\WorkflowAttribute.cs" />
     <Compile Include="Exceptions\WorkflowExceptions.cs" />
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\ApproveResult.cs" />

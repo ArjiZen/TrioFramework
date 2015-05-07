@@ -5,7 +5,10 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
     /// <summary>
     /// 环节参与人计算
     /// </summary>
-    public abstract class Actor {
+    public abstract class Actor
+    {
+        #region Properties
+
         /// <summary>
         /// 角色名
         /// </summary>
@@ -15,6 +18,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// 2、指定环节
         /// </remarks>
         public string RoleName { get; set; }
+
         /// <summary>
         /// 角色基准
         /// </summary>
@@ -24,14 +28,18 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// 3、指定部门
         /// </remarks>
         public string RoleBase { get; set; }
+
         /// <summary>
         /// 部门Id
         /// </summary>
         public string DeptId { get; set; }
+
         /// <summary>
         /// 引用环节名
         /// </summary>
         public string RefActivityName { get; set; }
+
+        #endregion
 
         /// <summary>
         /// 计算环节参与人

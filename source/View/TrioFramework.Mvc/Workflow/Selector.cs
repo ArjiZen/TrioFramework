@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bingosoft.Security;
-using Bingosoft.TrioFramework.Models;
+using Newtonsoft.Json;
 
 namespace Bingosoft.TrioFramework.Mvc.Workflow {
 	/// <summary>
@@ -15,31 +15,36 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// </summary>
 		[Serializable]
 		public class SelectorUser {
+
 			/// <summary>
 			/// 用户id
 			/// </summary>
-			public string id { get; set; }
+			[JsonProperty("id")]
+			public string Id { get; set; }
 
 			/// <summary>
 			/// 用户名
 			/// </summary>
-			public string name { get; set; }
+			[JsonProperty("name")]
+			public string Name { get; set; }
 
 			/// <summary>
 			/// 部门名称
 			/// </summary>
-			public string deptName { get; set; }
+			[JsonProperty("deptName")]
+			public string DeptName { get; set; }
 
 			/// <summary>
 			/// 是否默认选中
 			/// </summary>
-			public bool selected { get; set; }
+			[JsonProperty("selected")]
+			public bool Selected { get; set; }
 		}
 
 		/// <summary>
 		/// 环节用户
 		/// </summary>
-		protected IDictionary<string, IList<SelectorUser>> m_Users = new Dictionary<string, IList<SelectorUser>>();
+		protected IDictionary<string, IList<SelectorUser>> Users = new Dictionary<string, IList<SelectorUser>>();
 
 		/// <summary>
 		/// 获取当前审核结果的选择用户
@@ -47,10 +52,10 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <param name="choice">审核结果.</param>
 		public IList<SelectorUser> this [string choice] {
 			get {
-				if (!m_Users.ContainsKey(choice)) {
-					m_Users.Add(choice, new List<SelectorUser>());
+				if (!Users.ContainsKey(choice)) {
+					Users.Add(choice, new List<SelectorUser>());
 				}
-				return m_Users[choice];
+				return Users[choice];
 			}
 		}
 
@@ -61,10 +66,10 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <param name="id">用户loginid或userid.</param>
 		/// <param name="selected">是否默认选中.</param>
 		protected virtual void Add(string choice, string id, bool selected = false) {
-			if (!this.m_Users.ContainsKey(choice)) {
-				this.m_Users.Add(choice, new List<SelectorUser>());
+			if (!this.Users.ContainsKey(choice)) {
+				this.Users.Add(choice, new List<SelectorUser>());
 			}
-			if (this[choice].Any(p => p.id.Equals(id, StringComparison.OrdinalIgnoreCase))) {
+			if (this[choice].Any(p => p.Id.Equals(id, StringComparison.OrdinalIgnoreCase))) {
 				return;
 			}
 			var user = SecurityContext.Provider.Get(id);
@@ -76,10 +81,10 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 				throw new NullReferenceException(string.Format("未找到用户{0}所属的ID为{1}的部门", user.Name, user.DeptId));
 			}
 			this[choice].Add(new SelectorUser() {
-				id = user.Id,
-				name = user.Name,
-				deptName = dept.FullName,
-				selected = selected
+				Id = user.Id,
+				Name = user.Name,
+				DeptName = dept.FullName,
+				Selected = selected
 			});
 		}
 
@@ -89,17 +94,17 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// <param name="choice">审核结果.</param>
 		/// <param name="id">用户loginid或userid.</param>
 		public virtual void Remove(string choice, string id) {
-			if (!m_Users.ContainsKey(choice)) {
+			if (!Users.ContainsKey(choice)) {
 				return;
 			}
 
 			var user = SecurityContext.Provider.Get(id);
-			if (!m_Users[choice].Any(p => p.id.Equals(id, StringComparison.OrdinalIgnoreCase))) {
+			if (!Users[choice].Any(p => p.Id.Equals(id, StringComparison.OrdinalIgnoreCase))) {
 				return;
 			}
 
-			var selected = m_Users[choice].First(p => p.id.Equals(user.Id, StringComparison.OrdinalIgnoreCase));
-			m_Users[choice].Remove(selected);
+			var selected = Users[choice].First(p => p.Id.Equals(user.Id, StringComparison.OrdinalIgnoreCase));
+			Users[choice].Remove(selected);
 		}
 
 		/// <summary>
@@ -107,8 +112,8 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// </summary>
 		/// <param name="choice">Choice.</param>
 		public virtual void RemoveChoice(string choice) {
-			if (m_Users.ContainsKey(choice)) {
-				m_Users.Keys.Remove(choice);
+			if (Users.ContainsKey(choice)) {
+				Users.Keys.Remove(choice);
 			}
 		}
 
@@ -117,8 +122,8 @@ namespace Bingosoft.TrioFramework.Mvc.Workflow {
 		/// </summary>
 		/// <param name="choice">审核结果.</param>
 		public virtual void Clear(string choice) {
-			if (this.m_Users.ContainsKey(choice)) {
-				this.m_Users[choice].Clear();
+			if (this.Users.ContainsKey(choice)) {
+				this.Users[choice].Clear();
 			}
 		}
 

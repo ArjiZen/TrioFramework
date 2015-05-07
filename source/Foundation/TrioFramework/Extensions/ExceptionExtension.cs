@@ -4,6 +4,7 @@ using System.Text;
 /// <summary>
 /// 异常扩展
 /// </summary>
+// ReSharper disable once CheckNamespace
 public static class ExceptionExtension {
     /// <summary>
     /// 获取完整的错误信息

@@ -67,8 +67,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ActivityAttribute.cs" />
-    <Compile Include="Attributes\WorkflowAttribute.cs" />
     <Compile Include="Communication\TrioFileMessage.cs" />
     <Compile Include="Communication\TrioMessage.cs" />
     <Compile Include="Config\ExcelElement.cs" />
@@ -90,10 +88,11 @@
     <Compile Include="Config\WorkflowElement.cs" />
     <Compile Include="Config\FileServerElement.cs" />
     <Compile Include="Extensions\TypeExtension.cs" />
+    <Compile Include="DBFactory.cs" />
     <Compile Include="TrioVer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_Config\SqlCommands\securityContext.config">
+    <EmbeddedResource Include="App_Config\SqlCommands\security.config">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="App_Config\SqlCommands\param.config" />
@@ -135,5 +134,9 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="App_Config\SqlCommands\kissu.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

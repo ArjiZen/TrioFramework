@@ -3,6 +3,7 @@
 /// <summary>
 /// 类型扩展方法
 /// </summary>
+// ReSharper disable once CheckNamespace
 public static class TypeExtension {
 	/// <summary>
 	/// 获取第一个该类型的特性
