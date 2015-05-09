@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <title>@SettingProvider.Common.SystemName - @ViewBag.Title</title>
+    @Html.Stylesheet("~/Content/libs/bootstrap.min.css")
+    @if (IsSectionDefined("css"))
+    {
+        <!--页面引用的样式 Start-->
+        @RenderSection("css")
+        <!--页面引用的样式  End-->
+    }
+    @Html.Script("~/Scripts/require.js")
+    @Html.Script("~/Scripts/require.config.js")
+</head>
+<body>
+    <!-- 左边导航菜单 end-->
+    <!-- 中间主体内容 start -->
+    <div id="content" class="pageContent">
+        <!-- content start -->
+        @RenderBody()
+        <!-- content end -->
+        @*@Html.Partial("PagerTemplates/Pager")*@
+    </div>
+    @Html.Stylesheet("~/Content/trio/layout.min.css")
+    @if (IsSectionDefined("script"))
+    {
+        <!--页面引用的样式 Start-->
+        @RenderSection("script")
+        <!--页面引用的样式  End-->
+    }
+    <!-- 中间主体内容 end -->
+    <!-- 脚部 start -->
+    <div class="footer">
+        <div> © 2015</div>
+    </div>
+    <!-- 脚部 end
+    -->
+    <style type="text/css">
+        /* 去掉后台系统的滚动条 */ 
+        html {
+            overflow: hidden;
+        }
+        /*页面内容区域显示滚动条*/
+        .pageContent {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    </style>
+    @Html.Script("~/Scripts/My97DatePicker/WdatePicker.js")
+</body>
+</html>

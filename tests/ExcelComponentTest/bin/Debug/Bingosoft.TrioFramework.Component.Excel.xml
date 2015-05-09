@@ -1,0 +1,340 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bingosoft.TrioFramework.Component.Excel</name>
+    </assembly>
+    <members>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkFactory">
+            <summary>
+            Excel对象工厂类
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Component.Excel.WorkFactory._cache">
+            <summary>
+            类型缓存
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkFactory.Create``1">
+            <summary>
+            创建对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkFactory.CreateWorkbook">
+            <summary>
+            新建工作簿
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkFactory.CreateWorkSheet">
+            <summary>
+            新建工作表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkFactory.CreateWorkHead">
+            <summary>
+            创建表头对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkFactory.CreateDataRow">
+            <summary>
+            创建数据行
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkFactory.CreateWorkCell(System.String)">
+            <summary>
+            创建单元格
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.WorkFactory.ImplementAssembly">
+            <summary>
+            实现的程序集
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkHeadCollection">
+            <summary>
+            Excel表头集合
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkHeadCollection.Add(System.String)">
+            <summary>
+            初始化表头单元格
+            </summary>
+            <param name="content"></param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkHeadCollection.AddRange(System.String[])">
+            <summary>
+            初始化表头单元格集合
+            </summary>
+            <param name="heads"></param>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkHead">
+            <summary>
+            Excel表头
+            </summary>
+            <remarks>
+            树结构
+            </remarks>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkStrCell">
+            <summary>
+            字符串类型的单元格
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkCell">
+            <summary>
+            Excel单元格
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkCell.Create(System.String)">
+            <summary>
+            创建单元格
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.WorkCell.Content">
+            <summary>
+            单元格内容
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.WorkCell.DataFormat">
+            <summary>
+            数据格式
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkHead.#ctor">
+            <summary>
+            初始化表头单元格
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkHead.#ctor(System.String)">
+            <summary>
+            初始化表头单元格
+            </summary>
+            <param name="content"></param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkHead.Create">
+            <summary>
+            新建表头单元格
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkHead.Create(System.String)">
+            <summary>
+            新建表头单元格
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.WorkHead.Children">
+            <summary>
+            子表头集合
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkBook">
+            <summary>
+            Excel工作簿
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkBook.Create">
+            <summary>
+            创建一个工作簿
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkBook.Create(Bingosoft.TrioFramework.Component.Excel.WorkBook.ExcelFormat)">
+            <summary>
+            创建一个工作簿
+            </summary>
+            <param name="format">工作簿文件类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkBook.LoadFrom(System.IO.MemoryStream)">
+            <summary>
+            从MemoryStream中加载Excel文档数据
+            </summary>
+            <param name="ms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkBook.LoadFrom(System.String)">
+            <summary>
+            从文件读取Excel工作簿
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkBook.Save">
+            <summary>
+            保存
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkBook.SaveAsBytes">
+            <summary>
+            保存为字节数组
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkBook.Save(System.String,System.Boolean)">
+            <summary>
+            保存
+            </summary>
+            <param name="filePath"></param>
+            <param name="isCover">是否覆盖目标文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkBook.Load(System.IO.MemoryStream,System.Int32)">
+            <summary>
+            读取
+            </summary>
+            <param name="ms"></param>
+            <param name="headRows">标题行数</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkBook.CreateSheet(System.String)">
+            <summary>
+            创建工作表并添加到当前工作簿
+            </summary>
+            <param name="sheetName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.WorkBook.Sheets">
+            <summary>
+            工作表
+            </summary>
+            <value>The sheets.</value>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.WorkBook.Format">
+            <summary>
+            Excel文件格式
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkBook.ExcelFormat">
+            <summary>
+            Excel文件格式
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Component.Excel.WorkBook.ExcelFormat.xls">
+            <summary>
+            Office2003及之前的文件版本
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Component.Excel.WorkBook.ExcelFormat.xlsx">
+            <summary>
+            Office2007及以后的版本
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkSheetCollection">
+            <summary>
+            Excel工作表集合
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkSheet">
+            <summary>
+            Excel工作表
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkSheet.CreateHead">
+            <summary>
+            创建表头
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkSheet.CreateRow">
+            <summary>
+            创建数据行并添加到当前工作表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.WorkSheet.Name">
+            <summary>
+            工作表名称
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.WorkSheet.Head">
+            <summary>
+            表头集合
+            </summary>
+            <value>The headers.</value>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.WorkSheet.Data">
+            <summary>
+            数据集合
+            </summary>
+            <value>The table.</value>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkDataTable">
+            <summary>
+            Excel数据表
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkDataRow">
+            <summary>
+            Excel数据行
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkDataRow.Add(System.String,System.Boolean)">
+            <summary>
+            添加数据单元格（自动识别数据类型）
+            </summary>
+            <param name="value">数据值</param>
+            <param name="autoRecognize">自动识别数据类型</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkDataRow.Add(Bingosoft.TrioFramework.Component.Excel.WorkCell)">
+            <summary>
+            添加数据单元格
+            </summary>
+            <param name="cell"></param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.WorkDataRow.AddRange(System.String[],System.Boolean)">
+            <summary>
+            批量添加数据单元格（自动识别数据类型）
+            </summary>
+            <param name="values"></param>
+            /// <param name="autoRecognize">自动识别数据类型</param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.WorkDataRow.Cells">
+            <summary>
+            单元格集合
+            </summary>
+            <value>The cells.</value>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkCellUtil">
+            <summary>
+            Excel单元格取值、赋值辅助类
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkCellCollection">
+            <summary>
+            单元格集合
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkNumCell">
+            <summary>
+            数字类型的单元格
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkDateCell">
+            <summary>
+            日期类型的单元格
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkMoneyCell">
+            <summary>
+            金额类型的单元格
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.WorkBoolCell">
+            <summary>
+            布尔类型的单元格
+            </summary>
+        </member>
+    </members>
+</doc>

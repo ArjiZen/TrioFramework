@@ -1,0 +1,1279 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bingosoft.TrioFramework.Mvc</name>
+    </assembly>
+    <members>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Controllers.BaseController">
+            <summary>
+            Controller基类
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.BaseController.Success(System.Object)">
+            <summary>
+            返回操作成功标示的json格式
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.BaseController.Error(System.Int32,System.String)">
+            <summary>
+            返回操作错误标示的json格式
+            </summary>
+            <param name="code"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.BaseController.JsonExecutor(System.Func{System.Object})">
+            <summary>
+            返回Json执行结果
+            </summary>
+            <param name="func">逻辑主体.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.BaseController.JsonExecutor``1(System.Func{``0})">
+            <summary>
+            返回Json执行结果
+            </summary>
+            <param name="func">逻辑主体.</param>
+            <typeparam name="T">逻辑主体方法返回值类型.</typeparam>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Controllers.BaseController.ModuleName">
+            <summary>
+            当前功能所属模块
+            </summary>
+            <value>The name of the module.</value>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController">
+            <summary>
+            工作流基类
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.VIEWDATA_READONLY">
+            <summary>
+            表单Readonly字段标识
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.VIEWDATA_ACTIVITYNAME">
+            <summary>
+            表单环节名称字段标识
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.#ctor">
+            <summary>
+            实例化工作流基类
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.InitActivityHandler">
+            <summary>
+            初始化流程环节配置
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.handlers">
+            <summary>
+            环节自定义处理器
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.Attachments(System.String,System.String,System.String)">
+            <summary>
+            附件列表
+            </summary>
+            <param name="instanceNo">流程实例</param>
+            <param name="activityName">当前环节名称</param>
+            <param name="version">当前流程版本号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.AttachmentUpload(System.String,System.String,System.Int32)">
+            <summary>
+            附件上传
+            </summary>
+            <param name="instanceNo">流程实例编号</param>
+            <param name="taskId">任务id</param>
+            <param name="fileType">附件类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.AttachmentDelete(System.String,System.String,System.String)">
+            <summary>
+            附件删除
+            </summary>
+            <param name="fileId">文件Id</param>
+            <param name="activityName">当前环节</param>
+            <param name="version">当前流程版本号</param>
+            <returns></returns>
+            <remarks>
+            token为用户信息、附件id、有效期的加密字符串，用于防止附件的任意下载
+            </remarks>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.Render(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm,System.String)">
+            <summary>
+            表单渲染
+            </summary>
+            <param name="form">流程表单</param>
+            <param name="activityName">环节名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.Save(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
+            <summary>
+            保存流程
+            </summary>
+            <param name="form"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.Submit(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
+            <summary>
+            表单提交
+            </summary>
+            <param name="form"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.Delete(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
+            <summary>
+            删除工单
+            </summary>
+            <param name="form"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.Sign(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
+            <summary>
+            签收工单
+            </summary>
+            <param name="form"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.PassAround(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
+            <summary>
+            传阅
+            </summary>
+            <returns>The around.</returns>
+            <param name="form">Form. 字段：InstanceNo，TaskId，Version</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.LoadForm(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
+            <summary>
+            流程提交
+            </summary>
+            <param name="form"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.ModuleName">
+            <summary>
+            当前功能所属模块
+            </summary>
+            <value>The name of the module.</value>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.BusinessForm">
+            <summary>
+            业务表单类型
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Controllers.WorkflowController.AppCode">
+            <summary>
+            流程编号
+            </summary>
+        </member>
+        <member name="T:EncryptExtension">
+            <summary>
+            字符串加密扩展类
+            </summary>
+        </member>
+        <member name="M:EncryptExtension.Reverse(System.String)">
+            <summary>
+            翻转字符串
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EncryptExtension.Encrypt(System.Int32)">
+            <summary>
+            加密
+            </summary>
+            <param name="i">原字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:EncryptExtension.Encrypt(System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="str">原字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:EncryptExtension.Decrypt(System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="str">原字符串</param>
+            <returns></returns>
+        </member>
+        <member name="P:EncryptExtension.Rc4Key">
+            <summary>
+            Rc4加密Key
+            </summary>
+        </member>
+        <member name="P:EncryptExtension.IV">
+            <summary>
+            加密向量
+            </summary>
+        </member>
+        <member name="P:EncryptExtension.Key">
+            <summary>
+            加密Key
+            </summary>
+        </member>
+        <member name="T:DecryptException">
+            <summary>
+            解密异常类
+            </summary>
+        </member>
+        <member name="M:DecryptException.#ctor(System.Exception)">
+            <summary>
+            实例化解密异常类
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:HttpRequestExtension">
+            <summary>
+            HttpRequest扩展
+            </summary>
+        </member>
+        <member name="M:HttpRequestExtension.ToModel``1(System.Web.HttpRequestBase,HttpRequestExtension.ModelSource)">
+            <summary>
+            从请求中绑定实体数据（属性不区分大小写）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="request">请求数据</param>
+            <param name="source">绑定来源</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpRequestExtension.ToModel(System.Web.HttpRequestBase,System.Type,HttpRequestExtension.ModelSource)">
+            <summary>
+            从请求中绑定实体（属性区分大小写）
+            </summary>
+            <param name="request">请求</param>
+            <param name="modelType">实体类型</param>
+            <param name="source">实体来源</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpRequestExtension.ToModel(System.Web.HttpRequestBase,System.Object,HttpRequestExtension.ModelSource)">
+            <summary>
+            从请求中绑定实体（属性区分大小写）
+            </summary>
+            <param name="request">请求</param>
+            <param name="model">实体实例</param>
+            <param name="source">实体来源</param>
+            <returns></returns>
+        </member>
+        <member name="M:HttpRequestExtension.ConvertType(System.Object,System.Type)">
+            <summary>
+            类型转换
+            </summary>
+            <param name="val"></param>
+            <param name="targetType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HttpRequestExtension.ModelSource">
+            <summary>
+            实体数据来源
+            </summary>
+        </member>
+        <member name="F:HttpRequestExtension.ModelSource.Any">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="F:HttpRequestExtension.ModelSource.Form">
+            <summary>
+            表单
+            </summary>
+        </member>
+        <member name="F:HttpRequestExtension.ModelSource.QueryString">
+            <summary>
+            Url参数
+            </summary>
+        </member>
+        <member name="T:HtmlExtension">
+            <summary>
+            用于工作流的页面扩展
+            </summary>
+        </member>
+        <member name="M:HtmlExtension.SearchDropdown``1(System.Web.Mvc.HtmlHelper{``0},System.String,System.String,System.Object)">
+            <summary>
+            用于工作流的下拉列表控件
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="dictionaryCode"></param>
+            <param name="name"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HtmlExtension.Dropdownlist``1(System.Web.Mvc.HtmlHelper{``0},System.String,System.String,System.Object)">
+            <summary>
+            用于工作流的下拉列表控件
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="dictionaryCode"></param>
+            <param name="name"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.StaticFileExtension">
+            <summary>
+            静态文件扩展标识
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.StaticFileExtension.Stylesheet(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            链接Stylesheet样式文件，并自动附加版本标记
+            </summary>
+            <param name="htmlHelper"></param>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.StaticFileExtension.GetFileVersionFlag(System.String)">
+            <summary>
+            获取附带版本标记的文件路径
+            </summary>
+            <param name="virtualPath">文件虚拟路径地址</param>
+            <returns></returns>
+        </member>
+        <member name="T:WorkflowHtmlExtension">
+            <summary>
+            用于工作流的页面扩展
+            </summary>
+        </member>
+        <member name="M:WorkflowHtmlExtension.WorkflowTextBoxFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Object)">
+            <summary>
+            用于工作流的文本框控件
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="expression"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WorkflowHtmlExtension.WorkflowTextareaFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Object)">
+            <summary>
+            用于工作流的文本域控件
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="expression"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WorkflowHtmlExtension.WorkflowDropdownFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.Object)">
+            <summary>
+            用于工作流的下拉列表控件
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="dictionaryCode"></param>
+            <param name="expression"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WorkflowHtmlExtension.WorkflowDropdownFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Collections.Generic.IEnumerable{System.Web.Mvc.SelectListItem},System.Object)">
+            <summary>
+            用于工作流的下拉列表控件
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="selectListItems"></param>
+            <param name="expression"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WorkflowHtmlExtension.WorkflowHiddenFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            用于工作流的隐藏文本框控件
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.WebDavHelper">
+            <summary>
+            WebDAV文件上传辅助类
+            </summary>
+            <remarks>
+            没有把该类移到TrioFramework中是因为WebDAV会依赖文件服务器地址，为了统一使用Web站点访问文件服务器
+            </remarks>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.WebDavHelper.UploadFile(System.String,System.IO.Stream)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="fileName">文件名（已经</param>
+            <param name="stream">文件流</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.WebDavHelper.GetFileUrl(System.String)">
+            <summary>
+            获取存放在文件服务器上的文件路径（包含上传日期）
+            </summary>
+            <param name="fileName">文件名</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.WebDavHelper.DeleteFile(System.String)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="filePath">存放在文件服务器上的路径</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.WebDavHelper.DownloadFile(System.String)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="filePath">存放在文件服务器上的路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.WebDavHelper.DeleteWebFile(System.String)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="targetUrl">存放在文件服务器上的路径</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.WebDavHelper.UploadFileWithoutPrepareDirectory(System.IO.Stream,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="stream"></param>
+            <param name="targetUrl"></param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.WebDavHelper.WebFileDirectoryExist(System.String)">
+            <summary>
+            检查目录是否存在
+            </summary>
+            <param name="targetUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.WebDavHelper.GetDirectoryContents(System.String,System.Int32)">
+            <summary>
+            获取目录内容（用于检查目录是否存在）
+            </summary>
+            <param name="url"></param>
+            <param name="deep"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.WebDavHelper.PrepareWebDirectory(System.String)">
+            <summary>
+            检查并创建目录
+            </summary>
+            <param name="targetURL"></param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.WebDavHelper.WebDavOperate(System.String,System.String)">
+            <summary>
+            WebDAV的相关操作
+            </summary>
+            <param name="targetUrl"></param>
+            <param name="method"></param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.WebDavHelper.FileServer">
+            <summary>
+            文件服务器地址
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.WebDavHelper.Credential">
+            <summary>
+            认证
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.WebDavHelper.Resource">
+            <summary>
+            Web资源
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.WebDavHelper.Resource.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.WebDavHelper.Resource.Url">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.WebDavHelper.Resource.FilePath">
+            <summary>
+            文件路径
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.WebDavHelper.Resource.IsFolder">
+            <summary>
+            是否是文件夹
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.WebDavHelper.Resource.LastModified">
+            <summary>
+            上次修改时间
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.WebDavHelper.Resource.AddedAtRuntime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler">
+            <summary>
+            环节实现
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.#ctor">
+            <summary>
+            实例化流程环节实现对象
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.Render(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext,Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm)">
+            <summary>
+            环节表单渲染
+            </summary>
+            <param name="context">流程内容上下文</param>
+            <param name="form">流程表单</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.BeforeSubmit(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext,System.String)">
+            <summary>
+            流程提交前事件
+            </summary>
+            <param name="context">流程内容上下文</param>
+            <param name="choice">选择迁移</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.AfterSubmit(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext,System.String)">
+            <summary>
+            流程提交后事件
+            </summary>
+            <param name="context">流程内容上下文</param>
+            <param name="choice">选择结果</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.Save(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext,Bingosoft.TrioFramework.Mvc.Workflow.ActionMode)">
+            <summary>
+            流程提交按钮触发
+            </summary>
+            <param name="context">流程内容上下文</param>
+            <param name="mode">提交类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.BeforeDelete(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext)">
+            <summary>
+            流程删除前事件
+            </summary>
+            <param name="context">流流程内容上下文程编号</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.AfterDeleted(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext)">
+            <summary>
+            流程删除后事件
+            </summary>
+            <param name="context">流流程内容上下文程编号</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.BeforeSign(Bingosoft.TrioFramework.Workflow.Business.BusinessForm)">
+            <summary>
+            流程签收前事件
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.ResolveActor(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext,Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector)">
+            <summary>
+            计算参与者
+            </summary>
+            <param name="context">流程内容上下文</param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.ResolveTobeReadActor(Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext,Bingosoft.TrioFramework.Mvc.Workflow.TobeReadSelector)">
+            <summary>
+            计算待阅参与者
+            </summary>
+            <param name="context">流程内容上下文</param>
+            <param name="selector">待阅参与者.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.ResolvePassAroundActor(Bingosoft.TrioFramework.Workflow.Business.BusinessForm)">
+            <summary>
+            计算传阅参与者
+            </summary>
+            <returns>被传阅人userid或loginid.</returns>
+            <param name="bizform">业务表单.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.CanDownloadAttachment(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment)">
+            <summary>
+            是否可以下载附件
+            </summary>
+            <param name="attachment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.CanDeleteAttachment(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment)">
+            <summary>
+            是否可以删除附件
+            </summary>
+            <param name="attachment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.CanViewAttachment(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment)">
+            <summary>
+            是否可以查看附件
+            </summary>
+            <param name="attachment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.BeforeUploadAttachment(Bingosoft.TrioFramework.Mvc.Workflow.AttachmentContext,System.String@)">
+            <summary>
+            上传附件之前对附件进行相关检查
+            </summary>
+            <param name="context">附件相关上下文</param>
+            <param name="errMsg">错误信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.AfterUploadAttachment(Bingosoft.TrioFramework.Mvc.Workflow.AttachmentContext)">
+            <summary>
+            上传附件之后进行的操作
+            </summary>
+            <param name="context">附件相关上下文</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.BeforeDeleteAttachment(Bingosoft.TrioFramework.Mvc.Workflow.AttachmentContext,System.String@)">
+            <summary>
+            删除附件之前对附件进行的操作
+            </summary>
+            <param name="context"></param>
+            <param name="errMsg">错误信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.TryParseForm``1(Bingosoft.TrioFramework.Workflow.Business.BusinessForm,``0@)">
+            <summary>
+            获取业务表单
+            </summary>
+            <typeparam name="T">业务表单类型</typeparam>
+            <param name="bizform">业务表单通用类</param>
+            <param name="form">业务表单</param>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.AppCode">
+            <summary>
+            当前流程编号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.ActivityName">
+            <summary>
+            当前环节
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ActivityHandler.Version">
+            <summary>
+            当前流程版本
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.HandlerContext">
+            <summary>
+            上下文容器
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.HandlerContext.InstanceNo">
+            <summary>
+            流程实例编号
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.AttachmentContext">
+            <summary>
+            附件上下文
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.AttachmentContext.FileType">
+            <summary>
+            获取附件类型
+            </summary>
+            <value>The type of the file.</value>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.AttachmentContext.FileName">
+            <summary>
+            获取附件文件名
+            </summary>
+            <value>The name of the file.</value>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.AttachmentContext.Attachment">
+            <summary>
+            获取持久化的工作流附件对象
+            </summary>
+            <value>The attachment.</value>
+            <remarks>适用于AfterUploadAttachment</remarks>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext">
+            <summary>
+            流程上下文
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext._form">
+            <summary>
+            业务表单
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext.FormType">
+            <summary>
+            业务表单类型
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowContext.Form">
+            <summary>
+            获取业务表单
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector">
+            <summary>
+            审批页面选择对象
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.Selector">
+            <summary>
+            用户选择
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.Selector.m_Users">
+            <summary>
+            环节用户
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.Selector.Add(System.String,System.String,System.Boolean)">
+            <summary>
+            添加环节用户
+            </summary>
+            <param name="choice">审核结果.</param>
+            <param name="id">用户loginid或userid.</param>
+            <param name="selected">是否默认选中.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.Selector.Remove(System.String,System.String)">
+            <summary>
+            移除环节用户
+            </summary>
+            <param name="choice">审核结果.</param>
+            <param name="id">用户loginid或userid.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.Selector.RemoveChoice(System.String)">
+            <summary>
+            移除审批结果
+            </summary>
+            <param name="choice">Choice.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.Selector.Clear(System.String)">
+            <summary>
+            清空审核用户
+            </summary>
+            <param name="choice">审核结果.</param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.Selector.Item(System.String)">
+            <summary>
+            获取当前审核结果的选择用户
+            </summary>
+            <param name="choice">审核结果.</param>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.Selector.SelectorUser">
+            <summary>
+            选择用户
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.Selector.SelectorUser.id">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.Selector.SelectorUser.name">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.Selector.SelectorUser.deptName">
+            <summary>
+            部门名称
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.Selector.SelectorUser.selected">
+            <summary>
+            是否默认选中
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.#ctor">
+            <summary>
+            实例化审批页面选择对象
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.#ctor(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance)">
+            <summary>
+            实例化审批页面选择对象
+            </summary>
+            <param name="instance"></param>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.m_NextChoice">
+            <summary>
+            下一环节
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.m_Activities">
+            <summary>
+            审批结果与下一环节名称的映射关系
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.SetDefault(System.String,System.String)">
+            <summary>
+            设置默认审批用户（界面可重新选择）
+            </summary>
+            <param name="choice"></param>
+            <param name="userid"></param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.SetDefault(System.String)">
+            <summary>
+            设置默认审批项
+            </summary>
+            <param name="choice">审批项.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.Add(System.String,System.String,System.Boolean)">
+            <summary>
+            添加环节用户
+            </summary>
+            <param name="choice">审核结果.</param>
+            <param name="id">用户loginid或userid.</param>
+            <param name="selected">是否默认选中.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.RemoveChoice(System.String)">
+            <summary>
+            移除审批结果
+            </summary>
+            <param name="choice">Choice.</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.ToString">
+             <summary>
+             转为Json字符串，供页面使用
+             </summary>
+             <returns></returns>
+             <remarks>
+             返回数据格式：
+             {
+                "needChoice": "True",
+                "next": ["营销接口人审核"],
+                "nextActi": {
+                    "营销接口人审核": "营销接口人审核、评估"
+                },
+                "营销接口审核": [{
+                    "id": "0321031435",
+                    "name": "张英霞",
+                    "deptName": "业务支持中心.规划建设室"
+                }],
+                "default": {
+                     "营销接口审核" : ["0321031435"]
+                 }
+            }
+             </remarks>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.Choices">
+            <summary>
+            当前环节的所有审批项
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.ApproveSelector.m_NeedChoice">
+            <summary>
+            是否需要用户选择
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.FlowFactory">
+            <summary>
+            流程配置工厂类
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.FlowFactory.#cctor">
+            <summary>
+            流程工厂初始化
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.FlowFactory.LoadAssemblies">
+            <summary>
+            加载相关程序集（用于反射初始化流程配置信息）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.FlowFactory.InitActivitiesConfigs(System.Reflection.Assembly[])">
+            <summary>
+            初始化流程环节配置信息
+            </summary>
+            <param name="assemblies">项目相关类库</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.FlowFactory.InitBusinessForms(System.Reflection.Assembly[])">
+            <summary>
+            初始化流程业务表单系想你
+            </summary>
+            <param name="assemblies">项目相关类库</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.FlowFactory.GetWorklfowControllerName(System.Int32)">
+            <summary>
+            创建环节配置信息
+            </summary>
+            <param name="appCode">流程编号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.FlowFactory.CreateBusinessForm(System.Int32)">
+            <summary>
+            创建流程业务表单
+            </summary>
+            <param name="appCode">流程编号</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Models.JsonResultExtension">
+            <summary>
+            JsonResult扩展类
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Models.JsonResultExtension.Succeed(System.Web.Mvc.JsonResult)">
+            <summary>
+            返回操作成功的结果数据
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Models.JsonResultExtension.Succeed(System.Web.Mvc.JsonResult,System.Object)">
+            <summary>
+            返回操作成功的结果数据
+            </summary>
+            <param name="result"></param>
+            <param name="data">附带数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Models.JsonResultExtension.Error(System.Web.Mvc.JsonResult,System.Int32,System.String)">
+            <summary>
+            返回操作出错的结果数据
+            </summary>
+            <param name="result"></param>
+            <param name="code">错误码</param>
+            <param name="message">错误信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Models.JsonResultExtension.Error(System.Web.Mvc.JsonResult,System.Int32,System.String,System.String)">
+            <summary>
+            返回操作出错的结果数据
+            </summary>
+            <param name="result"></param>
+            <param name="code">错误码</param>
+            <param name="message">错误信息</param>
+            <param name="tips">操作提示</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Models.JsonModel">
+            <summary>
+            Json实体
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Models.JsonModel.Error(System.Int32,System.String)">
+            <summary>
+            返回操作失败的Json对象
+            </summary>
+            <param name="code">错误码</param>
+            <param name="message">错误信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Models.JsonModel.Error(System.Int32,System.String,System.String)">
+            <summary>
+            返回操作失败的Json对象
+            </summary>
+            <param name="code">错误码</param>
+            <param name="message">错误信息</param>
+            <param name="tips">操作提示</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Models.JsonModel.Succeed(System.Object)">
+            <summary>
+            返回操作成功的Json对象
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Models.JsonModel.Succeed">
+            <summary>
+            返回操作成功的Json对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Models.JsonModel.success">
+            <summary>
+            结果是否成功
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Models.JsonModel.errorCode">
+            <summary>
+            错误编码
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Models.JsonModel.errorMessage">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Models.JsonModel.tips">
+            <summary>
+            操作提示
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Models.JsonModel.data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.FormStatus">
+            <summary>
+            流程工单状态
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.FormStatus.Draft">
+            <summary>
+            草稿
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.FormStatus.Todo">
+            <summary>
+            待办
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.FormStatus.Done">
+            <summary>
+            已办
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.ActionMode">
+            <summary>
+            操作模式
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.ActionMode.Save">
+            <summary>
+            保存流程
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.ActionMode.Submit">
+            <summary>
+            提交流程
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.Mvc.Workflow.ActionMode.Rollback">
+            <summary>
+            退回流程
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm">
+            <summary>
+            流程数据承载对象
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.#ctor">
+            <summary>
+            实例化流程数据承载对象
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.Init(Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowInstance)">
+            <summary>
+            初始化流程表单对象
+            </summary>
+            <param name="instance">流程实例</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.GetAttachmentTypes">
+            <summary>
+            获取当前环节需要上传的附件类型列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.AppCode">
+            <summary>
+            流程编号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.AppName">
+            <summary>
+            流程名称
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.Description">
+            <summary>
+            流程描述
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.VersionStr">
+            <summary>
+            当前流程版本号（用于承载表单隐藏域的版本号加密数据，如需要直接获取int类型的版本号请使用Instance.Version）
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.InstanceNo">
+            <summary>
+            流程实例编号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.TaskId">
+            <summary>
+            流程当前任务编号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.CurrentActi">
+            <summary>
+            当前环节
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.Status">
+            <summary>
+            工单当前状态
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.Creator">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.CreatorDept">
+            <summary>
+            创建人所在部门
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.CurrentUser">
+            <summary>
+            当前用户
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.ActionMode">
+            <summary>
+            操作类型
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.ActionModeStr">
+            <summary>
+            操作类型文本
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.Controller">
+            <summary>
+            对应的流程控制器（一般为各流程独立的Controller）
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.HandlerKey">
+            <summary>
+            自定义事件环节关键字
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.Instance">
+            <summary>
+            流程实例
+            </summary>
+            <remarks>
+            加载流程表单和保存流程时该值不为null，提交流程时该值为null
+            </remarks>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.BusinessForm">
+            <summary>
+            业务表单
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.Selector">
+            <summary>
+            供选择的下一步骤处理人
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.TobeReadSelector">
+            <summary>
+            待阅用户Id集合
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.ApproveResult">
+            <summary>
+            审批结果
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.Workflow.WorkflowForm.HistoryActivities">
+            <summary>
+            历史环节记录
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.Workflow.TobeReadSelector">
+            <summary>
+            待阅人选择
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.TobeReadSelector.#ctor">
+            <summary>
+            实例化待阅人员选择
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.Workflow.TobeReadSelector.Add(System.String,System.String)">
+            <summary>
+            添加环节用户
+            </summary>
+            <param name="choice">审核结果.</param>
+            <param name="id">用户loginid或userid.</param>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.BusinessException">
+            <summary>
+            异常：业务类异常，不会记录到异常日志，只用作向界面输出
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.BusinessException.#ctor(System.String)">
+            <summary>
+            实例化异常
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.NextActivityNotFoundException">
+            <summary>
+            异常：下一环节未找到
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.NextActivityNotFoundException.#ctor(System.String,System.String,System.String)">
+            <summary>
+            实例化异常
+            </summary>
+            <param name="instanceNo">流程单号.</param>
+            <param name="currentActi">当前环节.</param>
+            <param name="choice">审核结果.</param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.NextActivityNotFoundException.InstanceNo">
+            <summary>
+            流程单号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.NextActivityNotFoundException.CurrentActi">
+            <summary>
+            当前环节
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.NextActivityNotFoundException.Choice">
+            <summary>
+            审核结果
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Mvc.ChoiceNotFoundException">
+            <summary>
+            异常：审批项未找到
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Mvc.ChoiceNotFoundException.#ctor(System.String)">
+            <summary>
+            实例化异常
+            </summary>
+            <param name="choice">Choice.</param>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Mvc.ChoiceNotFoundException.Choice">
+            <summary>
+            审核结果
+            </summary>
+        </member>
+        <member name="T:DictionaryCollectionExtension">
+            <summary>
+            字典集合
+            </summary>
+        </member>
+        <member name="M:DictionaryCollectionExtension.ToSelectListItems(Bingosoft.TrioFramework.Models.DictionaryCollection)">
+            <summary>
+            将字典项转为适用于Select的项（SelectListItem）集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DictionaryCollectionExtension.ToSelect(System.String[])">
+            <summary>
+            将数组转为适用于Select的项
+            </summary>
+            <returns>The select.</returns>
+            <param name="array">Array.</param>
+        </member>
+    </members>
+</doc>

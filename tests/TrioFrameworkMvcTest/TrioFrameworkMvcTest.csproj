@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{513D3850-0487-4E18-9EF5-CA8915DF81A8}</ProjectGuid>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>Bingosoft.TrioFramework.Mvc.Test</RootNamespace>
     <AssemblyName>TrioFrameworkMvcTest</AssemblyName>
@@ -28,6 +29,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="nunit.framework">
       <HintPath>..\..\source\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -79,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Test.cs" />
     <Compile Include="RequestExtensionTest.cs" />
+    <Compile Include="StaticExtensionTest.cs" />
     <Compile Include="WorkflowFormTest.cs" />
     <Compile Include="ControllerExecutorTest.cs" />
   </ItemGroup>
@@ -93,11 +96,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\source\TrioFramework.Mvc\TrioFramework.Mvc.csproj">
+    <ProjectReference Include="..\..\source\View\TrioFramework.Mvc\TrioFramework.Mvc.csproj">
       <Project>{128C4953-45D3-4A8C-A867-C5B9FA73E3EF}</Project>
       <Name>TrioFramework.Mvc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\source\Core\Core.csproj">
+    <ProjectReference Include="..\..\source\Workflow\Core\Core.csproj">
       <Project>{A7C4F4AE-4D37-4063-8CDE-C6B3AD191E83}</Project>
       <Name>Core</Name>
     </ProjectReference>

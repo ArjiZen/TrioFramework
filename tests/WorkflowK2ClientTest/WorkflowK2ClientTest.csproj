@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A1D334F9-D79F-495D-8BFC-B008C0C20508}</ProjectGuid>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>Bingosoft.TrioFramework.Workflow.K2Client.Test</RootNamespace>
     <AssemblyName>WorkflowK2ClientTest</AssemblyName>
@@ -28,6 +29,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="nunit.framework">
       <HintPath>..\..\source\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -79,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PaiallelTest.cs" />
     <Compile Include="WorkflowEngineTest.cs" />
     <Compile Include="DelegateTest.cs" />
     <Compile Include="WorkflowDefinitionSyncTest.cs" />
@@ -93,23 +96,20 @@
     <None Include="App_Config\Unity\Security.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\source\K2Client\K2Client.csproj">
+    <ProjectReference Include="..\..\source\Workflow\K2Client\K2Client.csproj">
       <Project>{AD572C7A-1140-423F-B39E-6EB652FA0DED}</Project>
       <Name>K2Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\source\Core\Core.csproj">
+    <ProjectReference Include="..\..\source\Workflow\Core\Core.csproj">
       <Project>{A7C4F4AE-4D37-4063-8CDE-C6B3AD191E83}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\source\TrioFramework\TrioFramework.csproj">
+    <ProjectReference Include="..\..\source\Foundation\TrioFramework\TrioFramework.csproj">
       <Project>{3DC7A192-85FF-407F-865E-F45FF05CB928}</Project>
       <Name>TrioFramework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Config\" />
-    <Folder Include="App_Config\Unity\" />
-  </ItemGroup>
+  <ItemGroup />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>

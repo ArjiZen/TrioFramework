@@ -64,7 +64,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\source\TrioFramework\TrioFramework.csproj">
+    <ProjectReference Include="..\..\source\Foundation\TrioFramework\TrioFramework.csproj">
       <Project>{3DC7A192-85FF-407F-865E-F45FF05CB928}</Project>
       <Name>TrioFramework</Name>
     </ProjectReference>

@@ -121,9 +121,6 @@
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Optimization">
-      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Providers">
       <HintPath>..\..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
     </Reference>
@@ -143,22 +140,29 @@
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
-    </Reference>
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
       <HintPath>..\..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
-    <Compile Include="Areas\Account\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Member\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
+    <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
+    <Compile Include="Areas\SystemManager\Controllers\DictionaryController.cs" />
+    <Compile Include="Areas\SystemManager\Controllers\OrganizationController.cs" />
+    <Compile Include="Areas\SystemManager\Controllers\ParamController.cs" />
+    <Compile Include="Areas\SystemManager\Controllers\RoleController.cs" />
+    <Compile Include="Areas\SystemManager\Controllers\UserController.cs" />
+    <Compile Include="Areas\SystemManager\SystemManagerAreaRegistration.cs" />
+    <Compile Include="Areas\Workflow\WorkflowAreaRegistration.cs" />
+    <Compile Include="Areas\WorkSpace\Controllers\MyDoneController.cs" />
+    <Compile Include="Areas\WorkSpace\Controllers\MyTodoController.cs" />
+    <Compile Include="Areas\WorkSpace\Controllers\NewWorkflowController.cs" />
+    <Compile Include="Areas\WorkSpace\WorkSpaceAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -221,9 +225,14 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Areas\Account\Views\Web.config" />
-    <Content Include="Areas\Account\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Workflow\Views\Web.config" />
+    <Content Include="Areas\Report\Views\Web.config" />
+    <Content Include="Areas\SystemManager\Views\Web.config" />
+    <Content Include="Areas\WorkSpace\Views\Web.config" />
+    <Content Include="Areas\Member\Views\Web.config" />
     <None Include="Scripts\libs\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\libs\angular.js" />
+    <Content Include="Scripts\libs\angular.min.js" />
     <Content Include="Scripts\libs\artTemplate.js" />
     <Content Include="Scripts\libs\bootstrap.min.js" />
     <Content Include="Scripts\libs\jquery-1.8.2.js" />
@@ -259,15 +268,28 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LayoutForServicePlatform.cshtml" />
+    <Content Include="Views\Shared\_LayoutForMetro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Account\Models\" />
-    <Folder Include="Areas\Account\Views\Shared\" />
+    <Folder Include="Areas\Member\Models\" />
+    <Folder Include="Areas\Member\Views\Shared\" />
+    <Folder Include="Areas\Report\Controllers\" />
+    <Folder Include="Areas\Report\Models\" />
+    <Folder Include="Areas\Report\Views\Shared\" />
+    <Folder Include="Areas\SystemManager\Models\" />
+    <Folder Include="Areas\SystemManager\Views\Shared\" />
+    <Folder Include="Areas\Workflow\Controllers\" />
+    <Folder Include="Areas\Workflow\Models\" />
+    <Folder Include="Areas\Workflow\Views\Shared\" />
+    <Folder Include="Areas\WorkSpace\Models\" />
+    <Folder Include="Areas\WorkSpace\Views\Shared\" />
+    <Folder Include="Content\libs\" />
+    <Folder Include="Content\trio\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\themes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

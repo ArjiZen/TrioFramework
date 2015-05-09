@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -40,7 +40,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\source\Business\Business.csproj">
+    <ProjectReference Include="..\..\source\Workflow\Business\Business.csproj">
       <Project>{044F6DFC-7BA1-49C2-BA0C-7DC9107DBEED}</Project>
       <Name>Business</Name>
     </ProjectReference>

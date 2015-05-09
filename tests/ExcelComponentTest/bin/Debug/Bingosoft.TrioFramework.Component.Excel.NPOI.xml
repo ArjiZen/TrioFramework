@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bingosoft.TrioFramework.Component.Excel.NPOI</name>
+    </assembly>
+    <members>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.NPOI.WorkBook">
+            <summary>
+            Excel工作簿
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.NPOI.WorkBook.GetWorkbook">
+            <summary>
+            获取工作表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.NPOI.WorkBook.Save">
+            <summary>
+            保存工作表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.NPOI.WorkBook.Load(System.IO.MemoryStream,System.Int32)">
+            <summary>
+            从文件读取Excel文件
+            </summary>
+            <param name="ms"></param>
+            <param name="headRows">标题行数</param>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.NPOI.WorkHeadCollectionExtension">
+            <summary>
+            表头集合扩展
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.NPOI.WorkHeadCollectionExtension.Get2DArray(Bingosoft.TrioFramework.Component.Excel.WorkHeadCollection)">
+            <summary>
+            将表头树转为二维坐标
+            </summary>
+            <param name="collection"></param>
+            <returns></returns>
+            <remarks>
+            思路：
+            先通过Colspan属性的值计算出第一行表头的二维数组列索引
+            然后从首行表头开始递归遍历子表头
+            子表头的二维数组列索引为父表头的二维数组列索引+当前表头在同级Children的索引
+            </remarks>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.NPOI.WorkHeadCollectionExtension.EachChildren(System.Collections.Generic.List{Bingosoft.TrioFramework.Component.Excel.NPOI.WorkHead[]}@,Bingosoft.TrioFramework.Component.Excel.WorkHeadCollection,System.Int32,System.Int32)">
+            <summary>
+            递归遍历子表头
+            </summary>
+            <param name="array">二维数组</param>
+            <param name="collection">表头集合</param>
+            <param name="rowIndex">行索引</param>
+            <param name="aColumnIndex">父表头在二维数组中的列索引</param>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Component.Excel.NPOI.WorkHeadCollectionExtension.SetElementToArray(System.Collections.Generic.List{Bingosoft.TrioFramework.Component.Excel.NPOI.WorkHead[]}@,Bingosoft.TrioFramework.Component.Excel.WorkHeadCollection,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            根据行列坐标设置二维数组的值
+            </summary>
+            <param name="array">二维数组</param>
+            <param name="collection">表头集合</param>
+            <param name="rowIndex">行索引</param>
+            <param name="oColumnIndex">当前表头在同级集合中的索引</param>
+            <param name="parentAColumnIndex">父级表头在二维数组中的列索引</param>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Component.Excel.NPOI.WorkHead">
+            <summary>
+            Excel表头
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Component.Excel.NPOI.WorkHead.ColSpan">
+            <summary>
+            行合并数
+            </summary>
+        </member>
+    </members>
+</doc>
