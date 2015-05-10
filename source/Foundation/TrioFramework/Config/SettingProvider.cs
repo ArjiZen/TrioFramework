@@ -16,7 +16,7 @@ namespace Bingosoft.TrioFramework
         /// <summary>
         /// 服务配置
         /// </summary>
-        private static TrioSection TrioSettings
+        private static TrioSection Section
         {
             get
             {
@@ -35,17 +35,32 @@ namespace Bingosoft.TrioFramework
         }
 
         /// <summary>
+        /// 数据库配置
+        /// </summary>
+        public static DbElement Db
+        {
+            get
+            {
+                if (Section == null)
+                {
+                    throw new ConfigurationErrorsException("配置文件中未找到Trio配置节点");
+                }
+                return Section.Db;
+            }
+        }
+
+        /// <summary>
         /// 通用配置
         /// </summary>
         public static CommonElement Common
         {
             get
             {
-                if (TrioSettings == null)
+                if (Section == null)
                 {
                     throw new ConfigurationErrorsException("配置文件中未找到Trio配置节点");
                 }
-                return TrioSettings.Common;
+                return Section.Common;
             }
         }
 
@@ -56,11 +71,11 @@ namespace Bingosoft.TrioFramework
         {
             get
             {
-                if (TrioSettings == null)
+                if (Section == null)
                 {
                     throw new ConfigurationErrorsException("配置文件中未找到Trio配置节点");
                 }
-                return TrioSettings.PendingJob;
+                return Section.PendingJob;
             }
         }
 
@@ -71,11 +86,11 @@ namespace Bingosoft.TrioFramework
         {
             get
             {
-                if (TrioSettings == null)
+                if (Section == null)
                 {
                     throw new ConfigurationErrorsException("配置文件中未找到Trio配置节点");
                 }
-                return TrioSettings.Workflow;
+                return Section.Workflow;
             }
         }
 
@@ -86,11 +101,11 @@ namespace Bingosoft.TrioFramework
         {
             get
             {
-                if (TrioSettings == null)
+                if (Section == null)
                 {
                     throw new ConfigurationErrorsException("配置文件中未找到Trio配置节点");
                 }
-                return TrioSettings.FileServer;
+                return Section.FileServer;
             }
         }
 

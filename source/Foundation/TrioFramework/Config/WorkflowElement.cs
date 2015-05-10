@@ -18,16 +18,6 @@ namespace Bingosoft.TrioFramework
         }
 
         /// <summary>
-        /// 流程类连接字符串名称
-        /// </summary>
-        [ConfigurationProperty("dbName", DefaultValue = "DefaultDB")]
-        public string DbName
-        {
-            get { return (string)this["DbName"]; }
-            set { this["DbName"] = value; }
-        }
-
-        /// <summary>
         /// 流程引擎提供者
         /// </summary>
         [ConfigurationProperty("provider")]

@@ -35,29 +35,18 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bingosoft.Common.Logging">
-      <HintPath>..\..\Library\Bingosoft.Common.Logging.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Bingosoft.Core">
-      <HintPath>..\..\Library\Bingosoft.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Bingosoft.Data">
-      <HintPath>..\..\Library\Bingosoft.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="Bingosoft.Security">
-      <HintPath>..\..\Library\Bingosoft.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
-      <HintPath>..\..\Library\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
-      <HintPath>..\..\Library\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\Library\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -69,18 +58,16 @@
   <ItemGroup>
     <Compile Include="Communication\TrioFileMessage.cs" />
     <Compile Include="Communication\TrioMessage.cs" />
+    <Compile Include="Config\DbElement.cs" />
     <Compile Include="Config\ExcelElement.cs" />
     <Compile Include="Config\TrioComponentSection.cs" />
+    <Compile Include="DB\DBFactory.cs" />
+    <Compile Include="DB\DbContextBase.cs" />
     <Compile Include="Extensions\ExceptionExtension.cs" />
-    <Compile Include="Extensions\SecurityContextExtension.cs" />
     <Compile Include="Extensions\StreamExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="Models\DictionaryCollection.cs" />
-    <Compile Include="Models\Organization.cs" />
-    <Compile Include="ParamContainer.cs" />
+    <Compile Include="Common\Param.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RestClient.cs" />
     <Compile Include="Config\SettingProvider.cs" />
     <Compile Include="Config\TrioSection.cs" />
     <Compile Include="Config\PendingJobElement.cs" />
@@ -88,7 +75,10 @@
     <Compile Include="Config\WorkflowElement.cs" />
     <Compile Include="Config\FileServerElement.cs" />
     <Compile Include="Extensions\TypeExtension.cs" />
-    <Compile Include="DBFactory.cs" />
+    <Compile Include="Security\Organization.cs" />
+    <Compile Include="Security\Permission.cs" />
+    <Compile Include="Security\Role.cs" />
+    <Compile Include="Security\User.cs" />
     <Compile Include="TrioVer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,5 +128,12 @@
     <EmbeddedResource Include="App_Config\SqlCommands\kissu.config">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

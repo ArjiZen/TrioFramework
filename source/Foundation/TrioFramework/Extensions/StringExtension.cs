@@ -64,7 +64,7 @@ public static class StringExtension
     /// </summary>
     /// <param name="str"></param>
     /// <param name="target"></param>
-    public static bool EqualsWith(this string str, string target)
+    public static bool Eq(this string str, string target)
     {
         return str.Equals(target, StringComparison.OrdinalIgnoreCase);
     }

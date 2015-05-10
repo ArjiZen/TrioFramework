@@ -13,17 +13,6 @@ namespace Bingosoft.TrioFramework
         /// </summary>
         public CommonElement()
         {
-            this.EncryptKey = "Bingosoft";
-        }
-
-        /// <summary>
-        /// 数据库链接名称
-        /// </summary>
-        [ConfigurationProperty("dbName", DefaultValue = "DefaultDB")]
-        public string DbName
-        {
-            get { return (string)this["DbName"]; }
-            set { this["DbName"] = value; }
         }
 
         /// <summary>
