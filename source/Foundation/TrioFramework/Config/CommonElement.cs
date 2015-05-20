@@ -22,8 +22,8 @@ namespace Bingosoft.TrioFramework
         [ConfigurationProperty("dbName", DefaultValue = "DefaultDB")]
         public string DbName
         {
-            get { return (string)this["DbName"]; }
-            set { this["DbName"] = value; }
+            get { return (string)this["dbName"]; }
+            set { this["dbName"] = value; }
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Web.Mvc;
 using Bingosoft.TrioFramework.Communication;
+using Newtonsoft.Json;
 
 // ReSharper disable once CheckNamespace
 namespace Bingosoft.TrioFramework.Mvc
@@ -18,7 +19,7 @@ namespace Bingosoft.TrioFramework.Mvc
         public static JsonResult Succeed(this JsonResult result)
         {
             result.ContentEncoding = Encoding.UTF8;
-            result.Data = TrioMessage.Succeed();
+            result.Data = TrioJsMessage.Succeed();
             return result;
         }
 
@@ -31,7 +32,7 @@ namespace Bingosoft.TrioFramework.Mvc
         public static JsonResult Succeed(this JsonResult result, object data)
         {
             result.ContentEncoding = Encoding.UTF8;
-            result.Data = TrioMessage.Succeed(data);
+            result.Data = TrioJsMessage.Succeed(data);
             return result;
         }
 
@@ -45,7 +46,7 @@ namespace Bingosoft.TrioFramework.Mvc
         public static JsonResult Error(this JsonResult result, int code, string message)
         {
             result.ContentEncoding = Encoding.UTF8;
-            result.Data = TrioMessage.Error(code, message);
+            result.Data = TrioJsMessage.Error(code, message);
             return result;
         }
     }

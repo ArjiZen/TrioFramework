@@ -18,7 +18,7 @@ public static class SecurityContextExtension
     /// <returns></returns>
     public static IUser Get(this ISecurityProvider provider, string id)
     {
-        var u = DBFactory.DB.QueryEntity<User>("framework.securitycontext.getuser", new { Id = id });
+        var u = DBFactory.DB.QueryEntity<User>("trio.framework.securitycontext.getuser", new { Id = id });
         if (u == null)
         {
             return SecurityContext.Provider.GetUser(id);
@@ -35,7 +35,7 @@ public static class SecurityContextExtension
     /// <returns></returns>
     public static User[] GetRoleUsers(this ISecurityProvider provider, string roleName, string orgName)
     {
-        var list = DBFactory.DB.QueryEntities<User>("framework.securitycontext.getroleuserbyorg", new { RoleName = roleName, OrgName = orgName });
+        var list = DBFactory.DB.QueryEntities<User>("trio.framework.securitycontext.getroleuserbyorg", new { RoleName = roleName, OrgName = orgName });
         return list.ToArray();
     }
 
@@ -47,7 +47,7 @@ public static class SecurityContextExtension
     /// <returns></returns>
     public static User[] GetRoleUsers(this ISecurityProvider provider, string roleName)
     {
-        var list = DBFactory.DB.QueryEntities<User>("framework.securitycontext.getroleuser", new { RoleName = roleName });
+        var list = DBFactory.DB.QueryEntities<User>("trio.framework.securitycontext.getroleuser", new { RoleName = roleName });
         return list.ToArray();
     }
 
@@ -59,7 +59,7 @@ public static class SecurityContextExtension
     /// <returns></returns>
     public static bool InRole(this IUser user, string roleName)
     {
-        var isExists = DBFactory.DB.QueryScalar<int>("framework.securitycontext.isinrole", new { UserId = user.Id, RoleName = roleName });
+        var isExists = DBFactory.DB.QueryScalar<int>("trio.framework.securitycontext.isinrole", new { UserId = user.Id, RoleName = roleName });
         return isExists > 0;
     }
 
@@ -71,7 +71,7 @@ public static class SecurityContextExtension
     /// <returns></returns>
     public static bool IsInDept(this IUser user, string deptName)
     {
-        var isExists = DBFactory.DB.QueryScalar<int>("framework.securitycontext.isindept", new { UserId = user.Id, DeptName = deptName });
+        var isExists = DBFactory.DB.QueryScalar<int>("trio.framework.securitycontext.isindept", new { UserId = user.Id, DeptName = deptName });
         return isExists > 0;
     }
 
