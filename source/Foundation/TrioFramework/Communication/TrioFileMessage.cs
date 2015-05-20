@@ -24,7 +24,7 @@ namespace Bingosoft.TrioFramework.Communication
             catch (Exception ex)
             {
                 this.Success = false;
-                this.ErrorMessage = "序列化文件流时出现错误：" + ex.GetAllMessage();
+                this.ErrorMessage = "序列化文件流时出现错误：" + ex.GetAll();
             }
         }
     }

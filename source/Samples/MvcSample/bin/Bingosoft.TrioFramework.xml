@@ -109,6 +109,42 @@
             Excel配置
             </summary>
         </member>
+        <member name="T:Bingosoft.TrioFramework.DB.DBFactory">
+            <summary>
+            提供数据库操作链接
+            </summary>
+        </member>
+        <member name="F:Bingosoft.TrioFramework.DB.DBFactory.connectionStrs">
+            <summary>
+            数据库链接集合
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.DB.DBFactory.GetConnectionStr(System.String)">
+            <summary>
+            获取链接字符串
+            </summary>
+            <param name="configurationName">链接字符串配置名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.DB.DBFactory.GetConnection(System.String)">
+            <summary>
+            获取数据库链接
+            </summary>
+            <param name="configurationName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.DB.DbContextBase">
+            <summary>
+            DBContext基类
+            </summary>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.DB.DbContextBase.Get``1">
+            <summary>
+            获取数据库操作上下文
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
         <member name="T:ExceptionExtension">
             <summary>
             异常扩展
@@ -133,68 +169,6 @@
             获取所有堆栈信息
             </summary>
             <param name="ex"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SecurityContextExtension">
-            <summary>
-            安全上下文扩展
-            </summary>
-        </member>
-        <member name="M:SecurityContextExtension.Get(Bingosoft.Security.ISecurityProvider,System.String)">
-            <summary>
-            根据 loginid 或 userid 获取指定人员
-            </summary>
-            <param name="provider"></param>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SecurityContextExtension.GetRoleUsers(Bingosoft.Security.ISecurityProvider,System.String,System.String)">
-            <summary>
-            获取该部门的角色用户
-            </summary>
-            <param name="provider"></param>
-            <param name="roleName">角色名</param>
-            <param name="orgName">部门名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:SecurityContextExtension.GetRoleUsers(Bingosoft.Security.ISecurityProvider,System.String)">
-            <summary>
-            获取该部门的角色用户
-            </summary>
-            <param name="provider"></param>
-            <param name="roleName">角色名</param>
-            <returns></returns>
-        </member>
-        <member name="M:SecurityContextExtension.InRole(Bingosoft.Security.Principal.IUser,System.String)">
-            <summary>
-            判断当前用户是否在某个角色中
-            </summary>
-            <param name="user"></param>
-            <param name="roleName">角色名</param>
-            <returns></returns>
-        </member>
-        <member name="M:SecurityContextExtension.IsInDept(Bingosoft.Security.Principal.IUser,System.String)">
-            <summary>
-            判断用户是否属于某个部门
-            </summary>
-            <param name="user"></param>
-            <param name="deptName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SecurityContextExtension.GetOrganization(Bingosoft.Security.ISecurityProvider,System.String)">
-            <summary>
-            获取部门信息
-            </summary>
-            <param name="provider"></param>
-            <param name="id">部门id</param>
-            <returns></returns>
-        </member>
-        <member name="M:SecurityContextExtension.GetOrganizationByName(Bingosoft.Security.ISecurityProvider,System.String)">
-            <summary>
-            根据名称获取部门信息
-            </summary>
-            <param name="provider"></param>
-            <param name="name">部门名称</param>
             <returns></returns>
         </member>
         <member name="T:StreamExtension">
@@ -252,381 +226,54 @@
             <param name="str"></param>
             <param name="target"></param>
         </member>
-        <member name="T:Bingosoft.TrioFramework.Logger">
+        <member name="T:Bingosoft.TrioFramework.Common.Param">
             <summary>
-            日志记录
+            系统参数
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogOperator(System.String,Bingosoft.TrioFramework.Logger.BusinessAction,System.String)">
+        <member name="M:Bingosoft.TrioFramework.Common.Param.Get(System.String,System.String)">
             <summary>
-            记录操作日志
-            </summary>
-            <param name="module">所属模块</param>
-            <param name="action">操作类型</param>
-            <param name="content">操作内容</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogOperator(System.String,Bingosoft.TrioFramework.Logger.BusinessAction,System.String,System.Exception)">
-            <summary>
-            记录操作日志
-            </summary>
-            <param name="module">所属模块</param>
-            <param name="action">操作类型</param>
-            <param name="content">操作内容</param>
-            <param name="ex">异常</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogOperator(System.String,System.String,System.String)">
-            <summary>
-            记录操作日志
-            </summary>
-            <param name="module">所属模块</param>
-            <param name="action">操作类型</param>
-            <param name="content">操作内容</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogOperator(System.String,System.String,System.String,System.Exception)">
-            <summary>
-            记录操作日志
-            </summary>
-            <param name="module">所属模块</param>
-            <param name="action">操作类型</param>
-            <param name="content">操作内容</param>
-            <param name="ex">异常</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogError(System.String,System.Exception,System.Object)">
-            <summary>
-            记录错误日志
-            </summary>
-            <param name="module">所属模块</param>
-            <param name="ex">异常</param>
-            <param name="extraData">附加数据</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogError(System.String,System.String,System.Exception,System.Object)">
-            <summary>
-            记录错误日志
-            </summary>
-            <param name="module">所属模块</param>
-            <param name="errorMessage">错误信息</param>
-            <param name="ex">异常</param>
-            <param name="extraData">附加数据</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogServiceRequest(System.String,System.String,System.String)">
-            <summary>
-            记录接口调用日志的请求内容
-            </summary>
-            <returns>记录的日志id.</returns>
-            <param name="module">所属模块.</param>
-            <param name="interfaceName">接口名.</param>
-            <param name="content">请求内容.</param>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogServiceResponse(System.Int64,System.String)">
-            <summary>
-            记录接口调用日志的返回结果
-            </summary>
-            <param name="logid">日志id.</param>
-            <param name="responseContent">接口返回内容.</param>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Logger.LogServiceResponse(System.Int64,System.Exception)">
-            <summary>
-            记录接口调用日志的返回结果
-            </summary>
-            <param name="logid">日志id.</param>
-            <param name="ex">接口调用异常对象.</param>
-        </member>
-        <member name="T:Bingosoft.TrioFramework.Logger.BaseLog">
-            <summary>
-            日志基类
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Logger.BaseLog.Application">
-            <summary>
-            所属应用
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Logger.BaseLog.Module">
-            <summary>
-            所属模块
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Logger.BaseLog.Actor">
-            <summary>
-            当前用户
-            </summary>
-        </member>
-        <member name="T:Bingosoft.TrioFramework.Logger.OperatorLog">
-            <summary>
-            操作日志
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Logger.OperatorLog.Action">
-            <summary>
-            操作类型
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Logger.OperatorLog.ActionContent">
-            <summary>
-            操作内容
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Logger.OperatorLog.ActionTime">
-            <summary>
-            操作时间
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Logger.OperatorLog.IsSuccess">
-            <summary>
-            是否成功
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Logger.OperatorLog.ExceptionType">
-            <summary>
-            异常类型
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Logger.OperatorLog.ExceptionMsg">
-            <summary>
-            异常消息
-            </summary>
-        </member>
-        <member name="T:Bingosoft.TrioFramework.Logger.BusinessAction">
-            <summary>
-            业务数据操作类型
-            </summary>
-        </member>
-        <member name="F:Bingosoft.TrioFramework.Logger.BusinessAction.添加">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="F:Bingosoft.TrioFramework.Logger.BusinessAction.删除">
-            <summary>
-            删除
-            </summary>
-        </member>
-        <member name="F:Bingosoft.TrioFramework.Logger.BusinessAction.修改">
-            <summary>
-            修改
-            </summary>
-        </member>
-        <member name="F:Bingosoft.TrioFramework.Logger.BusinessAction.查询">
-            <summary>
-            查询
-            </summary>
-        </member>
-        <member name="F:Bingosoft.TrioFramework.Logger.BusinessAction.下载">
-            <summary>
-            下载
-            </summary>
-        </member>
-        <member name="F:Bingosoft.TrioFramework.Logger.BusinessAction.其他">
-            <summary>
-            其他
-            </summary>
-        </member>
-        <member name="T:Bingosoft.TrioFramework.Models.DictionaryItem">
-            <summary>
-            字典项
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.DictionaryItem.Code">
-            <summary>
-            字典编码
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.DictionaryItem.Text">
-            <summary>
-            字典文本
-            </summary>
-        </member>
-        <member name="T:Bingosoft.TrioFramework.Models.DictionaryCollection">
-            <summary>
-            字典集合
-            </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Models.DictionaryCollection.#ctor">
-            <summary>
-            实例化字典集合
-            </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Models.DictionaryCollection.#ctor(System.Collections.Generic.IList{Bingosoft.TrioFramework.Models.DictionaryItem})">
-            <summary>
-            实例化字典集合
-            </summary>
-            <param name="list"></param>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Models.DictionaryCollection.ContainsCode(System.String)">
-            <summary>
-            包含字典项变啊
-            </summary>
-            <param name="code">字典项编码</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Models.DictionaryCollection.GetByCode(System.String)">
-            <summary>
-            根据字典编码获取字典项集合
-            </summary>
-            <param name="code">字典编码</param>
-            <returns></returns>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.DictionaryCollection.Item(System.String)">
-            <summary>
-            获取字典值
-            </summary>
-            <param name="code">字典编码</param>
-            <returns></returns>
-        </member>
-        <member name="T:Bingosoft.TrioFramework.Models.Organization">
-            <summary>
-            组织架构
-            </summary>
-        </member>
-        <member name="F:Bingosoft.TrioFramework.Models.Organization._parent">
-            <summary>
-            父部门
-            </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Models.Organization.Load(System.String)">
-            <summary>
-            加载部门信息
-            </summary>
-            <param name="id">部门id</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.Models.Organization.LoadByName(System.String)">
-            <summary>
-            根据名称获取部门信息
-            </summary>
-            <param name="name">部门名称</param>
-            <returns></returns>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.Organization.Id">
-            <summary>
-            部门Id
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.Organization.ParentId">
-            <summary>
-            父部门Id
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.Organization.Parent">
-            <summary>
-            父部门
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.Organization.Name">
-            <summary>
-            部门名称
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.Organization.Code">
-            <summary>
-            部门编码
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.Organization.FullName">
-            <summary>
-            部门完整名称
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.Organization.Level">
-            <summary>
-            部门所在级别
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.Organization.Order">
-            <summary>
-            部门显示顺序
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.Organization.Type">
-            <summary>
-            部门类型
-            </summary>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.Models.Organization.Status">
-            <summary>
-            部门状态
-            </summary>
-        </member>
-        <member name="T:Bingosoft.TrioFramework.ParamContainer">
-            <summary>
-            系统参数容器
-            </summary>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.ParamContainer.Get(System.String,System.String)">
-            <summary>
-            获取系统参数
+            获取参数值
             </summary>
             <param name="code">参数编码</param>
             <param name="defaultVal">默认值</param>
             <returns></returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.ParamContainer.Update(System.String,System.String)">
+        <member name="M:Bingosoft.TrioFramework.Common.Param.Update(System.String,System.String)">
             <summary>
-            更新系统参数
+            更新参数值
             </summary>
             <param name="code">参数编码</param>
             <param name="value">参数值</param>
-            <returns></returns>
         </member>
-        <member name="T:Bingosoft.TrioFramework.RestClient">
+        <member name="P:Bingosoft.TrioFramework.Common.Param.Id">
             <summary>
-            给予Rest服务的请求客户端
+            参数Id
             </summary>
         </member>
-        <member name="F:Bingosoft.TrioFramework.RestClient.CONTENT_TYPE_DEFAULT">
+        <member name="P:Bingosoft.TrioFramework.Common.Param.Code">
             <summary>
-            默认的请求内容格式
+            编码
             </summary>
         </member>
-        <member name="F:Bingosoft.TrioFramework.RestClient.CONTENT_TYPE_STREAM">
+        <member name="P:Bingosoft.TrioFramework.Common.Param.Value">
             <summary>
-            用于文件流的请求内容格式
+            参数值
             </summary>
         </member>
-        <member name="M:Bingosoft.TrioFramework.RestClient.#ctor(System.String)">
+        <member name="P:Bingosoft.TrioFramework.Common.Param.Description">
             <summary>
-            创建Rest客户端
+            描述
             </summary>
-            <param name="apiBaseUrl">API基地址（不包含具体调用方法）</param>
         </member>
-        <member name="M:Bingosoft.TrioFramework.RestClient.Login(System.String)">
+        <member name="T:Bingosoft.TrioFramework.Common.ParamContext">
             <summary>
-            登录
+            参数操作上下文
             </summary>
-            <param name="loginid">登录用户Id</param>
-            <returns></returns>
         </member>
-        <member name="M:Bingosoft.TrioFramework.RestClient.Open(System.String,System.String,System.String,System.Int32,System.String)">
+        <member name="P:Bingosoft.TrioFramework.Common.ParamContext.Params">
             <summary>
-            请求接口
-            </summary>
-            <param name="action">接口地址</param>
-            <param name="queryString">接口参数</param>
-            <param name="method">HTTP方法</param>
-            <param name="contentLength">请求内容长度（只有QueryString情况下为0）</param>
-            <param name="contentType">请求内容格式</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bingosoft.TrioFramework.RestClient.Open(System.String,System.Byte[],System.String,System.String,System.String)">
-            <summary>
-            请求接口
-            </summary>
-            <param name="action">接口地址</param>
-            <param name="formData">请求的FormData数据</param>
-            <param name="queryString">接口参数</param>
-            <param name="method">HTTP方法</param>
-            <param name="contentType">请求内容格式</param>
-            <returns></returns>
-        </member>
-        <member name="P:Bingosoft.TrioFramework.RestClient.BaseUrl">
-            <summary>
-            
+            参数集合
             </summary>
         </member>
         <member name="T:Bingosoft.TrioFramework.SettingProvider">
@@ -828,19 +475,128 @@
             <param name="type">类型</param>
             <returns></returns>
         </member>
-        <member name="T:Bingosoft.TrioFramework.DBFactory">
+        <member name="T:Bingosoft.TrioFramework.Security.User">
             <summary>
-            数据工厂
+            用户
             </summary>
         </member>
-        <member name="P:Bingosoft.TrioFramework.DBFactory.DB">
+        <member name="M:Bingosoft.TrioFramework.Security.User.Save">
             <summary>
-            数据库操作对象
+            保存用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Security.User.Get(System.String)">
+            <summary>
+            获取用户
+            </summary>
+            <param name="loginidOrUserId">登录id或用户id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bingosoft.TrioFramework.Security.User.CheckPassword">
+            <summary>
+            验证登录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.Id">
+            <summary>
+            用户Id
             </summary>
         </member>
-        <member name="P:Bingosoft.TrioFramework.DBFactory.WorkflowDB">
+        <member name="P:Bingosoft.TrioFramework.Security.User.LoginId">
             <summary>
-            流程类数据库操作对象
+            登录账号
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.Name">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.Type">
+            <summary>
+            账号类型(local/portal)
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.Password">
+            <summary>
+            登录密码
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.MobilePhone">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.IM">
+            <summary>
+            IM
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.Telephone">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.Sex">
+            <summary>
+            性别(M/F)
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.Birthday">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.OrgId">
+            <summary>
+            部门Id
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.Rank">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.CreatedBy">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.CreatedTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.LastUpdatedBy">
+            <summary>
+            上次更新人
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.User.LastUpdatedTime">
+            <summary>
+            上次更新时间
+            </summary>
+        </member>
+        <member name="T:Bingosoft.TrioFramework.Security.UserContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Bingosoft.TrioFramework.Security.UserContext.Users">
+            <summary>
+            用户集合
             </summary>
         </member>
         <member name="T:Bingosoft.TrioFramework.TrioVer">

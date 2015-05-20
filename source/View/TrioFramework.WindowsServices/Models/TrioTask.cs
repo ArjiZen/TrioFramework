@@ -83,7 +83,7 @@ namespace Bingosoft.TrioFramework.WindowsServices {
 						Thread.Sleep(1000);
 					} catch (Exception ex) {
 						var obj = JsonConvert.SerializeObject(task);
-						Log("", false, content: "执行失败 " + obj, errorMessage: ex.GetAllMessage());
+						Log("", false, content: "执行失败 " + obj, errorMessage: ex.GetAll());
 					}
 				}
 			}

@@ -5,16 +5,19 @@ using System.Text;
 /// 异常扩展
 /// </summary>
 // ReSharper disable once CheckNamespace
-public static class ExceptionExtension {
+public static class ExceptionExtension
+{
     /// <summary>
     /// 获取完整的错误信息
     /// </summary>
     /// <param name="ex">异常</param>
     /// <returns></returns>
-    public static string GetAllMessage(this Exception ex) {
+    public static string GetAll(this Exception ex)
+    {
         var sbException = new StringBuilder();
         var curException = ex;
-        do {
+        do
+        {
             sbException.AppendLine(curException.Message);
             sbException.AppendLine(curException.StackTrace);
             sbException.AppendLine("==========================================");
@@ -27,10 +30,12 @@ public static class ExceptionExtension {
     /// </summary>
     /// <param name="ex"></param>
     /// <returns></returns>
-    public static string GetMessages(this Exception ex) {
+    public static string GetMessages(this Exception ex)
+    {
         var sbException = new StringBuilder();
         var curException = ex;
-        do {
+        do
+        {
             sbException.AppendLine(curException.Message);
             curException = curException.InnerException;
         } while (curException != null);
@@ -41,10 +46,12 @@ public static class ExceptionExtension {
     /// </summary>
     /// <param name="ex"></param>
     /// <returns></returns>
-    public static string GetStackTraces(this Exception ex) {
+    public static string GetStackTraces(this Exception ex)
+    {
         var sbException = new StringBuilder();
         var curException = ex;
-        do {
+        do
+        {
             sbException.AppendLine(curException.StackTrace);
             curException = curException.InnerException;
         } while (curException != null);

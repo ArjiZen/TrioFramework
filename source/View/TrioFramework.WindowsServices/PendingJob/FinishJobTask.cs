@@ -56,7 +56,7 @@ namespace Bingosoft.TrioFramework.WindowsServices {
 					throw new InvalidOperationException("接口返回：" + isSuccess + " 未知原因");
 				}
 			} catch (Exception ex) {
-				task.Result = "待办结束失败：" + ex.GetAllMessage();
+				task.Result = "待办结束失败：" + ex.GetAll();
 				task.PendingFailure();
 				base.Log(businessNo, false, "待办结束失败", task.Result);
 				return false;

@@ -67,6 +67,11 @@
     <Compile Include="Extensions\StreamExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Common\Param.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Log\ErrorLog.cs" />
+    <Compile Include="Log\LoginLog.cs" />
+    <Compile Include="Log\OperatorLog.cs" />
+    <Compile Include="Log\ServiceCallLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Config\SettingProvider.cs" />
     <Compile Include="Config\TrioSection.cs" />
@@ -75,18 +80,12 @@
     <Compile Include="Config\WorkflowElement.cs" />
     <Compile Include="Config\FileServerElement.cs" />
     <Compile Include="Extensions\TypeExtension.cs" />
+    <Compile Include="RestClient.cs" />
     <Compile Include="Security\Organization.cs" />
     <Compile Include="Security\Permission.cs" />
     <Compile Include="Security\Role.cs" />
     <Compile Include="Security\User.cs" />
     <Compile Include="TrioVer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App_Config\SqlCommands\security.config">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="App_Config\SqlCommands\param.config" />
-    <EmbeddedResource Include="App_Config\SqlCommands\dictionary.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -124,11 +123,6 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup>
-    <EmbeddedResource Include="App_Config\SqlCommands\kissu.config">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

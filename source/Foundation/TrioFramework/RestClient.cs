@@ -12,6 +12,8 @@ namespace Bingosoft.TrioFramework
     /// </summary>
     public class RestClient
     {
+        private const string ModuleName = "RestClient";
+
         private const string LoginAction = "account/login";
 
         /// <summary>
@@ -83,7 +85,7 @@ namespace Bingosoft.TrioFramework
             }
             catch (Exception ex)
             {
-                Logger.LogError("RestClient", "请求地址时出现错误", ex,
+                Logger.LogError(ModuleName, "请求地址时出现错误", ex,
                     new {
                         action = action,
                         queryString = queryString,
@@ -91,7 +93,7 @@ namespace Bingosoft.TrioFramework
                         contentLength = contentLength,
                         contentType = contentType
                     });
-                return TrioMessage.Error(500, "请求时出现错误：" + ex.GetAllMessage());
+                return TrioMessage.Error(500, "请求时出现错误：" + ex.GetMessages());
             }
             finally
             {
@@ -144,14 +146,14 @@ namespace Bingosoft.TrioFramework
             }
             catch (Exception ex)
             {
-                Logger.LogError("RestClient", "请求地址时出现错误", ex,
+                Logger.LogError(ModuleName, "请求地址时出现错误", ex,
                     new {
                         action = action,
                         queryString = queryString,
                         method = method,
                         contentType = contentType
                     });
-                return TrioMessage.Error(500, "请求时出现错误：" + ex.GetAllMessage());
+                return TrioMessage.Error(500, "请求时出现错误：" + ex.GetMessages());
             }
             finally
             {

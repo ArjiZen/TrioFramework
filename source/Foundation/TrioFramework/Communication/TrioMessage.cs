@@ -48,7 +48,7 @@ namespace Bingosoft.TrioFramework.Communication {
                 try {
                     dataStr = JsonConvert.SerializeObject(model);
                 } catch (Exception ex) {
-                    return Error(500, ex.GetAllMessage());
+                    return Error(500, ex.GetAll());
                 }
             }
             return Succeed(dataStr);
