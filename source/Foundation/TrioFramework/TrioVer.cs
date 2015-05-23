@@ -8,7 +8,7 @@
         /// <summary>
         /// TrioFramework核心框架版本号
         /// </summary>
-        public const string Core = "1.6.0";
+        public const string Core = "2.0.0";
 
         /// <summary>
         /// 工作流组件版本号

@@ -73,7 +73,8 @@ namespace Bingosoft.TrioFramework.Log
                 }
                 else
                 {
-                    db.Logs.Attach(this);
+                    var entry = db.Entry(this);
+                    entry.State = EntityState.Modified;
                 }
                 db.SaveChanges();
             }
