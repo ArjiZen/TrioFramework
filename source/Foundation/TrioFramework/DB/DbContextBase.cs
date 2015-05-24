@@ -30,20 +30,5 @@ namespace Bingosoft.TrioFramework.DB
 
         #endregion
 
-        /// <summary>
-        /// 获取数据库操作上下文
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static T Get<T>(string configurationName = "") where T : DbContextBase
-        {
-            if (string.IsNullOrWhiteSpace(configurationName))
-            {
-                configurationName = SettingProvider.Db.SystemDb;
-            }
-            var conn = DBFactory.GetConnection(configurationName);
-            return typeof(T).Create<T>(conn);
-        }
-
     }
 }

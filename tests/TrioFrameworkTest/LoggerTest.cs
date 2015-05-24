@@ -38,21 +38,27 @@ namespace TrioFrameworkTest
         [TestMethod]
         public void LogServiceCallTest()
         {
-            var listBefore = ServiceCallLog.FindAll(1, 10);
-            var logid = Logger.LogServiceRequest("TrioFrameworkTest.LoggerTest", "ServiceTest", "Request Test");
+            var token = DateTime.Now.ToString("yyyyMMddHHmmss");
+            var listBefore = ServiceCallLog.FindAll(1, 100);
+            var logid = Logger.LogServiceRequest("TrioFrameworkTest.LoggerTest", "ServiceTest", "Request Test " + token);
             Logger.LogServiceResponse(logid, "Response Test");
-            var listAfter = ServiceCallLog.FindAll(1, 10);
+            var listAfter = ServiceCallLog.FindAll(1, 100);
             Assert.AreEqual(1, listAfter.Count - listBefore.Count);
+            var entity = listAfter[0];
+            Assert.AreEqual("Request Test " + token, entity.RequestContent);
         }
 
         [TestMethod]
         public void LogServiceCallExceptionTest()
         {
-            var listBefore = ServiceCallLog.FindAll(1, 10);
-            var logid = Logger.LogServiceRequest("TrioFrameworkTest.LoggerTest", "ServiceTest", "Request Test");
+            var token = DateTime.Now.ToString("yyyyMMddHHmmss");
+            var listBefore = ServiceCallLog.FindAll(1, 100);
+            var logid = Logger.LogServiceRequest("TrioFrameworkTest.LoggerTest", "ServiceTest", "Request Test " + token);
             Logger.LogServiceResponse(logid, new Exception("异常测试"));
-            var listAfter = ServiceCallLog.FindAll(1, 10);
+            var listAfter = ServiceCallLog.FindAll(1, 100);
             Assert.AreEqual(1, listAfter.Count - listBefore.Count);
+            var entity = listAfter[0];
+            Assert.AreEqual("Request Test " + token, entity.RequestContent);
         }
     }
 }

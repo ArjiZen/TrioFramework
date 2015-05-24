@@ -39,7 +39,7 @@ namespace Bingosoft.TrioFramework.Common
         /// <returns></returns>
         public static string Get(string code, string defaultVal = "")
         {
-            using (var db = DbContextBase.Get<ParamContext>())
+            using (var db = DBFactory.Get<ParamContext>())
             {
                 var query = (from p in db.Params
                              where p.Code.Eq(code)
@@ -55,7 +55,7 @@ namespace Bingosoft.TrioFramework.Common
         /// <param name="value">参数值</param>
         public static void Update(string code, string value)
         {
-            using (var db = DbContextBase.Get<ParamContext>())
+            using (var db = DBFactory.Get<ParamContext>())
             {
                 var query = (from p in db.Params
                              where p.Code.Eq(code)

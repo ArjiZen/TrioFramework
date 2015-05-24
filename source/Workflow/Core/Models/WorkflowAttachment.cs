@@ -1,12 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Common;
+using System.Data.Entity;
 using System.Linq;
-using Bingosoft.Data;
-using Bingosoft.Data.Attributes;
-using Bingosoft.Security;
+using Bingosoft.TrioFramework.DB;
 
 namespace Bingosoft.TrioFramework.Workflow.Core.Models
 {
+    /// <summary>
+    /// 流程附件类型
+    /// </summary>
+    [Table("WF_AttachType")]
+    public class WorkflowAttachType
+    {
+        #region Properties
+        /// <summary>
+        /// 附件类型
+        /// </summary>
+        [Key]
+        public int Id { get; set; }
+        /// <summary>
+        /// 附件名称
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string Description { get; set; }
+        #endregion
+
+        /// <summary>
+        /// 添加新的类型
+        /// </summary>
+        public void AddNew()
+        {
+            using (var db = DBFactory.Get<WorkflowAttachTypeContext>())
+            {
+                var entry = db.Entry(this);
+                entry.State = EntityState.Added;
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 获取附件类型
+        /// </summary>
+        /// <param name="id">附件类型id</param>
+        /// <returns></returns>
+        public static WorkflowAttachType Find(int id)
+        {
+            using (var db = DBFactory.Get<WorkflowAttachTypeContext>())
+            {
+                var query = (from t in db.Types
+                             where t.Id == id
+                             select t).FirstOrDefault();
+                return query;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 流程附件数据库操作类
+    /// </summary>
+    public class WorkflowAttachTypeContext : DbContextBase
+    {
+        #region ctor
+
+        public WorkflowAttachTypeContext()
+        {
+
+        }
+
+        public WorkflowAttachTypeContext(DbConnection conn)
+            : base(conn)
+        {
+
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 附件类型
+        /// </summary>
+        public DbSet<WorkflowAttachType> Types { get; set; }
+    }
+
     /// <summary>
     /// 流程附件表
     /// </summary>
@@ -27,96 +107,128 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
         /// <summary>
         /// 文件Id
         /// </summary>
-        [PrimaryKey]
+        [Key]
         public string FileId { get; set; }
+
         /// <summary>
         /// 所属流程编号
         /// </summary>
         public string InstanceNo { get; set; }
+
         /// <summary>
         /// 任务Id
         /// </summary>
         public int TaskId { get; set; }
+
         /// <summary>
         /// 所属环节名称
         /// </summary>
         public string ActivityName { get; set; }
-        /// <summary>
-        /// 附件类型
-        /// </summary>
-        public int FileType { get; set; }
-        /// <summary>
-        /// 附件类型
-        /// </summary>
-        public string AttachTypeStr { get; set; }
 
-        private string fileName = string.Empty;
+        /// <summary>
+        /// 附件类型Id
+        /// </summary>
+        public int FileTypeId { get; set; }
+
         /// <summary>
         /// 文件名
         /// </summary>
-        public string FileName
-        {
-            get { return (this.IsDisabled ? "（已失效）" : "") + fileName; }
-            set { fileName = value; }
-        }
+        public string FileName { get; set; }
+
         /// <summary>
         /// 文件路径（文件服务器）
         /// </summary>
         public string FilePath { get; set; }
+
         /// <summary>
         /// 文件大小(kb)
         /// </summary>
         public long FileSize { get; set; }
+
         /// <summary>
         /// 文件大小的文本表达形式
         /// </summary>
-        public string FileSizeStr
-        {
-            get { return GetFileSizeStr(FileSize); }
-        }
+        public string FileSizeText { get; set; }
+
         /// <summary>
         /// 创建人Id
         /// </summary>
         public string CreatorId { get; set; }
+
         /// <summary>
         /// 创建人
         /// </summary>
         public string Creator { get; set; }
+
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime CreatedTime { get; set; }
+        public DateTime CreateTime { get; set; }
+
         /// <summary>
         /// 创建时间字符串格式
         /// </summary>
-        public string CreatedTimeStr
+        [NotMapped]
+        public string CreateTimeStr
         {
-            get { return CreatedTime.ToString("MM-dd HH:mm:ss"); }
+            get { return CreateTime.ToString("MM-dd HH:mm:ss"); }
         }
+
         /// <summary>
-        /// 是否允许下载
+        /// 是否删除
         /// </summary>
-        public bool IsCanDownload { get; set; }
+        public bool IsDeleted { get; set; }
+
         /// <summary>
-        /// 是否允许删除
+        /// 删除者
         /// </summary>
-        public bool IsCanDeleted { get; set; }
+        public string DeletedBy { get; set; }
+
         /// <summary>
-        /// 是否可以查看
+        /// 删除时间
         /// </summary>
-        public bool IsCanView { get; set; }
+        public DateTime? DeletedTime { get; set; }
+
         /// <summary>
         /// 附件是否已失效
         /// </summary>
         public bool IsDisabled { get; set; }
+
         /// <summary>
         /// 操作人
         /// </summary>
         public string DisabledBy { get; set; }
+
         /// <summary>
         /// 失效时间
         /// </summary>
         public DateTime? DisabledTime { get; set; }
+
+        /// <summary>
+        /// 附件类型
+        /// </summary>
+        [ForeignKey("FileTypeId")]
+        public WorkflowAttachType FileType { get; set; }
+
+        #region for business
+
+        /// <summary>
+        /// 是否允许下载
+        /// </summary>
+        [NotMapped]
+        public bool IsCanDownload { get; set; }
+        /// <summary>
+        /// 是否允许删除
+        /// </summary>
+        [NotMapped]
+        public bool IsCanDeleted { get; set; }
+        /// <summary>
+        /// 是否可以查看
+        /// </summary>
+        [NotMapped]
+        public bool IsCanView { get; set; }
+
+        #endregion
 
         #endregion
 
@@ -144,53 +256,64 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
         /// 保存流程附件
         /// </summary>
         /// <returns></returns>
-        public bool Save()
+        public void AddNew()
         {
             if (string.IsNullOrWhiteSpace(this.FileId))
             {
                 this.FileId = Guid.NewGuid().ToString();
-                DBFactory.WorkflowDB.Insert<WorkflowAttachment>(this);
-                return true;
             }
-            return false;
+            this.FileSizeText = GetFileSizeStr(this.FileSize);
+            using (var db = DBFactory.Get<WorkflowAttachmentContent>())
+            {
+                db.Attachments.Add(this);
+                db.SaveChanges();
+            }
         }
 
         /// <summary>
         /// 删除附件记录（物理删除，仅在附件上传失败时调用）
         /// </summary>
         /// <returns></returns>
-        public bool Delete()
+        public void Delete()
         {
-            var effectRows = DBFactory.WorkflowDB.Delete<WorkflowAttachment>(this.FileId);
-            return effectRows > 0;
+            using (var db = DBFactory.Get<WorkflowAttachmentContent>())
+            {
+                var entry = db.Entry(this);
+                entry.State = EntityState.Deleted;
+                db.SaveChanges();
+            }
         }
 
         /// <summary>
         /// 标记为删除（逻辑删除）
         /// </summary>
         /// <returns></returns>
-        public bool MarkedDeleted()
+        public void MarkedDeleted()
         {
-            var loginUser = SecurityContext.User;
-            var effectRows = DBFactory.WorkflowDB.ExecuteNonQuery("trio.workflow.core.attachment.markdeleted", new {
-                FileId = this.FileId,
-                DeletedBy = loginUser.LoginId
-            });
-            return effectRows > 0;
+            using (var db = DBFactory.Get<WorkflowAttachmentContent>())
+            {
+                this.IsDeleted = true;
+                this.DeletedTime = DateTime.Now;
+                var entry = db.Entry(this);
+                entry.State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
 
         /// <summary>
         /// 标记为删除（逻辑删除）
         /// </summary>
         /// <returns></returns>
-        public bool MarkedDisabled()
+        public void MarkedDisabled()
         {
-            var loginUser = SecurityContext.User;
-            var effectRows = DBFactory.WorkflowDB.ExecuteNonQuery("trio.workflow.core.attachment.markdisabled", new {
-                FileId = this.FileId,
-                DeletedBy = loginUser.LoginId
-            });
-            return effectRows > 0;
+            using (var db = DBFactory.Get<WorkflowAttachmentContent>())
+            {
+                this.IsDisabled = true;
+                this.DisabledTime = DateTime.Now;
+                var entry = db.Entry(this);
+                entry.State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -198,9 +321,15 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
         /// </summary>
         /// <param name="fileId"></param>
         /// <returns></returns>
-        public static WorkflowAttachment Get(string fileId)
+        public static WorkflowAttachment Find(string fileId)
         {
-            return DBFactory.WorkflowDB.Select<WorkflowAttachment>(fileId);
+            using (var db = DBFactory.Get<WorkflowAttachmentContent>())
+            {
+                var query = (from a in db.Attachments.Include(a => a.FileType)
+                             where a.FileId.Equals(fileId, StringComparison.OrdinalIgnoreCase)
+                             select a).FirstOrDefault();
+                return query;
+            }
         }
 
         /// <summary>
@@ -208,9 +337,15 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
         /// </summary>
         /// <param name="instanceNo">流程编号</param>
         /// <returns></returns>
-        public static IList<WorkflowAttachment> GetFiles(string instanceNo)
+        public static IList<WorkflowAttachment> FindAll(string instanceNo)
         {
-            return DBFactory.WorkflowDB.QueryEntities<WorkflowAttachment>("trio.workflow.core.attachment.load", new { InstanceNo = instanceNo });
+            using (var db = DBFactory.Get<WorkflowAttachmentContent>())
+            {
+                var query = (from a in db.Attachments.Include(a => a.FileType)
+                             where a.InstanceNo.Equals(instanceNo, StringComparison.OrdinalIgnoreCase)
+                             select a).ToList();
+                return query;
+            }
         }
 
         /// <summary>
@@ -219,9 +354,15 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
         /// <param name="instanceNo">流程单号</param>
         /// <param name="fileType">文件类型</param>
         /// <returns></returns>
-        public static WorkflowAttachment Get(string instanceNo, int fileType)
+        public static WorkflowAttachment Find(string instanceNo, int fileType)
         {
-            return DBFactory.WorkflowDB.QueryEntity<WorkflowAttachment>("trio.workflow.core.attachment.getbytypeid", new { InstanceNo = instanceNo, FileType = fileType });
+            using (var db = DBFactory.Get<WorkflowAttachmentContent>())
+            {
+                var query = (from a in db.Attachments.Include(a => a.FileType)
+                             where a.InstanceNo.Equals(instanceNo, StringComparison.OrdinalIgnoreCase) && a.FileTypeId == fileType
+                             select a).FirstOrDefault();
+                return query;
+            }
         }
 
         /// <summary>
@@ -230,33 +371,15 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
         /// <param name="instanceNo">流程单号</param>
         /// <param name="fileType">文件类型</param>
         /// <returns></returns>
-        public static WorkflowAttachment[] GetFiles(string instanceNo, int fileType)
+        public static WorkflowAttachment[] FindAll(string instanceNo, int fileType)
         {
-            return DBFactory.WorkflowDB.QueryEntities<WorkflowAttachment>("trio.workflow.core.attachment.getfilesbytype", new { InstanceNo = instanceNo, FileType = fileType }).ToArray();
-        }
-
-        /// <summary>
-        /// 判断该流程是否存在该类型的附件
-        /// </summary>
-        /// <param name="instanceNo">流程单号</param>
-        /// <param name="fileTypeName">附件类型名称</param>
-        /// <returns></returns>
-        public static bool Exists(string instanceNo, string fileTypeName)
-        {
-            var exists = DBFactory.WorkflowDB.QueryScalar<int>("trio.workflow.core.attachment.existsbyname", new { InstanceNo = instanceNo, FileTypeName = fileTypeName });
-            return exists > 0;
-        }
-
-        /// <summary>
-        /// 判断该流程是否存在该附件类型
-        /// </summary>
-        /// <param name="instanceNo">流程单号</param>
-        /// <param name="fileTypes">多个附件类型</param>
-        /// <returns></returns>
-        public static bool Exists(string instanceNo, params int[] fileTypes)
-        {
-            var existsCounts = DBFactory.WorkflowDB.QueryScalar<int>("trio.workflow.core.attachment.existsbyids", new { InstanceNo = instanceNo, FileType = fileTypes.Concat(',') });
-            return (existsCounts == fileTypes.Length);
+            using (var db = DBFactory.Get<WorkflowAttachmentContent>())
+            {
+                var query = (from a in db.Attachments.Include(a => a.FileType)
+                             where a.InstanceNo.Equals(instanceNo, StringComparison.OrdinalIgnoreCase) && a.FileTypeId == fileType
+                             select a).ToArray();
+                return query;
+            }
         }
 
         /// <summary>
@@ -267,30 +390,37 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
         /// <returns></returns>
         public static bool Exists(string instanceNo, int fileType)
         {
-            var exists = DBFactory.WorkflowDB.QueryScalar<int>("trio.workflow.core.attachment.existsbyid", new { InstanceNo = instanceNo, FileType = fileType });
-            return exists > 0;
+            using (var db = DBFactory.Get<WorkflowAttachmentContent>())
+            {
+                var query = (from a in db.Attachments.Include(a => a.FileType)
+                             where a.InstanceNo.Equals(instanceNo, StringComparison.OrdinalIgnoreCase) && a.FileTypeId == fileType
+                             select a).Any();
+                return query;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 流程附件数据库操作类
+    /// </summary>
+    public class WorkflowAttachmentContent : DbContextBase
+    {
+        #region ctor
+        public WorkflowAttachmentContent()
+        {
+
         }
 
-        private static IDictionary<int, string> _attachTypeCache = null;
-        /// <summary>
-        /// 获取所有附件类型
-        /// </summary>
-        /// <returns></returns>
-        public static IDictionary<int, string> GetAllAttachType()
+        public WorkflowAttachmentContent(DbConnection conn)
+            : base(conn)
         {
-            if (_attachTypeCache == null)
-            {
-                _attachTypeCache = new Dictionary<int, string>();
-                using (var reader = DBFactory.WorkflowDB.QueryReader("trio.workflow.core.attachtype.getall"))
-                {
-                    while (reader.Read())
-                    {
-                        _attachTypeCache.Add(Convert.ToInt32(reader["Id"]), Convert.ToString(reader["Name"]));
-                    }
-                    reader.Close();
-                }
-            }
-            return _attachTypeCache;
+
         }
+        #endregion
+
+        /// <summary>
+        /// 附件列表
+        /// </summary>
+        public DbSet<WorkflowAttachment> Attachments { get; set; }
     }
 }

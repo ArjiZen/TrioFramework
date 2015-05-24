@@ -65,5 +65,21 @@ namespace Bingosoft.TrioFramework.DB
             return entity;
             //return new SqlConnection(connStr);
         }
+
+        /// <summary>
+        /// 获取DbContext对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="configurationName">连接字符串配置名称</param>
+        /// <returns></returns>
+        public static T Get<T>(string configurationName = "") where T : DbContextBase
+        {
+            if (string.IsNullOrWhiteSpace(configurationName))
+            {
+                configurationName = SettingProvider.Db.SystemDb;
+            }
+            var conn = DBFactory.GetConnection(configurationName);
+            return typeof(T).Create<T>(conn);
+        }
     }
 }

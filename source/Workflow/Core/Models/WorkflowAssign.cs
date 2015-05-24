@@ -1,5 +1,5 @@
 ﻿using System;
-using Bingosoft.Data.Attributes;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bingosoft.TrioFramework.Workflow.Core.Models
 {

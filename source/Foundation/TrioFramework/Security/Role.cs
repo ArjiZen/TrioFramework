@@ -70,7 +70,7 @@ namespace Bingosoft.TrioFramework.Security
         /// <returns></returns>
         public static Role Get(string code)
         {
-            using (var db = DbContextBase.Get<RoleContext>())
+            using (var db = DBFactory.Get<RoleContext>())
             {
                 var query = (from r in db.Roles.Include(r => r.Users).Include(r => r.Permissions)
                              where r.Code.Equals(code, StringComparison.OrdinalIgnoreCase)
@@ -85,7 +85,7 @@ namespace Bingosoft.TrioFramework.Security
         /// <returns></returns>
         public static IQueryable<Role> GetAll()
         {
-            using (var db = DbContextBase.Get<RoleContext>())
+            using (var db = DBFactory.Get<RoleContext>())
             {
                 var query = from r in db.Roles select r;
                 return query;

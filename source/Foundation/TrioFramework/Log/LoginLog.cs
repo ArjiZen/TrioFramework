@@ -57,7 +57,7 @@ namespace Bingosoft.TrioFramework.Log
         /// </summary>
         internal void Save()
         {
-            using (var db = DbContextBase.Get<LoginLogContext>())
+            using (var db = DBFactory.Get<LoginLogContext>())
             {
                 db.Logs.Add(this);
                 db.SaveChanges();
@@ -72,7 +72,7 @@ namespace Bingosoft.TrioFramework.Log
         /// <returns></returns>
         public static IList<LoginLog> FindAll(int pageIndex, int pageSize)
         {
-            using (var db = DbContextBase.Get<LoginLogContext>())
+            using (var db = DBFactory.Get<LoginLogContext>())
             {
                 var query = (from l in db.Logs select l)
                                 .OrderByDescending(l => l.Id)

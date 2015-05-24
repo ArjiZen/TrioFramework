@@ -1,12 +1,17 @@
 ﻿using System.Collections.Generic;
-using Bingosoft.Data.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Common;
+using System.Data.Entity;
+using System.Linq;
+using Bingosoft.TrioFramework.DB;
 
 namespace Bingosoft.TrioFramework.Workflow.Core.Models
 {
     /// <summary>
     /// 流程定义
     /// </summary>
-    [Table("WF_Definition")]
+    [Table("WF_Definitions")]
     public abstract class WorkflowDefinition
     {
 
@@ -14,17 +19,18 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
         /// <summary>
         /// 流程编码
         /// </summary>
-        [PrimaryKey]
+        [Key]
+        [Column(Order = 0)]
         public int AppCode { get; set; }
         /// <summary>
         /// 版本号
         /// </summary>
-        [PrimaryKey]
+        [Key]
+        [Column(Order = 1)]
         public int Version { get; set; }
         /// <summary>
         /// 流程名称
         /// </summary>
-        [Column("Name")]
         public string AppName { get; set; }
         /// <summary>
         /// 内部名称（目前用于K2）
@@ -41,6 +47,7 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
         /// <summary>
         /// 环节列表
         /// </summary>
+        [NotMapped]
         public IList<WorkflowActivity> Activities { get; set; }
         #endregion
 
@@ -48,13 +55,44 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
         /// 保存流程定义
         /// </summary>
         /// <returns></returns>
-        public abstract bool Save();
+        public abstract void Save();
 
         /// <summary>
         /// 更新流程定义
         /// </summary>
         /// <returns></returns>
-        public abstract bool Update();
+        public abstract void Update();
+
+        /// <summary>
+        /// 获取所有流程定义
+        /// </summary>
+        /// <returns></returns>
+        public static TWorkflowDefinition[] FindAll<TWorkflowDefinition>() where TWorkflowDefinition : WorkflowDefinition
+        {
+            using (var db = DBFactory.Get<WorkflowDefinitionContext<TWorkflowDefinition>>())
+            {
+                var query = (from d in db.Definitions
+                             select d).ToArray();
+                return query;
+            }
+        }
+
+        /// <summary>
+        /// 获取流程定义
+        /// </summary>
+        /// <param name="appCode">流程编号</param>
+        /// <param name="version">流程版本</param>
+        /// <returns></returns>
+        public static TWorkflowDefinition Find<TWorkflowDefinition>(int appCode, int version) where TWorkflowDefinition : WorkflowDefinition
+        {
+            using (var db = DBFactory.Get<WorkflowDefinitionContext<TWorkflowDefinition>>())
+            {
+                var query = (from d in db.Definitions
+                             where d.AppCode == appCode && d.Version == version
+                             select d).FirstOrDefault();
+                return query;
+            }
+        }
 
         /// <summary>
         /// 初始化环节信息
@@ -63,21 +101,27 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models
     }
 
     /// <summary>
-    /// 流程定义工厂类
+    /// 流程定义数据库操作类
     /// </summary>
-    public static class WorkflowDefinitionFactory
+    public class WorkflowDefinitionContext<T> : DbContextBase where T : WorkflowDefinition
     {
-        /// <summary>
-        /// 获取所有流程定义
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static IEnumerable<T> GetAll<T>() where T : WorkflowDefinition, new()
+        #region ctor
+
+        public WorkflowDefinitionContext()
         {
-            var type = typeof(T);
-            var attr = type.GetFirstAttr<TableAttribute>();
-            var sql = string.Format("SELECT * FROM {0} WITH(NOLOCK)", attr.Name);
-            return DBFactory.WorkflowDB.QueryEntities<T>(sql);
+
         }
+
+        public WorkflowDefinitionContext(DbConnection conn)
+            : base(conn)
+        {
+
+        }
+        #endregion
+
+        /// <summary>
+        /// 流程定义集合
+        /// </summary>
+        public DbSet<T> Definitions { get; set; }
     }
 }

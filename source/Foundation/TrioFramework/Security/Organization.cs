@@ -75,7 +75,7 @@ namespace Bingosoft.TrioFramework.Security
         /// <returns></returns>
         public static Organization Get(string dpidOrDpCode)
         {
-            using (var db = DbContextBase.Get<OrganizationContexnt>())
+            using (var db = DBFactory.Get<OrganizationContexnt>())
             {
                 var query = (from o in db.Organizations
                              where o.Id.Eq(dpidOrDpCode) || o.Code.Eq(dpidOrDpCode)
@@ -91,7 +91,7 @@ namespace Bingosoft.TrioFramework.Security
         /// <returns></returns>
         public static Organization GetByFullName(string fullName)
         {
-            using (var db = DbContextBase.Get<OrganizationContexnt>())
+            using (var db = DBFactory.Get<OrganizationContexnt>())
             {
                 var query = (from o in db.Organizations
                              where o.FullName.Eq(fullName)

@@ -65,7 +65,7 @@ namespace Bingosoft.TrioFramework.Log
         /// </summary>
         internal void Save()
         {
-            using (var db = DbContextBase.Get<ServiceCallLogContext>())
+            using (var db = DBFactory.Get<ServiceCallLogContext>())
             {
                 if (this.Id == 0)
                 {
@@ -87,7 +87,7 @@ namespace Bingosoft.TrioFramework.Log
         /// <returns></returns>
         internal static ServiceCallLog Get(int id)
         {
-            using (var db = DbContextBase.Get<ServiceCallLogContext>())
+            using (var db = DBFactory.Get<ServiceCallLogContext>())
             {
                 var query = (from l in db.Logs where l.Id == id select l).FirstOrDefault();
                 return query;
@@ -102,7 +102,7 @@ namespace Bingosoft.TrioFramework.Log
         /// <returns></returns>
         public static IList<ServiceCallLog> FindAll(int pageIndex, int pageSize)
         {
-            using (var db = DbContextBase.Get<ServiceCallLogContext>())
+            using (var db = DBFactory.Get<ServiceCallLogContext>())
             {
                 var query = (from l in db.Logs select l)
                                 .OrderByDescending(l => l.Id)

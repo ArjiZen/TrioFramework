@@ -113,7 +113,7 @@ namespace Bingosoft.TrioFramework.Security
         /// <returns></returns>
         public void Save()
         {
-            using (var db = DbContextBase.Get<UserContext>())
+            using (var db = DBFactory.Get<UserContext>())
             {
                 db.Users.Add(this);
                 db.SaveChanges();
@@ -127,7 +127,7 @@ namespace Bingosoft.TrioFramework.Security
         /// <returns></returns>
         public static User Get(string loginidOrUserId)
         {
-            using (var db = DbContextBase.Get<UserContext>())
+            using (var db = DBFactory.Get<UserContext>())
             {
                 var query = (from u in db.Users.Include(r => r.Roles)
                              where u.LoginId.Equals(loginidOrUserId, StringComparison.OrdinalIgnoreCase) || u.Id.Equals(loginidOrUserId, StringComparison.OrdinalIgnoreCase)
@@ -142,7 +142,7 @@ namespace Bingosoft.TrioFramework.Security
         /// <returns></returns>
         public bool CheckPassword()
         {
-            using (var db = DbContextBase.Get<UserContext>())
+            using (var db = DBFactory.Get<UserContext>())
             {
                 var query = (from u in db.Users
                              where u.LoginId.Equals(this.LoginId, StringComparison.OrdinalIgnoreCase) && u.Password.Equals(this.Password, StringComparison.OrdinalIgnoreCase)

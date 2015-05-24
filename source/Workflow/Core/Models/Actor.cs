@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using Bingosoft.Security.Principal;
+using Bingosoft.TrioFramework.Security;
 
-namespace Bingosoft.TrioFramework.Workflow.Core.Models {
+namespace Bingosoft.TrioFramework.Workflow.Core.Models
+{
     /// <summary>
     /// 环节参与人计算
     /// </summary>
@@ -44,6 +45,6 @@ namespace Bingosoft.TrioFramework.Workflow.Core.Models {
         /// <summary>
         /// 计算环节参与人
         /// </summary>
-        public abstract IEnumerable<IUser> Resolve(WorkflowInstance instance);
+        public abstract IEnumerable<User> Resolve(WorkflowInstance instance);
     }
 }
