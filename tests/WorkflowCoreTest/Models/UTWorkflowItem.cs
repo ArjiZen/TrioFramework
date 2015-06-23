@@ -9,7 +9,7 @@ using Bingosoft.TrioFramework.Workflow.Core.Models;
 
 namespace WorkflowCoreTest.Models
 {
-    [Table("WF_WorkflowItem")]
+    [Table("WF_WorkItems")]
     public class UTWorkflowItem : WorkflowItem
     {
         public override void AddNew()

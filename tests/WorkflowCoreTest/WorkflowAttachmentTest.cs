@@ -31,5 +31,39 @@ namespace WorkflowCoreTest
             Assert.IsNotNull(existsAttachments[0].FileType);
             Assert.AreEqual("普通附件", existsAttachments[0].FileType.Name);
         }
+
+        [TestMethod]
+        public void MarkedDisabledTest()
+        {
+            var attachments = WorkflowAttachment.FindAll("2015052400001");
+            Assert.IsNotNull(attachments);
+            Assert.AreEqual(1, attachments.Count);
+            var attachment = attachments[0];
+            attachment.MarkedDisabled();
+            var existsAttachment = WorkflowAttachment.Find(attachment.FileId);
+            Assert.IsTrue(existsAttachment.IsDisabled);
+            Assert.IsNotNull(existsAttachment.DisabledTime);
+        }
+
+        [TestMethod]
+        public void MarkedDeletedTest()
+        {
+            var attachments = WorkflowAttachment.FindAll("2015052400001");
+            Assert.IsNotNull(attachments);
+            Assert.AreEqual(1, attachments.Count);
+            var attachment = attachments[0];
+            attachment.MarkedDeleted();
+            var existsAttachment = WorkflowAttachment.Find(attachment.FileId);
+            Assert.IsTrue(existsAttachment.IsDeleted);
+            Assert.IsNotNull(existsAttachment.DeletedTime);
+        }
+
+        [TestMethod]
+        public void DeletedTest()
+        {
+            var attachments = WorkflowAttachment.FindAll("2015052400001");
+            Assert.IsNotNull(attachments);
+            Assert.AreEqual(0, attachments.Count);
+        }
     }
 }

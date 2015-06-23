@@ -23,7 +23,7 @@ namespace WorkflowCoreTest
                 StartTime = DateTime.Now,
                 Title = "测试流程" + DateTime.Now.ToString("yyyyMMddHHmmss")
             };
-            instance.Save();
+            instance.AddNew();
             var existsInstance = UTWorkflowInstance.Find<UTWorkflowInstance>(instance.InstanceNo);
             Assert.IsNotNull(existsInstance);
             Assert.AreEqual(instance.Title, existsInstance.Title);

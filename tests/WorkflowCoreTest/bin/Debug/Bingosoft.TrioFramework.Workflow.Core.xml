@@ -301,7 +301,7 @@
         </member>
         <member name="M:Bingosoft.TrioFramework.Workflow.Core.Models.WorkflowAttachment.MarkedDisabled">
             <summary>
-            标记为删除（逻辑删除）
+            标记为失效
             </summary>
             <returns></returns>
         </member>

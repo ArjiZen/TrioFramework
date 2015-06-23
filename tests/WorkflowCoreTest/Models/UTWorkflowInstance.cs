@@ -7,10 +7,10 @@ using Bingosoft.TrioFramework.Workflow.Core.Models;
 
 namespace WorkflowCoreTest.Models
 {
-    [Table("WF_WorkflowInstance")]
+    [Table("WF_Instance")]
     public class UTWorkflowInstance : WorkflowInstance
     {
-        public override void Save()
+        public override void AddNew()
         {
             using (var db = DBFactory.Get<WorkflowInstanceContext<UTWorkflowInstance>>())
             {
@@ -18,7 +18,8 @@ namespace WorkflowCoreTest.Models
                 {
                     this.InstanceNo = UTWorkflowInstance.GetNewInstanceNo<UTWorkflowInstance>();
                 }
-                db.Instances.Add(this);
+                var entry = db.Entry(this);
+                entry.State = EntityState.Added;
                 db.SaveChanges();
             }
         }
